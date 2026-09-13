@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="2026-09-11 미국 증시·연준·경제지표·AI 인프라 데일리 브리핑">
+<title>2026-09-11 미국 시장 브리핑</title>
+<style>
+:root{
+  --bg:#faf9f7; --surface:#fff; --text:#1c1b19; --muted:#6b675f; --line:#e5e1da;
+  --accent:#8a5a2b; --accent-soft:#f3ece3; --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px -12px rgba(0,0,0,.12);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#161513; --surface:#1f1e1b; --text:#eceae5; --muted:#a09a90; --line:#312f2b;
+    --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161513; --surface:#1f1e1b; --text:#eceae5; --muted:#a09a90; --line:#312f2b;
+  --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  font-size:16px; line-height:1.75; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:860px; margin:0 auto; padding:32px 20px 80px}
+header.top{border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:36px}
+header.top a.home{color:var(--muted); text-decoration:none; font-size:13px; letter-spacing:.04em}
+header.top a.home:hover{color:var(--accent)}
+h1{font-size:27px; line-height:1.35; margin:.5em 0 .2em; letter-spacing:-.01em}
+h2{font-size:21px; margin:2.2em 0 .6em; padding-bottom:.3em; border-bottom:1px solid var(--line); letter-spacing:-.01em}
+h3{font-size:17px; margin:1.8em 0 .4em; color:var(--accent)}
+h4{font-size:15px; margin:1.4em 0 .3em; color:var(--muted)}
+p,ul,ol{margin:.7em 0}
+li{margin:.25em 0}
+a{color:var(--accent)}
+hr{border:0; border-top:1px solid var(--line); margin:2.4em 0}
+code{background:var(--accent-soft); padding:.12em .4em; border-radius:4px; font-size:.87em}
+blockquote{
+  margin:1em 0; padding:.6em 1em; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 6px 6px 0; color:var(--muted);
+}
+blockquote p{margin:.3em 0}
+/* 표는 넓다. 페이지가 아니라 표 자체가 가로 스크롤되게 한다. */
+.tablewrap{overflow-x:auto; margin:1.1em 0; border:1px solid var(--line); border-radius:8px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:14px; min-width:520px}
+th,td{padding:9px 13px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+th{background:var(--accent-soft); font-weight:600; white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.meta{color:var(--muted); font-size:13px; margin:0}
+.cards{list-style:none; padding:0; margin:0}
+.cards li{margin:0 0 10px}
+.cards a{
+  display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:15px 18px; text-decoration:none; color:var(--text); box-shadow:var(--shadow);
+}
+.cards a:hover{border-color:var(--accent)}
+.cards .d{font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap}
+.cards .s{color:var(--muted); font-size:13px; text-align:right; overflow:hidden}
+.latest a{border-color:var(--accent); border-width:2px}
+.badge{
+  display:inline-block; background:var(--accent); color:var(--bg);
+  font-size:11px; padding:1px 7px; border-radius:99px; margin-left:8px; vertical-align:middle;
+}
+footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a class="home" href="../index.html">← 미국 시장 데일리 브리핑</a></header>
+<article>
+<h1>미국 시장 데일리 리포트</h1>
+<ul>
+<li><strong>기준일</strong>: 2026-09-10 (목) 미국 정규장 종가 기준</li>
+<li><strong>작성일</strong>: 2026-09-11 (KST)</li>
+<li>8월 CPI는 기준일(9/10) 시점 미발표로, 본 리포트의 금리·연준 관련 해석은 9/11 21:30 KST CPI 발표 이후 변경될 수 있다.</li>
+</ul>
+<hr>
+<h2>0. 오늘의 핵심 TOP</h2>
+<ol>
+<li>10년물 국채금리 4.84~4.85%, 2023년 10월 이후 최고치 경신 — ↑ · ★★★★★ · AI영향 부정 · 확신 중</li>
+<li>CME FedWatch, 9/16 FOMC에서 금리 &quot;인하&quot;가 아닌 25bp <strong>인상</strong> 확률 56~66% 반영 — ↑ · ★★★★★ · AI영향 부정 · 확신 중</li>
+<li>WTI $97.19(+2.76%), 국제유가 배럴당 100달러 돌파(중동 전쟁 장기화) — ↑ · ★★★★☆ · AI영향 중립 · 확신 상</li>
+<li>VIX 17.84(+8.38%) 급등 — ↑ · ★★★★☆ · AI영향 중립 · 확신 상</li>
+<li>Fed 의장 Kevin Warsh, 잭슨홀에서 &quot;근원 인플레이션 개선 미흡&quot; 매파 발언 — ↑ · ★★★★☆ · AI영향 부정 · 확신 중</li>
+<li>S&amp;P500 -0.58%·Dow -0.6%·Nasdaq -0.65%, 4거래일 연속 하락 — ↓ · ★★★★☆ · AI영향 부정 · 확신 상</li>
+<li>Russell2000 -1.04%, 국채금리 급등에 소형주 약세 — ↓ · ★★★☆☆ · AI영향 중립 · 확신 상</li>
+<li>8월 Core PPI +0.2%(예상 +0.3% 하회) vs 헤드라인 +0.4%(부합), YoY +5.4% — → · ★★★☆☆ · AI영향 중립 · 확신 중</li>
+<li>SOXX 순유입 +$9.43B vs SMH 순유출 -$2.48B (최근 1개월, 반도체 ETF 내 자금 엇갈림) — → · ★★★☆☆ · AI영향 중립(혼재) · 확신 하</li>
+<li>NVDA 이사 Mark Stevens 약 130만주 매도($227~234), 거래유형 미확정 — ↓ · ★★★☆☆ · AI영향 중립 · 확신 하</li>
+</ol>
+<blockquote>
+<p>오늘 하루를 한 줄로 요약하면: 유가 100달러 돌파와 국채금리 최고치 경신이 겹치며 증시가 4일 연속 밀렸고, 시장은 이례적으로 9/16 FOMC에서 금리 &quot;인상&quot; 가능성까지 반영하기 시작했다. 관건은 오늘(9/11) 발표되는 CPI다.</p>
+</blockquote>
+<hr>
+<h2>1. 시장 개요</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>지수</th>
+<th>종가</th>
+<th>등락률</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S&amp;P500</td>
+<td>7,591.70</td>
+<td>-0.58%</td>
+</tr>
+<tr>
+<td>NASDAQ</td>
+<td>26,081.72</td>
+<td>-0.65%</td>
+</tr>
+<tr>
+<td>Dow</td>
+<td>52,064.10 (-316.56pt)</td>
+<td>-0.6%</td>
+</tr>
+<tr>
+<td>Russell2000</td>
+<td>2,890.95</td>
+<td>-1.04%</td>
+</tr>
+<tr>
+<td>SOX(필라델피아 반도체지수)</td>
+<td>확인 필요 — 9/10 종가 미확인(최근 확인치 9/4 11,735.26)</td>
+<td>—</td>
+</tr>
+</tbody></table></div>
+<p><strong>한 줄 총평</strong>: 국제유가 100달러 돌파와 국채금리 급등이라는 두 가지 악재가 겹치면서 3대 지수가 4거래일 연속 하락했고, 금리에 민감한 소형주(Russell2000)가 가장 크게 밀렸다.</p>
+<p><strong>리스크 지표</strong></p>
+<ul>
+<li>VIX 17.84 (+8.38%) — 절대 레벨은 낮지만 급등폭 자체가 리스크 회피 심리 확산을 시사</li>
+<li>DXY 98.75 (-0.05%) — 원인 미보도</li>
+<li>Gold $4,405.88/t.oz (+0.18%) — 인플레이션 지표·Fed 회의 대기 속 안전자산 수요</li>
+<li>WTI $97.19/bbl (+2.76%), Brent $101.25/bbl (+0.04%, TradingEconomics 기준) — 중동(이란 관련) 전쟁 격화로 공급 우려 확산. ※ Brent 수치는 ConvexTrade가 $104.41(+2.78%)로 별도 보도해 소스 간 차이가 있음 — 아래 &#39;확인 필요&#39; 참고</li>
+</ul>
+<p><strong>하락 배경</strong>: 국제유가 100달러 돌파에 따른 인플레이션 우려, 국채금리의 지속 상승(재정 우려·AI 기업 관련 회사채 발행 급증·일본의 미국채 매도)이 복합적으로 작용했다.</p>
+<hr>
+<h2>2. 연준·금리</h2>
+<ul>
+<li><strong>10년물 국채금리</strong>: 4.84~4.85%로 2023년 10월 이후 최고 수준. 재정 우려, AI 기업 관련 신규 회사채 발행 급증(1.5조달러 이상), 엔화 약세에 따른 일본의 미국채 매도 등이 상승 압력으로 보도됨.</li>
+<li><strong>2년물 국채금리 / 10Y-2Y 스프레드</strong>: 9/10 종가 미확인으로 스프레드 계산 불가 (최근 확인치는 9/3 기준 4.34%) — 곡선 형태 판단은 유보.</li>
+<li><strong>CME FedWatch(9/16 FOMC)</strong>: 25bp <strong>금리 인상</strong> 확률 약 56<del>66%(CME FedWatch 58.7</del>66%, Kalshi 57%, Polymarket 49% — 소스별 스냅샷 시점·구조 차이로 수치가 다름). 통상적인 &quot;인하&quot; 기대가 아닌 &quot;인상&quot; 프라이싱이라는 점이 이례적이다.</li>
+<li><strong>Fed 인사 발언</strong>: Fed 의장 Kevin Warsh가 잭슨홀 기조연설에서 &quot;근원 인플레이션 추세가 의미 있게 개선되지 않았다&quot;고 매파적으로 발언.</li>
+<li><strong>7월 FOMC 결과</strong>: 금리 3.50~3.75% 동결(9-3 표결), 3명은 0.25%p 인상을 주장하며 반대.</li>
+<li><strong>다음 FOMC</strong>: 2026-09-15~16 회의, 금리 결정 9/16 14:00 ET(익일 03:00 KST), 기자회견 14:30 ET(익일 03:30 KST).</li>
+</ul>
+<p><strong>해석</strong>: Core PPI 서프라이즈는 오히려 하향(디스인플레이션 신호)이었는데도 10년물 금리가 최고치를 경신했다는 것은, 인플레이션 기대보다 <strong>재정·회사채 공급 요인</strong>이 금리 상승을 주도하고 있을 가능성을 시사한다. FedWatch의 &quot;인상&quot; 프라이싱은 유가발 헤드라인 인플레 우려와 Warsh의 매파 발언이 겹친 결과로 보이나, 이는 9/11 CPI 결과에 따라 빠르게 되돌려질 수 있는 잠정적 시장가격이다. 확신 수준: <strong>중간</strong>.</p>
+<p><strong>반대 시나리오</strong>: Core PPI 둔화와 신규 실업수당 청구 소폭 증가는 노동시장·근원물가가 함께 냉각되고 있다는 신호로도 읽을 수 있다. CPI마저 예상을 하회하면 FedWatch의 인상 프라이싱은 &quot;과잉 반응&quot;이었다는 쪽으로 뒤집힐 수 있다.</p>
+<hr>
+<h2>3. 주요 경제지표</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>지표</th>
+<th>발표치</th>
+<th>예상치</th>
+<th>이전치</th>
+<th>서프라이즈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>PPI(8월, 헤드라인 MoM)</td>
+<td>+0.4%</td>
+<td>+0.4%</td>
+<td>확인 필요</td>
+<td>부합</td>
+</tr>
+<tr>
+<td>PPI(8월, YoY)</td>
+<td>+5.4%</td>
+<td>확인 필요</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>Core PPI(8월, MoM)</td>
+<td>+0.2%</td>
+<td>+0.3%</td>
+<td>확인 필요</td>
+<td>예상 하회</td>
+</tr>
+<tr>
+<td>Core PPI(8월, YoY)</td>
+<td>+4.6%</td>
+<td>확인 필요</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td>신규 실업수당 청구건수(9/5 마감주)</td>
+<td>206,000건</td>
+<td>205,000건</td>
+<td>207,000건(수정치)</td>
+<td>소폭 상회</td>
+</tr>
+<tr>
+<td>CPI(8월)</td>
+<td><strong>9/11 21:30 KST 발표 예정, 본 리포트 작성 시점 미발표</strong></td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>4. 특징 종목·뉴스</h2>
+<ul>
+<li>9/10 기준 ±5% 이상 개별 종목 변동은 검색으로 확인되지 않았다.</li>
+<li><strong>Oracle(ORCL)·Adobe(ADBE)</strong>: 9/10 장마감 후 실적 발표 예정이었고, 결과는 본 리포트 작성 시점 기준 미확인. 옵션시장은 실적 발표를 앞두고 ORCL ±10.06%, ADBE ±7.24%의 큰 변동성을 반영했다. (★★★☆☆ · AI영향 중립(발표 전) · 확신 중 — 결과는 다음 수집 주기 확인 필요)</li>
+<li><strong>NVDA</strong>: 주당 $0.25 현금배당 ex-date 9/10 설정. 호주 기업들과 파트너십을 통해 2027년까지 AI 인프라 확충을 추진 중이라고 보도됐으나 구체 계약 규모·시점은 미확인.</li>
+<li>AI 인프라 공급 측(NVDA·AVGO·AMD·TSM·ANET·CRDO·CLS·VRT·SMCI·APLD)에서 9/10 당일 신규 수주·M&amp;A·가이던스 변경 뉴스는 확인되지 않았다. 직전 확인된 사실(2026년 8월 실적 시즌 발표분: AMD 데이터센터 매출 $6.72B, AVGO AI반도체 매출 $10.8B, TSM 8월 매출 NT$514.8B)은 유효 상태로 유지된다.</li>
+</ul>
+<hr>
+<h2>5. AI 밸류체인 영향 (수혜/피해 구조)</h2>
+<p>오늘 수집분에는 AI 인프라 공급 측 개별 기업발 뉴스가 없어, 아래 두 건은 모두 <strong>매크로發 압박</strong>이며 직접적인 수혜 주체를 특정할 근거는 없다(수혜 칸 공란).</p>
+<ul>
+<li><strong>10년물 금리 급등 + FedWatch 인상 프라이싱 + Fed 매파 발언</strong> (★★★★★)<ul>
+<li>피해: 데이터센터·전력인프라 등 부채·자본집약적 AI 인프라 기업군 — 할인율 상승이 미래현금흐름의 현재가치를 낮추고, 신규 부채 조달 비용을 높여 자본집약적 확장 계획에 부담을 준다. (확신: 중간)</li>
+</ul>
+</li>
+<li><strong>유가 100달러 돌파(중동 지정학)</strong> (★★★★☆)<ul>
+<li>피해: 전력 소비가 큰 데이터센터 운영사 — 에너지 비용 상승이 직접적인 원가 압박 요인이나, 전력원 구성(천연가스 vs 원유)이 확인되지 않아 메커니즘 강도는 제한적이다. (확신: 낮음)</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>6. 수급·내부자 동향</h2>
+<p><strong>ETF 자금흐름 (최근 1개월 누적)</strong></p>
+<ul>
+<li>SOXX: 순유입 +$9.43B (자산 대비 +20.5%)</li>
+<li>SMH: 순유출 -$2.48B (자산 대비 -3.5%)</li>
+<li>QQQ: 9월 최신 수치 확인 안됨</li>
+<li>해석: SOXX와 SMH는 둘 다 반도체 ETF지만 구성 종목 비중이 달라(SOXX가 더 광범위) 방향이 엇갈리는 것을 &quot;AI 반도체 자금 이탈&quot;로 단정하기 어렵다. 출처가 3차 소스(P3)라는 점도 신뢰도를 낮춘다. 시그널로 보기엔 근거 부족 — 확신 낮음.</li>
+</ul>
+<p><strong>옵션시장</strong>: ORCL(약 $47.1B), ADBE(약 $7.4B) 실적 발표를 앞두고 대규모 시가총액 변동성을 옵션시장이 반영. 방향성보다는 실적 발표에 대한 헤지 성격으로 해석된다.</p>
+<p><strong>Form 4 내부자 거래 (전체)</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>기업</th>
+<th>인물</th>
+<th>직책</th>
+<th>매수/매도</th>
+<th>주식수</th>
+<th>금액(주당)</th>
+<th>거래일</th>
+<th>거래유형</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NVDA</td>
+<td>Mark A. Stevens</td>
+<td>Director</td>
+<td>매도</td>
+<td>약 130만주</td>
+<td>$227~$234</td>
+<td>2026-09-03~04</td>
+<td><strong>시그널로 단정 불가, 확인 필요</strong>(공시서류 미열람)</td>
+</tr>
+<tr>
+<td>NVDA</td>
+<td>Timothy S. Teter</td>
+<td>EVP·General Counsel</td>
+<td>매도</td>
+<td>29,000주</td>
+<td>$216~$218</td>
+<td>2026-08-31</td>
+<td>10b5-1(사전예정 매도 — 노이즈로 분류)</td>
+</tr>
+<tr>
+<td>AVGO</td>
+<td>Mark David Brazeal</td>
+<td>Chief Legal &amp; Corporate Affairs Officer</td>
+<td>매도</td>
+<td>25,000주</td>
+<td>$401.329(가중평균)</td>
+<td>2026-07-10</td>
+<td><strong>시그널로 단정 불가, 확인 필요</strong>(공시서류 미열람)</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li>Teter의 매도는 사전에 설정된 10b5-1 계획에 따른 것으로 경영진의 현재 판단을 반영하지 않는 노이즈로 분류한다.</li>
+<li>Stevens의 매도는 Teter 대비 약 45배 규모이나 거래유형이 확인되지 않아, 재량 매도인지 예정 매도인지 판정할 수 없다. 규모만으로 시그널화하지 않고 판정 보류.</li>
+<li>Brazeal의 매도(7/10)는 시점이 오래되어 최근 시그널로서의 연관성이 낮다.</li>
+<li>CRDO·VRT·APLD: 신규 Form 4 공시 확인되지 않음.</li>
+<li>종합 확신 수준: <strong>낮음</strong> (핵심 정보인 거래유형이 다수 미확인).</li>
+</ul>
+<hr>
+<h2>7. 시총 상위·기타 기업 이슈</h2>
+<p>9/10 기준 MSFT·NVDA·AAPL·AMZN·GOOGL·META·AVGO·BRK·TSLA·TSM 관련 AI 무관 규제·제품·자본정책 등 일반 이슈 뉴스는 확인되지 않았다(신규 변동 없음).</p>
+<hr>
+<h2>8. 향후 일정 및 관전 포인트</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>날짜</th>
+<th>이벤트</th>
+<th>왜 중요한가</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2026-09-11 (21:30 KST)</td>
+<td>CPI(8월) 발표</td>
+<td>PPI는 헤드라인 부합·근원 하회로 엇갈렸다. CPI가 예상을 상회하면 FedWatch의 &quot;인상&quot; 프라이싱(현재 56~66%)이 굳어질 수 있고, 하회하면 유가발 우려가 과잉 반응이었다는 쪽으로 되돌려질 수 있다.</td>
+</tr>
+<tr>
+<td>2026-09-11 (결과 확인 필요)</td>
+<td>Oracle·Adobe 실적 결과</td>
+<td>9/10 장마감 후 발표된 결과는 아직 미확인. 옵션시장이 큰 변동성을 반영했던 만큼 AI 클라우드·소프트웨어 밸류체인 심리에 영향을 줄 수 있다.</td>
+</tr>
+<tr>
+<td>2026-09-15~16</td>
+<td>FOMC 회의</td>
+<td>금리 &quot;인상&quot; 가능성이 시장에 반영된 이례적 국면 — 실제 결정과 점도표, Warsh 의장의 기자회견 톤이 핵심 관전 포인트다. 동결 및 완화적 코멘트 가능성도 배제할 수 없다.</td>
+</tr>
+<tr>
+<td>2026-09-16 (03:00 KST)</td>
+<td>FOMC 금리 결정</td>
+<td>25bp 인상 여부 확정</td>
+</tr>
+<tr>
+<td>2026-09-16 (03:30 KST)</td>
+<td>Fed 의장 기자회견</td>
+<td>향후 정책 방향에 대한 톤 확인</td>
+</tr>
+<tr>
+<td>2026-09-16 (21:30 KST)</td>
+<td>소매판매(8월)</td>
+<td>금리 결정과 같은 날 발표되어 시장 변동성 확대 요인이 될 수 있으며, 경기 둔화 여부를 가늠하는 소비 지표</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>9. 종합 시사점</h2>
+<p>유가 100달러 돌파와 국채금리 최고치 경신이 겹치며 증시가 4일 연속 밀렸고, 시장은 이례적으로 금리 &quot;인하&quot;가 아닌 &quot;인상&quot; 가능성까지 반영하기 시작했다. 다만 이는 아직 CPI 발표 전 잠정 프라이싱이며, Core PPI 둔화·실업수당 소폭 증가라는 냉각 신호도 함께 존재해 신호가 엇갈리는 상태다. 오늘(9/11) CPI와 다음 주 FOMC 결과에 따라 현재의 &quot;금리 상방&quot; 내러티브가 강화될 수도, 뒤집힐 수도 있어 단정은 이르다.</p>
+<p>AI 밸류체인 관점에서는 개별 기업 호재·악재보다 금리·유가라는 매크로 압박이 자본집약적 데이터센터·전력인프라 기업에 부담으로 작용하고 있다는 점을 주목할 필요가 있다.</p>
+<hr>
+<h2>⚑ 확인 필요 항목 (출처 미확정)</h2>
+<ul>
+<li>SOX(필라델피아 반도체지수) 9/10 종가 — 최근 확인치는 9/4 기준으로 최신성 부족</li>
+<li>ES(S&amp;P 선물)·NQ(나스닥 선물) 9/10 정확 수치 — 등락률(-0.5%, -1.1%)만 확인됨</li>
+<li>2년물 국채금리 9/10 종가 — 10Y-2Y 스프레드 계산에 필요</li>
+<li>Brent유 정확 수치 교차검증 — TradingEconomics $101.25(+0.04%) vs ConvexTrade $104.41(+2.78%), 소스 간 상이</li>
+<li>NVDA 호주 AI 인프라 파트너십의 구체 계약 규모·시점</li>
+<li>Oracle·Adobe 9/10 실적 발표 결과(EPS·매출·가이던스) — 다음 수집 주기 확인 필요</li>
+<li>NVDA Mark Stevens, AVGO Mark Brazeal의 Form 4 거래유형(재량 매도 vs 10b5-1 사전예정) — 공시서류 확인 필요</li>
+<li>QQQ ETF 9월 자금흐름 최신 수치</li>
+</ul>
+
+</article>
+<footer>자동 생성 리포트 · 투자 조언이 아닙니다. 모든 수치는 원문 출처를 확인하세요.</footer>
+</div>
+</body>
+</html>

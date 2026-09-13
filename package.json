@@ -1,0 +1,14 @@
+{
+  "name": "economic-news-bot",
+  "version": "1.0.0",
+  "private": true,
+  "description": "미국 시장 데일리 브리핑 파이프라인",
+  "scripts": {
+    "data": "node fetch_market_data.js",
+    "check": "node fetch_market_data.js --check",
+    "site": "node build_site.js"
+  },
+  "dependencies": {
+    "marked": "^14.1.4"
+  }
+}

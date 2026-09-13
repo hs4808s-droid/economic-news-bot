@@ -37,6 +37,36 @@ function parseEmailFile(filePath) {
   return { subject, body: lines.slice(bodyStartIndex).join('\n') };
 }
 
+// GitHub Actions에서는 Secrets가 환경변수로 들어오고, 로컬에서는 기존 파일을 쓴다.
+function loadCredentials() {
+  const env = {
+    client_id: process.env.GMAIL_CLIENT_ID,
+    client_secret: process.env.GMAIL_CLIENT_SECRET,
+    refresh_token: process.env.GMAIL_REFRESH_TOKEN,
+  };
+  if (env.client_id && env.client_secret && env.refresh_token) return env;
+
+  // 환경변수가 일부만 있으면 조용히 파일로 넘어가지 않는다 — 설정 실수를 숨기게 된다.
+  const partial = Object.entries(env).filter(([, v]) => v).map(([k]) => k);
+  if (partial.length) {
+    throw new Error(
+      `Gmail 환경변수가 일부만 설정됐습니다 (있는 것: ${partial.join(', ')}). ` +
+        'GMAIL_CLIENT_ID · GMAIL_CLIENT_SECRET · GMAIL_REFRESH_TOKEN 세 개가 모두 필요합니다.'
+    );
+  }
+
+  if (!fs.existsSync(CLIENT_FILE) || !fs.existsSync(TOKEN_FILE)) {
+    throw new Error(
+      'Gmail 자격증명이 없습니다. 환경변수(GMAIL_CLIENT_ID/SECRET/REFRESH_TOKEN)를 설정하거나, ' +
+        'gmail_auth_setup.js를 실행해 gmail_oauth_client.json·gmail_token.json을 만드세요.'
+    );
+  }
+  const { client_id, client_secret } = JSON.parse(fs.readFileSync(CLIENT_FILE, 'utf8'));
+  const { refresh_token } = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8'));
+  if (!refresh_token) throw new Error('refresh_token이 없습니다. gmail_auth_setup.js를 먼저 실행하세요.');
+  return { client_id, client_secret, refresh_token };
+}
+
 async function getAccessToken(client_id, client_secret, refresh_token) {
   const res = await fetch('https://oauth2.googleapis.com/token', {
     method: 'POST',
@@ -54,13 +84,8 @@ async function main() {
     console.error('사용법: node send_email.js <발송할 텍스트 파일>');
     process.exit(1);
   }
-  if (!fs.existsSync(CLIENT_FILE) || !fs.existsSync(TOKEN_FILE)) {
-    throw new Error('gmail_oauth_client.json 또는 gmail_token.json이 없습니다. gmail_auth_setup.js를 먼저 실행하세요.');
-  }
-
-  const { client_id, client_secret } = JSON.parse(fs.readFileSync(CLIENT_FILE, 'utf8'));
-  const { refresh_token } = JSON.parse(fs.readFileSync(TOKEN_FILE, 'utf8'));
-  if (!refresh_token) throw new Error('refresh_token이 없습니다. gmail_auth_setup.js를 먼저 실행하세요.');
+  // 자격증명: 환경변수 우선(GitHub Actions), 없으면 로컬 파일 fallback.
+  const { client_id, client_secret, refresh_token } = loadCredentials();
 
   const { subject, body } = parseEmailFile(inputFile);
   const accessToken = await getAccessToken(client_id, client_secret, refresh_token);

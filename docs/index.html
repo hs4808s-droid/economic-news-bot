@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="미국 증시·연준·경제지표·AI 인프라를 매일 분석한 한국어 데일리 리포트 모음">
+<title>미국 시장 데일리 브리핑</title>
+<style>
+:root{
+  --bg:#faf9f7; --surface:#fff; --text:#1c1b19; --muted:#6b675f; --line:#e5e1da;
+  --accent:#8a5a2b; --accent-soft:#f3ece3; --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px -12px rgba(0,0,0,.12);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#161513; --surface:#1f1e1b; --text:#eceae5; --muted:#a09a90; --line:#312f2b;
+    --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161513; --surface:#1f1e1b; --text:#eceae5; --muted:#a09a90; --line:#312f2b;
+  --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  font-size:16px; line-height:1.75; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:860px; margin:0 auto; padding:32px 20px 80px}
+header.top{border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:36px}
+header.top a.home{color:var(--muted); text-decoration:none; font-size:13px; letter-spacing:.04em}
+header.top a.home:hover{color:var(--accent)}
+h1{font-size:27px; line-height:1.35; margin:.5em 0 .2em; letter-spacing:-.01em}
+h2{font-size:21px; margin:2.2em 0 .6em; padding-bottom:.3em; border-bottom:1px solid var(--line); letter-spacing:-.01em}
+h3{font-size:17px; margin:1.8em 0 .4em; color:var(--accent)}
+h4{font-size:15px; margin:1.4em 0 .3em; color:var(--muted)}
+p,ul,ol{margin:.7em 0}
+li{margin:.25em 0}
+a{color:var(--accent)}
+hr{border:0; border-top:1px solid var(--line); margin:2.4em 0}
+code{background:var(--accent-soft); padding:.12em .4em; border-radius:4px; font-size:.87em}
+blockquote{
+  margin:1em 0; padding:.6em 1em; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 6px 6px 0; color:var(--muted);
+}
+blockquote p{margin:.3em 0}
+/* 표는 넓다. 페이지가 아니라 표 자체가 가로 스크롤되게 한다. */
+.tablewrap{overflow-x:auto; margin:1.1em 0; border:1px solid var(--line); border-radius:8px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:14px; min-width:520px}
+th,td{padding:9px 13px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+th{background:var(--accent-soft); font-weight:600; white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.meta{color:var(--muted); font-size:13px; margin:0}
+.cards{list-style:none; padding:0; margin:0}
+.cards li{margin:0 0 10px}
+.cards a{
+  display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:15px 18px; text-decoration:none; color:var(--text); box-shadow:var(--shadow);
+}
+.cards a:hover{border-color:var(--accent)}
+.cards .d{font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap}
+.cards .s{color:var(--muted); font-size:13px; text-align:right; overflow:hidden}
+.latest a{border-color:var(--accent); border-width:2px}
+.badge{
+  display:inline-block; background:var(--accent); color:var(--bg);
+  font-size:11px; padding:1px 7px; border-radius:99px; margin-left:8px; vertical-align:middle;
+}
+footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+  <h1>미국 시장 데일리 브리핑</h1>
+  <p class="meta">미국 증시·연준·경제지표·AI 인프라를 매일 수집·분석한 한국어 리포트 · 총 50건</p>
+</header>
+<ul class="cards">
+  <li class="latest"><a href="reports/2026-09-13.html">
+    <span class="d">2026-09-13 (일)<span class="badge">최신</span></span>
+    <span class="s">Oracle CAPEX 가이던스 재확인 → Dell +11.5%/HPE +10.5% 급등, AI 인프라 밸류체인 재평가</span>
+  </a></li>
+  <li><a href="reports/2026-09-11.html">
+    <span class="d">2026-09-11 (금)</span>
+    <span class="s">10년물 국채금리 4.84~4.85%, 2023년 10월 이후 최고치 경신</span>
+  </a></li>
+  <li><a href="reports/2026-09-10.html">
+    <span class="d">2026-09-10 (목)</span>
+    <span class="s">브로드컴(AVGO) AI 반도체 매출 167억달러(+221% YoY)</span>
+  </a></li>
+  <li><a href="reports/2026-09-09.html">
+    <span class="d">2026-09-09 (수)</span>
+    <span class="s">QCOM +10%, Amazon과 최대 $60B 규모 커스텀 AI 데이터센터 칩 다세대 파트너십(워런트 최대 $4B)</span>
+  </a></li>
+  <li><a href="reports/2026-09-05.html">
+    <span class="d">2026-09-05 (토)</span>
+    <span class="s">8월 비농업고용(NFP) +162,000, 예상(+53,000) 대비 +109,000 서프라이즈</span>
+  </a></li>
+  <li><a href="reports/2026-09-04.html">
+    <span class="d">2026-09-04 (금)</span>
+    <span class="s">오늘 미국 8월 고용지표(NFP) 발표</span>
+  </a></li>
+  <li><a href="reports/2026-09-03.html">
+    <span class="d">2026-09-03 (목)</span>
+    <span class="s">브로드컴, FY2026 AI반도체 매출 가이던스 $56B로 상향(전년比 +180%)</span>
+  </a></li>
+  <li><a href="reports/2026-09-02.html">
+    <span class="d">2026-09-02 (수)</span>
+    <span class="s">미국-이란 호르무즈해협 재충돌(유조선 피격) → 3대 지수 동반 하락·VIX 급등·유가 급등</span>
+  </a></li>
+  <li><a href="reports/2026-08-28.html">
+    <span class="d">2026-08-28 (금)</span>
+    <span class="s">NVDA 2분기 실적 서프라이즈(매출 $96.22B, 전년비 +106%)·3분기 가이던스 $108.0B, 주가 +8.7%</span>
+  </a></li>
+  <li><a href="reports/2026-08-26.html">
+    <span class="d">2026-08-26 (수)</span>
+    <span class="s">NVIDIA(NVDA) 실적 발표(8/26 장마감 후)</span>
+  </a></li>
+  <li><a href="reports/2026-08-25.html">
+    <span class="d">2026-08-25 (화)</span>
+    <span class="s">NVDA, AI서버 가격 15%+ 인상 통보</span>
+  </a></li>
+  <li><a href="reports/2026-08-24.html">
+    <span class="d">2026-08-24 (월)</span>
+    <span class="s">하이퍼스케일러 설비투자(capex) 상향(아마존 $220B·알파벳 $205B)</span>
+  </a></li>
+  <li><a href="reports/2026-08-20.html">
+    <span class="d">2026-08-20 (목)</span>
+    <span class="s">재무부 장기채 바이백 2배 확대 → 국채금리 급락 → 3대 지수 3일 연속 하락세 종료</span>
+  </a></li>
+  <li><a href="reports/2026-08-19.html">
+    <span class="d">2026-08-19 (수)</span>
+    <span class="s">30년물 국채금리 19년래 최고(장중 5.3%대)·10년물 4.706% 급등이 반도체·메모리 밸류체인 조정을 촉발</span>
+  </a></li>
+  <li><a href="reports/2026-08-11.html">
+    <span class="d">2026-08-11 (화)</span>
+    <span class="s">Nvidia, 월가 6개 대형 자산운용사와 $500B 규모 AI 인프라 펀딩 MOU 체결</span>
+  </a></li>
+  <li><a href="reports/2026-08-10.html">
+    <span class="d">2026-08-10 (월)</span>
+    <span class="s">7월 고용쇼크로 9월 금리인상 기대 급락(58%→42%)</span>
+  </a></li>
+  <li><a href="reports/2026-08-07.html">
+    <span class="d">2026-08-07 (금)</span>
+    <span class="s">트럼프 대통령, 워시 Fed 의장에 압박성 통화(이란·AI·경제 현안) 보도</span>
+  </a></li>
+  <li><a href="reports/2026-08-06.html">
+    <span class="d">2026-08-06 (목)</span>
+    <span class="s">엔비디아, 스페이스X 전용 GPU 공급 발표·주가 $220 돌파</span>
+  </a></li>
+  <li><a href="reports/2026-08-05.html">
+    <span class="d">2026-08-05 (수)</span>
+    <span class="s">반도체 섹터 전반 랠리 + SOXX·SMH 사상 최대 자금유입</span>
+  </a></li>
+  <li><a href="reports/2026-08-03.html">
+    <span class="d">2026-08-03 (월)</span>
+    <span class="s">아마존 2분기 실적 서프라이즈, AWS +36.8% YoY 성장(18분기 만 최대)</span>
+  </a></li>
+  <li><a href="reports/2026-08-01.html">
+    <span class="d">2026-08-01 (토)</span>
+    <span class="s">아마존(AMZN) 실적 서프라이즈가 지수 상승 견인</span>
+  </a></li>
+  <li><a href="reports/2026-07-31.html">
+    <span class="d">2026-07-31 (금)</span>
+    <span class="s">마이크로소프트, 실적 서프라이즈 + Azure 매출 첫 $100B 돌파 + FY2027 자본지출(CAPEX) $255~260B 가이던스</span>
+  </a></li>
+  <li><a href="reports/2026-07-30.html">
+    <span class="d">2026-07-30 (목)</span>
+    <span class="s">FOMC 매파적 동결(9대3, 반대 3인 전원 인상 주장)</span>
+  </a></li>
+  <li><a href="reports/2026-07-29.html">
+    <span class="d">2026-07-29 (수)</span>
+    <span class="s">SOX(필라델피아 반도체지수) 기술적 베어마켓 진입, 6/22 고점 대비 -20.2%</span>
+  </a></li>
+  <li><a href="reports/2026-07-28.html">
+    <span class="d">2026-07-28 (화)</span>
+    <span class="s">엔비디아(NVDA) -5%, OpenAI 데이터센터向 최대 2,500억 달러 자금보증 논의설로 &quot;순환금융&quot; 우려 재점화</span>
+  </a></li>
+  <li><a href="reports/2026-07-27.html">
+    <span class="d">2026-07-27 (월)</span>
+    <span class="s">FOMC 회의(7/28~29)</span>
+  </a></li>
+  <li><a href="reports/2026-07-24.html">
+    <span class="d">2026-07-24 (금)</span>
+    <span class="s">중동發 유가 급등(WTI +6%대·Brent +7%, 배럴당 $100 재돌파)이 오늘 지수 하락의 핵심 동인</span>
+  </a></li>
+  <li><a href="reports/2026-07-23.html">
+    <span class="d">2026-07-23 (목)</span>
+    <span class="s">Alphabet, 2026년 CAPEX(설비투자) 가이던스를 최대 $205B로 상향(컨센서스 $188B 상회)</span>
+  </a></li>
+  <li><a href="reports/2026-07-22.html">
+    <span class="d">2026-07-22 (수)</span>
+    <span class="s">SOX +5.21%, 메모리주(마이크론·샌디스크) 급등이 반도체 밸류체인 전반 랠리 견인</span>
+  </a></li>
+  <li><a href="reports/2026-07-21.html">
+    <span class="d">2026-07-21 (화)</span>
+    <span class="s">SOX(반도체지수) +2.37% 반등, 마이크로소프트의 AMD Helios AI 추론 솔루션 채택이 계기</span>
+  </a></li>
+  <li><a href="reports/2026-07-20.html">
+    <span class="d">2026-07-20 (월)</span>
+    <span class="s">반도체 섹터 급락, SOX 지수 기술적 약세장 진입(6월 고점 대비 -20%↑)</span>
+  </a></li>
+  <li><a href="reports/2026-07-18.html">
+    <span class="d">2026-07-18 (토)</span>
+    <span class="s">SOX 반도체지수, 6월 고점 대비 20% 이상 하락하며 기술적 약세장(bear market) 진입</span>
+  </a></li>
+  <li><a href="reports/2026-07-16.html">
+    <span class="d">2026-07-16 (목)</span>
+    <span class="s">이란-미 갈등 확전 → Fed 7/29 FOMC 인상확률 급등(34%→46.5%, 9월은 최대 100%대 근접)</span>
+  </a></li>
+  <li><a href="reports/2026-07-15.html">
+    <span class="d">2026-07-15 (수)</span>
+    <span class="s">6월 CPI 서프라이즈 완화(헤드라인 YoY 3.5%, 예상 3.8%)</span>
+  </a></li>
+  <li><a href="reports/2026-07-14.html">
+    <span class="d">2026-07-14 (화)</span>
+    <span class="s">S&amp;P500 -0.79% / 나스닥 -1.55%(3대 지수 중 최대 낙폭), 이란 해상 봉쇄 재시행으로 미-이란 충돌 격화</span>
+  </a></li>
+  <li><a href="reports/2026-07-13.html">
+    <span class="d">2026-07-13 (월)</span>
+    <span class="s">연준 반기 통화정책보고서</span>
+  </a></li>
+  <li><a href="reports/2026-07-10.html">
+    <span class="d">2026-07-10 (금)</span>
+    <span class="s">반도체 섹터 전반 랠리 + 반도체 ETF(SOXX) 사상 최대 일일 자금유입($54.3억)</span>
+  </a></li>
+  <li><a href="reports/2026-07-09.html">
+    <span class="d">2026-07-09 (목)</span>
+    <span class="s">트럼프 대통령 &quot;이란 휴전 끝났다&quot; 발언 → 유가 급등 → 다우 -1.09% 급락</span>
+  </a></li>
+  <li><a href="reports/2026-07-08.html">
+    <span class="d">2026-07-08 (수)</span>
+    <span class="s">삼성전자 &quot;기대 미충족&quot; 실적 → 반도체 섹터 -7~-10% 매도세 촉발</span>
+  </a></li>
+  <li><a href="reports/2026-07-03.html">
+    <span class="d">2026-07-03 (금)</span>
+    <span class="s">Meta Compute 발표</span>
+  </a></li>
+  <li><a href="reports/2026-07-02.html">
+    <span class="d">2026-07-02 (목)</span>
+    <span class="s">금리 상승의 주인공은 Warsh 발언: 오늘 10년물 +6bp는 경제지표(ADP 하회)보다 Warsh 의장의 신트라 발언이 촉매였다고 해석됨. 확신: 높음</span>
+  </a></li>
+  <li><a href="reports/2026-07-01.html">
+    <span class="d">2026-07-01 (수)</span>
+    <span class="s">NFP (07-02)</span>
+  </a></li>
+  <li><a href="reports/2026-06-30.html">
+    <span class="d">2026-06-30 (화)</span>
+    <span class="s">미국 3대 지수 동반 랠리, Dow 사상 최초 52,000pt 돌파</span>
+  </a></li>
+  <li><a href="reports/2026-06-29.html">
+    <span class="d">2026-06-29 (월)</span>
+    <span class="s">기술주 5거래일 연속 약세 + OpenAI IPO 2027년 연기 검토설</span>
+  </a></li>
+  <li><a href="reports/2026-06-26.html">
+    <span class="d">2026-06-26 (금)</span>
+    <span class="s">DRAM·NAND·HBM 가격 급등, HBM 생산능력 매진</span>
+  </a></li>
+  <li><a href="reports/2026-06-25.html">
+    <span class="d">2026-06-25 (목)</span>
+    <span class="s">Micron(MU) 실적 서프라이즈</span>
+  </a></li>
+  <li><a href="reports/2026-06-24.html">
+    <span class="d">2026-06-24 (수)</span>
+    <span class="s">메모리·반도체 섹터 동반 급락</span>
+  </a></li>
+  <li><a href="reports/2026-06-23.html">
+    <span class="d">2026-06-23 (화)</span>
+    <span class="s">Fed 점도표가 매파적으로 급변(위원 18명 중 9명이 2026년 내 금리 인상 지지, 3월엔 0명)</span>
+  </a></li>
+  <li><a href="reports/2026-06-20.html">
+    <span class="d">2026-06-20 (토)</span>
+    <span class="s">미·이란 협상 연기</span>
+  </a></li>
+  <li><a href="reports/2026-06-19.html">
+    <span class="d">2026-06-19 (금)</span>
+    <span class="s"></span>
+  </a></li>
+</ul>
+<footer>매 거래일 자동 생성 · 투자 조언이 아닙니다.</footer>
+</div>
+</body>
+</html>

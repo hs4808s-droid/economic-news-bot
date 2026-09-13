@@ -1,0 +1,69 @@
+name: 데일리 리포트
+
+on:
+  # UTC 23:00 = KST 익일 08:00.
+  # 미 정규장 종가는 EDT 20:00 UTC / EST 21:00 UTC라 서머타임과 무관하게 항상 종가 이후다.
+  # ⬇️ 수동 실행(workflow_dispatch)이 2회 연속 성공한 뒤 아래 두 줄의 주석을 풀어 자동 실행을 켠다.
+  # schedule:
+  #   - cron: '0 23 * * 1-5'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: daily-report
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      TZ: Asia/Seoul
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - run: npm ci
+
+      - name: Claude Code 설치
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: 파이프라인 실행
+        env:
+          CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          FINNHUB_API_KEY: ${{ secrets.FINNHUB_API_KEY }}
+          GMAIL_CLIENT_ID: ${{ secrets.GMAIL_CLIENT_ID }}
+          GMAIL_CLIENT_SECRET: ${{ secrets.GMAIL_CLIENT_SECRET }}
+          GMAIL_REFRESH_TOKEN: ${{ secrets.GMAIL_REFRESH_TOKEN }}
+        run: bash run_daily.sh
+
+      - name: 리포트 커밋 & push
+        # 파이프라인이 중간에 실패했어도 만들어진 산출물은 남긴다.
+        if: always()
+        run: |
+          DATE=$(date +%F)
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs logs
+          if git diff --cached --quiet; then
+            echo "변경 없음 — 커밋 건너뜀"
+          else
+            git commit -m "report: $DATE"
+            # 동시 실행은 concurrency로 막았지만, 수동 실행과 겹칠 때를 대비해 rebase 후 push.
+            git pull --rebase --autostash origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi
+
+      - name: 실패 시 로그 보존
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: run-logs
+          path: logs/
+          retention-days: 7
