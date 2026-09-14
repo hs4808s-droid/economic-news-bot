@@ -6,7 +6,7 @@
 ## 리포트 링크 (본문 최상단)
 - `package.json`의 `homepage` 값을 Read해서 다음 URL을 만든다: `<homepage>reports/<오늘날짜 YYYY-MM-DD>.html`
 - 이 URL을 본문 **첫 줄**에 `전체 리포트: <URL>` 형태로 넣고, 그 다음 빈 줄을 둔 뒤 본문을 이어 쓴다.
-  - 예: `전체 리포트: https://hs4808.github.io/economic-news-bot/reports/2026-09-14.html`
+  - 예: `전체 리포트: https://hs4808s-droid.github.io/economic-news-bot/reports/2026-09-14.html`
 - ⚠️ 링크가 생겼다고 **본문을 요약하지 않는다.** 메일에는 리포트 전문이 그대로 들어간다.
 
 ## 변환 규칙

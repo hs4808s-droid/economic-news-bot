@@ -127,19 +127,51 @@ async function putCall(symbol) {
   };
 }
 
+// Finnhub company-news는 대형주일수록 Yahoo 신디케이션 홍보성 기사가 대부분이다
+// (실측: NVDA 3일치 250건 중 239건이 "Yahoo" 소스의 종목 추천·리스티클).
+// 아래 패턴으로 명백한 것만 걸러낸다.
+// ponytail: 헤드라인 패턴 매칭이라 완벽하지 않다. 남은 노이즈는 Collect 프롬프트의
+// '노이즈 제외' 규칙이 2차로 거른다. 더 정교하게 가려면 소스 화이트리스트가 필요하다.
+const NOISE_PATTERNS = [
+  /^(forget|want |if i |should you|better buy|prediction|here's why you)/i,
+  /\b\d+\s+(reasons?|things?|stocks?|etfs?|ways?)\b/i,
+  /\b(millionaire|\$1 million|\$100|monthly investment|could grow into|dividend king)\b/i,
+  /\b(is|are) .* a (buy|sell|good (stock|buy|investment))\b/i,
+  /\b(my top|best stock|top \d+|worth buying|buy now|which \d+ to buy)\b/i,
+  /\b(motley fool|zacks rank|analyst blog)\b/i,
+  /\bwhere will .* be\b/i,
+];
+
+const isNoise = (headline) => NOISE_PATTERNS.some((r) => r.test(headline));
+
+const toItem = (n) => ({
+  headline: n.headline,
+  source: n.source || '출처 미상',
+  at: n.datetime ? etTime(n.datetime) : 'N/A',
+  url: n.url,
+});
+
 async function sectorNews(ticker, from, to, key) {
   const url = `https://finnhub.io/api/v1/company-news?symbol=${ticker}&from=${from}&to=${to}&token=${key}`;
   const list = await getJson(url, 20000);
   if (!Array.isArray(list)) throw new Error('예상치 못한 응답');
   return list
-    .filter((n) => n.headline && n.url)
+    .filter((n) => n.headline && n.url && !isNoise(n.headline))
     .slice(0, 3)
-    .map((n) => ({
-      headline: n.headline,
-      source: n.source || '출처 미상',
-      at: n.datetime ? etTime(n.datetime) : 'N/A',
-      url: n.url,
-    }));
+    .map(toItem);
+}
+
+// 시장 전반 와이어 뉴스. company-news와 달리 Reuters·CNBC·Bloomberg 위주라
+// 프로젝트의 [P2] 등급과 그대로 맞는다.
+const WIRE_SOURCES = ['Reuters', 'Bloomberg', 'CNBC', 'WSJ'];
+
+async function marketNews(key) {
+  const list = await getJson(`https://finnhub.io/api/v1/news?category=general&token=${key}`, 20000);
+  if (!Array.isArray(list)) throw new Error('예상치 못한 응답');
+  return list
+    .filter((n) => n.headline && n.url && WIRE_SOURCES.includes(n.source) && !isNoise(n.headline))
+    .slice(0, 15)
+    .map(toItem);
 }
 
 // 실패해도 파이프라인을 멈추지 않는다. 실패는 N/A로 표면화된다.
@@ -154,7 +186,7 @@ async function safe(label, fn) {
 
 // --- 마크다운 생성 ---------------------------------------------------------
 
-function buildMarkdown(date, quotes, putCalls, news, newsSkipReason) {
+function buildMarkdown(date, quotes, putCalls, news, wire, newsSkipReason) {
   const L = [];
   L.push('# 자동 수집 시장 데이터 (0_data)');
   L.push(`# 기준일: ${date} · 생성시각(KST): ${kstTime()}`);
@@ -214,6 +246,20 @@ function buildMarkdown(date, quotes, putCalls, news, newsSkipReason) {
   }
   L.push('');
   L.push('> CBOE 지연 시세 기준. 직전 정규장 집계값이다.');
+  L.push('');
+
+  L.push('## 시장 전반 뉴스 (Finnhub · 와이어 매체)');
+  L.push('');
+  if (newsSkipReason) {
+    L.push(`N/A — ${newsSkipReason}`);
+  } else if (!wire.length) {
+    L.push('N/A — 해당 시점 와이어 뉴스 없음');
+  } else {
+    for (const n of wire) {
+      L.push(`- **${n.source}** · ${n.headline}`);
+      L.push(`  - ${n.at} (ET) · ${n.url}`);
+    }
+  }
   L.push('');
 
   L.push('## 섹터별 뉴스 (Finnhub)');
@@ -293,6 +339,7 @@ async function main() {
 
   // Finnhub 뉴스 — 직전 3일치를 받아 최신 3건만 남긴다 (주말·휴장 대비).
   const news = {};
+  let wire = [];
   let newsSkipReason = null;
   const key = process.env.FINNHUB_API_KEY;
   if (!key) {
@@ -308,11 +355,13 @@ async function main() {
         if (r.ok) news[sector].push(...r.value.map((n) => ({ ...n, ticker: t })));
       }
     }
-    console.log(`  섹터 뉴스 ${Object.values(news).flat().length}건 수집`);
+    const w = await safe('시장 전반 뉴스', () => marketNews(key));
+    if (w.ok) wire = w.value;
+    console.log(`  섹터 뉴스 ${Object.values(news).flat().length}건 · 와이어 뉴스 ${wire.length}건 수집`);
   }
 
   fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(outFile, buildMarkdown(date, quotes, putCalls, news, newsSkipReason), 'utf8');
+  fs.writeFileSync(outFile, buildMarkdown(date, quotes, putCalls, news, wire, newsSkipReason), 'utf8');
   console.log(`완료: ${path.relative(__dirname, outFile)}`);
 }
 
