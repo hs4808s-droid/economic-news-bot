@@ -1,6 +1,6 @@
 # 미국 시장 데일리 수집 결과 (Collect)
 # 기준일: 2026-09-16 (수) · 미국 정규장 종가 기준 · 실행모드: [데일리]
-# 생성시각(KST): 2026-09-16 07:51
+# 생성시각(KST): 2026-09-16 08:36
 
 ## [1] 미국 주요 지수 (데일리)
 
@@ -21,10 +21,10 @@
 
 | 항목 | 현재가 | 전일 대비 | 직전 종가 | 기준시각(ET) | 출처+태그 |
 |------|--------|-----------|-----------|--------------|-----------|
-| S&P500 선물 (ES) | 7,665.75 | +0.53% | 7,625 | 2026-09-15 18:40 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
-| 나스닥100 선물 (NQ) | 29,281.25 | +0.44% | 29,152.25 | 2026-09-15 18:40 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
-| 다우 선물 (YM) | 52,575 | +0.26% | 52,440 | 2026-09-15 18:40 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
-| 러셀2000 선물 (RTY) | 2,896.9 | +0.10% | 2,894.1 | 2026-09-15 18:40 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| S&P500 선물 (ES) | 7,663.5 | +0.50% | 7,625 | 2026-09-15 19:24 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| 나스닥100 선물 (NQ) | 29,275 | +0.42% | 29,152.25 | 2026-09-15 19:24 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| 다우 선물 (YM) | 52,575 | +0.26% | 52,440 | 2026-09-15 19:24 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| 러셀2000 선물 (RTY) | 2,896.3 | +0.08% | 2,894.1 | 2026-09-15 19:24 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
 
 ### 변동성 구조
 
@@ -38,13 +38,13 @@
 
 VIX 기간구조 비율(산출값): VIX3M/VIX = 1.126 (콘탱고), VIX/VIX9D = 0.999 (백워데이션). 출처: CBOE / CME (Yahoo chart API 자동수집) [P1]
 
-**매크로 (2026-09-15 18:40 ET 기준)**
+**매크로 (2026-09-15 19:24 ET 기준, DXY는 18:04 ET)**
 
 | 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 출처+태그 |
 |------|------|-------------|-----------|-----------|-----------|
 | 미 10년 국채선물 | `ZN=F` | 105.97 | -0.43% | 106.42 | CME (Yahoo chart API 자동수집) [P1] |
-| 금 | `GC=F` | 4,338 | -0.32% | 4,351.9 | COMEX (Yahoo chart API 자동수집) [P1] |
-| WTI | `CL=F` | 105.29 | +3.85% | 101.39 | NYMEX (Yahoo chart API 자동수집) [P1] |
+| 금 | `GC=F` | 4,325.1 | -0.62% | 4,351.9 | COMEX (Yahoo chart API 자동수집) [P1] |
+| WTI | `CL=F` | 105.44 | +3.99% | 101.39 | NYMEX (Yahoo chart API 자동수집) [P1] |
 | 달러지수 (DXY) | `DX-Y.NYB` | 99.61 | +0.15% | 99.46 | ICE (Yahoo chart API 자동수집) [P1] |
 
 ### Put/Call 비율
@@ -99,7 +99,7 @@ VIX 기간구조 비율(산출값): VIX3M/VIX = 1.126 (콘탱고), VIX/VIX9D = 0
 
 | 기업 | 뉴스 제목 | 사실 내용(무슨 일이) | 출처일자 | 출처+태그 |
 |------|-----------|------------------------|----------|-----------|
-| DELL | Dell's AI Server Backlog Reaches $95 Billion | Dell, 회계 2분기 말 AI 서버 수주잔고 950억달러(전분기 513억달러에서 급증), 분기 신규 수주 609억달러. AI 최적화 서버 매출 164억달러(전년 대비 2배). FY2027 매출 전망을 192억→ 아님, 250억달러 상향해 1,920억달러로, AI 서버 매출은 740억달러로 전망 상향 | 2026-09(2분기 실적 발표 기반) | Yahoo Finance · Dell's AI Backlog Just Hit a Record $95 Billion · https://finance.yahoo.com/technology/ai/articles/dells-ai-backlog-just-hit-122102567.html [P2] |
+| DELL | Dell's AI Server Backlog Reaches $95 Billion | Dell, 회계 2분기 말 AI 서버 수주잔고 950억달러(전분기 513억달러에서 급증), 분기 신규 수주 609억달러. AI 최적화 서버 매출 164억달러(전년 대비 2배). FY2027 매출 전망을 1,920억달러로, AI 서버 매출은 740억달러로 전망 상향 | 2026-09(2분기 실적 발표 기반) | Yahoo Finance · Dell's AI Backlog Just Hit a Record $95 Billion · https://finance.yahoo.com/technology/ai/articles/dells-ai-backlog-just-hit-122102567.html [P2] |
 | AVGO | Broadcom CEO addresses Anthropic's slowdown push | Broadcom CEO Hock Tan, AI 반도체 매출 전망(FY2027 1,150억달러, FY2028 2,300억달러) 유지 및 상향 가능성 언급. "I don't know about training, but when you want to productize inference, I see it continuing to be very, very strong" | 2026-09-14 | CNBC · Broadcom CEO addresses Anthropic's slowdown push, says AI revenue targets haven't changed · https://www.cnbc.com/2026/09/14/broadcom-ceo-on-anthropics-slowdown-push-ai-revenue-targets-havent-changed.html [P2] |
 | NVDA | (섹터뉴스 원문) TSMC's 2nm Era Is Accelerating With MediaTek. Nvidia and Alphabet Already Have Money on the Table | TSMC 2나노 공정에 MediaTek 합류 가속, Nvidia·Alphabet이 선주문 형태로 자금 투입했다는 보도(세부 금액 기사 내 미확인) | 2026-09-15 17:48(ET) | Yahoo(Finnhub 수집) · https://finnhub.io/api/news?id=86105b30bc518a119ef014f8b7c80f7f22eae6554c40f68f5a512b72d3a97b49 [P3] |
 | HBM/DRAM/NAND 현물가, AI 서버 출하량, GPU 공급, 광통신 수요 | N/A | N/A — 별도 수치 검색 확인 불가 | N/A | N/A |
@@ -152,11 +152,11 @@ N/A — 금일(2026-09-15~16) MSFT/NVDA/AAPL/AMZN/GOOGL/META/AVGO/BRK/TSLA/TSM �
 - [1] Dow 30 52,093.11, -328.09pt(-0.63%) (2026-09-15 종가) · CNBC [P2]
 - [1] Russell2000, SOX 9/15 종가 수치 검색 확인 불가 · N/A
 - [1] Brent 원유 약 $109/배럴, 이란 관련 공급 차질 우려 반영 · Yahoo Finance [P2]
-- [1-A] ES선물 7,663 (+0.50%), NQ선물 29,266.75(+0.39%), YM선물 52,562(+0.23%), RTY선물 2,896(+0.07%), 2026-09-15 18:29(ET) 기준 · CBOE/CME(Yahoo) [P1]
+- [1-A] ES선물 7,663.5(+0.50%), NQ선물 29,275(+0.42%), YM선물 52,575(+0.26%), RTY선물 2,896.3(+0.08%), 2026-09-15 19:24(ET) 기준 · CBOE/CME(Yahoo) [P1]
 - [1-A] VIX 17.2(+0.58%), VIX9D 17.21, VIX3M 19.36, VVIX 94.91, SKEW 146.61(-3.60%) · CBOE/CME(Yahoo) [P1]
 - [1-A] VIX3M/VIX 1.126(콘탱고), VIX/VIX9D 0.999(백워데이션) · CBOE/CME(Yahoo) [P1]
 - [1-A] SPX Put/Call 거래량비 1.211, QQQ Put/Call 거래량비 1.042 · CBOE 옵션체인 [P1]
-- [1-A] WTI 105.29(+3.85%) · 금 4,338(-0.32%) · DXY 99.61(+0.15%) · ZN 105.97(-0.43%), 2026-09-15 18:40(ET) 기준 · CBOE/CME(Yahoo) [P1]
+- [1-A] WTI 105.44(+3.99%) · 금 4,325.1(-0.62%) · DXY 99.61(+0.15%) · ZN 105.97(-0.43%), 2026-09-15 19:24(ET) 기준(DXY는 18:04 ET) · CBOE/CME(Yahoo) [P1]
 - [2] FOMC 정책결정 발표는 2026-09-16 오후 2:00(ET) 예정 · Kiplinger [P3]
 - [2] CME FedWatch, 25bp 인상 확률 84.1%(2026-09-14 기준) · KuCoin(CME FedWatch 인용) [P3]
 - [2] 10년물 국채 수익률 장중 5.041%(2007년 7월 이후 최고), 2년물 4.656% · CNBC [P2]
