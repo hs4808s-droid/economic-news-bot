@@ -6,6 +6,7 @@
   "scripts": {
     "data": "node fetch_market_data.js",
     "check": "node fetch_market_data.js --check",
+    "email": "node build_email.js",
     "site": "node build_site.js"
   },
   "dependencies": {

@@ -10,33 +10,41 @@ mkdir -p "$LOG_DIR"
 
 echo "=== 기준일 $DATE ==="
 
+# Claude 세션 사용량을 아끼기 위해 단계별로 정말 필요한 도구만 허용한다.
+# (2·3단계는 자체 규칙상 "새 사실을 지어내지 않는다/검색하지 않는다"이므로
+#  WebSearch를 애초에 주지 않아 어길 여지 자체를 없앤다.)
 run_step() {
   local prompt_file="$1"
   local out_file="$2"
+  shift 2
+  local tools=("$@")
 
   claude -p "$(cat "$prompt_file")" \
-    --allowedTools "WebSearch" "Read" "Write" \
+    --allowedTools "${tools[@]}" \
     > "$out_file" 2> "${out_file%.md}.err.log"
 }
 
 # 0단계: API에서 시장 수치를 기계 수집한다. 실패해도 파이프라인은 계속 간다
 # (1단계 프롬프트가 0_data.md 부재를 N/A로 처리하도록 되어 있다).
-echo "[0/5] 시장 데이터 수집"
+echo "[0/6] 시장 데이터 수집"
 if ! node fetch_market_data.js "$DATE" > "$LOG_DIR/0_data.run.log" 2>&1; then
   echo "  경고: 시장 데이터 수집 실패 — $LOG_DIR/0_data.run.log 확인. 검색 기반으로 계속 진행." >&2
 fi
 
-echo "[1/5] 수집(Collect)"
-run_step "prompts/1_collect.md" "$LOG_DIR/1_collect.run.log"
-echo "[2/5] 분석(Analysis)"
-run_step "prompts/2_analyze.md" "$LOG_DIR/2_analyze.run.log"
-echo "[3/5] 리포트 통합"
-run_step "prompts/3_report.md" "$LOG_DIR/3_report.run.log"
-echo "[4/5] 발송용 텍스트 생성"
-run_step "prompts/4_email.md" "$LOG_DIR/4_email.run.log"
+echo "[1/6] 수집(Collect)"
+run_step "prompts/1_collect.md" "$LOG_DIR/1_collect.run.log" WebSearch Read Write
+echo "[2/6] 분석(Analysis)"
+run_step "prompts/2_analyze.md" "$LOG_DIR/2_analyze.run.log" Read Write
+echo "[3/6] 리포트 통합"
+run_step "prompts/3_report.md" "$LOG_DIR/3_report.run.log" Read Write
+
+# 4단계: 발송용 텍스트 생성 — 마크다운 제거 + URL 삽입뿐이라 판단이 필요 없다.
+# claude -p 호출 없이 코드로 처리해 하루 4번 중 1번의 Claude 세션 사용을 없앤다.
+echo "[4/6] 발송용 텍스트 생성 (코드 변환, Claude 미사용)"
+node build_email.js "$DATE"
 
 # 5단계: 리포트를 HTML로 빌드한다. GitHub Pages가 docs/를 서빙한다.
-echo "[5/5] HTML 사이트 빌드"
+echo "[5/6] HTML 사이트 빌드"
 node build_site.js
 
 # 실제 발송은 Claude가 아니라 Gmail API를 직접 호출하는 스크립트가 담당한다.
@@ -56,4 +64,4 @@ else
   echo "메일 발송 실패 - $LOG_DIR/5_send.err.log 확인" >&2
 fi
 
-echo "완료: $LOG_DIR"
+echo "[6/6] 완료: $LOG_DIR"
