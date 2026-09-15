@@ -81,6 +81,10 @@ elif node send_email.js "$LOG_DIR/email_to_send.txt" > "$LOG_DIR/5_send.log" 2> 
   touch "$LOG_DIR/.emailed"
 else
   echo "메일 발송 실패 - $LOG_DIR/5_send.err.log 확인" >&2
+  # 이 실패는 스크립트를 죽이지 않아(set -e를 우회) 파이프라인 전체는
+  # "성공"으로 끝난다. GitHub Actions 요약 화면에 바로 보이는 경고를 남겨
+  # 로그를 따로 안 열어봐도 놓치지 않게 한다.
+  echo "::warning::메일 발송 실패 — $LOG_DIR/5_send.err.log 확인 (GMAIL_* Secrets 재확인 필요할 수 있음)"
 fi
 
 echo "[6/6] 완료: $LOG_DIR"

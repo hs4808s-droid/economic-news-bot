@@ -67,8 +67,12 @@ jobs:
             git push origin "HEAD:${GITHUB_REF_NAME}"
           fi
 
-      - name: 실패 시 로그 보존
-        if: failure()
+      - name: 실행 로그 보존
+        # 2026-09-16: 메일 발송이 GitHub Secrets 문제로 실패했는데도 파이프라인
+        # 자체는 "성공"으로 끝나(의도된 설계 — 메일 실패가 리포트 게시를 막지
+        # 않는다) 원인 로그(5_send.err.log)를 못 봤다. 성공/실패 무관하게
+        # 항상 보존해 이런 조용한 실패를 다음엔 바로 진단할 수 있게 한다.
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: run-logs
