@@ -41,8 +41,17 @@ node build_site.js
 
 # 실제 발송은 Claude가 아니라 Gmail API를 직접 호출하는 스크립트가 담당한다.
 # 메일 실패가 리포트 게시를 막아서는 안 되므로 종료코드를 전파하지 않는다.
-if node send_email.js "$LOG_DIR/email_to_send.txt" > "$LOG_DIR/5_send.log" 2> "$LOG_DIR/5_send.err.log"; then
+#
+# 하루 1통 제한: 같은 날짜에 이미 발송했다면 다시 보내지 않는다.
+# 마커 파일(.emailed)은 git에 커밋된다 — GitHub Actions는 매번 새 VM에서 시작해
+# 로컬 파일이 안 남으므로, 커밋된 마커만이 "오늘 이미 보냈다"를 다음 실행에 전달할 수 있다.
+# (수동 재실행 시 이미 있는 산출물을 그대로 중복 발송하는 사고를 막기 위함.
+#  일부러 다시 보내고 싶으면 "$LOG_DIR/.emailed"를 지우고 커밋한 뒤 재실행한다.)
+if [ -f "$LOG_DIR/.emailed" ]; then
+  echo "메일 발송 건너뜀 — 오늘 이미 발송함 ($LOG_DIR/.emailed 존재)"
+elif node send_email.js "$LOG_DIR/email_to_send.txt" > "$LOG_DIR/5_send.log" 2> "$LOG_DIR/5_send.err.log"; then
   echo "메일 발송 성공" >> "$LOG_DIR/5_send.log"
+  touch "$LOG_DIR/.emailed"
 else
   echo "메일 발송 실패 - $LOG_DIR/5_send.err.log 확인" >&2
 fi
