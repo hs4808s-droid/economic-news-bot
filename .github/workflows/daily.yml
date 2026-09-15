@@ -3,9 +3,10 @@ name: 데일리 리포트
 on:
   # UTC 23:00 = KST 익일 08:00.
   # 미 정규장 종가는 EDT 20:00 UTC / EST 21:00 UTC라 서머타임과 무관하게 항상 종가 이후다.
-  # ⬇️ 수동 실행(workflow_dispatch)이 2회 연속 성공한 뒤 아래 두 줄의 주석을 풀어 자동 실행을 켠다.
-  # schedule:
-  #   - cron: '0 23 * * 1-5'
+  # 2026-09-15: 로컬 Windows 예약작업(같은 Claude 계정 사용)과의 충돌로 첫 수동
+  # 실행이 세션 한도 초과로 실패 → 예약작업 비활성화 후 재실행해 성공 확인. 활성화.
+  schedule:
+    - cron: '0 23 * * 1-5'
   workflow_dispatch:
 
 permissions:
