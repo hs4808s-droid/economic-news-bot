@@ -1,5 +1,5 @@
 # 자동 수집 시장 데이터 (0_data)
-# 기준일: 2026-09-16 · 생성시각(KST): 2026-09-16 08:34
+# 기준일: 2026-09-16 · 생성시각(KST): 2026-09-16 09:40
 # 출처: Yahoo Finance chart API · CBOE 지연시세 API · Finnhub (전부 기계 수집, 사람 해석 없음)
 
 > 이 파일의 수치는 **이미 검증된 사실**이다. 1_collect 단계에서 다시 검색하지 말고 그대로 인용한다.
@@ -9,10 +9,10 @@
 
 | 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 기준시각(ET) |
 |------|------|-------------|-----------|-----------|--------------|
-| S&P500 선물 (ES) | `ES=F` | 7,663.5 | +0.50% | 7,625 | 2026-09-15 19:24 |
-| 나스닥100 선물 (NQ) | `NQ=F` | 29,275 | +0.42% | 29,152.25 | 2026-09-15 19:24 |
-| 다우 선물 (YM) | `YM=F` | 52,575 | +0.26% | 52,440 | 2026-09-15 19:24 |
-| 러셀2000 선물 (RTY) | `RTY=F` | 2,896.3 | +0.08% | 2,894.1 | 2026-09-15 19:24 |
+| S&P500 선물 (ES) | `ES=F` | 7,666.25 | +0.54% | 7,625 | 2026-09-15 20:29 |
+| 나스닥100 선물 (NQ) | `NQ=F` | 29,274.5 | +0.42% | 29,152.25 | 2026-09-15 20:29 |
+| 다우 선물 (YM) | `YM=F` | 52,617 | +0.34% | 52,440 | 2026-09-15 20:28 |
+| 러셀2000 선물 (RTY) | `RTY=F` | 2,898.2 | +0.14% | 2,894.1 | 2026-09-15 20:29 |
 
 ## 변동성 구조
 
@@ -28,10 +28,10 @@
 
 | 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 기준시각(ET) |
 |------|------|-------------|-----------|-----------|--------------|
-| 미 10년 국채선물 | `ZN=F` | 105.97 | -0.43% | 106.42 | 2026-09-15 19:24 |
-| 금 | `GC=F` | 4,325.1 | -0.62% | 4,351.9 | 2026-09-15 19:24 |
-| WTI | `CL=F` | 105.44 | +3.99% | 101.39 | 2026-09-15 19:24 |
-| 달러지수 (DXY) | `DX-Y.NYB` | 99.61 | +0.15% | 99.46 | 2026-09-15 18:04 |
+| 미 10년 국채선물 | `ZN=F` | 106 | -0.40% | 106.42 | 2026-09-15 20:29 |
+| 금 | `GC=F` | 4,324.4 | -0.63% | 4,351.9 | 2026-09-15 20:29 |
+| WTI | `CL=F` | 104.84 | +3.40% | 101.39 | 2026-09-15 20:29 |
+| 달러지수 (DXY) | `DX-Y.NYB` | 99.67 | +0.21% | 99.46 | 2026-09-15 20:29 |
 
 ### VIX 기간구조 (위 수치에서 산출한 비율)
 
@@ -53,14 +53,14 @@
 
 ## 시장 전반 뉴스 (Finnhub · 와이어 매체)
 
+- **Reuters** · Bessent defends Trump economic policies, reveals plans to meet Chinese official - Reuters
+  - 2026-09-15 19:49 (ET) · https://news.google.com/rss/articles/CBMiqwFBVV95cUxORTlaeHpnSkMzSU5ieGJqNEpUTFdaYU8yTzc2OExDcElaWFVFclZyNkVNcThWaFRiM29ZNGhaY3dpWS1RbVh0NUhZczdVLUhLVFNjN3RCRFhZMlVmeU5ibVhCXy14VnItdkpzVHNJZXlxWmhxbzRLX3BjOTFzcE9yRVFteHcwS0Jaa19QaTVPdnh5WDFLcXdvTXBrNldnNVJDd0RvN1NRYllyRWM?oc=5
 - **Reuters** · Best of the Emmy Awards - Reuters
   - 2026-09-15 18:38 (ET) · https://news.google.com/rss/articles/CBMibkFVX3lxTE5yNlkzNUF6QXZ2YjkzclJJdWhjUUNoSTVGY1A2SV9QNzI2R3MzUHBfemhjTnRRRHFRcDZzc21hYThRem4wTW1OQ09udGZVaG5HVHNYaDV4TEVFYnpkT2s2Uk5fdzF4c3pDRHpOZWFn?oc=5
 - **Reuters** · Several explosions heard on Iran's Qeshm island, IRNA says citing local sources - Reuters
   - 2026-09-15 18:23 (ET) · https://news.google.com/rss/articles/CBMixwFBVV95cUxPcWZBeGJLZWJoMXpTcmhaVVhRdm10Tm1UMWZJbUNna2VTb0todzRORVpBOElYdmVHdjlzRnVvWFZFOXM2emd3bXp5Q0NQeVRDeTNLQldWWU5oVS1mOHQtVjZ2YkQ5ZVBLM0NMTk5UZ19ZaFZJM241dWtoUEhsWVdsbE1zaFJEMk1NZjNRVkhXRlBMSUV3UHFDYU1aTTQyQUtnZ2hLaVplVGNWdUtyR3FjZm9yUVR0dmlMQ3Z1aVd3ME5VY0tUYkU0?oc=5
 - **Reuters** · Iran war cost hits $38 billion, forecast to rise $3 billion a month, CBO says - Reuters
   - 2026-09-15 18:13 (ET) · https://news.google.com/rss/articles/CBMivwFBVV95cUxQNEs4SmV2UTYzblAwenVTemk5SWQtMTRPbkpoLTVxaEVrYzBYNDJfX0RrSmVVZVZadlFBVnF0WkJNeGc5czMxVWREeDFtS0dZeGJ2V2tqSVg5VWM5UUFtN1hsMXlPX3g4d1RMbk5BR1oxcVdyYjBIaHg0bFl1SXY1dDMzazVEZlNBOHdCWm8zRno2Vjc1TEJ6ekdnQ25COEVkS3FVNHJmeWEyRVZJd2p3aF80RFlhZmVtREhQbkpIdw?oc=5
-- **Reuters** · Bessent defends Trump economic policies, reveals plans to meet Chinese official - Reuters
-  - 2026-09-15 17:52 (ET) · https://news.google.com/rss/articles/CBMiqwFBVV95cUxORTlaeHpnSkMzSU5ieGJqNEpUTFdaYU8yTzc2OExDcElaWFVFclZyNkVNcThWaFRiM29ZNGhaY3dpWS1RbVh0NUhZczdVLUhLVFNjN3RCRFhZMlVmeU5ibVhCXy14VnItdkpzVHNJZXlxWmhxbzRLX3BjOTFzcE9yRVFteHcwS0Jaa19QaTVPdnh5WDFLcXdvTXBrNldnNVJDd0RvN1NRYllyRWM?oc=5
 - **CNBC** · Wells Fargo sees improvement in a key metric — plus, Lilly gets praise beyond GLP-1s
   - 2026-09-15 15:09 (ET) · https://www.cnbc.com/2026/09/15/wells-fargo-sees-improvement-in-a-key-metric-plus-lilly-gets-praise-beyond-glp-1s.html
 - **Reuters** · US Republican lawmaker seeks Hegseth's impeachment over Iran - Reuters
@@ -88,18 +88,18 @@
 
 ### 반도체·AI
 
-- **NVDA** · Why Rule Breakers Dig Stocks With Multiple Futures
-  - Yahoo · 2026-09-15 17:54 (ET) · https://finnhub.io/api/news?id=466e78ea50f8b3e6ddd1e4737a81d9ece024ea527a25cbf5b74dce7a108c442d
-- **NVDA** · TSMC’s 2nm Era Is Accelerating With MediaTek. Nvidia and Alphabet Already Have Money on the Table
-  - Yahoo · 2026-09-15 17:48 (ET) · https://finnhub.io/api/news?id=86105b30bc518a119ef014f8b7c80f7f22eae6554c40f68f5a512b72d3a97b49
-- **NVDA** · Nvidia Bought Hugging Face for $12.9 Billion. This Software Acquisition Changes Everything.
-  - Yahoo · 2026-09-15 17:32 (ET) · https://finnhub.io/api/news?id=29e1a877db5d1cab280a1b2138a1b0719b33ff2eaa5d332ed85debe811c8eb94
+- **NVDA** · Why Circle Internet Group Stock Was Crushed Today
+  - Yahoo · 2026-09-15 19:53 (ET) · https://finnhub.io/api/news?id=1395d7ca7eecf6cc28e327c654ab663f8a005c10258c32a10de2ab2cf1d86a72
+- **NVDA** · Calls for Slower AI Development Have Created a Compelling Dip for AI Stocks
+  - Yahoo · 2026-09-15 18:59 (ET) · https://finnhub.io/api/news?id=fdd641785cbf3adf4ca7a9c5e72694fd58a5c68fe3798b9758a776a613e875a7
+- **NVDA** · Berkshire Hathaway's Class A Shares Cost About $766,000. Here's Why the Class B Shares Exist.
+  - Yahoo · 2026-09-15 18:50 (ET) · https://finnhub.io/api/news?id=f486a87b19ce3a7872901e83fdd1ad4e32912e8913c2169d41a6516a7f57dd27
+- **AVGO** · Credo (CRDO) vs. Marvell (MRVL): Which AI Chip Stock Is the Better Buy?
+  - Yahoo · 2026-09-15 18:11 (ET) · https://finnhub.io/api/news?id=ebf12ffcb67a09ec7a1f6d4ced50523a5bf9e1c5b1709b40081e86d6738b08bf
 - **AVGO** · Why Rule Breakers Dig Stocks With Multiple Futures
   - Yahoo · 2026-09-15 17:54 (ET) · https://finnhub.io/api/news?id=466e78ea50f8b3e6ddd1e4737a81d9ece024ea527a25cbf5b74dce7a108c442d
 - **AVGO** · What Was Qualcomm Stock Telling You Before It Ran?
   - Yahoo · 2026-09-15 16:26 (ET) · https://finnhub.io/api/news?id=02658fc90610a07217de35ed7584ae21bb283fd70a982d7df81f1b5477de6cdf
-- **AVGO** · Broadcom CEO Doubles Down on Massive AI Growth Target
-  - Yahoo · 2026-09-15 15:28 (ET) · https://finnhub.io/api/news?id=63dccb9631750e024437480449f0881d253eb191af693ea1cbfebb29d52a2653
 
 ### 금융
 
@@ -114,10 +114,10 @@
 
 - **XOM** · Market Chatter: Exxon Mobil Wins Approval For Texas Carbon Capture Project
   - Yahoo · 2026-09-15 17:50 (ET) · https://finnhub.io/api/news?id=85a53b5243ca2d609738a6b5b219e94bc5af9e76887beed6bcc3cf823d81c86b
+- **XOM** · Why the Market Dipped But Exxon Mobil Holdings (XOM) Gained Today
+  - Yahoo · 2026-09-15 17:45 (ET) · https://finnhub.io/api/news?id=ce46012c02b58caf28ffa63266de1d34616344f367af41eb16c52086ee7de1ab
 - **XOM** · Exxon Rises as $6 Diesel Meets a Refinery Shutdown
   - Yahoo · 2026-09-15 17:07 (ET) · https://finnhub.io/api/news?id=fa261727d14cbbdc73e652cc0acef80db955dd67357cebc924d969b7c6a27345
-- **XOM** · Chevron CEO warns a global fuel crisis is already here
-  - Yahoo · 2026-09-15 16:53 (ET) · https://finnhub.io/api/news?id=c02567864d7a13d3f9c713c146ef419642ad4afdae5eccfe68229b22ef58b424
 
 ### 헬스케어
 
@@ -130,10 +130,10 @@
 
 ### 소비재·유통
 
+- **AMZN** · Credo (CRDO) vs. Marvell (MRVL): Which AI Chip Stock Is the Better Buy?
+  - Yahoo · 2026-09-15 18:11 (ET) · https://finnhub.io/api/news?id=ebf12ffcb67a09ec7a1f6d4ced50523a5bf9e1c5b1709b40081e86d6738b08bf
+- **AMZN** · S&P 500, Nasdaq, Dow End Lower As Investors Price In Rate Hike Ahead Of Fed Meeting — AMZN, META, MU, TSLA, PLTR In Focus
+  - Yahoo · 2026-09-15 18:04 (ET) · https://finnhub.io/api/news?id=937b1548531416896a208cab353bef25747baa53e6bb5913f23c7bfa721f6d8a
 - **AMZN** · Amazon (AMZN) Dips More Than Broader Market: What You Should Know
   - Yahoo · 2026-09-15 17:45 (ET) · https://finnhub.io/api/news?id=e2c40f2d2a69a8ff231d2ef64bd1a44afebd750f007011ca9119bb44abc7191e
-- **AMZN** · Amazon sells luxury solar-powered watches from brands like Seiko and Citizen starting at $210
-  - Yahoo · 2026-09-15 16:45 (ET) · https://finnhub.io/api/news?id=20b8abb945f1bc160f11fd987c7bc0f2ac4780df292f667a7d01dd82440d7f93
-- **AMZN** · Stock Market Today: Dow Dives With Fed Seen Doing This; Senate Vote Hits These Crypto Stocks
-  - Yahoo · 2026-09-15 16:38 (ET) · https://finnhub.io/api/news?id=a95b23d9616d1f85988b1597674f2c01d32653ec2a16a42c86f1b8ec2f49cec7
 
