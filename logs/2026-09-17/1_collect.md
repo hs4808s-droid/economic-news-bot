@@ -1,6 +1,6 @@
 # 미국 시장 데일리 수집 결과 (Collect)
-# 기준일: 2026-09-17 (목) · 미국 정규장 종가 기준(2026-09-16 ET 세션) · 실행모드: 데일리 코어 (실적시즌 근접 — [5-A]/[6] 일부 참고 표기)
-# 생성시각(KST): 2026-09-17 08:46
+# 기준일: 2026-09-17 (목) · 미국 정규장 종가 기준 · 실행모드: [데일리]
+# 생성시각(KST): 2026-09-17 10:30
 
 ---
 
@@ -13,7 +13,7 @@
 | Dow Jones 산업평균 | 51,461.90 | -1.21% (-631.21pt) | 상동 | CNBC · 상동 · 2026-09-16 [P2] |
 | Russell 2000 | N/A | N/A | 검색으로 9/16 정규장 종가 확인 실패 (직전 거래일 값만 검색됨) | N/A — 확인 실패 |
 | SOX (필라델피아 반도체지수) | N/A | N/A | 9/16 종가 자체는 검색으로 확인 실패. 단, 개별 종목 기준 AMD -5.7%, Intel -5.4%, NVDA -5.7% 하락이 보도됨(연준 금리 인상 발표 직후 반응) | 24/7 Wall St. 계열 보도 인용 검색 결과 · 2026-09-16 [P3] — 지수 자체는 [N/A] |
-| Brent | 원유 자체는 WTI 기준 0_data.md에 있음(N/A는 Brent). 108.34 (참고: WTI와 별도) | +1.77 (전일대비, 오전 7시 ET 기준) | 지정학적 긴장(예멘·이란 관련 보도) 및 공급 우려 지속 | Fortune · "Current price of oil as of September 16, 2026" · 2026-09-16 07:00 (ET) · https://fortune.com/article/price-of-oil-09-16-2026/ [P3] |
+| Brent 원유 | $108.34/배럴 (오전 7시 ET 기준 시세, 정규장 종가 아님) | +1.77(전일대비, 동일 기준시각) | 지정학적 긴장(예멘·이란 관련 보도) 및 공급 우려 지속 | Fortune · "Current price of oil as of September 16, 2026" · 2026-09-16 07:00 (ET) · https://fortune.com/article/price-of-oil-09-16-2026/ [P3] |
 
 > Russell 2000·SOX 종가는 검색 결과가 상충하거나(다른 날짜 데이터 혼입) 확정 수치를 찾지 못해 N/A 처리함. 추정치로 메우지 않음.
 
@@ -25,20 +25,20 @@
 
 | 항목 | 현재가 | 전일 대비 | 직전 종가 | 기준시각(ET) | 출처+태그 |
 |------|--------|-----------|-----------|--------------|-----------|
-| S&P500 선물 (ES) | 7,647.25 | +0.76% | 7,589.25 | 2026-09-16 19:32 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
-| 나스닥100 선물 (NQ) | 29,408.5 | +1.57% | 28,955 | 2026-09-16 19:32 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
-| 다우 선물 (YM) | 52,038 | -0.15% | 52,115 | 2026-09-16 19:32 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
-| 러셀2000 선물 (RTY) | 2,891.1 | +0.63% | 2,873.1 | 2026-09-16 19:32 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| S&P500 선물 (ES) | 7,663 | +0.97% | 7,589.25 | 2026-09-16 20:36 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| 나스닥100 선물 (NQ) | 29,463.5 | +1.76% | 28,955 | 2026-09-16 20:36 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| 다우 선물 (YM) | 52,203 | +0.17% | 52,115 | 2026-09-16 20:36 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| 러셀2000 선물 (RTY) | 2,901.7 | +1.00% | 2,873.1 | 2026-09-16 20:36 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
 
 **변동성 구조**
 
-| 항목 | 수치 | 전일 대비 | 출처+태그 |
-|------|------|-----------|-----------|
-| VIX (30일) | 17.71 | +2.97% | CBOE (Yahoo chart API 자동수집) [P1] |
-| VIX9D (9일) | 17.4 | +1.10% | CBOE (Yahoo chart API 자동수집) [P1] |
-| VIX3M (3개월) | 19.73 | +1.91% | CBOE (Yahoo chart API 자동수집) [P1] |
-| VVIX (VIX의 변동성) | 95.41 | +0.53% | CBOE (Yahoo chart API 자동수집) [P1] |
-| SKEW (테일리스크) | 145.95 | -0.45% | CBOE (Yahoo chart API 자동수집) [P1] |
+| 항목 | 현재가/종가 | 전일 대비 | 직전 종가 | 기준시각(ET) | 출처+태그 |
+|------|-------------|-----------|-----------|--------------|-----------|
+| VIX (30일) | 17.71 | +2.97% | 17.2 | 2026-09-16 16:15 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| VIX9D (9일) | 17.4 | +1.10% | 17.21 | 2026-09-16 16:15 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| VIX3M (3개월) | 19.73 | +1.91% | 19.36 | 2026-09-16 16:15 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| VVIX (VIX의 변동성) | 95.41 | +0.53% | 94.91 | 2026-09-16 16:15 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
+| SKEW (테일리스크) | 145.95 | -0.45% | 146.61 | 2026-09-16 17:00 | CBOE / CME (Yahoo chart API 자동수집) [P1] |
 
 | 비율 | 값 | 구조 |
 |------|----|------|
@@ -49,17 +49,17 @@
 
 | 대상 | P/C(거래량) | P/C(미결제약정) | 콜 거래량 | 풋 거래량 | 출처+태그 |
 |------|-------------|------------------|-----------|-----------|-----------|
-| S&P500 지수옵션 (SPX) | 1.286 | 1.402 | 2,147,517 | 2,761,234 | CBOE 지연시세 API (자동수집) [P1] |
-| 나스닥100 ETF 옵션 (QQQ) | 1.366 | 1.397 | 3,129,348 | 4,273,311 | CBOE 지연시세 API (자동수집) [P1] |
+| S&P500 지수옵션 (SPX) | 1.286 | 1.402 | 2,147,517 | 2,761,234 | CBOE 옵션 체인 직접 집계 [P1] |
+| 나스닥100 ETF 옵션 (QQQ) | 1.366 | 1.397 | 3,129,348 | 4,273,311 | CBOE 옵션 체인 직접 집계 [P1] |
 
-추가 매크로(참고, `0_data.md` 원자료):
+**매크로 (2026-09-16 20:36 ET 기준, `0_data.md` 원자료)**
 
-| 항목 | 현재가 | 전일 대비 | 직전 종가 | 기준시각(ET) | 출처+태그 |
-|------|--------|-----------|-----------|--------------|-----------|
-| 미 10년 국채선물 (ZN=F) | 105.75 | -0.41% | 106.19 | 2026-09-16 19:32 | CME (Yahoo chart API 자동수집) [P1] |
-| 금 (GC=F) | 4,310.2 | -0.52% | 4,332.8 | 2026-09-16 19:32 | CME (Yahoo chart API 자동수집) [P1] |
-| WTI (CL=F) | 101.98 | -3.64% | 105.83 | 2026-09-16 19:32 | CME (Yahoo chart API 자동수집) [P1] |
-| 달러지수 (DXY) | 100.34 | +0.69% | 99.65 | 2026-09-16 18:04 | ICE (Yahoo chart API 자동수집) [P1] |
+| 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 출처+태그 |
+|------|------|-------------|-----------|-----------|-----------|
+| 미 10년 국채선물 | `ZN=F` | 105.88 | -0.29% | 106.19 | CME (Yahoo chart API 자동수집) [P1] |
+| 금 | `GC=F` | 4,322.3 | -0.24% | 4,332.8 | COMEX (Yahoo chart API 자동수집) [P1] |
+| WTI | `CL=F` | 101.43 | -4.16% | 105.83 | NYMEX (Yahoo chart API 자동수집) [P1] |
+| 달러지수 (DXY) | `DX-Y.NYB` | 100.3 | +0.65% | 99.65 | ICE (Yahoo chart API 자동수집) [P1] |
 
 ---
 
@@ -95,9 +95,10 @@
 | J.B. Hunt Transport | JBHT | -12%(장중, 종가 기준 별도매체 -9~-13% 편차 보도) | N/A | 3분기 실적이 전분기 대비 5~10% 감소할 것이라 경고. 운전기사 관련 비용 2,500만 달러 증가, 연료비 순차 역풍 최소 1,000만 달러. 컨센서스 EPS $2.10 대비 중간값 $1.77로 약 16% 하회 시사 | CNBC · "J.B. Hunt stock plunges 10% after company warns third-quarter earnings will fall" · 2026-09-16 · https://www.cnbc.com/2026/09/16/jb-hunt-stock-jbht-earnings.html [P2] |
 | Boeing | BA | -3.69%(TradingKey 집계) ~ 장중 한때 -5% 이상 보도 | N/A | CEO Kelly Ortberg가 737 MAX 월 47대 생산 안정화가 "예상보다 조금 더" 오래 걸린다고 언급. 렌턴 공장 동체 생산이 제약 요인. 안정화 후 월 52대로 증산 계획 | Reuters(Investing.com 경유) · "Boeing CEO says it is taking longer to stabilize 737 MAX output; shares slide" · 2026-09-16 [P2] |
 | GE Vernova | GEV | +5.42% | N/A | Morgan Stanley 라구나 컨퍼런스에서 CEO Scott Strazik이 2027년 초 백로그 2,000억 달러 도달 전망 제시. 전력화·청정에너지 지출 강세, 온쇼어 풍력은 부진 | 24/7 Wall St. · "GE Vernova Climbs 5% as CEO Sees Backlog Hitting $200B Early" · 2026-09-16 [P3] |
-| SpaceX | SPCX | +5% | N/A | 스타십 차기 궤도 시험 발사일이 9/22로 확정, Starlink V3 위성 탑재 계획 발표 | 24/7 Wall St. · "SpaceX Rises 5% as Starship's First Orbital Attempt Gets Launch Date" · 2026-09-16 [P3] |
 | Lumentum | LITE | +8% | N/A | 실적 가이던스 호조로 AI 광학 부문에 대한 월가 낙관론 확산 | Timothy Sykes News · "LITE Stock Climbs As Wall Street Backs AI Optics Upside" · 2026-09-16 [P3] |
 | AMD / Intel / NVDA | AMD/INTC/NVDA | AMD -5.7%, INTC -5.4%, NVDA -5.7% | N/A | 연준 금리 인상 발표 직후 고밸류에이션 AI 관련 반도체주 낙폭 확대 | 검색 결과 종합(24/7 Wall St. 계열) · 2026-09-16 [P3] — ±5% 기준 충족, 단일 1차 출처 확정 못해 [P3] |
+
+> "SpaceX(SPCX) +5%" 관련 보도가 일부 검색결과에 등장했으나, SpaceX는 비상장 기업으로 공개 거래 티커가 존재하지 않아(2026-09 기준) 해당 항목은 출처 신뢰도 미달로 제외함.
 
 ---
 
@@ -123,7 +124,7 @@
 | 기업 | 뉴스 제목 | 사실 내용(무슨 일이) | 출처일자 | 출처+태그 |
 |------|-----------|----------------------|----------|-----------|
 | AVGO | Broadcom forecasts $58B fiscal 2026 AI revenue and outlines $115B in 2027, $230B in 2028 | Hock Tan CEO가 AI 반도체 매출 가이던스를 2026년 580억 달러, 2027년 1,150억 달러, 2028년 2,300억 달러로 제시. 3분기 AI 반도체 매출은 167억 달러(YoY +221%, QoQ +54%), Anthropic·OpenAI 등 고객사 확대 언급 | 2026-09-02(3분기 실적 발표일, 오늘자 재인용 보도 다수) | Seeking Alpha · "Broadcom forecasts $58B fiscal 2026 AI revenue and outlines $115B in 2027, $230B in 2028" [P2] |
-| AVGO | Broadcom (AVGO) Shares Fell As Slower AI Development Raised Demand Concerns | 4분기 매출 가이던스 348억 달러가 컨센서스 350.5억 달러를 소폭 하회했고, 총마진이 전년 78%에서 73%로 압축되며 주가 약세 요인으로 보도됨(맞춤형 가속기·HBM 비중 확대에 따른 기계적 결과로 설명됨) | 2026-09-03 | 247wallst.com · "Broadcom Falls 6% as Soft Guidance Overshadows 221% AI Revenue Surge" [P3] |
+| AVGO | Broadcom (AVGO) Shares Fell As Slower AI Development Raised Demand Concerns | 4분기 매출 가이던스 348억 달러가 컨센서스 350.5억 달러를 소폭 하회했고, 총마진이 3분기 75%에서 4분기 약 73%로 압축 전망되며 주가 약세 요인으로 보도됨(XPU 제품 내 메모리 비중 확대에 따른 기계적 결과로 설명됨) | 2026-09-03 | 247wallst.com · "Broadcom Falls 6% as Soft Guidance Overshadows 221% AI Revenue Surge" [P3]; 보강 — Yahoo Finance · "Broadcom Inc (AVGO) (Q3 2026) Earnings Call Highlights" [P2] |
 | MU (Micron) | Micron Has Just Shared Great News (제목 수준, 0_data.md 수집) | 마이크론 관련 긍정적 소식이 보도됨(구체 내용 본문 미확인) | 2026-09-16 | SeekingAlpha(Finnhub 수집) [P3] |
 | MU (Micron) | HBM4 12H 샘플 출하 및 HBM 용량 2026년까지 완판 | 마이크론이 HBM(고대역폭메모리), 고용량 DIMM, LP 서버 D램 결합 매출이 전년 대비 5배 이상 증가한 100억 달러에 도달했다고 보도됨. HBM4 12H는 대역폭 2.8TBps 이상, 핀 속도 11Gbps 이상 달성. 엔비디아 Vera Rubin 플랫폼向 36GB 12-high HBM4 양산 출하 시작 | 검색 결과 종합(연중 누적 보도, 구체 발표일 명시 안 됨) | 업계 매체 종합(Tom's Hardware 등) [P3] — 발표일 불명확으로 신선도 주의 |
 
@@ -159,7 +160,7 @@ N/A — 신규 변동 없음. MSFT·AMZN·GOOGL·META의 CAPEX 가이던스는 �
 
 | 기업 | 내부자 | 직책 | 매수/매도 | 거래유형 | 규모 | 거래일 | 출처 |
 |------|--------|------|-----------|----------|------|--------|------|
-| VRT (Vertiv) | Frank Poncheri | Chief Human Resources Officer | 매도(처분) | 세금원천징수 목적 주식 인도(옵션행사/RSU 정산에 따른 세금·행사가 납부) | 2,352주, 주당 $234.61 | 2026-09-15(신고 서명 09-16) | SEC EDGAR Form 4 · https://www.sec.gov/Archives/edgar/data/0001674101/... [P1] |
+| VRT (Vertiv) | Frank Poncheri | Chief Human Resources Officer | 매도(처분) | 세금원천징수 목적 주식 인도(RSU 베스팅·정산에 따른 세금 납부) | 2,352주, 주당 $234.61 | 2026-09-15 | SEC EDGAR · Vertiv Holdings Co Form 4 · https://www.sec.gov/Archives/edgar/data/0001674101/000162828026062305/wk-form4_1789592604.xml [P1] |
 
 > CEO·CFO·COO·Director급 우선 대상(NVDA·AVGO·CRDO·CLS·APLD·VRT·SMCI) 중 오늘(9/15~9/16) 신규 공시로 확인된 것은 CHRO 1건뿐이며 이는 우선순위 직책(CEO/CFO/COO/Director)에 해당하지 않음. 나머지 기업(NVDA·AVGO·CRDO·SMCI 등)의 검색된 Form 4는 모두 8월~9월 초순 거래로 "오늘 신규 공시"가 아니어서 제외함.
 
@@ -194,9 +195,10 @@ N/A — 신규 변동 없음. MSFT·AMZN·GOOGL·META의 CAPEX 가이던스는 �
 [1] S&P500 7,551.81 (-0.45%), 나스닥종합 25,978.42 (-0.01%), 다우 51,461.90 (-1.21%) · CNBC/Yahoo [P2]
 [1] Russell2000·SOX 9/16 정규장 종가 검색 확인 실패 · N/A
 [1] Brent 108.34달러(오전 7시 ET 기준, 전일대비 +1.77) · Fortune [P3]
-[1-A] ES 7,647.25(+0.76%) · NQ 29,408.5(+1.57%) · YM 52,038(-0.15%) · RTY 2,891.1(+0.63%) · CME(자동수집) [P1]
+[1-A] ES 7,663(+0.97%) · NQ 29,463.5(+1.76%) · YM 52,203(+0.17%) · RTY 2,901.7(+1.00%), 2026-09-16 20:36(ET) 기준 · CBOE/CME(Yahoo) [P1]
 [1-A] VIX 17.71(+2.97%), VIX3M/VIX 1.114 콘탱고, VIX/VIX9D 1.018 콘탱고 · CBOE(자동수집) [P1]
-[1-A] SPX P/C(거래량) 1.286, QQQ P/C(거래량) 1.366 · CBOE(자동수집) [P1]
+[1-A] SPX P/C(거래량) 1.286, QQQ P/C(거래량) 1.366 · CBOE 옵션체인 [P1]
+[1-A] WTI 101.43(-4.16%) · 금 4,322.3(-0.24%) · DXY 100.3(+0.65%) · ZN 105.88(-0.29%), 2026-09-16 20:36(ET) 기준 · CBOE/CME(Yahoo) [P1]
 [2] FOMC 12-0 만장일치로 25bp 인상, 목표범위 3.75~4.00%로 상향, 2023년 7월 이후 첫 인상 · CNBC [P2]
 [2] SEP 점도표: 18명 중 16명이 연내 추가 인상 시사, 4명은 2회 추가 인상 가능성 · 검색 종합 [P2]
 [2] Warsh: "inflation is too high, and has been for too long" 발언 · CNBC [P2]
@@ -205,12 +207,11 @@ N/A — 신규 변동 없음. MSFT·AMZN·GOOGL·META의 CAPEX 가이던스는 �
 [4] J.B. Hunt(JBHT) 3분기 실적 경고로 주가 급락(-9~-13%대 보도), 운전기사·연료비 부담 언급 · CNBC [P2]
 [4] Boeing(BA) CEO, 737 MAX 월 47대 생산 안정화가 예상보다 지연된다고 발언, 주가 하락 · Reuters [P2]
 [4] GE Vernova(GEV) +5.42%, CEO가 2027년 초 백로그 2,000억 달러 전망 제시 · 247wallst [P3]
-[4] SpaceX(SPCX) +5%, 스타십 궤도시험 발사일 9/22 확정 · 247wallst [P3]
 [4] Lumentum(LITE) +8%, AI 광학 부문 가이던스 호조 · Timothy Sykes News [P3]
 [4] AMD -5.7%, Intel -5.4%, NVDA -5.7%, 연준 금리 인상 발표 직후 낙폭 확대 · 검색 종합 [P3]
 [4-A] Broadcom(AVGO) CEO, AI 반도체 매출 가이던스 2026년 580억→2027년 1,150억→2028년 2,300억 달러 제시 · Seeking Alpha [P2]
 [4-A] 아마존, 시급 20달러로 인상 및 Whole Foods 할인 추가 · Yahoo(Finnhub) [P3]
-[5] Broadcom 3분기 AI 반도체 매출 167억 달러(YoY +221%), 4분기 가이던스 컨센서스 소폭 하회로 총마진 73%로 압축 · Seeking Alpha/247wallst [P2/P3]
+[5] Broadcom 3분기 AI 반도체 매출 167억 달러(YoY +221%), 4분기 가이던스 컨센서스 소폭 하회로 총마진 3분기 75%→4분기 약 73% 전망 · Seeking Alpha/247wallst [P2/P3]
 [5] Micron, HBM 관련 매출(HBM+고용량DIMM+LP서버D램) 전년비 5배 이상 증가한 100억 달러 도달 보도(발표일 불명확) · 업계매체 종합 [P3]
 [7] QQQ 옵션 프리미엄 약 4,236만 달러 중 강세 포지셔닝 약 1,826만 달러, 연준 발표 앞둔 이벤트 포지셔닝으로 서술 · substack [P3]
 [7-A] Vertiv(VRT) CHRO Frank Poncheri, 세금원천징수 목적 2,352주 처분(9/15) · SEC EDGAR [P1]

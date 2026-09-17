@@ -1,5 +1,5 @@
 # 자동 수집 시장 데이터 (0_data)
-# 기준일: 2026-09-17 · 생성시각(KST): 2026-09-17 08:43
+# 기준일: 2026-09-17 · 생성시각(KST): 2026-09-17 09:46
 # 출처: Yahoo Finance chart API · CBOE 지연시세 API · Finnhub (전부 기계 수집, 사람 해석 없음)
 
 > 이 파일의 수치는 **이미 검증된 사실**이다. 1_collect 단계에서 다시 검색하지 말고 그대로 인용한다.
@@ -9,10 +9,10 @@
 
 | 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 기준시각(ET) |
 |------|------|-------------|-----------|-----------|--------------|
-| S&P500 선물 (ES) | `ES=F` | 7,647.25 | +0.76% | 7,589.25 | 2026-09-16 19:32 |
-| 나스닥100 선물 (NQ) | `NQ=F` | 29,408.5 | +1.57% | 28,955 | 2026-09-16 19:32 |
-| 다우 선물 (YM) | `YM=F` | 52,038 | -0.15% | 52,115 | 2026-09-16 19:32 |
-| 러셀2000 선물 (RTY) | `RTY=F` | 2,891.1 | +0.63% | 2,873.1 | 2026-09-16 19:32 |
+| S&P500 선물 (ES) | `ES=F` | 7,663 | +0.97% | 7,589.25 | 2026-09-16 20:36 |
+| 나스닥100 선물 (NQ) | `NQ=F` | 29,463.5 | +1.76% | 28,955 | 2026-09-16 20:36 |
+| 다우 선물 (YM) | `YM=F` | 52,203 | +0.17% | 52,115 | 2026-09-16 20:36 |
+| 러셀2000 선물 (RTY) | `RTY=F` | 2,901.7 | +1.00% | 2,873.1 | 2026-09-16 20:36 |
 
 ## 변동성 구조
 
@@ -28,10 +28,10 @@
 
 | 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 기준시각(ET) |
 |------|------|-------------|-----------|-----------|--------------|
-| 미 10년 국채선물 | `ZN=F` | 105.75 | -0.41% | 106.19 | 2026-09-16 19:32 |
-| 금 | `GC=F` | 4,310.2 | -0.52% | 4,332.8 | 2026-09-16 19:32 |
-| WTI | `CL=F` | 101.98 | -3.64% | 105.83 | 2026-09-16 19:32 |
-| 달러지수 (DXY) | `DX-Y.NYB` | 100.34 | +0.69% | 99.65 | 2026-09-16 18:04 |
+| 미 10년 국채선물 | `ZN=F` | 105.88 | -0.29% | 106.19 | 2026-09-16 20:36 |
+| 금 | `GC=F` | 4,322.3 | -0.24% | 4,332.8 | 2026-09-16 20:36 |
+| WTI | `CL=F` | 101.43 | -4.16% | 105.83 | 2026-09-16 20:36 |
+| 달러지수 (DXY) | `DX-Y.NYB` | 100.3 | +0.65% | 99.65 | 2026-09-16 20:36 |
 
 ### VIX 기간구조 (위 수치에서 산출한 비율)
 
@@ -112,12 +112,12 @@
 
 ### 에너지
 
+- **XOM** · XOM Keeps Climbing. Should You Climb On?
+  - Yahoo · 2026-09-16 19:29 (ET) · https://finnhub.io/api/news?id=7534221ac344c5c53503dc5423a14b49129f15f76c320858103b61d665ba1ebd
+- **XOM** · Exxonmobil in talks to return to Venezuela, Bloomberg reports
+  - Yahoo · 2026-09-16 17:56 (ET) · https://finnhub.io/api/news?id=42769e2f8782b1f67d1d307ec183c9629b79b693dfaa3b5d005143199e44b669
 - **XOM** · Chevron Doesn’t Need Oil to Hit New Highs. Here’s What Could Drive the Stock Instead
   - Yahoo · 2026-09-16 13:30 (ET) · https://finnhub.io/api/news?id=945f88515cefc51b03a2d8a4b506153ff9045413908dc0c60f2a44c5cbb92826
-- **XOM** · Will ExxonMobil's Guyana & Permian Assets Power Its Upstream Business?
-  - Yahoo · 2026-09-16 11:06 (ET) · https://finnhub.io/api/news?id=3620d3f7c88390b014696b3406bfb486525b6c47e05772bee320b2581f05443a
-- **XOM** · Stocks making the biggest moves midday: SpaceX, Lumentum, Diamondback Energy, J.B. Hunt & more
-  - CNBC · 2026-09-16 08:20 (ET) · https://finnhub.io/api/news?id=52a7e8e179b0ce8489f8baa91b60965c3707d641a7f9dd53a09b3315e642b1f0
 
 ### 헬스케어
 
@@ -130,10 +130,10 @@
 
 ### 소비재·유통
 
-- **AMZN** · These S&P500 stocks are the most active in today's session
-  - ChartMill · 2026-09-16 14:05 (ET) · https://finnhub.io/api/news?id=3d20960e9c2cadfe673a46daeed5f890004d55a06e129bf7d23e901b6ea94793
-- **AMZN** · Costco expands Uber Eats delivery to 47 states
-  - Yahoo · 2026-09-16 13:55 (ET) · https://finnhub.io/api/news?id=c9d7f808c9c43ff12a6dd796de6bd7dd50858474d53bb9745af938ed4c91a03d
-- **AMZN** · Amazon raises starting pay to $20 an hour and adds Whole Foods discount
-  - Yahoo · 2026-09-16 13:43 (ET) · https://finnhub.io/api/news?id=0a610c6958b8a064ce32323dd0528e839308027c83d609aac9dda27a74f39de6
+- **AMZN** · The Next Short? Economist Compares Hyperscaler AI Debt Stress to 2008 Housing Collapse
+  - Yahoo · 2026-09-16 18:39 (ET) · https://finnhub.io/api/news?id=5381226b9e2c126572bc7a1bc40343514bb578645a0e3628085055863895de45
+- **AMZN** · Generac Stock Soars on Amazon Generator Deal
+  - Yahoo · 2026-09-16 18:13 (ET) · https://finnhub.io/api/news?id=fc71a99933c41d025d94da073faa19d03e23d9efb14a122e4e1811b9e61fe2d6
+- **AMZN** · UPS (UPS) Stock Could Be 40% Undervalued Despite Strike Threats
+  - Yahoo · 2026-09-16 18:12 (ET) · https://finnhub.io/api/news?id=9abc7970799f38fb7e0a6a193a57e1484c6f7fef0707afd810209c08e8fb6ad7
 
