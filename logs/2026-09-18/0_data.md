@@ -1,5 +1,5 @@
 # 자동 수집 시장 데이터 (0_data)
-# 기준일: 2026-09-18 · 생성시각(KST): 2026-09-18 07:19
+# 기준일: 2026-09-18 · 생성시각(KST): 2026-09-18 08:36
 # 출처: Yahoo Finance chart API · CBOE 지연시세 API · Finnhub (전부 기계 수집, 사람 해석 없음)
 
 > 이 파일의 수치는 **이미 검증된 사실**이다. 1_collect 단계에서 다시 검색하지 말고 그대로 인용한다.
@@ -9,10 +9,10 @@
 
 | 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 기준시각(ET) |
 |------|------|-------------|-----------|-----------|--------------|
-| S&P500 선물 (ES) | `ES=F` | 7,700 | +1.90% | 7,556.5 | 2026-09-17 18:09 |
-| 나스닥100 선물 (NQ) | `NQ=F` | N/A | N/A | N/A | 수집 실패 |
-| 다우 선물 (YM) | `YM=F` | N/A | N/A | N/A | 수집 실패 |
-| 러셀2000 선물 (RTY) | `RTY=F` | 2,892.8 | +1.09% | 2,861.7 | 2026-09-17 18:09 |
+| S&P500 선물 (ES) | `ES=F` | 7,699.75 | +1.90% | 7,556.5 | 2026-09-17 19:26 |
+| 나스닥100 선물 (NQ) | `NQ=F` | 29,693.5 | +2.52% | 28,963.5 | 2026-09-17 19:26 |
+| 다우 선물 (YM) | `YM=F` | 52,177 | +1.30% | 51,507 | 2026-09-17 19:24 |
+| 러셀2000 선물 (RTY) | `RTY=F` | 2,892.7 | +1.08% | 2,861.7 | 2026-09-17 19:25 |
 
 ## 변동성 구조
 
@@ -28,9 +28,9 @@
 
 | 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 기준시각(ET) |
 |------|------|-------------|-----------|-----------|--------------|
-| 미 10년 국채선물 | `ZN=F` | 106.23 | +0.18% | 106.05 | 2026-09-17 18:09 |
-| 금 | `GC=F` | 4,381.2 | -0.14% | 4,387.5 | 2026-09-17 18:09 |
-| WTI | `CL=F` | 101.07 | -1.33% | 102.43 | 2026-09-17 18:09 |
+| 미 10년 국채선물 | `ZN=F` | 106.23 | +0.18% | 106.05 | 2026-09-17 19:26 |
+| 금 | `GC=F` | 4,383.2 | -0.10% | 4,387.5 | 2026-09-17 19:26 |
+| WTI | `CL=F` | 101.05 | -1.35% | 102.43 | 2026-09-17 19:26 |
 | 달러지수 (DXY) | `DX-Y.NYB` | 100.24 | -0.07% | 100.31 | 2026-09-17 18:04 |
 
 ### VIX 기간구조 (위 수치에서 산출한 비율)
@@ -53,20 +53,22 @@
 
 ## 시장 전반 뉴스 (Finnhub · 와이어 매체)
 
+- **Reuters** · US to allow Iranian leaders to attend UN General Assembly - Reuters
+  - 2026-09-17 17:08 (ET) · https://news.google.com/rss/articles/CBMivAFBVV95cUxQMlRxdXlUU25MV1Q5ZThqV29lYjBpb1Y0V2MwV3RqZFNoR25hS2ZUX0VpR0hENmZIMlRPWWxGS1p1WUJmNktPZ0ZMWE8xSGRQYmFOUHkwamNjVTFhZFdpSkUxUEhROGl4Y0Y4X05kcTM5QmxqRXVnRm9hSzNCWGZza2RNX1JqYmJiLUJ3UUFFeHFlZVNQQ2QxbzEtbkF5MzlKSktFV3ZUaEdMdTdOdy1rMU9CYWxlRG81SlM0Zg?oc=5
 - **Reuters** · EXCLUSIVE: China presses Iran to help rein in Houthis after Saudi appeal, sources say - Reuters
   - 2026-09-17 16:28 (ET) · https://news.google.com/rss/articles/CBMitgFBVV95cUxNUnJncHUxLTNvV25NTHFxQzVwcnljdzdsTkJCNFNjSlJybF95bFBhcW9DTWV1dnlYQ0prMkI0SmdnNjBrdXNLV0ZNM1pQNW1FcUxuaWpqd3NnRXJ6U2lkQWFqQlR0UVE2X3lYU0RXNXlBdno3QkRkSzB2SEwxUzdYV2NZWlc3SGhZdGRMbUFCVDJZeXZsTy0zOHF4R013c2xyMl8zNmVkaHlFOXM1MmtuZHJRREI3UQ?oc=5
-- **Reuters** · US allies fret over how Trump might play his Taiwan hand with Xi - Reuters
-  - 2026-09-17 16:07 (ET) · https://news.google.com/rss/articles/CBMisgFBVV95cUxQY3hVM1dFSVFMbUpibXh4OWtYdWFBRnNkN0JhREtSNFZ0R2hVMnN1T0lUTHlneVdReE1kd1YzSENaY2xpWXh5SGVjY09qSXNack9RQkN2VFBYQUxCcE5sUExGNzJxRDJzRXYzX0pZU3NTX3RNOTZ0WEZWZ01oSUp2dHh3SkNZSERMc0tFempuV3RSaXF6OXlGaUhCZGNUZlRvMEhaRWRKcUVMSVN6aVJRcmZ3?oc=5
 - **Reuters** · Impoverished by war in Iran, Afghan migrants return to Taliban rule - Reuters
   - 2026-09-17 16:05 (ET) · https://news.google.com/rss/articles/CBMitgFBVV95cUxQbUtnR01KbXZwRU1yS09FNXhXdnFRaXRXR1YyaWwyOWFvYWl1VC1MbVJFb1dvVWgxNGVFR0xKV3pCQkNycmVDaUJpVjFLYmt4MTVhSmR5dXRlVU54MWFRTG9LY2V4a1g3d2cyblNlVkU2MjNUTWJXaEY0MFNpNG9uZ3dWMWFEZ0ZIZ1dGMFdQby1jd1A5RzZ2TXNsQlJzdEFER2ZjRHE2SWstblhoVFRWWVhGcXFMZw?oc=5
+- **Reuters** · JP Morgan says it has no clear oil market endgame as Iran conflict drags on - Reuters
+  - 2026-09-17 15:32 (ET) · https://news.google.com/rss/articles/CBMivgFBVV95cUxOSzYzNHdWWVhKTktiSDh6Vi0yOTdmYWZpUlBtUlAwWFNNZjNCdnNkdkxmUWFsUEFuZUl3LWRmTzd4UEdBRVFlODRqenMwUlVya1dNMjY0VkozQVo5VTJNMF9uc1lWRnZlU0pTczdHejBmX2pzWEZiWDhXaWpMZ3FvMm1YS09vVVJKdWo0bWJ1eFZwem5seElGMEFqbjhVQk5zZ1NtblRiT0NFS0dGYUVvQVlhLWtack9OdzROdGxn?oc=5
 - **CNBC** · Intel and Micron lead our portfolio higher, and J&J's strengthens our case for owning it
   - 2026-09-17 14:55 (ET) · https://www.cnbc.com/2026/09/17/intel-and-micron-lead-our-portfolio-higher-and-jjs-strengthens-our-case-for-owning-it-.html
-- **Reuters** · Iranian delegation will be able to attend UN General Assembly, US says - Reuters
-  - 2026-09-17 14:49 (ET) · https://news.google.com/rss/articles/CBMivAFBVV95cUxQMlRxdXlUU25MV1Q5ZThqV29lYjBpb1Y0V2MwV3RqZFNoR25hS2ZUX0VpR0hENmZIMlRPWWxGS1p1WUJmNktPZ0ZMWE8xSGRQYmFOUHkwamNjVTFhZFdpSkUxUEhROGl4Y0Y4X05kcTM5QmxqRXVnRm9hSzNCWGZza2RNX1JqYmJiLUJ3UUFFeHFlZVNQQ2QxbzEtbkF5MzlKSktFV3ZUaEdMdTdOdy1rMU9CYWxlRG81SlM0Zg?oc=5
 - **Reuters** · Lockheed Martin gets first batch of Patriot interceptor parts from General Motors - Reuters
   - 2026-09-17 14:35 (ET) · https://news.google.com/rss/articles/CBMi1gFBVV95cUxNNG1NWWFVb3NxMWY1WVJVeXpyRzlOdXdNWklvZER6T19vTWpqOGV4OU8tWE9ZeC1SYzZlYlFtbkxKdEZNTFdVVjY2a3huYnhCSU5EazRYU0hLWlRLckpxaXcwS0VpdE5kRElRcVpWYkc4NWZ3VW5yMnc5SXA0R1k0UjdNWVVfMXZwZjd6RURHUktZUXRjNWNncHBHclI2YW1Rd2paV0ExMmRObE4xRVVoSS1oREpRV3NOUncwMHJaLVNzdk94bmZReWMtT3l1RXZQSFVib0Jn?oc=5
 - **CNBC** · Stephen Curry says his Li-Ning signature shoe will debut early next year
   - 2026-09-17 13:27 (ET) · https://www.cnbc.com/2026/09/17/stephen-curry-li-ning-signature-shoe.html
+- **Reuters** · Russia, China end mandate for independent monitoring of UN sanctions on Iran - Reuters
+  - 2026-09-17 13:17 (ET) · https://news.google.com/rss/articles/CBMiswFBVV95cUxOOHBsNEJfd0VCaF9BYlJXbDRTbFVTc1hGVE01TmdQaF9oRDdlaGw0YzU3TDRucEI4UjRpR2owemo3NUdFLTBkOVFCWm42Z0d3M0p1eHNvU3JBRkNyUG95VWoyWXRoY21lR0lvYjNXUjVEdUFON2x0dHdlbDF5OTlTOXpnV1kwNzlGQmRjODZGZzVsNXVjMHZvbXNad0dEWFdWTXVfdEVSNVh2dGx4elF1Nm5oaw?oc=5
 - **CNBC** · We're buying more shares of a retailer that's been punished enough for a rare misstep
   - 2026-09-17 13:08 (ET) · https://www.cnbc.com/2026/09/17/were-buying-more-shares-of-a-retailer-thats-been-punished-enough-for-a-rare-misstep.html
 - **CNBC** · Stocks stage a comeback after Fed-induced declines — plus, what's ailing Boeing
@@ -81,8 +83,6 @@
   - 2026-09-17 09:13 (ET) · https://news.google.com/rss/articles/CBMipwFBVV95cUxONHQ5ZjFKUlRNeTl4YXFuSUNzZ0FpZHRoUGRjMUJ0WjJhbVZOY2tQazZuVUdtMURzNzNnTlVadTZoT3gxUmYyYWdxS2o2bEdtSWRUcGExWjFOQXNsdmwzMm9EOFljblVTdk1OTXY2UUtuZ3pyOXhjSmhQTy0yQkFXUDFHN2tqR2p4VWhDcW1FbE9PY2lwLVJDcWhmWnFSMFZpSVBoUUJiOA?oc=5
 - **Reuters** · Lockheed Martin reveals new secret missile, fast tracks production - Reuters
   - 2026-09-17 08:39 (ET) · https://news.google.com/rss/articles/CBMixwFBVV95cUxPM0dqZ3hGcHAzNXRmNXZJRzRSV3EtbThWYms2Z2tRM1h2QzVUTncwMEhudXVmbWRhd3d2MHoxZTctUXc3dWRXdWxxN29lbHRieGpVZUFuMG5ta1ViQ3NZdXhsLWZucXIzZXhDSXRuR3Rud2Z6dnpoaXZxM3VKUFZMX3JUSUw2S1d2Z1piZU5vNjBXMHMzVHRHaGRES0NrcmxBTXdrLVhldmZqbWlfU2FqUHlfTXpUbTRGNkZNR08tb2dENklSd3BF?oc=5
-- **CNBC** · Charities say gifts by deceased donors are getting held up at financial firms
-  - 2026-09-17 07:31 (ET) · https://www.cnbc.com/2026/09/17/charities-ira-gifts-hurdles.html
 
 ## 섹터별 뉴스 (Finnhub)
 
