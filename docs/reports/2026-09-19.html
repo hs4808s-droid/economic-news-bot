@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<meta name="description" content="2026-09-19 미국 증시·연준·경제지표·AI 인프라 데일리 브리핑">
+<title>2026-09-19 미국 시장 브리핑</title>
+<style>
+:root{
+  --bg:#faf9f7; --surface:#fff; --text:#1c1b19; --muted:#6b675f; --line:#e5e1da;
+  --accent:#8a5a2b; --accent-soft:#f3ece3; --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px -12px rgba(0,0,0,.12);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#161513; --surface:#1f1e1b; --text:#eceae5; --muted:#a09a90; --line:#312f2b;
+    --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161513; --surface:#1f1e1b; --text:#eceae5; --muted:#a09a90; --line:#312f2b;
+  --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--bg); color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  font-size:16px; line-height:1.75; -webkit-text-size-adjust:100%;
+}
+.wrap{max-width:860px; margin:0 auto; padding:32px 20px 80px}
+header.top{border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:36px}
+header.top a.home{color:var(--muted); text-decoration:none; font-size:13px; letter-spacing:.04em}
+header.top a.home:hover{color:var(--accent)}
+h1{font-size:27px; line-height:1.35; margin:.5em 0 .2em; letter-spacing:-.01em}
+h2{font-size:21px; margin:2.2em 0 .6em; padding-bottom:.3em; border-bottom:1px solid var(--line); letter-spacing:-.01em}
+h3{font-size:17px; margin:1.8em 0 .4em; color:var(--accent)}
+h4{font-size:15px; margin:1.4em 0 .3em; color:var(--muted)}
+p,ul,ol{margin:.7em 0}
+li{margin:.25em 0}
+a{color:var(--accent)}
+hr{border:0; border-top:1px solid var(--line); margin:2.4em 0}
+code{background:var(--accent-soft); padding:.12em .4em; border-radius:4px; font-size:.87em}
+blockquote{
+  margin:1em 0; padding:.6em 1em; border-left:3px solid var(--accent);
+  background:var(--accent-soft); border-radius:0 6px 6px 0; color:var(--muted);
+}
+blockquote p{margin:.3em 0}
+/* 표는 넓다. 페이지가 아니라 표 자체가 가로 스크롤되게 한다. */
+.tablewrap{overflow-x:auto; margin:1.1em 0; border:1px solid var(--line); border-radius:8px; background:var(--surface)}
+table{border-collapse:collapse; width:100%; font-size:14px; min-width:520px}
+th,td{padding:9px 13px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
+th{background:var(--accent-soft); font-weight:600; white-space:nowrap}
+tr:last-child td{border-bottom:0}
+.meta{color:var(--muted); font-size:13px; margin:0}
+.cards{list-style:none; padding:0; margin:0}
+.cards li{margin:0 0 10px}
+.cards a{
+  display:flex; justify-content:space-between; align-items:baseline; gap:14px;
+  background:var(--surface); border:1px solid var(--line); border-radius:10px;
+  padding:15px 18px; text-decoration:none; color:var(--text); box-shadow:var(--shadow);
+}
+.cards a:hover{border-color:var(--accent)}
+.cards .d{font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap}
+.cards .s{color:var(--muted); font-size:13px; text-align:right; overflow:hidden}
+.latest a{border-color:var(--accent); border-width:2px}
+.badge{
+  display:inline-block; background:var(--accent); color:var(--bg);
+  font-size:11px; padding:1px 7px; border-radius:99px; margin-left:8px; vertical-align:middle;
+}
+footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top"><a class="home" href="../index.html">← 미국 시장 데일리 브리핑</a></header>
+<article>
+<h1>미국 시장 데일리 리포트</h1>
+<ul>
+<li><strong>기준일</strong>: 2026-09-18 (금) 미국 정규장 종가 기준</li>
+<li><strong>작성일</strong>: 2026-09-19 (토, KST)</li>
+<li>특이 휴장·일정조정 없음</li>
+</ul>
+<hr>
+<h2>0. 오늘의 핵심 TOP (순위)</h2>
+<ol>
+<li>Broadcom-OpenAI 최대 10GW 규모 커스텀 AI칩 공급 협력, MSFT가 물량의 40%를 구매하는 조건 협상 중 — ↑ · ★★★★☆ · AI영향 긍정 · 확신 낮음 (1차 공시 미확인, 발표일 불명)</li>
+<li>AMD-OpenAI 복수년 파트너십, MI450 신규 시설 2026년 가동 예정 — ↑ · ★★★★☆ · AI영향 긍정 · 확신 낮음 (1차 공시 미확인)</li>
+<li>FOMC 25bp 인상(3.75~4.00%로 상향) + Warsh 의장 매파적 발언, 10년물 국채금리 주중 5% 상회 후 재반등 — ↓ · ★★★★★ · AI영향 중립 · 확신 중간</li>
+<li>반도체주 강세가 지수 하방을 방어, 섹터 로테이션 조짐 — ↑ · ★★★★☆ · AI영향 긍정 · 확신 낮음</li>
+<li>Nvidia·Google·Emerald AI, &quot;AI Energy Management Alliance&quot; 결성 (데이터센터 전력망 확충) — ↑ · ★★★☆☆ · AI영향 긍정 · 확신 낮음</li>
+<li>정규장 마감 후 시간대 선물 큰 폭 반등(ES +1.11%, NQ +1.73%) + VIX 급락(-4.08%) — ↑ · ★★★☆☆ · AI영향 중립 · 확신 낮음</li>
+<li>넷플릭스(NFLX), Wells Fargo가 투자의견 Underweight로 하향, 약 -5% — ↓ · ★★★☆☆ · AI영향 중립 · 확신 중간</li>
+<li>로빈후드(HOOD) SEC 5년 조건부 &quot;혁신 예외&quot; 부여로 +5.94%, 코인베이스(COIN) +5.8% — ↑ · ★★★☆☆ · AI영향 중립 · 확신 중간</li>
+<li>DDR4 현물가 45달러 돌파, HBM3E 리세일가 강세 지속 — ↑ · ★★★☆☆ · AI영향 긍정 · 확신 낮음</li>
+<li>젠온 파마슈티컬스(XENE) 프리마켓 -29%, 뇌전증 치료제 3상 신규 환자 등록 자발 중단 — ↓ · ★★☆☆☆ · AI영향 중립 · 확신 높음</li>
+</ol>
+<hr>
+<h2>1. 시장 개요</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>지수</th>
+<th>종가</th>
+<th>등락률</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S&amp;P500</td>
+<td>7,650.50</td>
+<td>+0.17%</td>
+</tr>
+<tr>
+<td>나스닥종합</td>
+<td>26,522.55</td>
+<td>+0.39%</td>
+</tr>
+<tr>
+<td>다우</td>
+<td>51,682.64</td>
+<td>-0.18% (-95.40pt)</td>
+</tr>
+<tr>
+<td>러셀2000</td>
+<td>(종가 N/A)</td>
+<td>+0.39%</td>
+</tr>
+<tr>
+<td>SOX(필라델피아 반도체지수)</td>
+<td>확인 불가</td>
+<td>N/A</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><strong>리스크 지표</strong>: VIX 14.81(-4.08%) · 달러지수(DXY) 100.22(변동 거의 없음) · 금(GC=F) 4,415.9(+0.37%) · WTI 95.47(-6.32%), Brent 103.87달러/배럴(-0.9%)</li>
+<li><strong>한 줄 총평</strong>: 이번 주 FOMC의 25bp 인상과 Warsh 의장의 매파적 발언 여진으로 10년물 국채금리가 한때 5%를 넘어섰음에도, 반도체주 강세가 지수 하방을 방어하며 S&amp;P500·나스닥은 소폭 상승 마감했다(확신 중간). WTI가 하루 만에 -6.32% 급락한 배경은 미 해군의 호르무즈해협 유조선단 호위 등 공급 우려 완화 보도다.</li>
+</ul>
+<hr>
+<h2>1-A. 선물·변동성 구조</h2>
+<h3>선물 (기준시각: 2026-09-18 16:59 ET — 정규장 종가와는 다른 시점의 관측치이므로 직접 비교는 주의)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>현재가</th>
+<th>전일 대비</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S&amp;P500 선물(ES)</td>
+<td>7,725</td>
+<td>+1.11%</td>
+</tr>
+<tr>
+<td>나스닥100 선물(NQ)</td>
+<td>29,955</td>
+<td>+1.73%</td>
+</tr>
+<tr>
+<td>다우 선물(YM)</td>
+<td>52,138</td>
+<td>+0.64%</td>
+</tr>
+<tr>
+<td>러셀2000 선물(RTY)</td>
+<td>2,880.5</td>
+<td>+0.16%</td>
+</tr>
+</tbody></table></div>
+<p>해석(확신 낮음): 정규장 마감 이후 시간대 선물이 전 지수에서 상승 전환했고, 특히 나스닥100 선물의 반등폭이 커 위험선호 회복 신호로 읽힐 수 있다. 다만 이는 정규장 종가(위 1번 표)와 기준시각이 다른 별도 시점의 관측치이므로 &quot;장중 흐름이 이만큼 바뀌었다&quot;는 식으로 직접 등치할 수 없다.</p>
+<h3>변동성 구조 (기준시각: 2026-09-18 16:15~17:00 ET)</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>항목</th>
+<th>수치</th>
+<th>전일 대비</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>VIX (30일)</td>
+<td>14.81</td>
+<td>-4.08%</td>
+</tr>
+<tr>
+<td>VIX9D (9일)</td>
+<td>12.27</td>
+<td>-8.36%</td>
+</tr>
+<tr>
+<td>VIX3M (3개월)</td>
+<td>18.24</td>
+<td>-1.67%</td>
+</tr>
+<tr>
+<td>VVIX (VIX의 변동성)</td>
+<td>87.38</td>
+<td>-0.39%</td>
+</tr>
+<tr>
+<td>SKEW (테일리스크)</td>
+<td>148.1</td>
+<td>+1.65%</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li><strong>기간구조</strong>: VIX3M/VIX = 1.232, VIX/VIX9D = 1.207 — 둘 다 <strong>콘탱고</strong>(콘탱고 = 먼 만기 변동성이 더 비싼 평상시 구조). 단기~중기 전 구간에서 콘탱고가 유지되고 있어, 시장이 임박한 단기 스트레스를 가격에 반영하고 있지 않다는 뜻이다(확신 중간).</li>
+<li>VVIX는 낮은 수준에서 큰 변화가 없어 &quot;변동성의 변동성&quot;이 안정적이라는 뜻이고, SKEW의 소폭 상승(+1.65%)은 꼬리위험(급락 리스크) 프라이싱이 미세하게 높아졌음을 시사하지만 변화폭이 작아 유의미한 신호로 보긴 어렵다(확신 낮음).</li>
+</ul>
+<h3>Put/Call 비율</h3>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>대상</th>
+<th>P/C (거래량 기준)</th>
+<th>P/C (미결제약정 기준)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>S&amp;P500 지수옵션(SPX)</td>
+<td>1.134</td>
+<td>1.404</td>
+</tr>
+<tr>
+<td>나스닥100 ETF옵션(QQQ)</td>
+<td>1.064</td>
+<td>1.381</td>
+</tr>
+</tbody></table></div>
+<p>⚠️ 지수옵션은 기관의 헤지 수요가 구조적으로 많아 평시에도 P/C 비율이 1을 넘는 경우가 흔하다. 직전 대비 비교 기준이 없어 이 수치만으로 헤지 수요가 늘었는지 줄었는지 판단하기는 어렵다(확신 낮음, 판단 보류).</p>
+<hr>
+<h2>2. 연준·금리</h2>
+<ul>
+<li><strong>FOMC 결정(2026-09-16)</strong>: 기준금리를 25bp 인상해 3.75~4.00%로 상향 — 2023년 7월 이후 첫 인상.</li>
+<li><strong>점도표</strong>: 참가자 18명 중 16명이 연내 추가 1회 인상, 4명은 2회 인상을 전망(중복 응답 가능성 있음, 원문 표현 유지). 연말 기준금리 중위 전망은 4.1%.</li>
+<li><strong>Warsh 의장 발언(09-16 기자회견)</strong>: &quot;This summer&#39;s inflation readings do not tell me that underlying trends have meaningfully improved.&quot; / &quot;인플레이션이 목표로 뚜렷하고 충분히 빠르게 수렴한다는 확신 기준을 오늘 FOMC는 충족하지 못했다고 판단했다.&quot;</li>
+<li><strong>국채금리</strong>: 10년물 4.94%~5.006% 사이에서 등락(2007년 7월 이후 최고 수준까지 상승했다가 목요일 하락, 금요일 재반등). 2년물은 4.737%에서 일중 4.73%로 소폭 하락.</li>
+<li><strong>10Y-2Y 스프레드</strong>: N/A — 직접 계산 시 약 +0.2%p대로 추정되나, 매체가 명시적으로 보도한 수치는 확인되지 않아 N/A 처리.</li>
+<li><strong>CME FedWatch(10/28 차기 FOMC)</strong>: 25bp 추가 인상 확률이 소스에 따라 55.1%~95%로 크게 엇갈려 재확인이 필요하다.</li>
+</ul>
+<p><strong>해석(확신 중간)</strong>: 이번 인상은 시장 컨센서스에 부합했을 가능성이 높지만, 점도표상 다수가 추가 인상을 지지한다는 점은 향후 금리 경로가 예상보다 매파적일 수 있음을 시사한다.</p>
+<p><strong>반대 시나리오/불확실성</strong>: FedWatch 확률이 소스마다 크게 다르므로(55.1% vs 95%), 만약 낮은 쪽이 맞다면 시장은 이미 인상 사이클 종료 근접을 상당 부분 반영 중일 수 있다. 또한 Warsh 의장의 발언은 인상 중단 문턱이 높다는 신호로 해석될 수 있지만, 이미 한 차례 인상을 단행한 만큼 향후 톤이 데이터 의존적으로 완화될 가능성도 배제할 수 없다(확신 중간). 10Y-2Y 스프레드 자체는 근거 수치 부족으로 기간프리미엄 상승 여부를 판단하기엔 확신이 낮다.</p>
+<hr>
+<h2>3. 주요 경제지표</h2>
+<p>2026-09-18 당일 CPI·PPI·GDP·비농업고용·실업률 발표는 없었다. 아래 지표는 예상치만 확인되고 실제 발표치(액추얼)는 검색으로 확정되지 않아 전부 N/A로 남긴다.</p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>지표</th>
+<th>발표치</th>
+<th>예상치</th>
+<th>서프라이즈</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>신규 실업수당 청구건수(주간)</td>
+<td>N/A</td>
+<td>309,000</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>시카고 연은 국가활동지수(8월)</td>
+<td>N/A</td>
+<td>0.50</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>S&amp;P 글로벌 플래시 종합 PMI(9월)</td>
+<td>N/A</td>
+<td>제조업 60.8 / 서비스업 55.1</td>
+<td>N/A</td>
+</tr>
+<tr>
+<td>경기선행지수(LEI, 8월)</td>
+<td>N/A</td>
+<td>+0.6%(전월 +0.9%)</td>
+<td>N/A</td>
+</tr>
+</tbody></table></div>
+<hr>
+<h2>4. 특징 종목·뉴스</h2>
+<ul>
+<li><strong>Xenon Pharmaceuticals(XENE)</strong> 프리마켓 -29%: 뇌전증 치료제 azetukalner 3상 임상시험의 신규 환자 등록을 자발적으로 중단한다고 발표. (★★☆☆☆ · AI영향 중립 · 확신 높음)</li>
+<li><strong>Robinhood(HOOD)</strong> 프리마켓 +5.94%: SEC로부터 5년 조건부 &quot;혁신 예외(Innovation Exemption)&quot; 부여. (★★★☆☆ · AI영향 중립 · 확신 중간)</li>
+<li><strong>Coinbase(COIN)</strong> +5.8%: SEC의 신규 토큰화 규정 발표에 암호화폐 관련주 동반 상승. (★★★☆☆ · AI영향 중립 · 확신 중간)</li>
+<li><strong>Nucor(NUE)</strong> 프리마켓 -5.33%: 3분기 이익 가이던스가 월가 예상치를 하회. (★★★☆☆ · AI영향 중립 · 확신 중간)</li>
+<li><strong>Netflix(NFLX)</strong> 약 -5%(일부 보도 -3%대): Wells Fargo가 투자의견을 Underweight로 하향, 시청 참여도(engagement) 우려. (★★★☆☆ · AI영향 중립 · 확신 중간)</li>
+</ul>
+<p><strong>AI 인프라 기업 동향</strong></p>
+<ul>
+<li><strong>공급 측</strong>: Nvidia·Google·Emerald AI가 &quot;AI Energy Management Alliance&quot;를 결성해 AI 데이터센터의 신속한 전력망 연결과 피크 수요 시 유연한 전력 사용을 추진(★★★☆☆ · AI영향 긍정 · 확신 낮음). Broadcom-OpenAI가 최대 10GW 규모 커스텀 AI칩 공급 협력을 추진 중이며, 최초 1.3GW(약 180억 달러) 물량의 자금조달 방식을 협상 중 — Microsoft가 해당 칩의 40%를 구매해 자사 데이터센터에 설치 후 OpenAI에 재임대하는 조건이 걸려 있다(★★★★☆ · AI영향 긍정 · 확신 낮음, 1차 공시 미확인). AMD-OpenAI는 복수년 파트너십을 체결해 AMD 프로세서로 AI 데이터센터에 전력을 공급하고, OpenAI는 차세대 모델용 AMD 고성능 GPU 지속 접근권을 확보(★★★★☆ · AI영향 긍정 · 확신 낮음). 메모리 반도체 쪽에서는 DDR4 1Gx8 3200 현물가가 45.214달러(2026-09-11 기준)로 45달러선을 상회했고, HBM3E 36GB 스택 리세일가는 약 2,100달러(2026-08-31 기준)로 장기 계약가 대비 4~5배 수준 — HBM은 공개 현물시장이 없어 업계 추정치임에 유의(★★★☆☆ · AI영향 긍정 · 확신 낮음).</li>
+<li><strong>수요 측</strong>: MSFT·AMZN·GOOGL·META는 2026년 1<del>2분기 실적 발표 후 3분기 실적이 아직 발표되지 않아 현재는 실적시즌이 아니다. 신규 변동 없이 직전 CAPEX 가이던스 유지(참고치, 확정일자 미확인): MSFT 약 1,900억 달러, AMZN 약 2,000억 달러, GOOGL 1,750억</del>1,850억 달러, META 1,150억~1,350억 달러(META는 &quot;2026년 CAPEX가 2025년 대비 큰 폭 증가&quot; 언급).</li>
+</ul>
+<hr>
+<h2>4-A. 섹터별 동향</h2>
+<ul>
+<li><strong>반도체·AI</strong><ul>
+<li>NVDA: Nvidia가 투자한 클라우드 플랫폼 Nscale이 IPO 신청 (★★★☆☆ · 확신 낮음, 제목 기준) — Yahoo(Finnhub)</li>
+<li>AVGO(관련 소형 반도체주): 한 소형 반도체주 주가가 2배 상승하며 월가 투자의견이 긍정적으로 전환 (★★★☆☆ · 확신 낮음, 제목 기준) — Yahoo(Finnhub)</li>
+</ul>
+</li>
+<li><strong>금융</strong><ul>
+<li>IREN(태그: JPM): AI 클라우드 사업 성과에도 데이터센터 증설 리스크가 부각되며 공정가치 추정치가 하향 조정 (★★☆☆☆ · 확신 낮음, 상세 미확인) — Yahoo(Finnhub)</li>
+</ul>
+</li>
+<li><strong>헬스케어</strong><ul>
+<li>UNH: 산후안 지역 의료센터가 Oracle Health와 제휴해 환자 흐름 관리 시스템 도입 (★★☆☆☆ · 확신 중간) — Yahoo(Finnhub)</li>
+</ul>
+</li>
+<li><strong>소비재·유통</strong><ul>
+<li>AMZN(태그): ARK Invest(Cathie Wood)가 암호화폐 익스포저를 축소했다가 CoreWeave 관련 포지션은 다시 확대 (★★☆☆☆ · 확신 낮음, 제목 기준) — Yahoo(Finnhub)</li>
+</ul>
+</li>
+</ul>
+<p><strong>섹터 로테이션 관련 해석(확신 낮음)</strong>: 같은 날 여러 반도체 관련 호재성 뉴스가 동시에 나타난 점은 섹터 로테이션 가능성을 시사하지만, 근거가 이 뉴스들과 지수 등락률 정도뿐이라 확신은 낮게 둔다.</p>
+<p>에너지 섹터는 이날 검색 범위 내 유의미한 개별 뉴스가 없어 생략한다.</p>
+<hr>
+<h2>5. AI 밸류체인 영향 (수혜/피해 구조)</h2>
+<p><strong>① Broadcom-OpenAI 최대 10GW 커스텀 AI칩 협력</strong> (★★★★☆ · 확신 낮음)</p>
+<ul>
+<li>1차 수혜: <strong>Broadcom(AVGO)</strong> — 커스텀 ASIC 설계·공급 물량이 최대 10GW 규모로 확정되면 대형 매출 파이프라인 확보</li>
+<li>2차 수혜: <strong>Microsoft(MSFT)</strong> — 칩의 40%를 구매해 자사 데이터센터에 설치 후 OpenAI에 재임대하는 구조로 인프라 자산 확충</li>
+<li>3차 수혜: 후공정/패키징 업체 — 대규모 커스텀칩 양산 시 패키징 수요 증가 가능성 (구체 메커니즘은 원자료에 명시되지 않아 확인 필요)</li>
+<li>피해(추정): 범용 GPU 벤더 — 커스텀 ASIC 채택이 확대되면 상대적 점유율 압박 가능성 (직접 언급 없는 추정치)</li>
+</ul>
+<p><strong>② AMD-OpenAI 복수년 파트너십</strong> (★★★★☆ · 확신 낮음)</p>
+<ul>
+<li>1차 수혜: <strong>AMD</strong> — OpenAI向 GPU 장기 공급계약으로 매출 가시성 확보, MI450 신규 시설(2026년 가동) 가동으로 생산능력 확대</li>
+<li>2차 수혜: <strong>OpenAI</strong> — 차세대 모델 훈련·추론용 고성능 GPU에 대한 지속적 접근권 확보</li>
+<li>3차 수혜/피해: 원자료에 명시된 메커니즘 없음</li>
+</ul>
+<p><strong>③ NVDA/GOOGL/Emerald AI, AI Energy Management Alliance 결성</strong> (★★★☆☆ · 확신 낮음)</p>
+<ul>
+<li>1차 수혜: 데이터센터 운영사(GOOGL 등) — 전력망 신속 연결로 가동 지연 리스크 완화</li>
+<li>2차 수혜: <strong>Nvidia(NVDA)</strong> — 전력 제약이 GPU 클러스터 구축의 병목이었던 만큼, 병목 해소 시 하드웨어 수요 실현 속도 개선</li>
+<li>3차 수혜(추정): 전력망 사업자/유틸리티 — 유연한 수요반응 대가로 신규 연결 우선권 확보 가능성 (직접 언급 없어 확인 필요)</li>
+</ul>
+<p>세 사안 모두 1차 공시 원문이나 발표일이 확인되지 않은 배경 보도 수준이라 확신 수준은 전반적으로 낮게 유지한다.</p>
+<hr>
+<h2>6. 수급·내부자 동향</h2>
+<ul>
+<li><strong>SMH(VanEck 반도체 ETF)</strong>: 최근 1개월 순유출 약 -24.8억 달러(-3.5% of AUM) — 단, 데이터 기준 시점이 2026년 8월 말로 추정돼 최신성 확인 필요.</li>
+<li><strong>SOXX(iShares 반도체 ETF)</strong>: 최근 1개월 순유입 약 +94.3억 달러(+20.5% of AUM) — 데이터 기준 시점이 6월 말~7월 초로 추정돼 최신성 확인 필요.</li>
+<li>두 ETF의 자금흐름 방향이 상반되는데, 기준 시점이 서로 다르고 최신성이 불명확해 현재 시점의 반도체 섹터 수급 방향을 판정하는 근거로 채택하지 않는다(확신 낮음).</li>
+<li><strong>QQQ</strong>: 구체적 최신 자금흐름 수치 확인 불가(N/A).</li>
+<li><strong>옵션 시장</strong>: 2026-09-18은 옵션 만기일(트리플위칭 추정)로 거래량이 평소 대비 급증했다는 보도가 있으나 구체 계약수·금액은 미확인. 만기일 특유의 기계적 거래량 증가일 가능성이 높아 방향성 시그널로 보기 어렵다 — <strong>노이즈로 분류</strong>.</li>
+<li><strong>블록딜/대량거래</strong>: N/A — 검색으로 확인된 특정 블록딜 없음.</li>
+</ul>
+<p><strong>Form 4 내부자 거래 (전체)</strong></p>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>종목</th>
+<th>인물</th>
+<th>직책</th>
+<th>매수/매도</th>
+<th>주식수</th>
+<th>금액</th>
+<th>거래일</th>
+<th>거래유형</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>NVDA</td>
+<td>Nicholas P. Parker</td>
+<td>EVP(Worldwide Field Ops)</td>
+<td>RSU 부여</td>
+<td>172,507주</td>
+<td>N/A</td>
+<td>2026-09-09</td>
+<td>정기 보상 지급(재량적 매매 아님)</td>
+</tr>
+<tr>
+<td>NVDA</td>
+<td>Tench Coxe</td>
+<td>Director(이사)</td>
+<td>증여(Gift)</td>
+<td>500,000주</td>
+<td>N/A</td>
+<td>2026-09-02</td>
+<td>Rule 10b5-1(c) 매매계획(2026-03-19 수립)에 따른 사전 예정 처분</td>
+</tr>
+</tbody></table></div>
+<ul>
+<li>위 두 건 모두 재량적 매도 판단이 개입되지 않아 <strong>시그널로 단정 불가, 노이즈로 분류</strong>(확신 높음).</li>
+<li>AVGO·CRDO·CLS·APLD·VRT·SMCI: Form 4 신규 공시 확인되지 않음(N/A).</li>
+</ul>
+<hr>
+<h2>7. 시총 상위·기타 기업 이슈</h2>
+<ul>
+<li>시총 상위 10대 기업의 AI 무관 일반 이슈는 검색 범위 내 확인된 것이 없다(N/A). 현재 실적시즌이 아니라는 점도 관련이 있다.</li>
+</ul>
+<hr>
+<h2>8. 향후 일정 및 관전 포인트</h2>
+<div class="tablewrap"><table>
+<thead>
+<tr>
+<th>날짜</th>
+<th>유형</th>
+<th>항목</th>
+<th>비고</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>2026-10-02</td>
+<td>경제지표</td>
+<td>9월 비농업고용지표(Nonfarm Payrolls), 08:30 ET</td>
+<td>컨센서스 미확인</td>
+</tr>
+<tr>
+<td>2026-10-14</td>
+<td>경제지표</td>
+<td>9월 CPI 발표</td>
+<td>컨센서스 미확인 (14일 범위 밖, 참고용)</td>
+</tr>
+<tr>
+<td>2026-10-15</td>
+<td>경제지표</td>
+<td>9월 PPI 발표, 08:30 ET</td>
+<td>컨센서스 미확인 (14일 범위 밖, 참고용)</td>
+</tr>
+<tr>
+<td>2026-10-27~28</td>
+<td>연준</td>
+<td>FOMC 정례회의(이틀 일정), 10/28 14:00 ET 기자회견</td>
+<td>정책금리 결정 예정 (14일 범위 밖, 참고용)</td>
+</tr>
+</tbody></table></div>
+<p><strong>관전 포인트(확신 낮음~중간)</strong></p>
+<ul>
+<li><strong>10/2 비농업고용지표</strong>: FOMC가 막 25bp를 인상한 직후 발표되는 첫 주요 고용지표다. 예상보다 강한 고용이 나올 경우 추가 인상 기대가 강화되는 쪽으로, 예상보다 약한 고용이 나올 경우 인상 사이클 조기 종료 기대가 커지는 쪽으로 해석될 수 있다 — 컨센서스 수치 자체가 미확인이라 현재는 방향성 판단을 보류한다.</li>
+<li><strong>10/14 CPI, 10/15 PPI</strong>: Warsh 의장이 &quot;인플레이션이 목표로 수렴한다는 확신 기준이 충족되지 않았다&quot;고 언급한 만큼, 이 두 지표가 10/27~28 FOMC의 추가 인상 여부를 가늠할 핵심 변수가 될 가능성이 있다. 단, 컨센서스는 아직 미확인이다.</li>
+<li><strong>Broadcom-OpenAI 자금조달 협상</strong>: 최초 1.3GW(180억 달러) 물량의 자금조달 구조와 MSFT의 40% 구매 조건 합의 여부가 공식 발표되면 AI 밸류체인 밸류에이션에 직접 영향을 줄 수 있는 이벤트다. 현재는 배경 보도 수준이라 확정 여부를 지켜볼 필요가 있다.</li>
+</ul>
+<hr>
+<h2>9. 종합 시사점</h2>
+<p>이번 주는 FOMC의 25bp 인상과 Warsh 의장의 매파적 발언으로 10년물 국채금리가 한때 5%를 넘어서는 등 금리 압박이 컸지만, 09-18 정규장에서는 반도체주 강세가 지수 하방을 방어하며 지수가 소폭 상승 마감했다(확신 중간). 동시에 Broadcom-OpenAI, AMD-OpenAI 등 대형 AI칩 공급 계약 보도가 이어지면서 AI 밸류체인의 수요 서사는 여전히 견조하다는 해석이 가능하다.</p>
+<p>다만 신호가 엇갈리는 지점도 있다. 정규장 마감 후 선물은 크게 반등하고 VIX는 급락해 위험선호 회복 신호로 보이지만, 이는 정규장 종가와 기준시각이 다른 별도 관측치라 직접 등치할 수 없다(확신 낮음). Broadcom·AMD 관련 대형 계약 보도들 역시 1차 공시 원문이 확인되지 않은 배경 보도 수준이라, 공식 발표 여부를 계속 지켜볼 필요가 있다. 향후 2주 안에는 10/2 비농업고용지표가, 그 이후로는 10월 중순 CPI·PPI와 10/27~28 FOMC가 금리 경로 판단의 다음 분기점이 될 전망이다.</p>
+<hr>
+<h2>⚑ 확인 필요 항목 (출처 미확정)</h2>
+<ul>
+<li>SOX(필라델피아 반도체지수)의 실제 종가·등락률 — 확인 불가</li>
+<li>신규 실업수당청구건수·시카고연은 국가활동지수·플래시 PMI·LEI의 실제 발표치(액추얼) — 예상치만 확인, 발표치 전부 미확인</li>
+<li>CME FedWatch 10/28 FOMC 추가 인상 확률의 정확한 수치 — 소스 간 55.1%~95%로 상이, 재확인 필요</li>
+<li>10Y-2Y 국채 스프레드의 명시적 보도 수치 — 직접 계산 추정치만 존재</li>
+<li>Broadcom-OpenAI 10GW 커스텀칩 협력 및 AMD-OpenAI 파트너십의 1차 공시(기업 발표) 원문 및 정확한 발표일 — 둘 다 미확인</li>
+<li>SMH·SOXX 자금흐름 데이터의 최신 시점 — 8월 말/6~7월 데이터로 최신성 불명</li>
+<li>09-18 옵션 만기 관련 구체적 거래량·계약수·금액 — 미확인</li>
+<li>10/2 비농업고용지표 등 향후 일정의 컨센서스 수치 — 전부 N/A</li>
+</ul>
+
+</article>
+<footer>자동 생성 리포트 · 투자 조언이 아닙니다. 모든 수치는 원문 출처를 확인하세요.</footer>
+</div>
+</body>
+</html>
