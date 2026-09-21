@@ -13,6 +13,11 @@ on:
   # 09:37 KST 실패: "You've hit your session limit"). 제거.
   schedule:
     - cron: '30 21 * * 1-5'
+    # 임시(2026-09-22): 06:30 KST 정규 스케줄이 계속 지연/미발화해 GitHub 쪽
+    # cron 큐 자체가 살아있는지 07:30 KST(22:30 UTC) 트리거로 재확인한다.
+    # 확인되면(또는 오늘 안에 확인 안 되면) 이 줄을 지운다 — 절대 상시로 두지
+    # 않는다(2026-09-18에 이걸 안 지워서 세션 한도 연쇄 실패가 났었다).
+    - cron: '30 22 * * 1-5'
   workflow_dispatch:
 
 permissions:
