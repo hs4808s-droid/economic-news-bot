@@ -1,5 +1,5 @@
 # 자동 수집 시장 데이터 (0_data)
-# 기준일: 2026-09-23 · 생성시각(KST): 2026-09-23 08:41
+# 기준일: 2026-09-23 · 생성시각(KST): 2026-09-23 09:52
 # 출처: Yahoo Finance chart API · CBOE 지연시세 API · Finnhub (전부 기계 수집, 사람 해석 없음)
 
 > 이 파일의 수치는 **이미 검증된 사실**이다. 1_collect 단계에서 다시 검색하지 말고 그대로 인용한다.
@@ -9,10 +9,10 @@
 
 | 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 기준시각(ET) |
 |------|------|-------------|-----------|-----------|--------------|
-| S&P500 선물 (ES) | `ES=F` | 7,832.75 | -0.01% | 7,833.5 | 2026-09-22 19:31 |
-| 나스닥100 선물 (NQ) | `NQ=F` | 31,054 | +0.87% | 30,784.75 | 2026-09-22 19:31 |
-| 다우 선물 (YM) | `YM=F` | 52,268 | -0.39% | 52,475 | 2026-09-22 19:31 |
-| 러셀2000 선물 (RTY) | `RTY=F` | 2,914.2 | +0.58% | 2,897.4 | 2026-09-22 19:31 |
+| S&P500 선물 (ES) | `ES=F` | 7,831.5 | -0.03% | 7,833.5 | 2026-09-22 20:42 |
+| 나스닥100 선물 (NQ) | `NQ=F` | 31,046.5 | +0.85% | 30,784.75 | 2026-09-22 20:42 |
+| 다우 선물 (YM) | `YM=F` | 52,269 | -0.39% | 52,475 | 2026-09-22 20:41 |
+| 러셀2000 선물 (RTY) | `RTY=F` | 2,912.9 | +0.53% | 2,897.4 | 2026-09-22 20:42 |
 
 ## 변동성 구조
 
@@ -28,10 +28,10 @@
 
 | 항목 | 심볼 | 현재가/종가 | 전일 대비 | 직전 종가 | 기준시각(ET) |
 |------|------|-------------|-----------|-----------|--------------|
-| 미 10년 국채선물 | `ZN=F` | 106.13 | -0.19% | 106.33 | 2026-09-22 19:29 |
-| 금 | `GC=F` | 4,402.1 | +0.42% | 4,383.9 | 2026-09-22 19:31 |
-| WTI | `CL=F` | 89.67 | -6.38% | 95.78 | 2026-09-22 19:31 |
-| 달러지수 (DXY) | `DX-Y.NYB` | 100.56 | +0.13% | 100.43 | 2026-09-22 19:31 |
+| 미 10년 국채선물 | `ZN=F` | 106.08 | -0.24% | 106.33 | 2026-09-22 20:41 |
+| 금 | `GC=F` | 4,394.1 | +0.23% | 4,383.9 | 2026-09-22 20:42 |
+| WTI | `CL=F` | 90.09 | -5.94% | 95.78 | 2026-09-22 20:42 |
+| 달러지수 (DXY) | `DX-Y.NYB` | 100.56 | +0.13% | 100.43 | 2026-09-22 20:42 |
 
 ### VIX 기간구조 (위 수치에서 산출한 비율)
 
@@ -57,12 +57,12 @@
   - 2026-09-22 19:00 (ET) · https://www.cnbc.com/2026/09/22/qantas-flight-new-york-sydney-nonstop.html
 - **Reuters** · Trump threatens to annihilate Iran as diplomats push for deal at UN - Reuters
   - 2026-09-22 17:55 (ET) · https://news.google.com/rss/articles/CBMiqAFBVV95cUxPMHFVWHVmRkJDV09JMHNSQ2RvNk5zS2NwN3lwZ3lNOFNLd0tUdjZHS09lMUhZdHBCWXZUQ1NJUHh5cUxmYlU4NjNTRGRtWDJ3UkFpb05jS1U2R2huempndzFvVEtqZmV1RjN2cTRJWWYybEpQSkptR2NjLWFySUtUeDdXMmdBd0N4dktqeGN6WjdTOGVfQXZJLVgyX2k1RTlzbDZncmktWlI?oc=5
+- **Reuters** · Trump warns in UN speech he could 'annihilate' Iran without peace deal - Reuters
+  - 2026-09-22 17:07 (ET) · https://news.google.com/rss/articles/CBMisgFBVV95cUxOOFdkQk9aWHdzT0hrcFhDNDZPSmlwQVBUUm12TGd4SUVPUURUMVo4Y3I0WHZBSTIxdjdKTWZ4WkF3cVUzUnlrWmNrbTA5T21UN3R0Z0JnekdrZm5ReC1ZS2JmUWVQRXRVNzhaYmNucDI5YVh6d2JxeHp5Yi00Y3p2d0loRTY5YXNiWGRHTlJZb1ZiX1paMVh3UU1XVThfUXR2NHF3T0pod3BBS3VpU3AyTDB3?oc=5
 - **CNBC** · A top chip stock analyst sees big things for Nvidia, Broadcom. How his case aligns with ours
   - 2026-09-22 16:43 (ET) · https://www.cnbc.com/2026/09/22/a-top-chip-stock-analyst-sees-big-things-for-nvidia-broadcom-how-his-case-aligns-with-ours.html
 - **Reuters** · PODCAST: Trump's UN speech, ICC sanctions and Turkey's LGBTQ+ crackdown (Updated) - Reuters
   - 2026-09-22 16:31 (ET) · https://news.google.com/rss/articles/CBMinwFBVV95cUxNSUdQTWg2T1FqNWc5SHhjOFdROWIyQjBQUkViWUpjYjhvWFM4V1V2LWJDQzZuRnVmYkVGdDVhUVBkUGYxdWV5bDNSTUNKZThUdjRHZ2VsbDFVeHNzcDdmVjdPRC14cnMzT2xVOEFnMUw4ai00VmRWZHFUWlZvd29oR0gwWWdNcEJwdi1OcGFHVWNNdHRCNmFvdzA5SjhEdFk?oc=5
-- **Reuters** · Trump warns in UN speech he could 'annihilate' Iran without peace deal - Reuters
-  - 2026-09-22 16:20 (ET) · https://news.google.com/rss/articles/CBMisgFBVV95cUxOOFdkQk9aWHdzT0hrcFhDNDZPSmlwQVBUUm12TGd4SUVPUURUMVo4Y3I0WHZBSTIxdjdKTWZ4WkF3cVUzUnlrWmNrbTA5T21UN3R0Z0JnekdrZm5ReC1ZS2JmUWVQRXRVNzhaYmNucDI5YVh6d2JxeHp5Yi00Y3p2d0loRTY5YXNiWGRHTlJZb1ZiX1paMVh3UU1XVThfUXR2NHF3T0pod3BBS3VpU3AyTDB3?oc=5
 - **Reuters** · Iran submits conditions for reopening of Hormuz to U.S. representative, state media says - Reuters
   - 2026-09-22 15:46 (ET) · https://news.google.com/rss/articles/CBMiyAFBVV95cUxOYVI5Zk1aX3RhYUR3djFoUE4wTGo1cEJscDJwelUwamFLQV9WVEh3OU1BcFhkOGJKWWtCVXFPSndFUUpFV2xvWWctLTQxVWFlWmE0d3ctNmJuYzVDLXJSdjdwaktKWFREMVBQeUlZakZvalZOQTAtSlQ5UzZFQkFlUVZPblc2bEE5dzNVRV9pTzM2ZkxURHlFMzVlamZCWG50RUlkaVd5MDc4MzZTbWp1N1J1Y3NnQnUwMnFNRjhWMnd6Y0Z1LWp5NA?oc=5
 - **CNBC** · Royal Caribbean nears $3 billion deal to take 50% equity stake in Sandals
@@ -88,12 +88,12 @@
 
 ### 반도체·AI
 
-- **NVDA** · 3 Monthly Income ETFs to Buy Once That Have Paid You Every Single Month for More Than a Decade
-  - Yahoo · 2026-09-22 17:45 (ET) · https://finnhub.io/api/news?id=49523b64032dbd62d2f615ba6397c253636bb19be6ef3602f3e5329db83ddbd2
-- **NVDA** · JEPI’s 4.42% Gain Looks Modest Next to FYEE’s 12.4% Run in 2026
-  - Yahoo · 2026-09-22 17:35 (ET) · https://finnhub.io/api/news?id=98f0833cf12dd65e061b16ff846203e0db1310ceab52f159a5eda56cdc169e52
-- **NVDA** · Micron vs. SanDisk: Comparing Two Red-Hot AI Memory Stocks
-  - Yahoo · 2026-09-22 16:57 (ET) · https://finnhub.io/api/news?id=0dc3b45bc78fe147c4dbcad938b62700559a26eaa41bd0fc28e272cbaf8caa1e
+- **NVDA** · Google Goes Nuclear With Power Upgrade Agreement in Georgia
+  - Yahoo · 2026-09-22 19:35 (ET) · https://finnhub.io/api/news?id=075bf0ef30d49aa73aedd831b4f10451e69a80c23ba0f43369fb0999b1bc0bde
+- **NVDA** · What $3,000 Invested in SpaceX Stock Could Grow to by September 2027
+  - Yahoo · 2026-09-22 19:35 (ET) · https://finnhub.io/api/news?id=9453ea8f611629f795d06bfa540f9faa5371a7cddc032b20d5c01c7a9f824422
+- **NVDA** · Invest Like Buffett: Lessons From the Oracle of Omaha
+  - Yahoo · 2026-09-22 19:34 (ET) · https://finnhub.io/api/news?id=fe92dcbf4081b9a8b2a178f7f57f7888eed6c829289f56eee4caf95e10b2d705
 - **AVGO** · AMD Stock Just Sent a Huge AI Signal
   - Yahoo · 2026-09-22 15:07 (ET) · https://finnhub.io/api/news?id=0a8e4d9f85eb3886d87d720ed8c87f443770bada2ce1f8dd2ccd85b5c0af282b
 - **AVGO** · Apple’s New CEO Is Already Being Pressured to Drop the Chinese Chip Deal Tim Cook Fought to Keep
@@ -103,12 +103,12 @@
 
 ### 금융
 
+- **JPM** · JPMorgan Drops 3.8% as $2.6 Billion AI Deal Meets Geopolitics
+  - Yahoo · 2026-09-22 18:32 (ET) · https://finnhub.io/api/news?id=8ece79b03113f63d00eab5816cce286df8cea82c7010cb63c61ae6511c9ab18c
+- **JPM** · JPMorgan strongly recommends buying tumbling energy leader
+  - Yahoo · 2026-09-22 18:07 (ET) · https://finnhub.io/api/news?id=931681c685a521b7eb09856cdedd3ed638308df3040bd001703a32860007dbb4
 - **JPM** · JPMorgan Chase & Co. (JPM) Stock Moves -3.34%: What You Should Know
   - Yahoo · 2026-09-22 17:45 (ET) · https://finnhub.io/api/news?id=8c236832d9da0a78bc6284e524df643d1373065f4438890eaf78965c57b2ec7a
-- **JPM** · Tuesday's session: top gainers and losers in the dow jones index
-  - ChartMill · 2026-09-22 15:10 (ET) · https://finnhub.io/api/news?id=d1a0fa717a3205c82feb1b910304a2237ef6e5907fe442d635e0bf4fae4efbd3
-- **JPM** · Charles Schwab, JPMorgan Chase Slide On Vanguard-Backed AI Threat
-  - Yahoo · 2026-09-22 14:22 (ET) · https://finnhub.io/api/news?id=56dfba9ea80de5f3e1e45e5b3fd289e973770965e8e213b39bb580bfcb22daf9
 
 ### 에너지
 
@@ -130,10 +130,10 @@
 
 ### 소비재·유통
 
+- **AMZN** · VGT Holders Bought ‘Tech’ and Own No Google, Meta, or Amazon: The Sector Rule That Decides What’s Inside
+  - Yahoo · 2026-09-22 18:15 (ET) · https://finnhub.io/api/news?id=5689ddb9b57259262486fbc4b3848e155e2ba4172ad5fcb0556ec7c43f2d295c
+- **AMZN** · $223 Billion Back To Shareholders: Inside The MSFT Machine
+  - Yahoo · 2026-09-22 17:51 (ET) · https://finnhub.io/api/news?id=96f91b80e6c926f581c3b91e8f69f73e6d1bfac7969c396c91bb46eb78163a48
 - **AMZN** · Amazon.com (AMZN) Blocks Rival AI Shopping Agent On Its Platform
   - Yahoo · 2026-09-22 17:14 (ET) · https://finnhub.io/api/news?id=7d96e1f939a7d93111edee3ea421edb3a4bc9f031b1392f9a3a21031cd0ae943
-- **AMZN** · How Much Upside Is Left In eBay Stock?
-  - Yahoo · 2026-09-22 17:10 (ET) · https://finnhub.io/api/news?id=03325dbe4b893c52a67cdb22b127fcf3172519a39fac67a8fef43b165b6a8922
-- **AMZN** · GREEN FUEL FORWARD EXPANDS INDUSTRY ALLIANCE TO SUPPORT SUSTAINABLE AVIATION FUEL ADOPTION IN ASIA
-  - Yahoo · 2026-09-22 17:00 (ET) · https://finnhub.io/api/news?id=5c93470d3a6fedadd6dcb542d890ba9eae197563c46d8520a158699dba9015fa
 
