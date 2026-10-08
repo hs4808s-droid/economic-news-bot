@@ -1,0 +1,1182 @@
+{
+  "AAOI": {
+    "name_ko": "어플라이드옵토일렉트로닉스",
+    "sector": "광통신"
+  },
+  "AAPL": {
+    "name_ko": "애플",
+    "sector": "IT하드웨어"
+  },
+  "ABNB": {
+    "name_ko": "에어비앤비",
+    "sector": "경기소비재"
+  },
+  "ABT": {
+    "name_ko": "애보트",
+    "sector": "헬스케어"
+  },
+  "ACN": {
+    "name_ko": "액센츄어",
+    "sector": "IT서비스"
+  },
+  "ADBE": {
+    "name_ko": "어도비",
+    "sector": "소프트웨어"
+  },
+  "ADS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "AJC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "AKAM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ALAB": {
+    "name_ko": "아스테라랩스",
+    "sector": "반도체"
+  },
+  "ALLE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ALMS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ALNY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "AMAT": {
+    "name_ko": "어플라이드머티어리얼즈",
+    "sector": "반도체장비"
+  },
+  "AMD": {
+    "name_ko": "AMD",
+    "sector": "반도체"
+  },
+  "AMZN": {
+    "name_ko": "아마존",
+    "sector": "경기소비재"
+  },
+  "ANET": {
+    "name_ko": "아리스타네트웍스",
+    "sector": "네트워크장비"
+  },
+  "APLD": {
+    "name_ko": "어플라이드디지털",
+    "sector": "데이터센터"
+  },
+  "APOG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "APP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "APPS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ARM": {
+    "name_ko": "암홀딩스",
+    "sector": "반도체"
+  },
+  "ASML": {
+    "name_ko": "ASML",
+    "sector": "반도체장비"
+  },
+  "ASR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "AST": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ASTS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ATM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "AVGO": {
+    "name_ko": "브로드컴",
+    "sector": "반도체"
+  },
+  "AXT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "AXTI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "AYI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "BA": {
+    "name_ko": "보잉",
+    "sector": "산업재"
+  },
+  "BAC": {
+    "name_ko": "뱅크오브아메리카",
+    "sector": "금융"
+  },
+  "BFLY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "BLDR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "BLK": {
+    "name_ko": "블랙록",
+    "sector": "금융"
+  },
+  "BP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "BRK": {
+    "name_ko": "버크셔해서웨이",
+    "sector": "금융"
+  },
+  "BRK.B": {
+    "name_ko": "버크셔해서웨이B",
+    "sector": "금융"
+  },
+  "BSP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "C": {
+    "name_ko": "씨티그룹",
+    "sector": "금융"
+  },
+  "CACI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CASY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CAT": {
+    "name_ko": "캐터필러",
+    "sector": "산업재"
+  },
+  "CB": {
+    "name_ko": "처브",
+    "sector": "금융"
+  },
+  "CCL": {
+    "name_ko": "카니발",
+    "sector": "경기소비재"
+  },
+  "CEG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CHRW": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CIEN": {
+    "name_ko": "시에나",
+    "sector": "네트워크장비"
+  },
+  "CJ": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CLS": {
+    "name_ko": "셀레스티카",
+    "sector": "IT하드웨어"
+  },
+  "CMA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CMCSA": {
+    "name_ko": "컴캐스트",
+    "sector": "커뮤니케이션"
+  },
+  "CNXC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "COF": {
+    "name_ko": "캐피털원",
+    "sector": "금융"
+  },
+  "COHR": {
+    "name_ko": "코히런트",
+    "sector": "광통신"
+  },
+  "COIN": {
+    "name_ko": "코인베이스",
+    "sector": "금융"
+  },
+  "COPPA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "COST": {
+    "name_ko": "코스트코",
+    "sector": "필수소비재"
+  },
+  "CPTO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CRCL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CRDO": {
+    "name_ko": "크레도",
+    "sector": "반도체"
+  },
+  "CRL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CRM": {
+    "name_ko": "세일즈포스",
+    "sector": "소프트웨어"
+  },
+  "CRO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CRWD": {
+    "name_ko": "크라우드스트라이크",
+    "sector": "소프트웨어"
+  },
+  "CRWV": {
+    "name_ko": "코어위브",
+    "sector": "클라우드"
+  },
+  "CSCO": {
+    "name_ko": "시스코",
+    "sector": "네트워크장비"
+  },
+  "CTSH": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CTVA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CVX": {
+    "name_ko": "셰브론",
+    "sector": "에너지"
+  },
+  "CXMT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DAL": {
+    "name_ko": "델타항공",
+    "sector": "산업재"
+  },
+  "DC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DDOG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DELL": {
+    "name_ko": "델",
+    "sector": "IT하드웨어"
+  },
+  "DEO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DGX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DHR": {
+    "name_ko": "다나허",
+    "sector": "헬스케어"
+  },
+  "DICK": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DKS": {
+    "name_ko": "딕스스포팅굿즈",
+    "sector": "경기소비재"
+  },
+  "DLR": {
+    "name_ko": "디지털리얼티",
+    "sector": "부동산"
+  },
+  "DRI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DSX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DUK": {
+    "name_ko": "듀크에너지",
+    "sector": "유틸리티"
+  },
+  "EBAY": {
+    "name_ko": "이베이",
+    "sector": "경기소비재"
+  },
+  "EL": {
+    "name_ko": "에스티로더",
+    "sector": "필수소비재"
+  },
+  "EMIB": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "EOSE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "FDA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "FDX": {
+    "name_ko": "페덱스",
+    "sector": "산업재"
+  },
+  "FICO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "FIX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "FRMI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "FRVO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GE": {
+    "name_ko": "GE에어로스페이스",
+    "sector": "산업재"
+  },
+  "GENI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GETY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GEV": {
+    "name_ko": "GE버노바",
+    "sector": "전기장비"
+  },
+  "GGP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GLW": {
+    "name_ko": "코닝",
+    "sector": "IT하드웨어"
+  },
+  "GM": {
+    "name_ko": "GM",
+    "sector": "경기소비재"
+  },
+  "GNRC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GOOG": {
+    "name_ko": "알파벳(C)",
+    "sector": "커뮤니케이션"
+  },
+  "GOOGL": {
+    "name_ko": "알파벳(A)",
+    "sector": "커뮤니케이션"
+  },
+  "GPC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GS": {
+    "name_ko": "골드만삭스",
+    "sector": "금융"
+  },
+  "GTLB": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GWRE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "HAL": {
+    "name_ko": "핼리버튼",
+    "sector": "에너지"
+  },
+  "HCA": {
+    "name_ko": "HCA헬스케어",
+    "sector": "헬스케어"
+  },
+  "HDB": {
+    "name_ko": "HDFC은행",
+    "sector": "금융"
+  },
+  "HON": {
+    "name_ko": "허니웰",
+    "sector": "산업재"
+  },
+  "HOOD": {
+    "name_ko": "로빈후드",
+    "sector": "금융"
+  },
+  "HPE": {
+    "name_ko": "HPE",
+    "sector": "IT하드웨어"
+  },
+  "HUBS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "HUM": {
+    "name_ko": "휴마나",
+    "sector": "헬스케어"
+  },
+  "IAC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "IBM": {
+    "name_ko": "IBM",
+    "sector": "IT서비스"
+  },
+  "IBN": {
+    "name_ko": "ICICI은행",
+    "sector": "금융"
+  },
+  "IGV": {
+    "name_ko": "소프트웨어 ETF",
+    "sector": "ETF"
+  },
+  "INCY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "INTC": {
+    "name_ko": "인텔",
+    "sector": "반도체"
+  },
+  "IONQ": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "IONS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "IOVA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "IQV": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "IQVIA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "IREN": {
+    "name_ko": "아이렌",
+    "sector": "데이터센터"
+  },
+  "ISRG": {
+    "name_ko": "인튜이티브서지컬",
+    "sector": "헬스케어"
+  },
+  "ITUB": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "IWM": {
+    "name_ko": "러셀2000 ETF",
+    "sector": "ETF"
+  },
+  "JBHT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "JBL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "JNJ": {
+    "name_ko": "존슨앤드존슨",
+    "sector": "헬스케어"
+  },
+  "JP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "JPM": {
+    "name_ko": "JP모건",
+    "sector": "금융"
+  },
+  "KBH": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "KBW": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "KIS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "KKR": {
+    "name_ko": "KKR",
+    "sector": "금융"
+  },
+  "KLA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "KLAC": {
+    "name_ko": "KLA",
+    "sector": "반도체장비"
+  },
+  "KMX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "KRE": {
+    "name_ko": "지역은행 ETF",
+    "sector": "ETF"
+  },
+  "LAMR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "LEN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "LESL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "LGIH": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "LIFT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "LITE": {
+    "name_ko": "루멘텀",
+    "sector": "광통신"
+  },
+  "LLY": {
+    "name_ko": "일라이릴리",
+    "sector": "헬스케어"
+  },
+  "LMT": {
+    "name_ko": "록히드마틴",
+    "sector": "산업재"
+  },
+  "LNG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "LPL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "LRCX": {
+    "name_ko": "램리서치",
+    "sector": "반도체장비"
+  },
+  "LULU": {
+    "name_ko": "룰루레몬",
+    "sector": "경기소비재"
+  },
+  "MARA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "MCD": {
+    "name_ko": "맥도날드",
+    "sector": "경기소비재"
+  },
+  "MDB": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "META": {
+    "name_ko": "메타",
+    "sector": "커뮤니케이션"
+  },
+  "MGM": {
+    "name_ko": "MGM리조트",
+    "sector": "경기소비재"
+  },
+  "MKC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "MNDY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "MRK": {
+    "name_ko": "머크",
+    "sector": "헬스케어"
+  },
+  "MRNA": {
+    "name_ko": "모더나",
+    "sector": "헬스케어"
+  },
+  "MRVL": {
+    "name_ko": "마벨",
+    "sector": "반도체"
+  },
+  "MS": {
+    "name_ko": "모건스탠리",
+    "sector": "금융"
+  },
+  "MSCI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "MSFT": {
+    "name_ko": "마이크로소프트",
+    "sector": "소프트웨어"
+  },
+  "MTCH": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "MTIA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "MU": {
+    "name_ko": "마이크론",
+    "sector": "반도체"
+  },
+  "MW": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NBIS": {
+    "name_ko": "네비우스",
+    "sector": "클라우드"
+  },
+  "NCNO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NET": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NFLX": {
+    "name_ko": "넷플릭스",
+    "sector": "커뮤니케이션"
+  },
+  "NGS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NIVF": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NKE": {
+    "name_ko": "나이키",
+    "sector": "경기소비재"
+  },
+  "NOW": {
+    "name_ko": "서비스나우",
+    "sector": "소프트웨어"
+  },
+  "NSC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NUE": {
+    "name_ko": "뉴코어",
+    "sector": "소재"
+  },
+  "NVAX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NVDA": {
+    "name_ko": "엔비디아",
+    "sector": "반도체"
+  },
+  "NVS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "OKTA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ON": {
+    "name_ko": "온세미",
+    "sector": "반도체"
+  },
+  "OPCH": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ORCL": {
+    "name_ko": "오라클",
+    "sector": "소프트웨어"
+  },
+  "OSAT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "OXY": {
+    "name_ko": "옥시덴탈",
+    "sector": "에너지"
+  },
+  "PANW": {
+    "name_ko": "팔로알토네트웍스",
+    "sector": "소프트웨어"
+  },
+  "PAYC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PCG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PENG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PEP": {
+    "name_ko": "펩시코",
+    "sector": "필수소비재"
+  },
+  "PG": {
+    "name_ko": "P&G",
+    "sector": "필수소비재"
+  },
+  "PGR": {
+    "name_ko": "프로그레시브",
+    "sector": "금융"
+  },
+  "PINS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PLAY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PLD": {
+    "name_ko": "프롤로지스",
+    "sector": "부동산"
+  },
+  "PLTR": {
+    "name_ko": "팔란티어",
+    "sector": "소프트웨어"
+  },
+  "PLUG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PM": {
+    "name_ko": "필립모리스",
+    "sector": "필수소비재"
+  },
+  "PMC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PNC": {
+    "name_ko": "PNC",
+    "sector": "금융"
+  },
+  "PRGS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PSNY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "QCOM": {
+    "name_ko": "퀄컴",
+    "sector": "반도체"
+  },
+  "QQQ": {
+    "name_ko": "나스닥100 ETF",
+    "sector": "ETF"
+  },
+  "QQQM": {
+    "name_ko": "나스닥100 ETF(소액)",
+    "sector": "ETF"
+  },
+  "RF": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ROG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ROIV": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "RTX": {
+    "name_ko": "RTX",
+    "sector": "산업재"
+  },
+  "RVTY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "RXO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SAP": {
+    "name_ko": "SAP",
+    "sector": "소프트웨어"
+  },
+  "SCHW": {
+    "name_ko": "찰스슈왑",
+    "sector": "금융"
+  },
+  "SCKT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SHOE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SHW": {
+    "name_ko": "셔윈윌리엄스",
+    "sector": "소재"
+  },
+  "SKHY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SKHYV": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SKYD": {
+    "name_ko": "스카이댄스",
+    "sector": "커뮤니케이션"
+  },
+  "SLB": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SMCI": {
+    "name_ko": "슈퍼마이크로",
+    "sector": "IT하드웨어"
+  },
+  "SMH": {
+    "name_ko": "반도체 ETF(VanEck)",
+    "sector": "ETF"
+  },
+  "SNDK": {
+    "name_ko": "샌디스크",
+    "sector": "반도체"
+  },
+  "SNPS": {
+    "name_ko": "시높시스",
+    "sector": "소프트웨어"
+  },
+  "SOXL": {
+    "name_ko": "반도체 3배 레버리지 ETF",
+    "sector": "ETF"
+  },
+  "SOXX": {
+    "name_ko": "반도체 ETF(iShares)",
+    "sector": "ETF"
+  },
+  "SPCX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SPY": {
+    "name_ko": "S&P500 ETF",
+    "sector": "ETF"
+  },
+  "SSTK": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "STLA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "STX": {
+    "name_ko": "시게이트",
+    "sector": "IT하드웨어"
+  },
+  "STZ": {
+    "name_ko": "컨스텔레이션브랜즈",
+    "sector": "필수소비재"
+  },
+  "SWKS": {
+    "name_ko": "스카이웍스",
+    "sector": "반도체"
+  },
+  "SXM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SYNA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "T": {
+    "name_ko": "AT&T",
+    "sector": "커뮤니케이션"
+  },
+  "TCOM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TDOC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TEM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TER": {
+    "name_ko": "테라다인",
+    "sector": "반도체장비"
+  },
+  "TJX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TMC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TMO": {
+    "name_ko": "써모피셔",
+    "sector": "헬스케어"
+  },
+  "TMUS": {
+    "name_ko": "T-모바일",
+    "sector": "커뮤니케이션"
+  },
+  "TSLA": {
+    "name_ko": "테슬라",
+    "sector": "경기소비재"
+  },
+  "TSM": {
+    "name_ko": "TSMC",
+    "sector": "반도체"
+  },
+  "TTD": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TWLO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TWST": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TXN": {
+    "name_ko": "텍사스인스트루먼츠",
+    "sector": "반도체"
+  },
+  "UAE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "UBS": {
+    "name_ko": "UBS",
+    "sector": "금융"
+  },
+  "UNH": {
+    "name_ko": "유나이티드헬스",
+    "sector": "헬스케어"
+  },
+  "USB": {
+    "name_ko": "US뱅코프",
+    "sector": "금융"
+  },
+  "UTHR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "UWMC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "VICR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "VLO": {
+    "name_ko": "발레로",
+    "sector": "에너지"
+  },
+  "VOD": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "VRT": {
+    "name_ko": "버티브",
+    "sector": "전기장비"
+  },
+  "VYLR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "WDC": {
+    "name_ko": "웨스턴디지털",
+    "sector": "IT하드웨어"
+  },
+  "WDFC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "WFC": {
+    "name_ko": "웰스파고",
+    "sector": "금융"
+  },
+  "WOR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "WWD": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "WYNN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "XBI": {
+    "name_ko": "바이오 ETF",
+    "sector": "ETF"
+  },
+  "XENE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "XLB": {
+    "name_ko": "소재 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLC": {
+    "name_ko": "커뮤니케이션 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLE": {
+    "name_ko": "에너지 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLF": {
+    "name_ko": "금융 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLI": {
+    "name_ko": "산업재 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLK": {
+    "name_ko": "기술 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLP": {
+    "name_ko": "필수소비재 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLRE": {
+    "name_ko": "부동산 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLU": {
+    "name_ko": "유틸리티 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLV": {
+    "name_ko": "헬스케어 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XLY": {
+    "name_ko": "경기소비재 섹터 ETF",
+    "sector": "ETF"
+  },
+  "XOM": {
+    "name_ko": "엑슨모빌",
+    "sector": "에너지"
+  },
+  "XPV": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "XRPNW": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "YMTC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ZS": {
+    "name_ko": "?",
+    "sector": "?"
+  }
+}

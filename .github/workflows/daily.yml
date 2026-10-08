@@ -39,7 +39,7 @@ jobs:
         with:
           node-version: '20'
 
-      - run: npm ci
+      - run: npm ci --omit=dev  # Playwright 등 devDependencies 는 일일 실행에 필요 없다
 
       - name: Claude Code 설치
         run: npm install -g @anthropic-ai/claude-code
