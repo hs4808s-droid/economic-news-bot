@@ -1,10 +1,10 @@
 {
   "facts": {
     "fedwatch": {
-      "value": "가장 최근 조회치(2026-10-07): 동결(Hold) 78.4% / 25bp 인상 21.6% / 인하 0%",
+      "value": "facts.json 직전 확인값(2026-10-07 조회): 동결(Hold) 78.4% / 25bp 인상 21.6% / 인하 0% [출처: CME FedWatch, last_verified 2026-10-08]",
       "source": "CME FedWatch",
-      "last_verified": "2026-10-08"
+      "last_verified": "2026-10-09"
     }
   },
-  "updated_at": "2026-10-08T07:12:38.806Z"
+  "updated_at": "2026-10-08T21:40:07.690Z"
 }

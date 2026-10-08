@@ -159,6 +159,14 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "BTC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "BZ": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "C": {
     "name_ko": "씨티그룹",
     "sector": "금융"
@@ -210,6 +218,10 @@
   "CMCSA": {
     "name_ko": "컴캐스트",
     "sector": "커뮤니케이션"
+  },
+  "CMG": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "CNXC": {
     "name_ko": "?",
@@ -283,6 +295,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "CVS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "CVX": {
     "name_ko": "셰브론",
     "sector": "에너지"
@@ -327,6 +343,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "DJI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "DKS": {
     "name_ko": "딕스스포팅굿즈",
     "sector": "경기소비재"
@@ -346,6 +366,10 @@
   "DUK": {
     "name_ko": "듀크에너지",
     "sector": "유틸리티"
+  },
+  "DX": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "EBAY": {
     "name_ko": "이베이",
@@ -435,6 +459,10 @@
     "name_ko": "골드만삭스",
     "sector": "금융"
   },
+  "GSPC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "GTLB": {
     "name_ko": "?",
     "sector": "?"
@@ -454,6 +482,14 @@
   "HDB": {
     "name_ko": "HDFC은행",
     "sector": "금융"
+  },
+  "HDFC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "HG": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "HON": {
     "name_ko": "허니웰",
@@ -486,6 +522,10 @@
   "IBN": {
     "name_ko": "ICICI은행",
     "sector": "금융"
+  },
+  "ICICI": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "IGV": {
     "name_ko": "소프트웨어 ETF",
@@ -534,6 +574,10 @@
   "IWM": {
     "name_ko": "러셀2000 ETF",
     "sector": "ETF"
+  },
+  "IXIC": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "JBHT": {
     "name_ko": "?",
@@ -587,6 +631,10 @@
     "name_ko": "지역은행 ETF",
     "sector": "ETF"
   },
+  "KRW": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "LAMR": {
     "name_ko": "?",
     "sector": "?"
@@ -634,6 +682,10 @@
   "LULU": {
     "name_ko": "룰루레몬",
     "sector": "경기소비재"
+  },
+  "MA": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "MARA": {
     "name_ko": "?",
@@ -711,6 +763,14 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "NEE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NEM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "NET": {
     "name_ko": "?",
     "sector": "?"
@@ -752,6 +812,14 @@
     "sector": "반도체"
   },
   "NVS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NYB": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "OAS": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -875,6 +943,10 @@
     "name_ko": "RTX",
     "sector": "산업재"
   },
+  "RUT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "RVTY": {
     "name_ko": "?",
     "sector": "?"
@@ -886,6 +958,10 @@
   "SAP": {
     "name_ko": "SAP",
     "sector": "소프트웨어"
+  },
+  "SBUX": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "SCHW": {
     "name_ko": "찰스슈왑",
@@ -944,6 +1020,10 @@
     "sector": "ETF"
   },
   "SPCX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SPOT": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1051,9 +1131,17 @@
     "name_ko": "유나이티드헬스",
     "sector": "헬스케어"
   },
+  "UNP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "USB": {
     "name_ko": "US뱅코프",
     "sector": "금융"
+  },
+  "UTC": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "UTHR": {
     "name_ko": "?",
