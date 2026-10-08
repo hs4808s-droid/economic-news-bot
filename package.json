@@ -7,10 +7,19 @@
     "data": "node fetch_market_data.js",
     "check": "node fetch_market_data.js --check",
     "email": "node build_email.js",
-    "site": "node build_site.js"
+    "site": "node build_site.js",
+    "calendar": "node scripts/update_calendar.js",
+    "inject": "node inject_dashboard.js",
+    "validate": "node scripts/validate_report.js",
+    "verify": "node scripts/verify_data.js",
+    "e2e": "node scripts/e2e_site.js",
+    "test": "node scripts/update_calendar.js --selftest && node scripts/update_facts.js --selftest && node inject_dashboard.js --selftest && node scripts/validate_report.js --selftest && node scripts/should_run.js --selftest && node build_site.js --selftest"
   },
   "dependencies": {
     "marked": "^14.1.4"
   },
-  "homepage": "https://hs4808s-droid.github.io/economic-news-bot/"
+  "homepage": "https://hs4808s-droid.github.io/economic-news-bot/",
+  "devDependencies": {
+    "playwright-core": "^1.64.0"
+  }
 }

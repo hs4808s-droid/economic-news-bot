@@ -4,369 +4,493 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
+<link rel="icon" href="data:,">
 <meta name="description" content="미국 증시·연준·경제지표·AI 인프라를 매일 분석한 한국어 데일리 리포트 모음">
 <title>미국 시장 데일리 브리핑</title>
-<style>
-:root{
-  --bg:#faf9f7; --surface:#fff; --text:#1c1b19; --muted:#6b675f; --line:#e5e1da;
-  --accent:#8a5a2b; --accent-soft:#f3ece3; --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px -12px rgba(0,0,0,.12);
-}
-@media (prefers-color-scheme:dark){
-  :root:not([data-theme="light"]){
-    --bg:#161513; --surface:#1f1e1b; --text:#eceae5; --muted:#a09a90; --line:#312f2b;
-    --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#161513; --surface:#1f1e1b; --text:#eceae5; --muted:#a09a90; --line:#312f2b;
-  --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
-}
-*{box-sizing:border-box}
-body{
-  margin:0; background:var(--bg); color:var(--text);
-  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
-  font-size:16px; line-height:1.75; -webkit-text-size-adjust:100%;
-}
-.wrap{max-width:860px; margin:0 auto; padding:32px 20px 80px}
-header.top{border-bottom:1px solid var(--line); padding-bottom:20px; margin-bottom:36px}
-header.top a.home{color:var(--muted); text-decoration:none; font-size:13px; letter-spacing:.04em}
-header.top a.home:hover{color:var(--accent)}
-h1{font-size:27px; line-height:1.35; margin:.5em 0 .2em; letter-spacing:-.01em}
-h2{font-size:21px; margin:2.2em 0 .6em; padding-bottom:.3em; border-bottom:1px solid var(--line); letter-spacing:-.01em}
-h3{font-size:17px; margin:1.8em 0 .4em; color:var(--accent)}
-h4{font-size:15px; margin:1.4em 0 .3em; color:var(--muted)}
-p,ul,ol{margin:.7em 0}
-li{margin:.25em 0}
-a{color:var(--accent)}
-hr{border:0; border-top:1px solid var(--line); margin:2.4em 0}
-code{background:var(--accent-soft); padding:.12em .4em; border-radius:4px; font-size:.87em}
-blockquote{
-  margin:1em 0; padding:.6em 1em; border-left:3px solid var(--accent);
-  background:var(--accent-soft); border-radius:0 6px 6px 0; color:var(--muted);
-}
-blockquote p{margin:.3em 0}
-/* 표는 넓다. 페이지가 아니라 표 자체가 가로 스크롤되게 한다. */
-.tablewrap{overflow-x:auto; margin:1.1em 0; border:1px solid var(--line); border-radius:8px; background:var(--surface)}
-table{border-collapse:collapse; width:100%; font-size:14px; min-width:520px}
-th,td{padding:9px 13px; text-align:left; border-bottom:1px solid var(--line); vertical-align:top}
-th{background:var(--accent-soft); font-weight:600; white-space:nowrap}
-tr:last-child td{border-bottom:0}
-.meta{color:var(--muted); font-size:13px; margin:0}
-.cards{list-style:none; padding:0; margin:0}
-.cards li{margin:0 0 10px}
-.cards a{
-  display:flex; justify-content:space-between; align-items:baseline; gap:14px;
-  background:var(--surface); border:1px solid var(--line); border-radius:10px;
-  padding:15px 18px; text-decoration:none; color:var(--text); box-shadow:var(--shadow);
-}
-.cards a:hover{border-color:var(--accent)}
-.cards .d{font-weight:600; font-variant-numeric:tabular-nums; white-space:nowrap}
-.cards .s{color:var(--muted); font-size:13px; text-align:right; overflow:hidden}
-.latest a{border-color:var(--accent); border-width:2px}
-.badge{
-  display:inline-block; background:var(--accent); color:var(--bg);
-  font-size:11px; padding:1px 7px; border-radius:99px; margin-left:8px; vertical-align:middle;
-}
-footer{margin-top:56px; padding-top:20px; border-top:1px solid var(--line); color:var(--muted); font-size:13px}
-</style>
+<script>try{var t=localStorage.getItem('enb.theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);if(localStorage.getItem('enb.color')==='us')document.documentElement.setAttribute('data-color','us')}catch(e){}</script>
+<link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
-<div class="wrap">
+<div class="wrap ">
 <header class="top">
-  <h1>미국 시장 데일리 브리핑</h1>
-  <p class="meta">미국 증시·연준·경제지표·AI 인프라를 매일 수집·분석한 한국어 리포트 · 총 72건</p>
+  <div><h1>미국 시장 데일리 브리핑</h1><p class="meta" id="updated">총 72건 · 최신 2026-10-08</p></div>
+  <div class="settings" aria-label="표시 설정">
+    <div class="seg" role="group" aria-label="테마"><button type="button" data-set-theme="auto" aria-pressed="true">자동</button><button type="button" data-set-theme="light" aria-pressed="false">라이트</button><button type="button" data-set-theme="dark" aria-pressed="false">다크</button></div>
+    <div class="seg" role="group" aria-label="상승 하락 색상"><button type="button" data-set-color="kr" aria-pressed="true">한국식 <span class="up">▲</span><span class="down">▼</span></button><button type="button" data-set-color="us" aria-pressed="false">미국식 <span class="up">▲</span><span class="down">▼</span></button></div>
+  </div>
 </header>
-<ul class="cards">
-  <li class="latest"><a href="reports/2026-10-08.html">
-    <span class="d">2026-10-08 (목)<span class="badge">최신</span></span>
-    <span class="s">10년물 국채수익률 5.365%, 2002년 이후 최고치</span>
-  </a></li>
-  <li><a href="reports/2026-10-07.html">
-    <span class="d">2026-10-07 (수)</span>
-    <span class="s">Constellation Energy +12~15%, Google과 20년 원전 전력구매계약(890MW 업그레이드·43억 달러 투자)</span>
-  </a></li>
-  <li><a href="reports/2026-10-06.html">
-    <span class="d">2026-10-06 (화)</span>
-    <span class="s">미 10년물 국채수익률 5.307%, 2002년 4월 이후 최고치</span>
-  </a></li>
-  <li><a href="reports/2026-10-05.html">
-    <span class="d">2026-10-05 (월)</span>
-    <span class="s">나스닥종합 +1.2% 사상최고 경신, 엔비디아 랠리가 견인</span>
-  </a></li>
-  <li><a href="reports/2026-10-04.html">
-    <span class="d">2026-10-04 (일)</span>
-    <span class="s">9월 비농업고용 서프라이즈 대폭 하회(+2.9만 명 vs 예상 +8.4만 명)가 Fed 긴축 중단 기대를 키우며 지수 전반 상승 견인</span>
-  </a></li>
-  <li><a href="reports/2026-10-03.html">
-    <span class="d">2026-10-03 (토)</span>
-    <span class="s">9월 비농업고용(NFP) 서프라이즈 미스(+2.9만 명, 예상 +8.4만 명) → 연준 추가 긴축 경계 완화 기대로 증시 랠리</span>
-  </a></li>
-  <li><a href="reports/2026-10-02.html">
-    <span class="d">2026-10-02 (금)</span>
-    <span class="s">FOMC 9/16 25bp 인상(3.75~4.00%) + 2026년 말 4.1%까지 추가 인상 점도표</span>
-  </a></li>
-  <li><a href="reports/2026-10-01.html">
-    <span class="d">2026-10-01 (목)</span>
-    <span class="s">8월 PCE 헤드라인·근원 동반 서프라이즈 하회, CME FedWatch 10월 동결확률 52.9%로 급등</span>
-  </a></li>
-  <li><a href="reports/2026-09-30.html">
-    <span class="d">2026-09-30 (수)</span>
-    <span class="s">미 30년물 국채금리 5.612%, 2002년 6월 이후 24년 만 최고치</span>
-  </a></li>
-  <li><a href="reports/2026-09-29.html">
-    <span class="d">2026-09-29 (화)</span>
-    <span class="s">미 10년물 국채금리 5.24%(2007년 이후 최고)</span>
-  </a></li>
-  <li><a href="reports/2026-09-28.html">
-    <span class="d">2026-09-28 (월)</span>
-    <span class="s">Fed 매파 발언 연쇄(뉴욕연은 총재 Williams·이사 Barr) + CME FedWatch 10월 금리 인상 확률 약 73%</span>
-  </a></li>
-  <li><a href="reports/2026-09-27.html">
-    <span class="d">2026-09-27 (일)</span>
-    <span class="s">미 증시 3대 지수 동반 상승, 3주 만에 주간 반등 마감</span>
-  </a></li>
-  <li><a href="reports/2026-09-26.html">
-    <span class="d">2026-09-26 (토)</span>
-    <span class="s">Akamai-Anthropic 7년 $11.6B 클라우드 계약 체결, AKAM 시간외 +22%</span>
-  </a></li>
-  <li><a href="reports/2026-09-25.html">
-    <span class="d">2026-09-25 (금)</span>
-    <span class="s">미 10년물 국채금리 5.223%(2007년 6월 이후 최고), Fed 금리경로 재평가 촉발 가능</span>
-  </a></li>
-  <li><a href="reports/2026-09-24.html">
-    <span class="d">2026-09-24 (목)</span>
-    <span class="s">미 10년물 국채금리 5.104%(2007년 7월 이후 최고), 5년물 첫 5%대 진입</span>
-  </a></li>
-  <li><a href="reports/2026-09-23.html">
-    <span class="d">2026-09-23 (수)</span>
-    <span class="s">Micron(MU) +3.29%, 2026년 HBM 공급 물량 전량 소진(완판)·DRAM 현물가 급등</span>
-  </a></li>
-  <li><a href="reports/2026-09-22.html">
-    <span class="d">2026-09-22 (화)</span>
-    <span class="s">나스닥 사상 최고 종가(+2.26%), 반도체·AI 랙스케일 전반 강세</span>
-  </a></li>
-  <li><a href="reports/2026-09-19.html">
-    <span class="d">2026-09-19 (토)</span>
-    <span class="s">Broadcom-OpenAI 최대 10GW 규모 커스텀 AI칩 공급 협력, MSFT가 물량의 40%를 구매하는 조건 협상 중</span>
-  </a></li>
-  <li><a href="reports/2026-09-18.html">
-    <span class="d">2026-09-18 (금)</span>
-    <span class="s">뉴욕증시 전반 반등: S&amp;P500 +1.14%, 나스닥 +1.69%, 다우 +0.61%</span>
-  </a></li>
-  <li><a href="reports/2026-09-17.html">
-    <span class="d">2026-09-17 (목)</span>
-    <span class="s">FOMC 25bp 인상(3.75~4.00%), 3년 만의 첫 인상</span>
-  </a></li>
-  <li><a href="reports/2026-09-16.html">
-    <span class="d">2026-09-16 (수)</span>
-    <span class="s">FOMC 정책결정 발표(9/16 14:00 ET), 점도표·신임의장 Warsh 기자회견</span>
-  </a></li>
-  <li><a href="reports/2026-09-15.html">
-    <span class="d">2026-09-15 (화)</span>
-    <span class="s">연준이 2023년 이후 첫 25bp 인상으로 방향을 틀 확률을 시장이 89~93%로 반영</span>
-  </a></li>
-  <li><a href="reports/2026-09-13.html">
-    <span class="d">2026-09-13 (일)</span>
-    <span class="s">Oracle CAPEX 가이던스 재확인 → Dell +11.5%/HPE +10.5% 급등, AI 인프라 밸류체인 재평가</span>
-  </a></li>
-  <li><a href="reports/2026-09-11.html">
-    <span class="d">2026-09-11 (금)</span>
-    <span class="s">10년물 국채금리 4.84~4.85%, 2023년 10월 이후 최고치 경신</span>
-  </a></li>
-  <li><a href="reports/2026-09-10.html">
-    <span class="d">2026-09-10 (목)</span>
-    <span class="s">브로드컴(AVGO) AI 반도체 매출 167억달러(+221% YoY)</span>
-  </a></li>
-  <li><a href="reports/2026-09-09.html">
-    <span class="d">2026-09-09 (수)</span>
-    <span class="s">QCOM +10%, Amazon과 최대 $60B 규모 커스텀 AI 데이터센터 칩 다세대 파트너십(워런트 최대 $4B)</span>
-  </a></li>
-  <li><a href="reports/2026-09-05.html">
-    <span class="d">2026-09-05 (토)</span>
-    <span class="s">8월 비농업고용(NFP) +162,000, 예상(+53,000) 대비 +109,000 서프라이즈</span>
-  </a></li>
-  <li><a href="reports/2026-09-04.html">
-    <span class="d">2026-09-04 (금)</span>
-    <span class="s">오늘 미국 8월 고용지표(NFP) 발표</span>
-  </a></li>
-  <li><a href="reports/2026-09-03.html">
-    <span class="d">2026-09-03 (목)</span>
-    <span class="s">브로드컴, FY2026 AI반도체 매출 가이던스 $56B로 상향(전년比 +180%)</span>
-  </a></li>
-  <li><a href="reports/2026-09-02.html">
-    <span class="d">2026-09-02 (수)</span>
-    <span class="s">미국-이란 호르무즈해협 재충돌(유조선 피격) → 3대 지수 동반 하락·VIX 급등·유가 급등</span>
-  </a></li>
-  <li><a href="reports/2026-08-28.html">
-    <span class="d">2026-08-28 (금)</span>
-    <span class="s">NVDA 2분기 실적 서프라이즈(매출 $96.22B, 전년비 +106%)·3분기 가이던스 $108.0B, 주가 +8.7%</span>
-  </a></li>
-  <li><a href="reports/2026-08-26.html">
-    <span class="d">2026-08-26 (수)</span>
-    <span class="s">NVIDIA(NVDA) 실적 발표(8/26 장마감 후)</span>
-  </a></li>
-  <li><a href="reports/2026-08-25.html">
-    <span class="d">2026-08-25 (화)</span>
-    <span class="s">NVDA, AI서버 가격 15%+ 인상 통보</span>
-  </a></li>
-  <li><a href="reports/2026-08-24.html">
-    <span class="d">2026-08-24 (월)</span>
-    <span class="s">하이퍼스케일러 설비투자(capex) 상향(아마존 $220B·알파벳 $205B)</span>
-  </a></li>
-  <li><a href="reports/2026-08-20.html">
-    <span class="d">2026-08-20 (목)</span>
-    <span class="s">재무부 장기채 바이백 2배 확대 → 국채금리 급락 → 3대 지수 3일 연속 하락세 종료</span>
-  </a></li>
-  <li><a href="reports/2026-08-19.html">
-    <span class="d">2026-08-19 (수)</span>
-    <span class="s">30년물 국채금리 19년래 최고(장중 5.3%대)·10년물 4.706% 급등이 반도체·메모리 밸류체인 조정을 촉발</span>
-  </a></li>
-  <li><a href="reports/2026-08-11.html">
-    <span class="d">2026-08-11 (화)</span>
-    <span class="s">Nvidia, 월가 6개 대형 자산운용사와 $500B 규모 AI 인프라 펀딩 MOU 체결</span>
-  </a></li>
-  <li><a href="reports/2026-08-10.html">
-    <span class="d">2026-08-10 (월)</span>
-    <span class="s">7월 고용쇼크로 9월 금리인상 기대 급락(58%→42%)</span>
-  </a></li>
-  <li><a href="reports/2026-08-07.html">
-    <span class="d">2026-08-07 (금)</span>
-    <span class="s">트럼프 대통령, 워시 Fed 의장에 압박성 통화(이란·AI·경제 현안) 보도</span>
-  </a></li>
-  <li><a href="reports/2026-08-06.html">
-    <span class="d">2026-08-06 (목)</span>
-    <span class="s">엔비디아, 스페이스X 전용 GPU 공급 발표·주가 $220 돌파</span>
-  </a></li>
-  <li><a href="reports/2026-08-05.html">
-    <span class="d">2026-08-05 (수)</span>
-    <span class="s">반도체 섹터 전반 랠리 + SOXX·SMH 사상 최대 자금유입</span>
-  </a></li>
-  <li><a href="reports/2026-08-03.html">
-    <span class="d">2026-08-03 (월)</span>
-    <span class="s">아마존 2분기 실적 서프라이즈, AWS +36.8% YoY 성장(18분기 만 최대)</span>
-  </a></li>
-  <li><a href="reports/2026-08-01.html">
-    <span class="d">2026-08-01 (토)</span>
-    <span class="s">아마존(AMZN) 실적 서프라이즈가 지수 상승 견인</span>
-  </a></li>
-  <li><a href="reports/2026-07-31.html">
-    <span class="d">2026-07-31 (금)</span>
-    <span class="s">마이크로소프트, 실적 서프라이즈 + Azure 매출 첫 $100B 돌파 + FY2027 자본지출(CAPEX) $255~260B 가이던스</span>
-  </a></li>
-  <li><a href="reports/2026-07-30.html">
-    <span class="d">2026-07-30 (목)</span>
-    <span class="s">FOMC 매파적 동결(9대3, 반대 3인 전원 인상 주장)</span>
-  </a></li>
-  <li><a href="reports/2026-07-29.html">
-    <span class="d">2026-07-29 (수)</span>
-    <span class="s">SOX(필라델피아 반도체지수) 기술적 베어마켓 진입, 6/22 고점 대비 -20.2%</span>
-  </a></li>
-  <li><a href="reports/2026-07-28.html">
-    <span class="d">2026-07-28 (화)</span>
-    <span class="s">엔비디아(NVDA) -5%, OpenAI 데이터센터向 최대 2,500억 달러 자금보증 논의설로 &quot;순환금융&quot; 우려 재점화</span>
-  </a></li>
-  <li><a href="reports/2026-07-27.html">
-    <span class="d">2026-07-27 (월)</span>
-    <span class="s">FOMC 회의(7/28~29)</span>
-  </a></li>
-  <li><a href="reports/2026-07-24.html">
-    <span class="d">2026-07-24 (금)</span>
-    <span class="s">중동發 유가 급등(WTI +6%대·Brent +7%, 배럴당 $100 재돌파)이 오늘 지수 하락의 핵심 동인</span>
-  </a></li>
-  <li><a href="reports/2026-07-23.html">
-    <span class="d">2026-07-23 (목)</span>
-    <span class="s">Alphabet, 2026년 CAPEX(설비투자) 가이던스를 최대 $205B로 상향(컨센서스 $188B 상회)</span>
-  </a></li>
-  <li><a href="reports/2026-07-22.html">
-    <span class="d">2026-07-22 (수)</span>
-    <span class="s">SOX +5.21%, 메모리주(마이크론·샌디스크) 급등이 반도체 밸류체인 전반 랠리 견인</span>
-  </a></li>
-  <li><a href="reports/2026-07-21.html">
-    <span class="d">2026-07-21 (화)</span>
-    <span class="s">SOX(반도체지수) +2.37% 반등, 마이크로소프트의 AMD Helios AI 추론 솔루션 채택이 계기</span>
-  </a></li>
-  <li><a href="reports/2026-07-20.html">
-    <span class="d">2026-07-20 (월)</span>
-    <span class="s">반도체 섹터 급락, SOX 지수 기술적 약세장 진입(6월 고점 대비 -20%↑)</span>
-  </a></li>
-  <li><a href="reports/2026-07-18.html">
-    <span class="d">2026-07-18 (토)</span>
-    <span class="s">SOX 반도체지수, 6월 고점 대비 20% 이상 하락하며 기술적 약세장(bear market) 진입</span>
-  </a></li>
-  <li><a href="reports/2026-07-16.html">
-    <span class="d">2026-07-16 (목)</span>
-    <span class="s">이란-미 갈등 확전 → Fed 7/29 FOMC 인상확률 급등(34%→46.5%, 9월은 최대 100%대 근접)</span>
-  </a></li>
-  <li><a href="reports/2026-07-15.html">
-    <span class="d">2026-07-15 (수)</span>
-    <span class="s">6월 CPI 서프라이즈 완화(헤드라인 YoY 3.5%, 예상 3.8%)</span>
-  </a></li>
-  <li><a href="reports/2026-07-14.html">
-    <span class="d">2026-07-14 (화)</span>
-    <span class="s">S&amp;P500 -0.79% / 나스닥 -1.55%(3대 지수 중 최대 낙폭), 이란 해상 봉쇄 재시행으로 미-이란 충돌 격화</span>
-  </a></li>
-  <li><a href="reports/2026-07-13.html">
-    <span class="d">2026-07-13 (월)</span>
-    <span class="s">연준 반기 통화정책보고서</span>
-  </a></li>
-  <li><a href="reports/2026-07-10.html">
-    <span class="d">2026-07-10 (금)</span>
-    <span class="s">반도체 섹터 전반 랠리 + 반도체 ETF(SOXX) 사상 최대 일일 자금유입($54.3억)</span>
-  </a></li>
-  <li><a href="reports/2026-07-09.html">
-    <span class="d">2026-07-09 (목)</span>
-    <span class="s">트럼프 대통령 &quot;이란 휴전 끝났다&quot; 발언 → 유가 급등 → 다우 -1.09% 급락</span>
-  </a></li>
-  <li><a href="reports/2026-07-08.html">
-    <span class="d">2026-07-08 (수)</span>
-    <span class="s">삼성전자 &quot;기대 미충족&quot; 실적 → 반도체 섹터 -7~-10% 매도세 촉발</span>
-  </a></li>
-  <li><a href="reports/2026-07-03.html">
-    <span class="d">2026-07-03 (금)</span>
-    <span class="s">Meta Compute 발표</span>
-  </a></li>
-  <li><a href="reports/2026-07-02.html">
-    <span class="d">2026-07-02 (목)</span>
-    <span class="s">금리 상승의 주인공은 Warsh 발언: 오늘 10년물 +6bp는 경제지표(ADP 하회)보다 Warsh 의장의 신트라 발언이 촉매였다고 해석됨. 확신: 높음</span>
-  </a></li>
-  <li><a href="reports/2026-07-01.html">
-    <span class="d">2026-07-01 (수)</span>
-    <span class="s">NFP (07-02)</span>
-  </a></li>
-  <li><a href="reports/2026-06-30.html">
-    <span class="d">2026-06-30 (화)</span>
-    <span class="s">미국 3대 지수 동반 랠리, Dow 사상 최초 52,000pt 돌파</span>
-  </a></li>
-  <li><a href="reports/2026-06-29.html">
-    <span class="d">2026-06-29 (월)</span>
-    <span class="s">기술주 5거래일 연속 약세 + OpenAI IPO 2027년 연기 검토설</span>
-  </a></li>
-  <li><a href="reports/2026-06-26.html">
-    <span class="d">2026-06-26 (금)</span>
-    <span class="s">DRAM·NAND·HBM 가격 급등, HBM 생산능력 매진</span>
-  </a></li>
-  <li><a href="reports/2026-06-25.html">
-    <span class="d">2026-06-25 (목)</span>
-    <span class="s">Micron(MU) 실적 서프라이즈</span>
-  </a></li>
-  <li><a href="reports/2026-06-24.html">
-    <span class="d">2026-06-24 (수)</span>
-    <span class="s">메모리·반도체 섹터 동반 급락</span>
-  </a></li>
-  <li><a href="reports/2026-06-23.html">
-    <span class="d">2026-06-23 (화)</span>
-    <span class="s">Fed 점도표가 매파적으로 급변(위원 18명 중 9명이 2026년 내 금리 인상 지지, 3월엔 0명)</span>
-  </a></li>
-  <li><a href="reports/2026-06-20.html">
-    <span class="d">2026-06-20 (토)</span>
-    <span class="s">미·이란 협상 연기</span>
-  </a></li>
-  <li><a href="reports/2026-06-19.html">
-    <span class="d">2026-06-19 (금)</span>
-    <span class="s"></span>
-  </a></li>
-</ul>
-<footer>매 거래일 자동 생성 · 투자 조언이 아닙니다.</footer>
+<section class="block" id="dashboard" data-base="" aria-label="대시보드">
+  <h2>시장 대시보드 <small>Yahoo Finance · FRED · CBOE 자동 수집</small></h2>
+  <div id="tiles"><div class="empty">불러오는 중…</div></div>
+  <h2 style="margin-top:22px">섹터 히트맵
+    <span class="seg" id="heat-ctrl" role="group" aria-label="기간"><button type="button" data-period="1d" aria-pressed="true">1D</button><button type="button" data-period="5d" aria-pressed="false">5D</button><button type="button" data-period="1m" aria-pressed="false">1M</button><button type="button" data-period="ytd" aria-pressed="false">YTD</button></span>
+  </h2>
+  <div id="heatmap" class="heat"><div class="empty">불러오는 중…</div></div>
+  <h2 style="margin-top:22px">다가오는 2주 일정 <small>ET 기준 · 발표된 항목은 실제값과 서프라이즈 표시</small></h2>
+  <div id="calendar"><div class="empty">불러오는 중…</div></div>
+</section>
+<section class="block" aria-label="아카이브">
+  <h2>리포트 아카이브 <span class="count" id="count">72건</span></h2>
+  <div class="tools">
+    <input type="search" id="q" placeholder="검색 (예: FOMC, 엔비디아, 유가)" aria-label="리포트 검색" autocomplete="off">
+  </div>
+  <div class="chips tools" id="tagchips" role="group" aria-label="태그 필터"><button type="button" data-tag="" aria-pressed="true">전체 (72)</button><button type="button" data-tag="연준" aria-pressed="false">연준 (40)</button><button type="button" data-tag="금리" aria-pressed="false">금리 (37)</button><button type="button" data-tag="물가" aria-pressed="false">물가 (15)</button><button type="button" data-tag="고용" aria-pressed="false">고용 (11)</button><button type="button" data-tag="AI" aria-pressed="false">AI (32)</button><button type="button" data-tag="반도체" aria-pressed="false">반도체 (54)</button><button type="button" data-tag="실적" aria-pressed="false">실적 (33)</button><button type="button" data-tag="빅테크" aria-pressed="false">빅테크 (21)</button><button type="button" data-tag="에너지" aria-pressed="false">에너지 (17)</button><button type="button" data-tag="금융" aria-pressed="false">금융 (3)</button><button type="button" data-tag="변동성" aria-pressed="false">변동성 (4)</button><button type="button" data-tag="환율" aria-pressed="false">환율 (15)</button></div>
+  <div id="archive">
+  <div class="month"><h3>2026년 10월</h3>
+  <ul class="cards">
+    <li data-tags="금리,금융,연준,반도체" data-text="10년물 국채수익률 5.365%, 2002년 이후 최고치 FOMC 9월 의사록 공개 나스닥 기술주 조정 SpaceX, Nvidia 칩 구매용 $400억 자금조달 추진(은행대출 $100억+투자등급채권 $300억) 금리 금융 연준 반도체 10년물 국채수익률 5.365%, 2002년 이후 최고치 FOMC 9월 의사록 공개 나스닥 기술주 조정 SpaceX, Nvidia 칩 구매용 $400억 자금조달 추진(은행대출 $100억+투자등급채권 $300억) 금융주 동반 약세(Goldman Sachs·BofA·Wells Fargo·Citigroup·JPMorgan) 러셀2000 -1.31% Vertiv, UtilityInnovation Group 약 $14.5억 인수 SOXX(반도체 ETF) 주간 유출 약 $14억 Arista Networks, 오픈 이더넷 랙스케일 AI 포트폴리오 발표(AMD·Broadcom 등과 공동) Skydance -7%" class="latest"><a class="card" href="reports/2026-10-08.html">
+      <div class="row1"><span class="d">2026-10-08 (목)</span><span>미국 기준일 2026-10-07</span><span class="badge">최신</span></div>
+      <div class="hl">10년물 국채수익률 5.365%, 2002년 이후 최고치</div>
+      <p class="sm">FOMC 9월 의사록 공개<br>나스닥 기술주 조정<br>SpaceX, Nvidia 칩 구매용 $400억 자금조달 추진(은행대출 $100억+투자등급채권 $300억)</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">금융</span><span class="tag">연준</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="금리,환율,연준,빅테크" data-text="Constellation Energy +12~15%, Google과 20년 원전 전력구매계약(890MW 업그레이드·43억 달러 투자) Seagate -8%·Western Digital -6%, 도시바 HDD 증설(점유율 10%→30%)로 공급과잉 우려 S&amp;P500·NASDAQ·Dow 동시 사상 최고치, 금리 하락 전환 + 기술주 강세가 배경 미 10년물 5.275%로 하락 전환, Fed Schmid 매파 발언에도 FedWatch 동결확률 78.4% 금리 환율 연준 빅테크 Constellation Energy +12~15%, Google과 20년 원전 전력구매계약(890MW 업그레이드·43억 달러 투자) Seagate -8%·Western Digital -6%, 도시바 HDD 증설(점유율 10%→30%)로 공급과잉 우려 S&amp;P500·NASDAQ·Dow 동시 사상 최고치, 금리 하락 전환 + 기술주 강세가 배경 미 10년물 5.275%로 하락 전환, Fed Schmid 매파 발언에도 FedWatch 동결확률 78.4% Marvell Investor Day, FY2031까지 AI 매출 900억 달러 목표 제시 Novavax -9~12%·Moderna -5~6%, WHO &quot;흑사병 유행위험 낮음&quot; 발표로 전일 급등분 되돌림 Option Care Health +20~33%, CD&amp;R·McKesson 58억 달러 인수계약 체결 Russell2000 단독 하락(-0.59%), 헬스케어 약세가 주도 VIX·VVIX·SKEW 동반 하락, 콘탱고 구조 유지 Nvidia 옵션시장, 10월 말 시총 $6조 도달확률 약 50% 프라이싱"><a class="card" href="reports/2026-10-07.html">
+      <div class="row1"><span class="d">2026-10-07 (수)</span><span>미국 기준일 2026-10-06</span></div>
+      <div class="hl">Constellation Energy +12~15%, Google과 20년 원전 전력구매계약(890MW 업그레이드·43억 달러 투자)</div>
+      <p class="sm">Seagate -8%·Western Digital -6%, 도시바 HDD 증설(점유율 10%→30%)로 공급과잉 우려<br>S&amp;P500·NASDAQ·Dow 동시 사상 최고치, 금리 하락 전환 + 기술주 강세가 배경<br>미 10년물 5.275%로 하락 전환, Fed Schmid 매파 발언에도 FedWatch 동결확률 78.4%</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">환율</span><span class="tag">연준</span><span class="tag">빅테크</span></div>
+    </a></li>
+    <li data-tags="환율,금리,반도체,금융" data-text="미 10년물 국채수익률 5.307%, 2002년 4월 이후 최고치 Nvidia 150억 달러 바이백 추가 승인(총 235억 달러), 지수 랠리 주도 TSMC, Nvidia·Apple·AMD 대상 웨이퍼 가격 5~10% 인상 통보 Broadcom, Anthropic에 최대 420억 달러 대출계약(순환금융 우려 병존) 환율 금리 반도체 금융 미 10년물 국채수익률 5.307%, 2002년 4월 이후 최고치 Nvidia 150억 달러 바이백 추가 승인(총 235억 달러), 지수 랠리 주도 TSMC, Nvidia·Apple·AMD 대상 웨이퍼 가격 5~10% 인상 통보 Broadcom, Anthropic에 최대 420억 달러 대출계약(순환금융 우려 병존) HBM3E 현물가 2,100달러(장기계약가 대비 4~5배), 2026년 생산 전량 선판매 Super Micro, Vera Rubin NVL72 서버랙 출하 개시 + FY26 4분기 신규수주 600억 달러 초과 Schneider Electric, PTC를 226억 달러 전액현금 인수(42.3% 프리미엄) C.H. Robinson, RXO 58억 달러 인수 UnitedHealth, 2027년 일부 Medicare Advantage 철수 + 상원 '0달러 지급' 클레임 조사 개시 AMD, World Labs 82억 달러 인수(Fei-Fei Li 영입)"><a class="card" href="reports/2026-10-06.html">
+      <div class="row1"><span class="d">2026-10-06 (화)</span><span>미국 기준일 2026-10-05</span></div>
+      <div class="hl">미 10년물 국채수익률 5.307%, 2002년 4월 이후 최고치</div>
+      <p class="sm">Nvidia 150억 달러 바이백 추가 승인(총 235억 달러), 지수 랠리 주도<br>TSMC, Nvidia·Apple·AMD 대상 웨이퍼 가격 5~10% 인상 통보<br>Broadcom, Anthropic에 최대 420억 달러 대출계약(순환금융 우려 병존)</p>
+      <div class="tags"><span class="tag">환율</span><span class="tag">금리</span><span class="tag">반도체</span><span class="tag">금융</span></div>
+    </a></li>
+    <li data-tags="금리,고용,AI,반도체" data-text="나스닥종합 +1.2% 사상최고 경신, 엔비디아 랠리가 견인 9월 비농업고용 +29,000명(예상 +84,000명) 큰 서프라이즈 10년물 금리 5.281%(+5bp) Broadcom, Anthropic에 최대 $42B 대출 금리 고용 AI 반도체 나스닥종합 +1.2% 사상최고 경신, 엔비디아 랠리가 견인 9월 비농업고용 +29,000명(예상 +84,000명) 큰 서프라이즈 10년물 금리 5.281%(+5bp) Broadcom, Anthropic에 최대 $42B 대출 엔비디아 이사회, $150B 추가 자사주매입 승인(누적 $235B, 美 기업 최대 규모) 액센추어 +16~22%, AI 신규고객 400개사 이상 확보 도시바 HDD 증설 발표에 웨스턴디지털·시게이트 급락 AWS CEO, 데이터센터 모라토리엄 확산을 AI 경쟁력 리스크로 경고 CME FedWatch 10월 FOMC 동결확률 77~78% 유지 나이키 -9~10%, FY2027 가이던스 부진 및 구조조정('Pace') 발표"><a class="card" href="reports/2026-10-05.html">
+      <div class="row1"><span class="d">2026-10-05 (월)</span><span>미국 기준일 2026-10-02</span></div>
+      <div class="hl">나스닥종합 +1.2% 사상최고 경신, 엔비디아 랠리가 견인</div>
+      <p class="sm">9월 비농업고용 +29,000명(예상 +84,000명) 큰 서프라이즈<br>10년물 금리 5.281%(+5bp)<br>Broadcom, Anthropic에 최대 $42B 대출</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">고용</span><span class="tag">AI</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="연준,고용,반도체,금리" data-text="9월 비농업고용 서프라이즈 대폭 하회(+2.9만 명 vs 예상 +8.4만 명)가 Fed 긴축 중단 기대를 키우며 지수 전반 상승 견인 CME FedWatch 10월 FOMC 동결확률 80%로 급등(1주 전 인상확률 36%) S&amp;P500·나스닥·SOX 동반 상승, SOX +2.40%로 최대폭 Broadcom, Anthropic에 최대 420억 달러 대출 제공해 자사 TPU 리스 유도 연준 고용 반도체 금리 9월 비농업고용 서프라이즈 대폭 하회(+2.9만 명 vs 예상 +8.4만 명)가 Fed 긴축 중단 기대를 키우며 지수 전반 상승 견인 CME FedWatch 10월 FOMC 동결확률 80%로 급등(1주 전 인상확률 36%) S&amp;P500·나스닥·SOX 동반 상승, SOX +2.40%로 최대폭 Broadcom, Anthropic에 최대 420억 달러 대출 제공해 자사 TPU 리스 유도 미 10년물 국채수익률 5.27~28%, 2002년 이후 최고 수준 지속 ON Semiconductor, Synaptics 인수조건을 전액 현금(총 약 57억 달러)으로 변경 Tesla Q3 인도량 486,532대로 컨센서스 상회 VIX 15.31로 -6.59% 급락, 콘탱고 구조 유지 Stellantis 약 -7%, 신용등급 하향 및 프랑스 공장 EV 배터리 부족으로 생산 중단 AWS, 데이터센터 NDA 전면 폐지 발표"><a class="card" href="reports/2026-10-04.html">
+      <div class="row1"><span class="d">2026-10-04 (일)</span><span>미국 기준일 2026-10-02</span></div>
+      <div class="hl">9월 비농업고용 서프라이즈 대폭 하회(+2.9만 명 vs 예상 +8.4만 명)가 Fed 긴축 중단 기대를 키우며 지수 전반 상승 견인</div>
+      <p class="sm">CME FedWatch 10월 FOMC 동결확률 80%로 급등(1주 전 인상확률 36%)<br>S&amp;P500·나스닥·SOX 동반 상승, SOX +2.40%로 최대폭<br>Broadcom, Anthropic에 최대 420억 달러 대출 제공해 자사 TPU 리스 유도</p>
+      <div class="tags"><span class="tag">연준</span><span class="tag">고용</span><span class="tag">반도체</span><span class="tag">금리</span></div>
+    </a></li>
+    <li data-tags="고용,환율,금리,연준" data-text="9월 비농업고용(NFP) 서프라이즈 미스(+2.9만 명, 예상 +8.4만 명) → 연준 추가 긴축 경계 완화 기대로 증시 랠리 Nvidia 사상 최고가 경신, 시가총액 5.7조 달러 돌파, 자사주 매입 한도 2,350억 달러로 증액 Broadcom, Anthropic에 최대 약 1,020억 달러(칩 리스 420억+생산자금 600~700억) 자금조달 추진 고용 미스에도 10년·2년 국채금리 각각 +5bp 상승 고용 환율 금리 연준 9월 비농업고용(NFP) 서프라이즈 미스(+2.9만 명, 예상 +8.4만 명) → 연준 추가 긴축 경계 완화 기대로 증시 랠리 Nvidia 사상 최고가 경신, 시가총액 5.7조 달러 돌파, 자사주 매입 한도 2,350억 달러로 증액 Broadcom, Anthropic에 최대 약 1,020억 달러(칩 리스 420억+생산자금 600~700억) 자금조달 추진 고용 미스에도 10년·2년 국채금리 각각 +5bp 상승 VIX -6.59%(15.31) 등 변동성 지표 전반 급락, 콘탱고 구조 유지 Seagate(-16%)·Western Digital(-7~10%) 급락 은행주, 최근 1개월간 S&amp;P500 대비 1990년 이후 최대폭 underperform UnitedHealth·Humana, 2027년 메디케어 어드밴티지 플랜 일부 종료(약 39만+60만 명 영향) 차기 FOMC(10/28) 동결 확률 약 74%, 직전 9월엔 0.25%p 인상 G7 디젤·원유 비축분 방출 합의, Brent유 약보합($102.25)"><a class="card" href="reports/2026-10-03.html">
+      <div class="row1"><span class="d">2026-10-03 (토)</span><span>미국 기준일 2026-10-02</span></div>
+      <div class="hl">9월 비농업고용(NFP) 서프라이즈 미스(+2.9만 명, 예상 +8.4만 명) → 연준 추가 긴축 경계 완화 기대로 증시 랠리</div>
+      <p class="sm">Nvidia 사상 최고가 경신, 시가총액 5.7조 달러 돌파, 자사주 매입 한도 2,350억 달러로 증액<br>Broadcom, Anthropic에 최대 약 1,020억 달러(칩 리스 420억+생산자금 600~700억) 자금조달 추진<br>고용 미스에도 10년·2년 국채금리 각각 +5bp 상승</p>
+      <div class="tags"><span class="tag">고용</span><span class="tag">환율</span><span class="tag">금리</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="환율,반도체,실적,연준" data-text="FOMC 9/16 25bp 인상(3.75~4.00%) + 2026년 말 4.1%까지 추가 인상 점도표 브로드컴(AVGO), Anthropic에 최대 420억달러 전환사채 대출 (1,252억달러 TPU 공급계약 중 약 1/3) 중동 항모타격단 3척째 파견 보도 + WTI 선물 +2.75%·브렌트 +4.4%(보도 기준) 액센츄어(ACN) FY4분기 실적 호조·사상 최대 수주(+16~21%, 출처별 상이), 코그니전트(CTSH) 동반 상승(+7.2%) 환율 반도체 실적 연준 FOMC 9/16 25bp 인상(3.75~4.00%) + 2026년 말 4.1%까지 추가 인상 점도표 브로드컴(AVGO), Anthropic에 최대 420억달러 전환사채 대출 (1,252억달러 TPU 공급계약 중 약 1/3) 중동 항모타격단 3척째 파견 보도 + WTI 선물 +2.75%·브렌트 +4.4%(보도 기준) 액센츄어(ACN) FY4분기 실적 호조·사상 최대 수주(+16~21%, 출처별 상이), 코그니전트(CTSH) 동반 상승(+7.2%) 시놉시스(SNPS) 인베스터데이: FY2027 가이던스 상향, OpenAI 파트너십, AWS 10억달러+ 계약 엔비디아(NVDA), 1,500억달러 자사주매입 추가 승인(잔여 총 2,350억달러, 사상 최대) ADP 민간고용 9월 +90,000명(예상 +68,000명) 서프라이즈 아마존(AMZN)-콘스텔레이션, 메릴랜드 원전 20년 전력구매계약(PPA) QQQ 일일 순유입 31.3억달러, SOXX 1개월 순유입 94.3억달러(AUM의 20.5%) AMD, World Labs 82억달러 전액주식 인수 (Fei-Fei Li 창업)"><a class="card" href="reports/2026-10-02.html">
+      <div class="row1"><span class="d">2026-10-02 (금)</span><span>미국 기준일 2026-10-01</span></div>
+      <div class="hl">FOMC 9/16 25bp 인상(3.75~4.00%) + 2026년 말 4.1%까지 추가 인상 점도표</div>
+      <p class="sm">브로드컴(AVGO), Anthropic에 최대 420억달러 전환사채 대출 (1,252억달러 TPU 공급계약 중 약 1/3)<br>중동 항모타격단 3척째 파견 보도 + WTI 선물 +2.75%·브렌트 +4.4%(보도 기준)<br>액센츄어(ACN) FY4분기 실적 호조·사상 최대 수주(+16~21%, 출처별 상이), 코그니전트(CTSH) 동반 상승(+7.2%)</p>
+      <div class="tags"><span class="tag">환율</span><span class="tag">반도체</span><span class="tag">실적</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="실적,환율,금리,물가" data-text="8월 PCE 헤드라인·근원 동반 서프라이즈 하회, CME FedWatch 10월 동결확률 52.9%로 급등 Micron FY2026 4분기 실적: DRAM 매출 전년비 +343%, 매출·EPS 예상 대폭 상회, FY27 1분기 가이던스 강세 HPE, Vultr와 12억 달러 AI 시스템 계약 + 하이퍼스케일 고객 35억 달러 추론 계약 체결, EPS 가이던스 상향 Fair Isaac(FICO) -26.5%, FHFA가 모기지 신용평가에 단일 가격정책 도입 발표 실적 환율 금리 물가 8월 PCE 헤드라인·근원 동반 서프라이즈 하회, CME FedWatch 10월 동결확률 52.9%로 급등 Micron FY2026 4분기 실적: DRAM 매출 전년비 +343%, 매출·EPS 예상 대폭 상회, FY27 1분기 가이던스 강세 HPE, Vultr와 12억 달러 AI 시스템 계약 + 하이퍼스케일 고객 35억 달러 추론 계약 체결, EPS 가이던스 상향 Fair Isaac(FICO) -26.5%, FHFA가 모기지 신용평가에 단일 가격정책 도입 발표 MongoDB(MDB) -21.2%, CEO 치란탄 데사이 사전통보 없이 사임·메타로 이동 Fed 이사 마이클 바, 추가 금리인상 필요 가능성·&quot;정책금리는 여전히 완화적&quot; 발언 9월 ADP 민간고용 +90,000명, 예상 상회 Celestica, Bernstein &quot;Outperform&quot; 커버리지 개시 + 2026년 매출 가이던스 190억→205억 달러 상향 United Therapeutics(UTHR) +15%, FDA가 Tyvaso IPF 적응증 sNDA 접수 Anthropic IPO 프로스펙터스 유출: 2026년 2분기 매출 115억 달러·순손실 420억 달러"><a class="card" href="reports/2026-10-01.html">
+      <div class="row1"><span class="d">2026-10-01 (목)</span><span>미국 기준일 2026-09-30</span></div>
+      <div class="hl">8월 PCE 헤드라인·근원 동반 서프라이즈 하회, CME FedWatch 10월 동결확률 52.9%로 급등</div>
+      <p class="sm">Micron FY2026 4분기 실적: DRAM 매출 전년비 +343%, 매출·EPS 예상 대폭 상회, FY27 1분기 가이던스 강세<br>HPE, Vultr와 12억 달러 AI 시스템 계약 + 하이퍼스케일 고객 35억 달러 추론 계약 체결, EPS 가이던스 상향<br>Fair Isaac(FICO) -26.5%, FHFA가 모기지 신용평가에 단일 가격정책 도입 발표</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">환율</span><span class="tag">금리</span><span class="tag">물가</span></div>
+    </a></li>
+  </ul></div>
+  <div class="month"><h3>2026년 9월</h3>
+  <ul class="cards">
+    <li data-tags="금리,AI,반도체,환율" data-text="미 30년물 국채금리 5.612%, 2002년 6월 이후 24년 만 최고치 컨퍼런스보드 소비자신뢰지수 81.9, 2014년 이후(12년) 최저 뉴욕연은 윌리엄스: &quot;서두를 필요 없다&quot;면서도 &quot;연내 추가 한 차례 인상 가능&quot; 발언 Anthropic IPO 서류, 10년간 5,180억 달러 AI인프라 지출계획 공개(80% 비취소) 금리 AI 반도체 환율 미 30년물 국채금리 5.612%, 2002년 6월 이후 24년 만 최고치 컨퍼런스보드 소비자신뢰지수 81.9, 2014년 이후(12년) 최저 뉴욕연은 윌리엄스: &quot;서두를 필요 없다&quot;면서도 &quot;연내 추가 한 차례 인상 가능&quot; 발언 Anthropic IPO 서류, 10년간 5,180억 달러 AI인프라 지출계획 공개(80% 비취소) TSMC 월간매출 데이터, 3분기 반도체수요 견조 시사(NVDA·AVGO 투자자 대상) Fair Isaac(FICO) -21.63%, FHFA 모기지 신용평가 가격정책 변경(경쟁 도입) 8월 JOLTS 구인건수 707.9만 건, 예상(723만)·전월(733.5만) 모두 하회 Broadcom(AVGO) &quot;167억 달러 AI엔진&quot; 마진 이슈 기사, 주가 +3.2% Vertiv, 데이터센터 전력·유체관리 관련 M&amp;A 2건(UtilityInnovation, King Environmental) Iovance Biotherapeutics +31.48%, FY26 매출 가이던스 상향(4.1억~4.2억 달러)"><a class="card" href="reports/2026-09-30.html">
+      <div class="row1"><span class="d">2026-09-30 (수)</span><span>미국 기준일 2026-09-29</span></div>
+      <div class="hl">미 30년물 국채금리 5.612%, 2002년 6월 이후 24년 만 최고치</div>
+      <p class="sm">컨퍼런스보드 소비자신뢰지수 81.9, 2014년 이후(12년) 최저<br>뉴욕연은 윌리엄스: &quot;서두를 필요 없다&quot;면서도 &quot;연내 추가 한 차례 인상 가능&quot; 발언<br>Anthropic IPO 서류, 10년간 5,180억 달러 AI인프라 지출계획 공개(80% 비취소)</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">AI</span><span class="tag">반도체</span><span class="tag">환율</span></div>
+    </a></li>
+    <li data-tags="금리,반도체,연준,물가" data-text="미 10년물 국채금리 5.24%(2007년 이후 최고) S&amp;P500 -0.77% · NASDAQ -0.92% · Dow -0.67%(-347.11pt) 동반 하락 NVDA, Anthropic 클라우드 계약 총액 $1,800억 공개(2.5GW 용량) Boeing -6%~-7%, FAA 737 MAX 10 인증 보류 금리 반도체 연준 물가 미 10년물 국채금리 5.24%(2007년 이후 최고) S&amp;P500 -0.77% · NASDAQ -0.92% · Dow -0.67%(-347.11pt) 동반 하락 NVDA, Anthropic 클라우드 계약 총액 $1,800억 공개(2.5GW 용량) Boeing -6%~-7%, FAA 737 MAX 10 인증 보류 VIX 16.07(+8.07%), 4대 선물 전 품목 하락 Brent $105.28(+$0.96), 美-이란 긴장(호르무즈 해협 관련) Fed Cook, &quot;노동시장이 금리 인상을 감당할 수 있는 위치&quot; 발언 NVDA 자사주 매입 한도 $2,350억으로 확대(+$1,500억) AVGO $1,150억 수주 전망 관련 주가 하락(&quot;컨버전 허들&quot; 우려) 9/29 소비자신뢰지수·JOLTS, 9/30 GDP 3차·PCE 발표 대기"><a class="card" href="reports/2026-09-29.html">
+      <div class="row1"><span class="d">2026-09-29 (화)</span><span>미국 기준일 2026-09-29</span></div>
+      <div class="hl">미 10년물 국채금리 5.24%(2007년 이후 최고)</div>
+      <p class="sm">S&amp;P500 -0.77% · NASDAQ -0.92% · Dow -0.67%(-347.11pt) 동반 하락<br>NVDA, Anthropic 클라우드 계약 총액 $1,800억 공개(2.5GW 용량)<br>Boeing -6%~-7%, FAA 737 MAX 10 인증 보류</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">반도체</span><span class="tag">연준</span><span class="tag">물가</span></div>
+    </a></li>
+    <li data-tags="금리,AI,실적,환율" data-text="Fed 매파 발언 연쇄(뉴욕연은 총재 Williams·이사 Barr) + CME FedWatch 10월 금리 인상 확률 약 73% 미 10년물 국채금리 5.163%, 2007년 6월 이후 최고치 근접 나스닥, Meta의 AI 에이전트 &quot;Muse&quot; 랠리가 주간 상승 견인 Akamai-Anthropic 7년 116억 달러 클라우드 계약 금리 AI 실적 환율 Fed 매파 발언 연쇄(뉴욕연은 총재 Williams·이사 Barr) + CME FedWatch 10월 금리 인상 확률 약 73% 미 10년물 국채금리 5.163%, 2007년 6월 이후 최고치 근접 나스닥, Meta의 AI 에이전트 &quot;Muse&quot; 랠리가 주간 상승 견인 Akamai-Anthropic 7년 116억 달러 클라우드 계약 AI 인프라 공급측 뉴스 클러스터(Vertiv 인수·APLD 신규 커버리지·Arista S&amp;P100 편입·Credo 신제품·Supermicro Vera Rubin 랙 출하·SK하이닉스 HBM4 양산) 브렌트유 -2.1%, 미국-이란 협상 낙관론 신규 실업수당청구 197,000건(예상 하회, 노동시장 견조) 마이크론 9/30 FY26 4분기 실적 예고(시장 평균 매출 510억 달러, +365% YoY) 젠스케일러(Zscaler) CRO 교체, FY27 가이던스 실행력 우려 재부각 디젤 강세 테마(JPMorgan 포지션 확대 / 엑슨모빌 정유능력 부족 보도)"><a class="card" href="reports/2026-09-28.html">
+      <div class="row1"><span class="d">2026-09-28 (월)</span><span>미국 기준일 2026-09-28</span></div>
+      <div class="hl">Fed 매파 발언 연쇄(뉴욕연은 총재 Williams·이사 Barr) + CME FedWatch 10월 금리 인상 확률 약 73%</div>
+      <p class="sm">미 10년물 국채금리 5.163%, 2007년 6월 이후 최고치 근접<br>나스닥, Meta의 AI 에이전트 &quot;Muse&quot; 랠리가 주간 상승 견인<br>Akamai-Anthropic 7년 116억 달러 클라우드 계약</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">AI</span><span class="tag">실적</span><span class="tag">환율</span></div>
+    </a></li>
+    <li data-tags="변동성,연준,AI,환율" data-text="미 증시 3대 지수 동반 상승, 3주 만에 주간 반등 마감 VIX 14.87(-5.11%)·VIX9D 12.76(-9.57%) 급락으로 단기 변동성 스트레스 해소 CME FedWatch, 10/28 FOMC에서 25bp 추가 인상 확률 75.8% Apple, 햅틱(진동) 특허소송에서 57억 달러 이상 배상 평결(항소 예정) 변동성 연준 AI 환율 미 증시 3대 지수 동반 상승, 3주 만에 주간 반등 마감 VIX 14.87(-5.11%)·VIX9D 12.76(-9.57%) 급락으로 단기 변동성 스트레스 해소 CME FedWatch, 10/28 FOMC에서 25bp 추가 인상 확률 75.8% Apple, 햅틱(진동) 특허소송에서 57억 달러 이상 배상 평결(항소 예정) Oracle 데이터센터 force majeure 관련 AI 인프라 투자논리 회의론 재부각"><a class="card" href="reports/2026-09-27.html">
+      <div class="row1"><span class="d">2026-09-27 (일)</span><span>미국 기준일 2026-09-25</span></div>
+      <div class="hl">미 증시 3대 지수 동반 상승, 3주 만에 주간 반등 마감</div>
+      <p class="sm">VIX 14.87(-5.11%)·VIX9D 12.76(-9.57%) 급락으로 단기 변동성 스트레스 해소<br>CME FedWatch, 10/28 FOMC에서 25bp 추가 인상 확률 75.8%<br>Apple, 햅틱(진동) 특허소송에서 57억 달러 이상 배상 평결(항소 예정)</p>
+      <div class="tags"><span class="tag">변동성</span><span class="tag">연준</span><span class="tag">AI</span><span class="tag">환율</span></div>
+    </a></li>
+    <li data-tags="금리,빅테크,에너지,연준" data-text="Akamai-Anthropic 7년 $11.6B 클라우드 계약 체결, AKAM 시간외 +22% Microsoft, Copilot 대개편(&quot;업무용 OS&quot; 재포지셔닝) 발표, MSFT +4.00% $517.86 국채금리 급등 진정 + 유가 하락 → 3대 지수 반등, 다우 3주 연속 주간 하락 흐름 종료 10년물 국채금리 5.163%(3거래일 23bp 급등 후 진정), 30년물 주초 5.501%(2004년 6월 이후 최고) 금리 빅테크 에너지 연준 Akamai-Anthropic 7년 $11.6B 클라우드 계약 체결, AKAM 시간외 +22% Microsoft, Copilot 대개편(&quot;업무용 OS&quot; 재포지셔닝) 발표, MSFT +4.00% $517.86 국채금리 급등 진정 + 유가 하락 → 3대 지수 반등, 다우 3주 연속 주간 하락 흐름 종료 10년물 국채금리 5.163%(3거래일 23bp 급등 후 진정), 30년물 주초 5.501%(2004년 6월 이후 최고) CME FedWatch, 10/28 FOMC 25bp 추가 인상 확률 69~75.8%(매체별 상이) Oracle, 뉴멕시코 데이터센터 프로젝트에 force majeure(불가항력) 통지, ORCL -3~4%대 신규 실업수당청구 197,000건(예상 201,000건 하회, 57년래 최저권) Amazon, Anthropic-Akamai 계약 반사로 하락 흐름 보도 Humana(HUM) +7%대, Barclays 투자의견 상향(목표가 $515) AMD·Broadcom·Meta·Microsoft·NVIDIA·OpenAI, Optical Scale-up Consortium(광통신 스케일업 표준 컨소시엄) 결성"><a class="card" href="reports/2026-09-26.html">
+      <div class="row1"><span class="d">2026-09-26 (토)</span><span>미국 기준일 2026-09-25</span></div>
+      <div class="hl">Akamai-Anthropic 7년 $11.6B 클라우드 계약 체결, AKAM 시간외 +22%</div>
+      <p class="sm">Microsoft, Copilot 대개편(&quot;업무용 OS&quot; 재포지셔닝) 발표, MSFT +4.00% $517.86<br>국채금리 급등 진정 + 유가 하락 → 3대 지수 반등, 다우 3주 연속 주간 하락 흐름 종료<br>10년물 국채금리 5.163%(3거래일 23bp 급등 후 진정), 30년물 주초 5.501%(2004년 6월 이후 최고)</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">빅테크</span><span class="tag">에너지</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="금리,연준,AI,반도체" data-text="미 10년물 국채금리 5.223%(2007년 6월 이후 최고), Fed 금리경로 재평가 촉발 가능 Fed 이사 Michael Barr 매파 발언(9/23) + CME FedWatch 10월 인상확률 64~73% 8월 신규주택판매 684K, 컨센서스 대비 +69K 대형 서프라이즈 Brent +3.4%, 후티의 사우디 아람코 얀부 시설 공격 보도 후 호르무즈 재개 협상으로 상승폭 축소 금리 연준 AI 반도체 미 10년물 국채금리 5.223%(2007년 6월 이후 최고), Fed 금리경로 재평가 촉발 가능 Fed 이사 Michael Barr 매파 발언(9/23) + CME FedWatch 10월 인상확률 64~73% 8월 신규주택판매 684K, 컨센서스 대비 +69K 대형 서프라이즈 Brent +3.4%, 후티의 사우디 아람코 얀부 시설 공격 보도 후 호르무즈 재개 협상으로 상승폭 축소 AVGO, 중국 SASAC의 국영 데이터센터 스위치 의존도 조사 대상 TSM, 2027년 1월부터 웨이퍼 가격 3~6% 인상 계획(성숙공정도 가동률 초과) Bloom Energy -6% / Oracle -4%, 뉴멕시코 데이터센터 force majeure(불가항력) 통보 Super Micro, Vera Rubin NVL72 랙 출하 개시(기록적 수주잔고) Meta &quot;Muse&quot; AI 에이전트 흥행, 주가 +9~11% Everpure(구 Pure Storage) +5.5~15%, FY28 전망 컨센서스 상회"><a class="card" href="reports/2026-09-25.html">
+      <div class="row1"><span class="d">2026-09-25 (금)</span><span>미국 기준일 2026-09-24</span></div>
+      <div class="hl">미 10년물 국채금리 5.223%(2007년 6월 이후 최고), Fed 금리경로 재평가 촉발 가능</div>
+      <p class="sm">Fed 이사 Michael Barr 매파 발언(9/23) + CME FedWatch 10월 인상확률 64~73%<br>8월 신규주택판매 684K, 컨센서스 대비 +69K 대형 서프라이즈<br>Brent +3.4%, 후티의 사우디 아람코 얀부 시설 공격 보도 후 호르무즈 재개 협상으로 상승폭 축소</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">연준</span><span class="tag">AI</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="금리,AI,물가,반도체" data-text="미 10년물 국채금리 5.104%(2007년 7월 이후 최고), 5년물 첫 5%대 진입 5년물 국채 입찰 부진(응찰률 2.21배, 평균 2.33배 하회) 3대 지수 동반 하락, 러셀2000 -1.77%로 최대 낙폭 S&amp;P Global 9월 플래시 PMI 58.4, 2021년 7월 이후 최고 확장세 금리 AI 물가 반도체 미 10년물 국채금리 5.104%(2007년 7월 이후 최고), 5년물 첫 5%대 진입 5년물 국채 입찰 부진(응찰률 2.21배, 평균 2.33배 하회) 3대 지수 동반 하락, 러셀2000 -1.77%로 최대 낙폭 S&amp;P Global 9월 플래시 PMI 58.4, 2021년 7월 이후 최고 확장세 브렌트유 급등(+2.4%~+3.9%, 이란발 지정학 리스크) Worthington Enterprises +16%(데이터센터 액침냉각 탱크 수요 서프라이즈) CoreWeave, Nvidia GPU 기반 신규 다년 AI 인프라 고객 계약 AMD -2%·Marvell -0.6%(커스텀 액셀러레이터 마진 우려) IonQ +12%(실시간 양자 오류 디코더 테스트 성공) JPM 다이먼, AI 지출 2027년 1조달러 도달 가능성 및 인플레 영향 경고"><a class="card" href="reports/2026-09-24.html">
+      <div class="row1"><span class="d">2026-09-24 (목)</span><span>미국 기준일 2026-09-24</span></div>
+      <div class="hl">미 10년물 국채금리 5.104%(2007년 7월 이후 최고), 5년물 첫 5%대 진입</div>
+      <p class="sm">5년물 국채 입찰 부진(응찰률 2.21배, 평균 2.33배 하회)<br>3대 지수 동반 하락, 러셀2000 -1.77%로 최대 낙폭<br>S&amp;P Global 9월 플래시 PMI 58.4, 2021년 7월 이후 최고 확장세</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">AI</span><span class="tag">물가</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="AI,반도체,변동성,물가" data-text="Micron(MU) +3.29%, 2026년 HBM 공급 물량 전량 소진(완판)·DRAM 현물가 급등 Charles Schwab(SCHW) -4.4%~-6.1%, Vanguard의 Altruist(AI 세금·재무플래닝) 인수發 RIA 업계 AI 경쟁 우려로 브로… WTI -5.94%, 5거래일 연속 하락(미-이란 외교 기대·걸프 공급 확대) NASDAQ 종합 27,244.28 사상 최고 종가, +0.45% AI 반도체 변동성 물가 Micron(MU) +3.29%, 2026년 HBM 공급 물량 전량 소진(완판)·DRAM 현물가 급등 Charles Schwab(SCHW) -4.4%~-6.1%, Vanguard의 Altruist(AI 세금·재무플래닝) 인수發 RIA 업계 AI 경쟁 우려로 브로커리지 섹터 동반 하락 WTI -5.94%, 5거래일 연속 하락(미-이란 외교 기대·걸프 공급 확대) NASDAQ 종합 27,244.28 사상 최고 종가, +0.45% JPMorgan(JPM) -3.34%~-4.0%, Victory Giant 홍콩 상장 주선(지정학 이슈) + Vanguard-Altruist 겹악재 Cisco(CSCO) -3.3%~-5%, Piper Sandler가 목표주가 $132→$125 하향(성장 둔화 우려) Google-Georgia Power 원전 업레이트 계약(96MW 신규 발전용량, AI 데이터센터 전력 확보) Nvidia 옵션시장, 대형 변동성 베팅(역방향 아이언 콘도르) 포착 Bernstein, Nvidia·Broadcom 목표주가 상향 제시(Outperform 유지) VIX·VIX9D·VVIX 동반 급락(-4.44%~-7.69%)이나 SKEW는 오히려 상승"><a class="card" href="reports/2026-09-23.html">
+      <div class="row1"><span class="d">2026-09-23 (수)</span><span>미국 기준일 2026-09-22</span></div>
+      <div class="hl">Micron(MU) +3.29%, 2026년 HBM 공급 물량 전량 소진(완판)·DRAM 현물가 급등</div>
+      <p class="sm">Charles Schwab(SCHW) -4.4%~-6.1%, Vanguard의 Altruist(AI 세금·재무플래닝) 인수發 RIA 업계 AI 경쟁 우려로 브로…<br>WTI -5.94%, 5거래일 연속 하락(미-이란 외교 기대·걸프 공급 확대)<br>NASDAQ 종합 27,244.28 사상 최고 종가, +0.45%</p>
+      <div class="tags"><span class="tag">AI</span><span class="tag">반도체</span><span class="tag">변동성</span><span class="tag">물가</span></div>
+    </a></li>
+    <li data-tags="반도체,금리,AI,빅테크" data-text="나스닥 사상 최고 종가(+2.26%), 반도체·AI 랙스케일 전반 강세 AMD 시가총액 1조달러 최초 돌파, 5거래일 연속 랠리 Intel +12%, CEO &quot;고객 수요의 50%만 충족 가능&quot; 발언 Meta +11%, Muse 앱스토어 다운로드 1위·Wells Fargo 목표가 상향 반도체 금리 AI 빅테크 나스닥 사상 최고 종가(+2.26%), 반도체·AI 랙스케일 전반 강세 AMD 시가총액 1조달러 최초 돌파, 5거래일 연속 랠리 Intel +12%, CEO &quot;고객 수요의 50%만 충족 가능&quot; 발언 Meta +11%, Muse 앱스토어 다운로드 1위·Wells Fargo 목표가 상향 Arm +12~17%, Meta Muse發 CPU 수요 기대 재점화 TSMC 8월 매출 +53%(사상 최고), 2026 CAPEX 15% 상향(600~640억달러) S&amp;P500 신규 52주 신저가(30개) &gt; 신고가(7개), 1999년 이후 첫 사례 나스닥100 선물 야간 +4.23% 급등(정규장과 기준시각 상이) Trump-Xi 정상회담(9/23~25), AI 관련 대화체 논의 포함 보도 10년물 국채금리 -3~4bp, WTI -8.08%/Brent -3.67% 동반 하락"><a class="card" href="reports/2026-09-22.html">
+      <div class="row1"><span class="d">2026-09-22 (화)</span><span>미국 기준일 2026-09-21</span></div>
+      <div class="hl">나스닥 사상 최고 종가(+2.26%), 반도체·AI 랙스케일 전반 강세</div>
+      <p class="sm">AMD 시가총액 1조달러 최초 돌파, 5거래일 연속 랠리<br>Intel +12%, CEO &quot;고객 수요의 50%만 충족 가능&quot; 발언<br>Meta +11%, Muse 앱스토어 다운로드 1위·Wells Fargo 목표가 상향</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">금리</span><span class="tag">AI</span><span class="tag">빅테크</span></div>
+    </a></li>
+    <li data-tags="금리,AI,반도체,연준" data-text="Broadcom-OpenAI 최대 10GW 규모 커스텀 AI칩 공급 협력, MSFT가 물량의 40%를 구매하는 조건 협상 중 AMD-OpenAI 복수년 파트너십, MI450 신규 시설 2026년 가동 예정 FOMC 25bp 인상(3.75~4.00%로 상향) + Warsh 의장 매파적 발언, 10년물 국채금리 주중 5% 상회 후 재반등 반도체주 강세가 지수 하방을 방어, 섹터 로테이션 조짐 금리 AI 반도체 연준 Broadcom-OpenAI 최대 10GW 규모 커스텀 AI칩 공급 협력, MSFT가 물량의 40%를 구매하는 조건 협상 중 AMD-OpenAI 복수년 파트너십, MI450 신규 시설 2026년 가동 예정 FOMC 25bp 인상(3.75~4.00%로 상향) + Warsh 의장 매파적 발언, 10년물 국채금리 주중 5% 상회 후 재반등 반도체주 강세가 지수 하방을 방어, 섹터 로테이션 조짐 Nvidia·Google·Emerald AI, &quot;AI Energy Management Alliance&quot; 결성 (데이터센터 전력망 확충) 정규장 마감 후 시간대 선물 큰 폭 반등(ES +1.11%, NQ +1.73%) + VIX 급락(-4.08%) 넷플릭스(NFLX), Wells Fargo가 투자의견 Underweight로 하향, 약 -5% 로빈후드(HOOD) SEC 5년 조건부 &quot;혁신 예외&quot; 부여로 +5.94%, 코인베이스(COIN) +5.8% DDR4 현물가 45달러 돌파, HBM3E 리세일가 강세 지속 젠온 파마슈티컬스(XENE) 프리마켓 -29%, 뇌전증 치료제 3상 신규 환자 등록 자발 중단"><a class="card" href="reports/2026-09-19.html">
+      <div class="row1"><span class="d">2026-09-19 (토)</span><span>미국 기준일 2026-09-18</span></div>
+      <div class="hl">Broadcom-OpenAI 최대 10GW 규모 커스텀 AI칩 공급 협력, MSFT가 물량의 40%를 구매하는 조건 협상 중</div>
+      <p class="sm">AMD-OpenAI 복수년 파트너십, MI450 신규 시설 2026년 가동 예정<br>FOMC 25bp 인상(3.75~4.00%로 상향) + Warsh 의장 매파적 발언, 10년물 국채금리 주중 5% 상회 후 재반등<br>반도체주 강세가 지수 하방을 방어, 섹터 로테이션 조짐</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">AI</span><span class="tag">반도체</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="반도체,금리,환율,고용" data-text="뉴욕증시 전반 반등: S&amp;P500 +1.14%, 나스닥 +1.69%, 다우 +0.61% VIX -12.82%(15.44)로 급락, 기간구조 콘탱고 복귀 SOX(필라델피아 반도체지수) +3%대, INTC·ARM·MRVL·MU 동반 강세 국채금리 하락(10년 -7bp 초과, 2년 -5bp 초과) 반도체 금리 환율 고용 뉴욕증시 전반 반등: S&amp;P500 +1.14%, 나스닥 +1.69%, 다우 +0.61% VIX -12.82%(15.44)로 급락, 기간구조 콘탱고 복귀 SOX(필라델피아 반도체지수) +3%대, INTC·ARM·MRVL·MU 동반 강세 국채금리 하락(10년 -7bp 초과, 2년 -5bp 초과) Generac(GNRC) 장중 +27%대, 아마존과 데이터센터向 발전기 최대 80억 달러 공급계약 TSMC, 엔비디아·브로드컴에 첨단공정 생산능력 제약 통보(CoWoS 엔비디아 약 60% 점유) 반도체 ETF SOXX +9.93억 달러·SMH +7.20억 달러, 9/17 전체 ETF 중 순유입 1·2위 신규 실업수당청구 19.6만 건(예상 20.8만 건, -1.2만 건 서프라이즈) 필라델피아 연준 제조업지수 37.8(+7.3p 서프라이즈), 단 고용지수는 27.9→11.8로 급락하며 혼조 Micron(MU) +6.0%, 인도 사난드 반도체 조립·테스트(OSAT) 공장 상업 생산 개시(27.5억 달러 공동투자)"><a class="card" href="reports/2026-09-18.html">
+      <div class="row1"><span class="d">2026-09-18 (금)</span><span>미국 기준일 2026-09-17</span></div>
+      <div class="hl">뉴욕증시 전반 반등: S&amp;P500 +1.14%, 나스닥 +1.69%, 다우 +0.61%</div>
+      <p class="sm">VIX -12.82%(15.44)로 급락, 기간구조 콘탱고 복귀<br>SOX(필라델피아 반도체지수) +3%대, INTC·ARM·MRVL·MU 동반 강세<br>국채금리 하락(10년 -7bp 초과, 2년 -5bp 초과)</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">금리</span><span class="tag">환율</span><span class="tag">고용</span></div>
+    </a></li>
+    <li data-tags="금리,반도체,연준,실적" data-text="FOMC 25bp 인상(3.75~4.00%), 3년 만의 첫 인상 Warsh 의장의 인플레이션 경계 발언 + SEP 점도표(18명 중 16명이 연내 추가 인상 시사) S&amp;P500 -0.45%, 다우 -1.21%(-631pt), 10년물 국채수익률 5.008%로 급등 AMD -5.7%, Intel -5.4%, NVDA -5.7% 금리 반도체 연준 실적 FOMC 25bp 인상(3.75~4.00%), 3년 만의 첫 인상 Warsh 의장의 인플레이션 경계 발언 + SEP 점도표(18명 중 16명이 연내 추가 인상 시사) S&amp;P500 -0.45%, 다우 -1.21%(-631pt), 10년물 국채수익률 5.008%로 급등 AMD -5.7%, Intel -5.4%, NVDA -5.7% 8월 소매판매 +1.2%(예상 +0.5%) Broadcom(AVGO) AI 매출 가이던스 2026년 580억 달러 → 2028년 2,300억 달러, 3분기 AI 매출 167억 달러(YoY +221%) 한국 아침 시점 선물 반등(ES +0.76%, NQ +1.57%) J.B. Hunt(JBHT) 3분기 실적 경고, 주가 -9~13%대 GE Vernova(GEV) +5.42%, 2027년 초 백로그 2,000억 달러 전망 Boeing(BA) 737 MAX 증산 지연, CEO 발언"><a class="card" href="reports/2026-09-17.html">
+      <div class="row1"><span class="d">2026-09-17 (목)</span><span>미국 기준일 2026-09-16</span></div>
+      <div class="hl">FOMC 25bp 인상(3.75~4.00%), 3년 만의 첫 인상</div>
+      <p class="sm">Warsh 의장의 인플레이션 경계 발언 + SEP 점도표(18명 중 16명이 연내 추가 인상 시사)<br>S&amp;P500 -0.45%, 다우 -1.21%(-631pt), 10년물 국채수익률 5.008%로 급등<br>AMD -5.7%, Intel -5.4%, NVDA -5.7%</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">반도체</span><span class="tag">연준</span><span class="tag">실적</span></div>
+    </a></li>
+    <li data-tags="금리,연준,AI,반도체" data-text="FOMC 정책결정 발표(9/16 14:00 ET), 점도표·신임의장 Warsh 기자회견 10년물 국채수익률 장중 5.041%(2007년 7월래 최고) CME FedWatch, 25bp 인상 확률 84.1%(9/14 기준) 8월 소매판매 발표 예정(9/16 08:30 ET, 결과 미확인) 금리 연준 AI 반도체 FOMC 정책결정 발표(9/16 14:00 ET), 점도표·신임의장 Warsh 기자회견 10년물 국채수익률 장중 5.041%(2007년 7월래 최고) CME FedWatch, 25bp 인상 확률 84.1%(9/14 기준) 8월 소매판매 발표 예정(9/16 08:30 ET, 결과 미확인) Dell(DELL) AI 서버 수주잔고 950억달러(전분기 대비 급증) Broadcom CEO, AI 반도체 수요 &quot;전망 초과&quot; 재확인 TSMC 2나노 가속 + MediaTek 합류·Nvidia/Alphabet 선주문 Skyworks(SWKS) +10% / Qualcomm(QCOM) +4%대 WTI +3.40%(이란 공급차질 우려) Dave &amp; Buster's(PLAY) -17%(실적 컨센서스 하회, 순손실)"><a class="card" href="reports/2026-09-16.html">
+      <div class="row1"><span class="d">2026-09-16 (수)</span><span>미국 기준일 2026-09-15</span></div>
+      <div class="hl">FOMC 정책결정 발표(9/16 14:00 ET), 점도표·신임의장 Warsh 기자회견</div>
+      <p class="sm">10년물 국채수익률 장중 5.041%(2007년 7월래 최고)<br>CME FedWatch, 25bp 인상 확률 84.1%(9/14 기준)<br>8월 소매판매 발표 예정(9/16 08:30 ET, 결과 미확인)</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">연준</span><span class="tag">AI</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="반도체,AI,빅테크,연준" data-text="연준이 2023년 이후 첫 25bp 인상으로 방향을 틀 확률을 시장이 89~93%로 반영 미 10년물 장중 5.014% 터치(2023년 10월 이후 최고) 후 4.987% AI 프론티어 개발 속도조절 담론에 글로벌 반도체 동반 급락 (SOX -5.9%) 사우디 동-서 송유관(약 700만 b/d 우회로) 피격·폐쇄 → Brent +2.9% $107.54 반도체 AI 빅테크 연준 연준이 2023년 이후 첫 25bp 인상으로 방향을 틀 확률을 시장이 89~93%로 반영 미 10년물 장중 5.014% 터치(2023년 10월 이후 최고) 후 4.987% AI 프론티어 개발 속도조절 담론에 글로벌 반도체 동반 급락 (SOX -5.9%) 사우디 동-서 송유관(약 700만 b/d 우회로) 피격·폐쇄 → Brent +2.9% $107.54 메모리 체인이 GPU보다 더 크게 맞음 (MU -5.6% · SNDK -6% · SK하이닉스 -6%대) 반도체 → 엔터프라이즈 소프트웨어로 자금 이동 (CRM +4.73% · NOW +5% · ADBE +4%) 변동성 구조는 콘탱고 유지 + SKEW 하락 OpenAI, AI 안전 우려로 IPO를 2027년으로 연기 하이퍼스케일러 3사 동반 상승 (GOOGL +2.15~2.61% · MSFT +1.6~2.18% · META 약 +1.4%) 야간 선물 4종 전부 상방 (ES +0.47% · YM +0.56% · NQ +0.23% · RTY +0.42%)"><a class="card" href="reports/2026-09-15.html">
+      <div class="row1"><span class="d">2026-09-15 (화)</span><span>미국 기준일 2026-09-14</span></div>
+      <div class="hl">연준이 2023년 이후 첫 25bp 인상으로 방향을 틀 확률을 시장이 89~93%로 반영</div>
+      <p class="sm">미 10년물 장중 5.014% 터치(2023년 10월 이후 최고) 후 4.987%<br>AI 프론티어 개발 속도조절 담론에 글로벌 반도체 동반 급락 (SOX -5.9%)<br>사우디 동-서 송유관(약 700만 b/d 우회로) 피격·폐쇄 → Brent +2.9% $107.54</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">AI</span><span class="tag">빅테크</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="반도체,물가,AI,실적" data-text="Oracle CAPEX 가이던스 재확인 → Dell +11.5%/HPE +10.5% 급등, AI 인프라 밸류체인 재평가 8월 CPI 헤드라인 부합·Core CPI 소폭 상회, 9/16 FOMC 25bp 인상확률 90%로 급등 VIX -11.21%, 3대지수 +0.86~0.98% 반등 (금리인상 우려 속 위험선호 회복) SOX +1.81%, 반도체 밸류체인 전반 강세 반도체 물가 AI 실적 Oracle CAPEX 가이던스 재확인 → Dell +11.5%/HPE +10.5% 급등, AI 인프라 밸류체인 재평가 8월 CPI 헤드라인 부합·Core CPI 소폭 상회, 9/16 FOMC 25bp 인상확률 90%로 급등 VIX -11.21%, 3대지수 +0.86~0.98% 반등 (금리인상 우려 속 위험선호 회복) SOX +1.81%, 반도체 밸류체인 전반 강세 SMCI +7%, Oracle CAPEX 후속 동반 상승 TSM 8월 매출 +53%YoY, AI 반도체 수요 지속 시사 WTI/Brent 급락(-2.37%/-2.98%), 인플레 압력 일부 완화 요인 SOXX +$9.43B 순유입 vs SMH -$2.48B 순유출, 반도체 ETF 내 자금 쏠림 상반 CRDO, JPMorgan 목표주가 $335→$310 하향(투자의견 Overweight 유지) AVGO, EU가 VMware 라이선스 개편 조사 중"><a class="card" href="reports/2026-09-13.html">
+      <div class="row1"><span class="d">2026-09-13 (일)</span><span>미국 기준일 2026-09-11</span></div>
+      <div class="hl">Oracle CAPEX 가이던스 재확인 → Dell +11.5%/HPE +10.5% 급등, AI 인프라 밸류체인 재평가</div>
+      <p class="sm">8월 CPI 헤드라인 부합·Core CPI 소폭 상회, 9/16 FOMC 25bp 인상확률 90%로 급등<br>VIX -11.21%, 3대지수 +0.86~0.98% 반등 (금리인상 우려 속 위험선호 회복)<br>SOX +1.81%, 반도체 밸류체인 전반 강세</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">물가</span><span class="tag">AI</span><span class="tag">실적</span></div>
+    </a></li>
+    <li data-tags="금리,연준,에너지,물가" data-text="10년물 국채금리 4.84~4.85%, 2023년 10월 이후 최고치 경신 CME FedWatch, 9/16 FOMC에서 금리 &quot;인하&quot;가 아닌 25bp 인상 확률 56~66% 반영 WTI $97.19(+2.76%), 국제유가 배럴당 100달러 돌파(중동 전쟁 장기화) VIX 17.84(+8.38%) 급등 금리 연준 에너지 물가 10년물 국채금리 4.84~4.85%, 2023년 10월 이후 최고치 경신 CME FedWatch, 9/16 FOMC에서 금리 &quot;인하&quot;가 아닌 25bp 인상 확률 56~66% 반영 WTI $97.19(+2.76%), 국제유가 배럴당 100달러 돌파(중동 전쟁 장기화) VIX 17.84(+8.38%) 급등 Fed 의장 Kevin Warsh, 잭슨홀에서 &quot;근원 인플레이션 개선 미흡&quot; 매파 발언 S&amp;P500 -0.58%·Dow -0.6%·Nasdaq -0.65%, 4거래일 연속 하락 Russell2000 -1.04%, 국채금리 급등에 소형주 약세 8월 Core PPI +0.2%(예상 +0.3% 하회) vs 헤드라인 +0.4%(부합), YoY +5.4% SOXX 순유입 +$9.43B vs SMH 순유출 -$2.48B (최근 1개월, 반도체 ETF 내 자금 엇갈림) NVDA 이사 Mark Stevens 약 130만주 매도($227~234), 거래유형 미확정"><a class="card" href="reports/2026-09-11.html">
+      <div class="row1"><span class="d">2026-09-11 (금)</span><span>미국 기준일 2026-09-10</span></div>
+      <div class="hl">10년물 국채금리 4.84~4.85%, 2023년 10월 이후 최고치 경신</div>
+      <p class="sm">CME FedWatch, 9/16 FOMC에서 금리 &quot;인하&quot;가 아닌 25bp 인상 확률 56~66% 반영<br>WTI $97.19(+2.76%), 국제유가 배럴당 100달러 돌파(중동 전쟁 장기화)<br>VIX 17.84(+8.38%) 급등</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">연준</span><span class="tag">에너지</span><span class="tag">물가</span></div>
+    </a></li>
+    <li data-tags="실적,환율,금리,연준" data-text="브로드컴(AVGO) AI 반도체 매출 167억달러(+221% YoY) 브렌트유 배럴당 100달러 첫 돌파(7월 이후 최초), 이란 유조선 타격 보도 매크로 이벤트 클러스터 임박: 9/10 PPI·신규실업수당청구, 9/11 CPI, 9/15~16 FOMC(금리결정+점도표+파월 기자회견) 3대 지수 동반 하락(S&amp;P -0.48%·다우 -0.77%·나스닥 -0.64%), 러셀2000 -1.3% 실적 환율 금리 연준 브로드컴(AVGO) AI 반도체 매출 167억달러(+221% YoY) 브렌트유 배럴당 100달러 첫 돌파(7월 이후 최초), 이란 유조선 타격 보도 매크로 이벤트 클러스터 임박: 9/10 PPI·신규실업수당청구, 9/11 CPI, 9/15~16 FOMC(금리결정+점도표+파월 기자회견) 3대 지수 동반 하락(S&amp;P -0.48%·다우 -0.77%·나스닥 -0.64%), 러셀2000 -1.3% VIX 16.44(+4.58%) 10년물 국채금리 4.80%, 2023년 11월 이후 최고(9/2 보도 이월분) 애플 폴더블 'iPhone Duo' 공개(예약 10/16·출시 10/23), 주가 -1.75% 메타 자율 AI 개인비서 'Muse' 출시, 주가 +4.9% 오라클·어도비 9/10 장마감 후 실적 발표 예정(EPS 컨센서스 1.73달러/6.07달러) nCino +12.5%·Signet Jewelers +10%(실적 서프라이즈) vs Casey's General Stores -12.2%(실적 부진)"><a class="card" href="reports/2026-09-10.html">
+      <div class="row1"><span class="d">2026-09-10 (목)</span><span>미국 기준일 2026-09-09</span></div>
+      <div class="hl">브로드컴(AVGO) AI 반도체 매출 167억달러(+221% YoY)</div>
+      <p class="sm">브렌트유 배럴당 100달러 첫 돌파(7월 이후 최초), 이란 유조선 타격 보도<br>매크로 이벤트 클러스터 임박: 9/10 PPI·신규실업수당청구, 9/11 CPI, 9/15~16 FOMC(금리결정+점도표+파월 기자회견)<br>3대 지수 동반 하락(S&amp;P -0.48%·다우 -0.77%·나스닥 -0.64%), 러셀2000 -1.3%</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">환율</span><span class="tag">금리</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="AI,반도체,에너지,연준" data-text="QCOM +10%, Amazon과 최대 $60B 규모 커스텀 AI 데이터센터 칩 다세대 파트너십(워런트 최대 $4B) Dow -1.18%·S&amp;P500 -0.58%, 사우디 에너지시설 피격발 유가 급등 속 리스크오프 WTI $92.37(+0.97%), 6주래 최고 GPT-6 Astra 관련 코멘트發 SOX·광통신주(AAOI·LITE·COHR·CIEN) 강세 AI 반도체 에너지 연준 QCOM +10%, Amazon과 최대 $60B 규모 커스텀 AI 데이터센터 칩 다세대 파트너십(워런트 최대 $4B) Dow -1.18%·S&amp;P500 -0.58%, 사우디 에너지시설 피격발 유가 급등 속 리스크오프 WTI $92.37(+0.97%), 6주래 최고 GPT-6 Astra 관련 코멘트發 SOX·광통신주(AAOI·LITE·COHR·CIEN) 강세 10년물 4.79%(+3bp)·FedWatch 9/16 FOMC 25bp 인상확률 56~59%(매체 간 상이) AMD +5.90%(장중 $500 상회), Citi 컨퍼런스서 &quot;2030년 AI시장 $2조·2027년 데이터센터매출 $70B&quot; 언급 NVDA -2.01%, 하락 사유 미확인 Novartis(NVS) -10%대, 심혈관·근육질환 신약 임상시험 2건 실패 반도체 ETF 자금흐름 엇갈림: SOXX 순유입 +$9.43B / SMH 순유출 -$2.48B NVDA 이사 Mark Stevens 재량 매도 184.8만주(08-31~09-02, 가중평균 $220~226)"><a class="card" href="reports/2026-09-09.html">
+      <div class="row1"><span class="d">2026-09-09 (수)</span><span>미국 기준일 2026-09-08</span></div>
+      <div class="hl">QCOM +10%, Amazon과 최대 $60B 규모 커스텀 AI 데이터센터 칩 다세대 파트너십(워런트 최대 $4B)</div>
+      <p class="sm">Dow -1.18%·S&amp;P500 -0.58%, 사우디 에너지시설 피격발 유가 급등 속 리스크오프<br>WTI $92.37(+0.97%), 6주래 최고<br>GPT-6 Astra 관련 코멘트發 SOX·광통신주(AAOI·LITE·COHR·CIEN) 강세</p>
+      <div class="tags"><span class="tag">AI</span><span class="tag">반도체</span><span class="tag">에너지</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="금리,고용,연준,물가" data-text="8월 비농업고용(NFP) +162,000, 예상(+53,000) 대비 +109,000 서프라이즈 2년물 국채금리 4.416%(18개월래 최고) · CME FedWatch 9월 금리인상 확률 49.4%→58~60% FOMC 9/15~16 임박, 점도표(SEP) 9/16 동시 발표 KLA(KLAC) +8.2%, Susquehanna가 웨이퍼팹 장비(WFE) 지출 확대 전망 상향 금리 고용 연준 물가 8월 비농업고용(NFP) +162,000, 예상(+53,000) 대비 +109,000 서프라이즈 2년물 국채금리 4.416%(18개월래 최고) · CME FedWatch 9월 금리인상 확률 49.4%→58~60% FOMC 9/15~16 임박, 점도표(SEP) 9/16 동시 발표 KLA(KLAC) +8.2%, Susquehanna가 웨이퍼팹 장비(WFE) 지출 확대 전망 상향 Lululemon(LULU) -17.77%, 3분기 가이던스 대폭 하향, 주가 8년래 최저 Guidewire(GWRE) -21% (사유 미확인) Fair Isaac(FICO) -15%대 (사유 미확인) SanDisk(SNDK) +10% / Planet Labs(PL) +13% (개별 모멘텀) PPI(9/10)·CPI(9/11) NVDA 이사 Tench Coxe 50만주 신탁 증여"><a class="card" href="reports/2026-09-05.html">
+      <div class="row1"><span class="d">2026-09-05 (토)</span><span>미국 기준일 2026-09-04</span></div>
+      <div class="hl">8월 비농업고용(NFP) +162,000, 예상(+53,000) 대비 +109,000 서프라이즈</div>
+      <p class="sm">2년물 국채금리 4.416%(18개월래 최고) · CME FedWatch 9월 금리인상 확률 49.4%→58~60%<br>FOMC 9/15~16 임박, 점도표(SEP) 9/16 동시 발표<br>KLA(KLAC) +8.2%, Susquehanna가 웨이퍼팹 장비(WFE) 지출 확대 전망 상향</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">고용</span><span class="tag">연준</span><span class="tag">물가</span></div>
+    </a></li>
+    <li data-tags="금리,고용,반도체,실적" data-text="오늘 미국 8월 고용지표(NFP) 발표 · 국채금리 매파적 리프라이싱 · TSMC 애리조나 추가 $100B 투자 국채금리 매파적 리프라이싱 TSMC 애리조나 추가 $100B 투자 Broadcom 가이던스 쇼크 금리 고용 반도체 실적 오늘 미국 8월 고용지표(NFP) 발표 국채금리 매파적 리프라이싱 TSMC 애리조나 추가 $100B 투자 Broadcom 가이던스 쇼크 Fed Waller: &quot;9월 결정은 9/11 CPI에 좌우&quot; 3대 지수 2거래일 연속 상승 반도체 선물 강세(NQ +0.94%, ES +0.47%, 프리마켓) SOXX/SMH 자금흐름 엇갈림 NVDA 이사 Stevens 대량 매도(173.85만주) WTI $91.70(6주 최고)"><a class="card" href="reports/2026-09-04.html">
+      <div class="row1"><span class="d">2026-09-04 (금)</span><span>미국 기준일 2026-09-04</span></div>
+      <div class="hl">오늘 미국 8월 고용지표(NFP) 발표 · 국채금리 매파적 리프라이싱 · TSMC 애리조나 추가 $100B 투자</div>
+      <p class="sm">국채금리 매파적 리프라이싱<br>TSMC 애리조나 추가 $100B 투자<br>Broadcom 가이던스 쇼크</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">고용</span><span class="tag">반도체</span><span class="tag">실적</span></div>
+    </a></li>
+    <li data-tags="실적,금리,AI,반도체" data-text="브로드컴, FY2026 AI반도체 매출 가이던스 $56B로 상향(전년比 +180%) 美 10년물 국채금리 장중 4.818%(2023년 11월 이후 최고) 후 진정, 지수 반등의 직접 트리거 · → 델 테크놀로지스 +16%, AI서버 매출 2배·수주잔고 $61B 이란-호르무즈해협 긴장, 유조선 기뢰 피격 보도 실적 금리 AI 반도체 브로드컴, FY2026 AI반도체 매출 가이던스 $56B로 상향(전년比 +180%) 美 10년물 국채금리 장중 4.818%(2023년 11월 이후 최고) 후 진정, 지수 반등의 직접 트리거 · → 델 테크놀로지스 +16%, AI서버 매출 2배·수주잔고 $61B 이란-호르무즈해협 긴장, 유조선 기뢰 피격 보도 팔로알토 네트웍스 -9.2%, 실적은 컨센서스 상회했으나 NGS ARR·잉여현금흐름 마진 가이던스 실망 · ↓ HPE +5.5%(장전), 델 실적 호재 동반 강세 TSMC 3나노 웨이퍼 월 18만장 조기 도달 전망(당초보다 2~3개월 앞당김) 깃랩 +20%, 2분기 실적 호조 · ↑ PG&amp;E -7%(전일 -20% 급락에 이어 추가 하락), 캘리포니아 산불법안(SB492) 실망 · ↓ 7월 공장재수주 +0.9%(예상 +0.6%), 내구재수주(ex-운송) +0.4%"><a class="card" href="reports/2026-09-03.html">
+      <div class="row1"><span class="d">2026-09-03 (목)</span><span>미국 기준일 2026-09-02</span></div>
+      <div class="hl">브로드컴, FY2026 AI반도체 매출 가이던스 $56B로 상향(전년比 +180%)</div>
+      <p class="sm">美 10년물 국채금리 장중 4.818%(2023년 11월 이후 최고) 후 진정, 지수 반등의 직접 트리거 · →<br>델 테크놀로지스 +16%, AI서버 매출 2배·수주잔고 $61B<br>이란-호르무즈해협 긴장, 유조선 기뢰 피격 보도</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">금리</span><span class="tag">AI</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="금리,연준,실적,AI" data-text="미국-이란 호르무즈해협 재충돌(유조선 피격) → 3대 지수 동반 하락·VIX 급등·유가 급등 미 10년물 국채금리 20개월래 최고치(4.788%) + Fed 의장 Warsh 매파 발언 델(DELL) AI서버 매출 $16.40B·백로그 $95B, 시간외 +9% ISM 제조업 PMI 54.6 (컨센서스 55.3 하회) 금리 연준 실적 AI 미국-이란 호르무즈해협 재충돌(유조선 피격) → 3대 지수 동반 하락·VIX 급등·유가 급등 미 10년물 국채금리 20개월래 최고치(4.788%) + Fed 의장 Warsh 매파 발언 델(DELL) AI서버 매출 $16.40B·백로그 $95B, 시간외 +9% ISM 제조업 PMI 54.6 (컨센서스 55.3 하회) 팔로알토네트웍스(PANW) 실적 서프라이즈에도 주가 -5.25%~-5.96% JOLTS 구인건수 7.271백만 건 (컨센서스 하회, 전월 하향 수정) 시스코, Secure AI Factory에 슈퍼마이크로 랙스케일 솔루션 추가(NVIDIA 연계) 애플(AAPL) 신임 CEO 존 터너스 취임 첫날 +3% 브로드컴(AVGO), 9/2 장마감 후 FY26 3분기 실적 발표 예정 (관전포인트) 퍼보 에너지(Fervo Energy)-구글 396MW 지열발전 전력구매계약(PPA)"><a class="card" href="reports/2026-09-02.html">
+      <div class="row1"><span class="d">2026-09-02 (수)</span><span>미국 기준일 2026-09-01</span></div>
+      <div class="hl">미국-이란 호르무즈해협 재충돌(유조선 피격) → 3대 지수 동반 하락·VIX 급등·유가 급등</div>
+      <p class="sm">미 10년물 국채금리 20개월래 최고치(4.788%) + Fed 의장 Warsh 매파 발언<br>델(DELL) AI서버 매출 $16.40B·백로그 $95B, 시간외 +9%<br>ISM 제조업 PMI 54.6 (컨센서스 55.3 하회)</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">연준</span><span class="tag">실적</span><span class="tag">AI</span></div>
+    </a></li>
+  </ul></div>
+  <div class="month"><h3>2026년 8월</h3>
+  <ul class="cards">
+    <li data-tags="실적,AI,연준,반도체" data-text="NVDA 2분기 실적 서프라이즈(매출 $96.22B, 전년비 +106%)·3분기 가이던스 $108.0B, 주가 +8.7% AWS-NVIDIA, 2027~28년 GPU 200만개 추가 공급 파트너십 확장(정부용 10만개 별도) Fed 의장 Kevin Warsh, 8/28(금) 10:00 ET 잭슨홀 취임 후 첫 기조연설(예정, 미발생) Salesforce(CRM) +22.60%, 2분기 실적 호조·가이던스 상향·Anthropic AI 파트너십 실적 AI 연준 반도체 NVDA 2분기 실적 서프라이즈(매출 $96.22B, 전년비 +106%)·3분기 가이던스 $108.0B, 주가 +8.7% AWS-NVIDIA, 2027~28년 GPU 200만개 추가 공급 파트너십 확장(정부용 10만개 별도) Fed 의장 Kevin Warsh, 8/28(금) 10:00 ET 잭슨홀 취임 후 첫 기조연설(예정, 미발생) Salesforce(CRM) +22.60%, 2분기 실적 호조·가이던스 상향·Anthropic AI 파트너십 CrowdStrike(CRWD) 약 +17.9~19.8%, EPS·ARR 서프라이즈, 다수 IB 목표가 상향 Okta(OKTA) 약 +19%, 2분기 EPS·매출 컨센서스 상회 NVDA, Hugging Face 인수 협상(약 $12.9~13B, 매체 간 진행상황 상충 보도) Marvell(MRVL) 2분기 매출 사상최대($2.739B)·데이터센터 전년비 +46%, 주가 반응은 제한적 QQQ +$3.67B 순유입 vs SPY -$3.82B 순유출(당일 각각 최대 규모) Meta(META), 29개 주 아동안전 소송 최대 $18B 다주 합의 성사"><a class="card" href="reports/2026-08-28.html">
+      <div class="row1"><span class="d">2026-08-28 (금)</span><span>미국 기준일 2026-08-27</span></div>
+      <div class="hl">NVDA 2분기 실적 서프라이즈(매출 $96.22B, 전년비 +106%)·3분기 가이던스 $108.0B, 주가 +8.7%</div>
+      <p class="sm">AWS-NVIDIA, 2027~28년 GPU 200만개 추가 공급 파트너십 확장(정부용 10만개 별도)<br>Fed 의장 Kevin Warsh, 8/28(금) 10:00 ET 잭슨홀 취임 후 첫 기조연설(예정, 미발생)<br>Salesforce(CRM) +22.60%, 2분기 실적 호조·가이던스 상향·Anthropic AI 파트너십</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">AI</span><span class="tag">연준</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="반도체,AI,물가,연준" data-text="NVIDIA(NVDA) 실적 발표(8/26 장마감 후) Core PCE 물가지수·GDP 2차추정치 발표(8/26 08:30 ET) Broadcom(AVGO), AI칩 부채조달 $70~80B(최대 $100B)로 확대 협상 HBM/DRAM 가격 사상 최고치 지속, Samsung HBM4 수율 80% 달성 반도체 AI 물가 연준 NVIDIA(NVDA) 실적 발표(8/26 장마감 후) Core PCE 물가지수·GDP 2차추정치 발표(8/26 08:30 ET) Broadcom(AVGO), AI칩 부채조달 $70~80B(최대 $100B)로 확대 협상 HBM/DRAM 가격 사상 최고치 지속, Samsung HBM4 수율 80% 달성 DICK'S Sporting Goods(DKS) -25~30% 급락, 연간 가이던스 대폭 하향 Moderna(MRNA) +14.46% 급등, Merck 공동개발 백신 3상 후속 매수 3대 지수 동반 상승(S&amp;P·Nasdaq·Dow), 뚜렷한 단일 촉매 부재 FOMC 7/29 회의, 3인 이사 인상 지지 반대표 잭슨홀 심포지엄(8/27~29)·Fed 의장 Warsh 첫 기조연설(8/28) 예정 캐나다 대미 보복관세 약 $200억 규모(9/8 발효 예정)"><a class="card" href="reports/2026-08-26.html">
+      <div class="row1"><span class="d">2026-08-26 (수)</span><span>미국 기준일 2026-08-25</span></div>
+      <div class="hl">NVIDIA(NVDA) 실적 발표(8/26 장마감 후)</div>
+      <p class="sm">Core PCE 물가지수·GDP 2차추정치 발표(8/26 08:30 ET)<br>Broadcom(AVGO), AI칩 부채조달 $70~80B(최대 $100B)로 확대 협상<br>HBM/DRAM 가격 사상 최고치 지속, Samsung HBM4 수율 80% 달성</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">AI</span><span class="tag">물가</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="반도체,연준,물가,AI" data-text="NVDA, AI서버 가격 15%+ 인상 통보 Broadcom, Anthropic向 $60B+(최대 $100B) 부채조달 협상 · ↑ 반도체·메모리주 동반 급락 (AAOI/SNDK/STX/MU) · ↓ NVDA 2027회계연도 2분기 실적 발표(8/26 장마감 후) 반도체 연준 물가 AI NVDA, AI서버 가격 15%+ 인상 통보 Broadcom, Anthropic向 $60B+(최대 $100B) 부채조달 협상 · ↑ 반도체·메모리주 동반 급락 (AAOI/SNDK/STX/MU) · ↓ NVDA 2027회계연도 2분기 실적 발표(8/26 장마감 후) 나스닥 -0.76% vs 다우 +0.26% 혼조, VIX +4.76% · → Fed 잭슨홀 심포지엄·Warsh 의장 첫 기조연설(8/27~29, 8/28) · →(예정) 반도체 ETF(SOXX·SMH) 순유출 → QQQ로 자금이동 · ↓ Core PCE 물가지수·2분기 GDP 2차추정(8/26) · →(발표 전) Tesla, Dojo 출신 Senior Director가 DensityAI로 이직 · ↓ Tesla, 중국 도어핸들 결함으로 약 298만대 리콜(9/25 발효) · ↓"><a class="card" href="reports/2026-08-25.html">
+      <div class="row1"><span class="d">2026-08-25 (화)</span><span>미국 기준일 2026-08-24</span></div>
+      <div class="hl">NVDA, AI서버 가격 15%+ 인상 통보</div>
+      <p class="sm">Broadcom, Anthropic向 $60B+(최대 $100B) 부채조달 협상 · ↑<br>반도체·메모리주 동반 급락 (AAOI/SNDK/STX/MU) · ↓<br>NVDA 2027회계연도 2분기 실적 발표(8/26 장마감 후)</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">연준</span><span class="tag">물가</span><span class="tag">AI</span></div>
+    </a></li>
+    <li data-tags="반도체,AI,실적,빅테크" data-text="하이퍼스케일러 설비투자(capex) 상향(아마존 $220B·알파벳 $205B) HBM·DRAM·NAND 메모리 가격 급등, 삼성 2026년 HBM 생산능력 선판매 완료 · ↑ 브로드컴(AVGO) -5.4%, 마벨(MRVL)-구글 $12B 커스텀칩 계약 소식 · ↓ FOMC 3인 동일방향(인상) 반대표 반도체 AI 실적 빅테크 하이퍼스케일러 설비투자(capex) 상향(아마존 $220B·알파벳 $205B) HBM·DRAM·NAND 메모리 가격 급등, 삼성 2026년 HBM 생산능력 선판매 완료 · ↑ 브로드컴(AVGO) -5.4%, 마벨(MRVL)-구글 $12B 커스텀칩 계약 소식 · ↓ FOMC 3인 동일방향(인상) 반대표 엔비디아(NVDA) 8/26(수) 실적 발표 예정(가이던스 매출 $91B±2%) Warsh 의장 forward guidance 문구 제거 + 8/28 잭슨홀 첫 기조연설 예정 · → 반도체 ETF(SMH·SOXX·SOXL) 주간 최대 순유입 · ↑ SOX 지수, 시장 전반 반등 속 홀로 -0.51%(원인 미확인) · ↓ VIX -5.50% 급락 슈퍼마이크로(SMCI) FY27 1분기 마진 가이던스 11%로 하향(직전분기 18%) · ↓"><a class="card" href="reports/2026-08-24.html">
+      <div class="row1"><span class="d">2026-08-24 (월)</span><span>미국 기준일 2026-08-21</span></div>
+      <div class="hl">하이퍼스케일러 설비투자(capex) 상향(아마존 $220B·알파벳 $205B)</div>
+      <p class="sm">HBM·DRAM·NAND 메모리 가격 급등, 삼성 2026년 HBM 생산능력 선판매 완료 · ↑<br>브로드컴(AVGO) -5.4%, 마벨(MRVL)-구글 $12B 커스텀칩 계약 소식 · ↓<br>FOMC 3인 동일방향(인상) 반대표</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">AI</span><span class="tag">실적</span><span class="tag">빅테크</span></div>
+    </a></li>
+    <li data-tags="금리,실적,물가,연준" data-text="재무부 장기채 바이백 2배 확대 → 국채금리 급락 → 3대 지수 3일 연속 하락세 종료 7월 FOMC 의사록 매파적 공개 (위원 3인 금리 인상 주장) Moderna·Merck mRNA 흑색종 백신 3상 성공, Moderna +176.97% NVIDIA H200 칩 중국 재유입(ByteDance·Tencent 각 약 1만개) 금리 실적 물가 연준 재무부 장기채 바이백 2배 확대 → 국채금리 급락 → 3대 지수 3일 연속 하락세 종료 7월 FOMC 의사록 매파적 공개 (위원 3인 금리 인상 주장) Moderna·Merck mRNA 흑색종 백신 3상 성공, Moderna +176.97% NVIDIA H200 칩 중국 재유입(ByteDance·Tencent 각 약 1만개) HBM/DRAM/NAND 현물가 급등 지속 전일(8/18) 반도체 섹터 급락, NVIDIA 장중 시총 최대 $153B 증발 Estée Lauder FY26 4분기 실적·가이던스 서프라이즈, +15%대 하이퍼스케일러 2026년 CAPEX 가이던스 유지(4사 합산 약 $725B) 8/26 GDP 2차 추정치·PCE 물가지수·NVIDIA 실적 발표 예정 WTI·Brent 상승 + 금 급등, 지정학 리스크·안전자산 수요"><a class="card" href="reports/2026-08-20.html">
+      <div class="row1"><span class="d">2026-08-20 (목)</span><span>미국 기준일 2026-08-19</span></div>
+      <div class="hl">재무부 장기채 바이백 2배 확대 → 국채금리 급락 → 3대 지수 3일 연속 하락세 종료</div>
+      <p class="sm">7월 FOMC 의사록 매파적 공개 (위원 3인 금리 인상 주장)<br>Moderna·Merck mRNA 흑색종 백신 3상 성공, Moderna +176.97%<br>NVIDIA H200 칩 중국 재유입(ByteDance·Tencent 각 약 1만개)</p>
+      <div class="tags"><span class="tag">금리</span><span class="tag">실적</span><span class="tag">물가</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="반도체,금리,AI,에너지" data-text="30년물 국채금리 19년래 최고(장중 5.3%대)·10년물 4.706% 급등이 반도체·메모리 밸류체인 조정을 촉발 SOX 반도체지수 약 -5.5%, 나스닥 -1.33% 메모리·저장장치 급락(Western Digital -7%, SanDisk -6~9%, Seagate -9%대, Marvell -4.62~8%, Micron -5… Applied Materials -4.09~5% 반도체 금리 AI 에너지 30년물 국채금리 19년래 최고(장중 5.3%대)·10년물 4.706% 급등이 반도체·메모리 밸류체인 조정을 촉발 SOX 반도체지수 약 -5.5%, 나스닥 -1.33% 메모리·저장장치 급락(Western Digital -7%, SanDisk -6~9%, Seagate -9%대, Marvell -4.62~8%, Micron -5%) Applied Materials -4.09~5% NVIDIA, SB Energy와 오하이오 데이터센터 부지·전력 파트너십 체결(OpenAI 20년 리스) Broadcom AI칩 수주잔고 $30B 초과(인도분 $10.8B 상회) VIX 15.19(+3.83%) 유가 3거래일 연속 상승(WTI $85.18) 7월 신규주택착공 123.9만 건(전월비 -12.4%), 건축허가 144.3만 건(전월비 +5.0%) NVIDIA 2Q FY27 실적발표(8/26 장마감 후 예정)"><a class="card" href="reports/2026-08-19.html">
+      <div class="row1"><span class="d">2026-08-19 (수)</span><span>미국 기준일 2026-08-18</span></div>
+      <div class="hl">30년물 국채금리 19년래 최고(장중 5.3%대)·10년물 4.706% 급등이 반도체·메모리 밸류체인 조정을 촉발</div>
+      <p class="sm">SOX 반도체지수 약 -5.5%, 나스닥 -1.33%<br>메모리·저장장치 급락(Western Digital -7%, SanDisk -6~9%, Seagate -9%대, Marvell -4.62~8%, Micron -5…<br>Applied Materials -4.09~5%</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">금리</span><span class="tag">AI</span><span class="tag">에너지</span></div>
+    </a></li>
+    <li data-tags="빅테크,실적,에너지,물가" data-text="Nvidia, 월가 6개 대형 자산운용사와 $500B 규모 AI 인프라 펀딩 MOU 체결 호르무즈 해협 재개방 협상 불확실성으로 WTI·Brent +약5% 급등, 인플레이션 우려 재점화 빅4(MSFT·GOOGL·AMZN·META) 2026년 CAPEX 합산 최대 $725B 가이던스 유지 TSMC 3nm/2nm 증설 가속, 2026 CAPEX $60~64B로 상향 빅테크 실적 에너지 물가 Nvidia, 월가 6개 대형 자산운용사와 $500B 규모 AI 인프라 펀딩 MOU 체결 호르무즈 해협 재개방 협상 불확실성으로 WTI·Brent +약5% 급등, 인플레이션 우려 재점화 빅4(MSFT·GOOGL·AMZN·META) 2026년 CAPEX 합산 최대 $725B 가이던스 유지 TSMC 3nm/2nm 증설 가속, 2026 CAPEX $60~64B로 상향 7/29 FOMC 9-3 표결, 3인 인상 소수의견(2016년 9월 이후 최초) Intel, 1971년 상장 이후 첫 $15B 공모증자 + 2026 CAPEX $18B→$20B 상향, 주가 -4.5% CPI(7월), 8/12(수) 발표 예정 eBay/GameStop, Ryan Cohen $56B eBay 인수제안 철회 후 파트너십 모색 검토(보도) monday.com 2분기 EPS $1.48 서프라이즈(컨센서스 $1.11 상회) CoreWeave·SMCI, 8/11(오늘) 장마감 후 실적 발표 예정"><a class="card" href="reports/2026-08-11.html">
+      <div class="row1"><span class="d">2026-08-11 (화)</span><span>미국 기준일 2026-08-10</span></div>
+      <div class="hl">Nvidia, 월가 6개 대형 자산운용사와 $500B 규모 AI 인프라 펀딩 MOU 체결</div>
+      <p class="sm">호르무즈 해협 재개방 협상 불확실성으로 WTI·Brent +약5% 급등, 인플레이션 우려 재점화<br>빅4(MSFT·GOOGL·AMZN·META) 2026년 CAPEX 합산 최대 $725B 가이던스 유지<br>TSMC 3nm/2nm 증설 가속, 2026 CAPEX $60~64B로 상향</p>
+      <div class="tags"><span class="tag">빅테크</span><span class="tag">실적</span><span class="tag">에너지</span><span class="tag">물가</span></div>
+    </a></li>
+    <li data-tags="빅테크,금리,실적,반도체" data-text="7월 고용쇼크로 9월 금리인상 기대 급락(58%→42%) S&amp;P500 7,757.64 사상 최고 종가(+0.62%), SOX +2.56% 하이퍼스케일러 4사(MSFT·GOOGL·AMZN·META) 2026 CAPEX 합산 $725B(전년比 +77%) Atlassian +34%·Twilio +27%·Cloudflare +9%·Airbnb +8%, 실적 서프라이즈 랠리 빅테크 금리 실적 반도체 7월 고용쇼크로 9월 금리인상 기대 급락(58%→42%) S&amp;P500 7,757.64 사상 최고 종가(+0.62%), SOX +2.56% 하이퍼스케일러 4사(MSFT·GOOGL·AMZN·META) 2026 CAPEX 합산 $725B(전년比 +77%) Atlassian +34%·Twilio +27%·Cloudflare +9%·Airbnb +8%, 실적 서프라이즈 랠리 TSMC, 애리조나 파운드리에 추가 $100B 투자 발표(보도) 10년물 국채금리 4.60%(-7bp)·달러 약세·금 $4,399.70(+2.33%) The Trade Desk 장중 최대 -27.3%(7년 최저), 3분기 매출가이던스 컨센서스 대비 -19.4% 반도체 ETF(SOXX·SMH) 자금유출 vs SOX 급등, 엇갈린 수급 신호 Vertiv(VRT) 2026 가이던스 상향, GLJ Research 투자의견 상향(Hold→Buy), YTD +56.69% CPI(7월) 8/12(수) 발표 예정"><a class="card" href="reports/2026-08-10.html">
+      <div class="row1"><span class="d">2026-08-10 (월)</span><span>미국 기준일 2026-08-07</span></div>
+      <div class="hl">7월 고용쇼크로 9월 금리인상 기대 급락(58%→42%)</div>
+      <p class="sm">S&amp;P500 7,757.64 사상 최고 종가(+0.62%), SOX +2.56%<br>하이퍼스케일러 4사(MSFT·GOOGL·AMZN·META) 2026 CAPEX 합산 $725B(전년比 +77%)<br>Atlassian +34%·Twilio +27%·Cloudflare +9%·Airbnb +8%, 실적 서프라이즈 랠리</p>
+      <div class="tags"><span class="tag">빅테크</span><span class="tag">금리</span><span class="tag">실적</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="환율,에너지,AI,연준" data-text="트럼프 대통령, 워시 Fed 의장에 압박성 통화(이란·AI·경제 현안) 보도 CME FedWatch 9월 회의 &quot;인상&quot; 확률 82%로 급등(직전 주 53% 미만 대비) WTI +3.37%, 호르무즈 해협 지정학 리스크發 유가 급등 TSMC 2026 CAPEX 600억~640억달러로 상향, 애리조나 추가 1,000억달러 투자 환율 에너지 AI 연준 트럼프 대통령, 워시 Fed 의장에 압박성 통화(이란·AI·경제 현안) 보도 CME FedWatch 9월 회의 &quot;인상&quot; 확률 82%로 급등(직전 주 53% 미만 대비) WTI +3.37%, 호르무즈 해협 지정학 리스크發 유가 급등 TSMC 2026 CAPEX 600억~640억달러로 상향, 애리조나 추가 1,000억달러 투자 하이퍼스케일러 4사 2026 CAPEX 합산 약 7,250억달러(전년비 +77% 추정) 7월 고용보고서 오늘 밤(21:30 KST) 발표 예정 SMH 반도체 ETF 주간 사상 최대급 순유입(6.9억달러 이상) Honeywell 항공우주 성장전망 하향(7~9%→4~5%), 주가 -20% HubSpot 연간 매출전망 하향, 주가 -16~-24% Datadog 가이던스 시장 기대 하회, 주가 -16%"><a class="card" href="reports/2026-08-07.html">
+      <div class="row1"><span class="d">2026-08-07 (금)</span><span>미국 기준일 2026-08-06</span></div>
+      <div class="hl">트럼프 대통령, 워시 Fed 의장에 압박성 통화(이란·AI·경제 현안) 보도</div>
+      <p class="sm">CME FedWatch 9월 회의 &quot;인상&quot; 확률 82%로 급등(직전 주 53% 미만 대비)<br>WTI +3.37%, 호르무즈 해협 지정학 리스크發 유가 급등<br>TSMC 2026 CAPEX 600억~640억달러로 상향, 애리조나 추가 1,000억달러 투자</p>
+      <div class="tags"><span class="tag">환율</span><span class="tag">에너지</span><span class="tag">AI</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="반도체,AI,빅테크,고용" data-text="엔비디아, 스페이스X 전용 GPU 공급 발표·주가 $220 돌파 반도체 ETF(SMH·SOXX·SOXL), 주간 자금유입 전체 ETF 중 1위(반도체 섹터 최초 사례) 다우존스 54,349.12 사상 최고 종가, 5거래일 연속 상승(엔비디아가 견인) AMD, 실적 실망 이후 프리마켓 추가 -8.5% 하락 반도체 AI 빅테크 고용 엔비디아, 스페이스X 전용 GPU 공급 발표·주가 $220 돌파 반도체 ETF(SMH·SOXX·SOXL), 주간 자금유입 전체 ETF 중 1위(반도체 섹터 최초 사례) 다우존스 54,349.12 사상 최고 종가, 5거래일 연속 상승(엔비디아가 견인) AMD, 실적 실망 이후 프리마켓 추가 -8.5% 하락 ADP 7월 민간고용 +44,000명(예상 +75,000명 큰 폭 하회) 나스닥종합 26,363.44, -0.83%, 4거래일 랠리 종료(AMD발 차익실현) CME FedWatch 9월 금리인상 확률 61.9%/82.4% 두 수치 상충 ISM 서비스업 PMI(7월) 54.1%, 예상(54.5%) 소폭 하회(확장국면 유지) 베이조스, 아마존 지분 약 $40.7억 매도 공시(10b5-1 사전예정계획) 애플 vs 오픈AI 영업비밀 소송, 애플이 예비적 금지명령 신청"><a class="card" href="reports/2026-08-06.html">
+      <div class="row1"><span class="d">2026-08-06 (목)</span><span>미국 기준일 2026-08-05</span></div>
+      <div class="hl">엔비디아, 스페이스X 전용 GPU 공급 발표·주가 $220 돌파</div>
+      <p class="sm">반도체 ETF(SMH·SOXX·SOXL), 주간 자금유입 전체 ETF 중 1위(반도체 섹터 최초 사례)<br>다우존스 54,349.12 사상 최고 종가, 5거래일 연속 상승(엔비디아가 견인)<br>AMD, 실적 실망 이후 프리마켓 추가 -8.5% 하락</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">AI</span><span class="tag">빅테크</span><span class="tag">고용</span></div>
+    </a></li>
+    <li data-tags="실적,빅테크,반도체,연준" data-text="반도체 섹터 전반 랠리 + SOXX·SMH 사상 최대 자금유입 S&amp;P500·다우 사상 최고 종가, 나스닥 +2.59% 하이퍼스케일러 4사(알파벳·MS·메타·아마존) CAPEX 합산 $7,000억+ 상향 팔란티어(PLTR) 2분기 실적 서프라이즈·연간 가이던스 상향(+29.45%) 실적 빅테크 반도체 연준 반도체 섹터 전반 랠리 + SOXX·SMH 사상 최대 자금유입 S&amp;P500·다우 사상 최고 종가, 나스닥 +2.59% 하이퍼스케일러 4사(알파벳·MS·메타·아마존) CAPEX 합산 $7,000억+ 상향 팔란티어(PLTR) 2분기 실적 서프라이즈·연간 가이던스 상향(+29.45%) 아리스타 네트웍스 실적 비트·가이던스 상향(시간외 +13%) TSMC 2026 매출성장 전망 30%대로 상향 WTI -5.23% 급락(중동 긴장 완화 기대) 7월 FOMC 9-3 표결 이견 + 차기 Fed 의장(워시) 교체 이슈 AMD 실적 비트에도 시간외 -8%대 하락 애플 9월분기 가이던스 실망 + 중화권·서비스 매출 부진(시간외 -4%)"><a class="card" href="reports/2026-08-05.html">
+      <div class="row1"><span class="d">2026-08-05 (수)</span><span>미국 기준일 2026-08-04</span></div>
+      <div class="hl">반도체 섹터 전반 랠리 + SOXX·SMH 사상 최대 자금유입</div>
+      <p class="sm">S&amp;P500·다우 사상 최고 종가, 나스닥 +2.59%<br>하이퍼스케일러 4사(알파벳·MS·메타·아마존) CAPEX 합산 $7,000억+ 상향<br>팔란티어(PLTR) 2분기 실적 서프라이즈·연간 가이던스 상향(+29.45%)</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">빅테크</span><span class="tag">반도체</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="빅테크,실적,반도체,연준" data-text="아마존 2분기 실적 서프라이즈, AWS +36.8% YoY 성장(18분기 만 최대) SOX(반도체지수) +8.2% 반등, 5거래일 연속 하락 후 전환 빅테크 4사(아마존·MS·구글·메타) 2026 CAPEX 합산 $725B(전년비 +77%) 애플, 3분기 실적은 상회했으나 9월분기 매출 가이던스 하회 + 메모리가격·부품공급 제약 언급 빅테크 실적 반도체 연준 아마존 2분기 실적 서프라이즈, AWS +36.8% YoY 성장(18분기 만 최대) SOX(반도체지수) +8.2% 반등, 5거래일 연속 하락 후 전환 빅테크 4사(아마존·MS·구글·메타) 2026 CAPEX 합산 $725B(전년비 +77%) 애플, 3분기 실적은 상회했으나 9월분기 매출 가이던스 하회 + 메모리가격·부품공급 제약 언급 TSMC 애리조나 $100B 추가투자 발표, 2026년말 CoWoS 캐파 월 127,000장 전망 FOMC 기준금리 3.50~3.75% 동결, 3인+월러 이사 인상 선호 반대표(매파적 소수의견 확대) ISM 제조업 PMI(7월), 8/3 10:00 ET(23:00 KST) 발표 예정(리포트 작성 시점 미발표) 알파벳, 클라우드 실적 재평가로 주가 +6.7~6.9% VIX -17.28%(17.09)로 급락, 위험선호 회복 SOXX·SMH 주간 자금유입 vs QQQ 주간 자금유출"><a class="card" href="reports/2026-08-03.html">
+      <div class="row1"><span class="d">2026-08-03 (월)</span><span>미국 기준일 2026-07-31</span></div>
+      <div class="hl">아마존 2분기 실적 서프라이즈, AWS +36.8% YoY 성장(18분기 만 최대)</div>
+      <p class="sm">SOX(반도체지수) +8.2% 반등, 5거래일 연속 하락 후 전환<br>빅테크 4사(아마존·MS·구글·메타) 2026 CAPEX 합산 $725B(전년비 +77%)<br>애플, 3분기 실적은 상회했으나 9월분기 매출 가이던스 하회 + 메모리가격·부품공급 제약 언급</p>
+      <div class="tags"><span class="tag">빅테크</span><span class="tag">실적</span><span class="tag">반도체</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="빅테크,실적,금리,반도체" data-text="아마존(AMZN) 실적 서프라이즈가 지수 상승 견인 아마존 2026년 CAPEX 가이던스 $200B → $220B 상향 애플(AAPL) 실적 미스 + 메모리 공급제약發 4분기 영향 경고 10년물·30년물 국채금리 급등(4.75%/한때 약 5.25%), 실적 모멘텀에 상쇄되며 지수는 상승 마감 빅테크 실적 금리 반도체 아마존(AMZN) 실적 서프라이즈가 지수 상승 견인 아마존 2026년 CAPEX 가이던스 $200B → $220B 상향 애플(AAPL) 실적 미스 + 메모리 공급제약發 4분기 영향 경고 10년물·30년물 국채금리 급등(4.75%/한때 약 5.25%), 실적 모멘텀에 상쇄되며 지수는 상승 마감 Applied Digital, 하이퍼스케일러向 $36B 규모 리스 계약 브로드컴(AVGO), 커스텀 AI 추론칩 &quot;Jalapeño&quot; 공개 + 애플·삼성전자와 대형 공급계약 고용비용지수(ECI) 예상 상회 버티브(VRT), 매출은 컨센서스 소폭 미달했으나 backlog $15B·연간가이던스 상향 미시간대 소비자심리 급등 + 기대인플레이션 완화, 금리 급등과는 상반된 신호 시카고 PMI 예상 상회(57.6)"><a class="card" href="reports/2026-08-01.html">
+      <div class="row1"><span class="d">2026-08-01 (토)</span><span>미국 기준일 2026-07-31</span></div>
+      <div class="hl">아마존(AMZN) 실적 서프라이즈가 지수 상승 견인</div>
+      <p class="sm">아마존 2026년 CAPEX 가이던스 $200B → $220B 상향<br>애플(AAPL) 실적 미스 + 메모리 공급제약發 4분기 영향 경고<br>10년물·30년물 국채금리 급등(4.75%/한때 약 5.25%), 실적 모멘텀에 상쇄되며 지수는 상승 마감</p>
+      <div class="tags"><span class="tag">빅테크</span><span class="tag">실적</span><span class="tag">금리</span><span class="tag">반도체</span></div>
+    </a></li>
+  </ul></div>
+  <div class="month"><h3>2026년 7월</h3>
+  <ul class="cards">
+    <li data-tags="실적,반도체,빅테크,금리" data-text="마이크로소프트, 실적 서프라이즈 + Azure 매출 첫 $100B 돌파 + FY2027 자본지출(CAPEX) $255~260B 가이던스 GDP 성장률 미스 + GDP 물가지수 급등(스태그플레이션성 신호) + 9월 금리 &quot;인상&quot; 확률 81% 반도체 섹터 전반 랠리 (마이크론 +18%, AMD +13%, 인텔 +11.3%, TSMC +7.6%, 램리서치 +14.1%) 메타, 실적은 미스했지만(잉여현금흐름 -91%) 2026년 AI 인프라 투자(CAPEX) 가이던스는 상향 실적 반도체 빅테크 금리 마이크로소프트, 실적 서프라이즈 + Azure 매출 첫 $100B 돌파 + FY2027 자본지출(CAPEX) $255~260B 가이던스 GDP 성장률 미스 + GDP 물가지수 급등(스태그플레이션성 신호) + 9월 금리 &quot;인상&quot; 확률 81% 반도체 섹터 전반 랠리 (마이크론 +18%, AMD +13%, 인텔 +11.3%, TSMC +7.6%, 램리서치 +14.1%) 메타, 실적은 미스했지만(잉여현금흐름 -91%) 2026년 AI 인프라 투자(CAPEX) 가이던스는 상향 VIX(변동성지수) 17.28% 급락(17.09) TSMC 신규 첨단 패키징 기술 개발 보도(단독 매체) → 인텔·TSMC 급등 AMD, 제품 출시 주기를 6주 고정 주기로 전환 발표 애플 FY26 3분기: 아이폰 매출은 예상 상회, 서비스 매출은 미스, 시간외 하락(보도마다 -3~-8%로 편차) 아마존 2분기 실적 발표(장마감 후, 결과치 아직 미검증) 코어위브(CoreWeave) CEO 내부자 매도 $24.07M(7/21)"><a class="card" href="reports/2026-07-31.html">
+      <div class="row1"><span class="d">2026-07-31 (금)</span><span>미국 기준일 2026-07-30</span></div>
+      <div class="hl">마이크로소프트, 실적 서프라이즈 + Azure 매출 첫 $100B 돌파 + FY2027 자본지출(CAPEX) $255~260B 가이던스</div>
+      <p class="sm">GDP 성장률 미스 + GDP 물가지수 급등(스태그플레이션성 신호) + 9월 금리 &quot;인상&quot; 확률 81%<br>반도체 섹터 전반 랠리 (마이크론 +18%, AMD +13%, 인텔 +11.3%, TSMC +7.6%, 램리서치 +14.1%)<br>메타, 실적은 미스했지만(잉여현금흐름 -91%) 2026년 AI 인프라 투자(CAPEX) 가이던스는 상향</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">반도체</span><span class="tag">빅테크</span><span class="tag">금리</span></div>
+    </a></li>
+    <li data-tags="실적,연준,금리,반도체" data-text="FOMC 매파적 동결(9대3, 반대 3인 전원 인상 주장) 미-이란 휴전 붕괴·호르무즈 리스크 재점화(해상봉쇄 재개) Meta 2분기 EPS 미스 + CAPEX 가이던스 $135~145B로 상향, 시간외 -8~10% Microsoft Q4FY26 서프라이즈 + Azure +43% + FY27 CAPEX 가이던스 $255~260B 실적 연준 금리 반도체 FOMC 매파적 동결(9대3, 반대 3인 전원 인상 주장) 미-이란 휴전 붕괴·호르무즈 리스크 재점화(해상봉쇄 재개) Meta 2분기 EPS 미스 + CAPEX 가이던스 $135~145B로 상향, 시간외 -8~10% Microsoft Q4FY26 서프라이즈 + Azure +43% + FY27 CAPEX 가이던스 $255~260B 반도체 섹터 동반급락(SanDisk -14.2%·Micron -8.8%·AMD -8.1%·Intel -5.9%) WTI +6.39%·Brent +7.9% 급등 VIX 20.63(+13.29%) Vertiv 2분기: EPS 서프라이즈(+60% YoY)·매출 미스, 주가 -10.4%, FY 가이던스 상향 국채금리 커브 스티프닝(10Y +5bp·30Y +9bp, 2Y -4bp, 스프레드 42.1bp) Amazon·Apple 2분기 실적 7/30 발표 예정(AWS 성장률·아이폰 수요가 핵심 변수)"><a class="card" href="reports/2026-07-30.html">
+      <div class="row1"><span class="d">2026-07-30 (목)</span><span>미국 기준일 2026-07-29</span></div>
+      <div class="hl">FOMC 매파적 동결(9대3, 반대 3인 전원 인상 주장)</div>
+      <p class="sm">미-이란 휴전 붕괴·호르무즈 리스크 재점화(해상봉쇄 재개)<br>Meta 2분기 EPS 미스 + CAPEX 가이던스 $135~145B로 상향, 시간외 -8~10%<br>Microsoft Q4FY26 서프라이즈 + Azure +43% + FY27 CAPEX 가이던스 $255~260B</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">연준</span><span class="tag">금리</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="반도체,실적,빅테크,연준" data-text="SOX(필라델피아 반도체지수) 기술적 베어마켓 진입, 6/22 고점 대비 -20.2% FOMC 금리결정 + 워시 의장 첫 기자회견(오늘 14:00/14:30 ET) Corning 가이던스 쇼크 -18%, 광통신 밸류체인(MRVL·LITE·AXTI·COHR) 동반 급락 SK하이닉스(한국 상장) -15%, 미국 메모리·엔비디아 동반 하락 촉발 반도체 실적 빅테크 연준 SOX(필라델피아 반도체지수) 기술적 베어마켓 진입, 6/22 고점 대비 -20.2% FOMC 금리결정 + 워시 의장 첫 기자회견(오늘 14:00/14:30 ET) Corning 가이던스 쇼크 -18%, 광통신 밸류체인(MRVL·LITE·AXTI·COHR) 동반 급락 SK하이닉스(한국 상장) -15%, 미국 메모리·엔비디아 동반 하락 촉발 엔비디아 CDS(5년물) 하루 최대폭 상승(+14bp, ~82bp) AMD/Intel/Micron/ASML 동반 급락(-5~9%대) 알파벳 FY2026 자본지출(CAPEX) 가이던스 $75B→$85B 상향 빅테크 4개사 실적 집중(MSFT·META 7/29, AMZN·AAPL 7/30) Celestica 실적 서프라이즈 + FY26 가이던스 상향 테슬라 실적: EPS 미스 -32.7%, 잉여현금흐름 적자 전환, CAPEX +142%YoY"><a class="card" href="reports/2026-07-29.html">
+      <div class="row1"><span class="d">2026-07-29 (수)</span><span>미국 기준일 2026-07-28</span></div>
+      <div class="hl">SOX(필라델피아 반도체지수) 기술적 베어마켓 진입, 6/22 고점 대비 -20.2%</div>
+      <p class="sm">FOMC 금리결정 + 워시 의장 첫 기자회견(오늘 14:00/14:30 ET)<br>Corning 가이던스 쇼크 -18%, 광통신 밸류체인(MRVL·LITE·AXTI·COHR) 동반 급락<br>SK하이닉스(한국 상장) -15%, 미국 메모리·엔비디아 동반 하락 촉발</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">실적</span><span class="tag">빅테크</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="반도체,AI,빅테크,환율" data-text="엔비디아(NVDA) -5%, OpenAI 데이터센터向 최대 2,500억 달러 자금보증 논의설로 &quot;순환금융&quot; 우려 재점화 샌디스크(SNDK) -11.85%/씨게이트(STX) -7%, 중국 창신테크(ChangXin) 상하이 IPO(첫날 +466%) 여파로 메모리 공급과잉 우려 엔비디아-SK그룹 5,000억 달러 이상 규모 협력 의향서(LOI), 2GW급 AI데이터센터·HBM4 공동개발 WTI -8.68%/브렌트유 -8.23%, 미국-이란 공습 상호 중단으로 유가 급락 반도체 AI 빅테크 환율 엔비디아(NVDA) -5%, OpenAI 데이터센터向 최대 2,500억 달러 자금보증 논의설로 &quot;순환금융&quot; 우려 재점화 샌디스크(SNDK) -11.85%/씨게이트(STX) -7%, 중국 창신테크(ChangXin) 상하이 IPO(첫날 +466%) 여파로 메모리 공급과잉 우려 엔비디아-SK그룹 5,000억 달러 이상 규모 협력 의향서(LOI), 2GW급 AI데이터센터·HBM4 공동개발 WTI -8.68%/브렌트유 -8.23%, 미국-이란 공습 상호 중단으로 유가 급락 브로드컴(AVGO), AI반도체 백로그 약 730억 달러·FY2027까지 매출목표 1,000억 달러 이상(CEO 발언) 알파벳(GOOGL), 2026년 연간 설비투자(Capex) 가이던스 195억~205억 달러로 상향 TSMC(TSM), Q2 매출 가이던스 390억~402억 달러(전년비 약 32% 성장), 2나노 양산 진전 FOMC 정책성명(07-29 발표 예정), 동결 확률 97.4% 애플(AAPL), 세계 시가총액 1위 지위 탈환(엔비디아 하락 반사, 시총 약 4.94~4.95조 달러) 빅테크 실적위크: MSFT·META(07-29), AMZN·AAPL(07-30) 실적 발표 예정"><a class="card" href="reports/2026-07-28.html">
+      <div class="row1"><span class="d">2026-07-28 (화)</span><span>미국 기준일 2026-07-27</span></div>
+      <div class="hl">엔비디아(NVDA) -5%, OpenAI 데이터센터向 최대 2,500억 달러 자금보증 논의설로 &quot;순환금융&quot; 우려 재점화</div>
+      <p class="sm">샌디스크(SNDK) -11.85%/씨게이트(STX) -7%, 중국 창신테크(ChangXin) 상하이 IPO(첫날 +466%) 여파로 메모리 공급과잉 우려<br>엔비디아-SK그룹 5,000억 달러 이상 규모 협력 의향서(LOI), 2GW급 AI데이터센터·HBM4 공동개발<br>WTI -8.68%/브렌트유 -8.23%, 미국-이란 공습 상호 중단으로 유가 급락</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">AI</span><span class="tag">빅테크</span><span class="tag">환율</span></div>
+    </a></li>
+    <li data-tags="반도체,환율,AI,실적" data-text="FOMC 회의(7/28~29) · NVDA-SK그룹 5,000억 달러+ AI 인프라 파트너십 · Alphabet 2026년 capex 1,950~2,050억 달러로 상… NVDA-SK그룹 5,000억 달러+ AI 인프라 파트너십 Alphabet 2026년 capex 1,950~2,050억 달러로 상향(클라우드 매출 YoY+82%), 다만 시간외 주가는 하락 SOX(필라델피아 반도체지수) -4.25% 급락 반도체 환율 AI 실적 FOMC 회의(7/28~29) NVDA-SK그룹 5,000억 달러+ AI 인프라 파트너십 Alphabet 2026년 capex 1,950~2,050억 달러로 상향(클라우드 매출 YoY+82%), 다만 시간외 주가는 하락 SOX(필라델피아 반도체지수) -4.25% 급락 TSMC 2026년 capex 600~640억 달러로 상향, 애리조나 추가 1,000억 달러 투자 AMD, Helios 랙스케일 양산 시작 + Anthropic과 최대 2GW MI450 공급계약 MSFT·META 실적(7/29) Super Micro(SMCI) FY26 4분기 마진 가이던스 대폭 상향, 백로그 600억 달러 초과 WTI -3.12%/브렌트 약 -4% 급락 SK하이닉스 HBM4 램프업을 2분기→3분기로 연기(NVIDIA 'Rubin' 지연 배경으로 거론)"><a class="card" href="reports/2026-07-27.html">
+      <div class="row1"><span class="d">2026-07-27 (월)</span><span>미국 기준일 2026-07-24</span></div>
+      <div class="hl">FOMC 회의(7/28~29) · NVDA-SK그룹 5,000억 달러+ AI 인프라 파트너십 · Alphabet 2026년 capex 1,950~2,050억 달러로 상…</div>
+      <p class="sm">NVDA-SK그룹 5,000억 달러+ AI 인프라 파트너십<br>Alphabet 2026년 capex 1,950~2,050억 달러로 상향(클라우드 매출 YoY+82%), 다만 시간외 주가는 하락<br>SOX(필라델피아 반도체지수) -4.25% 급락</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">환율</span><span class="tag">AI</span><span class="tag">실적</span></div>
+    </a></li>
+    <li data-tags="실적,AI,빅테크,에너지" data-text="중동發 유가 급등(WTI +6%대·Brent +7%, 배럴당 $100 재돌파)이 오늘 지수 하락의 핵심 동인 알파벳, Q2 실적은 호조였지만 2026년 capex 가이던스를 $1,950~2,050억으로 상향하자 주가 -7%, 마이크로소프트·아마존도 동반 하락 테슬라 Q2 실적 쇼크 AMD, Advancing AI 2026 행사에서 MI400/Helios 공식 공개, 오픈AI의 6GW GPU 배치 약속 발표 실적 AI 빅테크 에너지 중동發 유가 급등(WTI +6%대·Brent +7%, 배럴당 $100 재돌파)이 오늘 지수 하락의 핵심 동인 알파벳, Q2 실적은 호조였지만 2026년 capex 가이던스를 $1,950~2,050억으로 상향하자 주가 -7%, 마이크로소프트·아마존도 동반 하락 테슬라 Q2 실적 쇼크 AMD, Advancing AI 2026 행사에서 MI400/Helios 공식 공개, 오픈AI의 6GW GPU 배치 약속 발표 7/28~29 FOMC 임박 신규 실업수당청구 187,000명, 1969년 이후 최저 수준 슈퍼마이크로컴퓨터, 잠정 실적에서 매출총이익률 가이던스를 8.2~8.4%→15~17%로 대폭 상향, 분기 신규수주 $600억 초과 TSMC, Q2 매출 $402억(+34% YoY)으로 5분기 연속 최대 실적, AI 수요를 &quot;매우 견조&quot;하다고 평가 DRAM 현물가 최근 1년간 약 700% 급등, HBM은 2026년 물량이 이미 완판 록히드마틴(+11.4%)·허니웰(+5%) 실적 서프라이즈"><a class="card" href="reports/2026-07-24.html">
+      <div class="row1"><span class="d">2026-07-24 (금)</span><span>미국 기준일 2026-07-23</span></div>
+      <div class="hl">중동發 유가 급등(WTI +6%대·Brent +7%, 배럴당 $100 재돌파)이 오늘 지수 하락의 핵심 동인</div>
+      <p class="sm">알파벳, Q2 실적은 호조였지만 2026년 capex 가이던스를 $1,950~2,050억으로 상향하자 주가 -7%, 마이크로소프트·아마존도 동반 하락<br>테슬라 Q2 실적 쇼크<br>AMD, Advancing AI 2026 행사에서 MI400/Helios 공식 공개, 오픈AI의 6GW GPU 배치 약속 발표</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">AI</span><span class="tag">빅테크</span><span class="tag">에너지</span></div>
+    </a></li>
+    <li data-tags="실적,반도체,에너지,금리" data-text="Alphabet, 2026년 CAPEX(설비투자) 가이던스를 최대 $205B로 상향(컨센서스 $188B 상회) SOX(필라델피아 반도체지수) +5.2% 급등, 3대 지수는 소폭 약세 · ↑ Tesla 2분기 매출 컨센서스 상회했지만 EPS 대폭 하회·마진 쇼크(영업이익률 1.4%, 잉여현금흐름 -$1.1B) · ↓ Super Micro Computer(SMCI) +24%, 2026년 매출총이익률 2배 확대 전망 · ↑ 실적 반도체 에너지 금리 Alphabet, 2026년 CAPEX(설비투자) 가이던스를 최대 $205B로 상향(컨센서스 $188B 상회) SOX(필라델피아 반도체지수) +5.2% 급등, 3대 지수는 소폭 약세 · ↑ Tesla 2분기 매출 컨센서스 상회했지만 EPS 대폭 하회·마진 쇼크(영업이익률 1.4%, 잉여현금흐름 -$1.1B) · ↓ Super Micro Computer(SMCI) +24%, 2026년 매출총이익률 2배 확대 전망 · ↑ WTI +4%대·Brent +3.43%(6주 최고), 미–이란 긴장·후티 반군 위협 · ↑(유가) AMD-Microsoft, Helios AI 랙시스템 Azure 공급 확대(Meta·OpenAI·Oracle 초기 도입 언급) · ↑ Broadcom, 2027년까지 AI칩 매출 $100B 이상 전망(Reuters 보도) · ↑ TSMC 2분기 매출 NT$1.27조(+36% YoY), AI 수요가 사상 최고치 견인 · ↑ VIX -8.58%(17.05), 유가 급등 속에도 위험선호 개선 · ↑(위험선호) 10년물 국채금리 4.63%, CME FedWatch 7/29 FOMC 동결 확률 83.4% · →"><a class="card" href="reports/2026-07-23.html">
+      <div class="row1"><span class="d">2026-07-23 (목)</span><span>미국 기준일 2026-07-22</span></div>
+      <div class="hl">Alphabet, 2026년 CAPEX(설비투자) 가이던스를 최대 $205B로 상향(컨센서스 $188B 상회)</div>
+      <p class="sm">SOX(필라델피아 반도체지수) +5.2% 급등, 3대 지수는 소폭 약세 · ↑<br>Tesla 2분기 매출 컨센서스 상회했지만 EPS 대폭 하회·마진 쇼크(영업이익률 1.4%, 잉여현금흐름 -$1.1B) · ↓<br>Super Micro Computer(SMCI) +24%, 2026년 매출총이익률 2배 확대 전망 · ↑</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">반도체</span><span class="tag">에너지</span><span class="tag">금리</span></div>
+    </a></li>
+    <li data-tags="반도체,실적,연준,에너지" data-text="SOX +5.21%, 메모리주(마이크론·샌디스크) 급등이 반도체 밸류체인 전반 랠리 견인 엔비디아, Nebius 지분 9.3%(약 $50억) 보유 SEC 공시 Danaher -13.7%, 실적은 서프라이즈했으나 2026년 가이던스 하향 MSCI -10.7%, 2분기 실적 컨센서스 미달 반도체 실적 연준 에너지 SOX +5.21%, 메모리주(마이크론·샌디스크) 급등이 반도체 밸류체인 전반 랠리 견인 엔비디아, Nebius 지분 9.3%(약 $50억) 보유 SEC 공시 Danaher -13.7%, 실적은 서프라이즈했으나 2026년 가이던스 하향 MSCI -10.7%, 2분기 실적 컨센서스 미달 VIX -8.58% 급락, 지정학 리스크 속에서도 위험선호 회복 Genuine Parts -7.4%, 연간 이익전망 하향 CME FedWatch 동결확률 83.4%(7/21 보도) vs 인상확률 46.5%(7/13 보도), 시점 간 수치 상충 Intel +6%, RBC의 2분기 실적 서프라이즈(&quot;beat call&quot;) 기대(실적 발표는 7/23) Gold $4,082.73(+1.75%), FOMC 대기 속 $4,000 상회 유지 Brent +2.11%, 중동 리스크와 미-이란 평화협상 기대감 교차"><a class="card" href="reports/2026-07-22.html">
+      <div class="row1"><span class="d">2026-07-22 (수)</span><span>미국 기준일 2026-07-21</span></div>
+      <div class="hl">SOX +5.21%, 메모리주(마이크론·샌디스크) 급등이 반도체 밸류체인 전반 랠리 견인</div>
+      <p class="sm">엔비디아, Nebius 지분 9.3%(약 $50억) 보유 SEC 공시<br>Danaher -13.7%, 실적은 서프라이즈했으나 2026년 가이던스 하향<br>MSCI -10.7%, 2분기 실적 컨센서스 미달</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">실적</span><span class="tag">연준</span><span class="tag">에너지</span></div>
+    </a></li>
+    <li data-tags="빅테크,반도체,실적,AI" data-text="SOX(반도체지수) +2.37% 반등, 마이크로소프트의 AMD Helios AI 추론 솔루션 채택이 계기 브로드컴-애플, 2031년까지 $300억+ 규모 칩 공급계약 갱신 TSMC, 2026년 설비투자(CAPEX) 가이던스를 $187.5억~$200억으로 상향 (7/16 발표, 참고) 미-이란 군사 충돌 재점화, 유가·금 상승 및 위험자산 회피 빅테크 반도체 실적 AI SOX(반도체지수) +2.37% 반등, 마이크로소프트의 AMD Helios AI 추론 솔루션 채택이 계기 브로드컴-애플, 2031년까지 $300억+ 규모 칩 공급계약 갱신 TSMC, 2026년 설비투자(CAPEX) 가이던스를 $187.5억~$200억으로 상향 (7/16 발표, 참고) 미-이란 군사 충돌 재점화, 유가·금 상승 및 위험자산 회피 FOMC 회의 7/28~29 임박, CME FedWatch 동결 확률 86.7% 애플 -2%대 하락, 7/30 실적 발표를 앞두고 마진·가격인상 우려 오라클/서비스나우/어도비 동반 -4%대 하락(구체적 원인 미확인) 반도체 ETF(SOXX) 월중 순유입 $61.3억 vs 대형기술주 ETF(QQQ) 주간 순유출 $80억, 자금 로테이션 시그널 루멘텀 +7.5% / 테라다인 +4.6%, 광네트워킹·반도체 테스트장비 개별 강세(촉발 뉴스 미확인) 빅테크 실적시즌 개막 임박 (알파벳 7/22, MS·메타 7/29, 애플·아마존 7/30)"><a class="card" href="reports/2026-07-21.html">
+      <div class="row1"><span class="d">2026-07-21 (화)</span><span>미국 기준일 2026-07-20</span></div>
+      <div class="hl">SOX(반도체지수) +2.37% 반등, 마이크로소프트의 AMD Helios AI 추론 솔루션 채택이 계기</div>
+      <p class="sm">브로드컴-애플, 2031년까지 $300억+ 규모 칩 공급계약 갱신<br>TSMC, 2026년 설비투자(CAPEX) 가이던스를 $187.5억~$200억으로 상향 (7/16 발표, 참고)<br>미-이란 군사 충돌 재점화, 유가·금 상승 및 위험자산 회피</p>
+      <div class="tags"><span class="tag">빅테크</span><span class="tag">반도체</span><span class="tag">실적</span><span class="tag">AI</span></div>
+    </a></li>
+    <li data-tags="반도체,실적,에너지,변동성" data-text="반도체 섹터 급락, SOX 지수 기술적 약세장 진입(6월 고점 대비 -20%↑) 美 이란 공습 지속, 요르단서 美군 사망 확인, 유가 급등(WTI +4.48%) VIX 10%대 급등(최근 수주 최대폭) TSM, 실적은 호조였지만 CAPEX 가이던스發 마진 압박 우려로 주가 하락 반도체 실적 에너지 변동성 반도체 섹터 급락, SOX 지수 기술적 약세장 진입(6월 고점 대비 -20%↑) 美 이란 공습 지속, 요르단서 美군 사망 확인, 유가 급등(WTI +4.48%) VIX 10%대 급등(최근 수주 최대폭) TSM, 실적은 호조였지만 CAPEX 가이던스發 마진 압박 우려로 주가 하락 넷플릭스, 3분기 가이던스 부진으로 나스닥 하락에 기여 댈러스 연은 로건 총재, &quot;완만하게 더 높은 금리&quot; 필요 매파적 발언 구글 제미나이 3.5 프로 출시 지연 보도, 주가 -4% AST 스페이스모바일 -17%, 10억 달러 규모 전환사채 발행(옵션거래량 급증) 미시간대 소비자심리 예상 상회(54.4) vs NAHB 주택시장지수 하락(34) AMD, 반도체 ETF(SOXX) 내 비중에서 엔비디아 최초 추월(ETF 리밸런싱에 따른 기계적 결과)"><a class="card" href="reports/2026-07-20.html">
+      <div class="row1"><span class="d">2026-07-20 (월)</span><span>미국 기준일 2026-07-17</span></div>
+      <div class="hl">반도체 섹터 급락, SOX 지수 기술적 약세장 진입(6월 고점 대비 -20%↑)</div>
+      <p class="sm">美 이란 공습 지속, 요르단서 美군 사망 확인, 유가 급등(WTI +4.48%)<br>VIX 10%대 급등(최근 수주 최대폭)<br>TSM, 실적은 호조였지만 CAPEX 가이던스發 마진 압박 우려로 주가 하락</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">실적</span><span class="tag">에너지</span><span class="tag">변동성</span></div>
+    </a></li>
+    <li data-tags="반도체,실적,AI,에너지" data-text="SOX 반도체지수, 6월 고점 대비 20% 이상 하락하며 기술적 약세장(bear market) 진입 TSM 2분기 실적은 매출·수익성 컨센서스 상회(“더블 비트”)했으나, 상향된 CAPEX 가이던스가 마진압박 우려로 해석되며 주가 하락(-2.8~-7%) 중국 스타트업 Moonshot, 오픈소스 대형 AI모델 “Kimi K3” 공개 UBS, 하이퍼스케일러 CAPEX 증가율이 2026년 76%→2028년 6%로 둔화될 것이라는 전망 보도 반도체 실적 AI 에너지 SOX 반도체지수, 6월 고점 대비 20% 이상 하락하며 기술적 약세장(bear market) 진입 TSM 2분기 실적은 매출·수익성 컨센서스 상회(“더블 비트”)했으나, 상향된 CAPEX 가이던스가 마진압박 우려로 해석되며 주가 하락(-2.8~-7%) 중국 스타트업 Moonshot, 오픈소스 대형 AI모델 “Kimi K3” 공개 UBS, 하이퍼스케일러 CAPEX 증가율이 2026년 76%→2028년 6%로 둔화될 것이라는 전망 보도 미국의 대이란 공습 7일째 지속, WTI +4.05%·Brent +2.04% 급등 Netflix 2분기 매출 컨센서스 소폭 미달·3분기 가이던스 부진으로 주가 -8~-10% Micron·SanDisk·Western Digital 등 메모리 반도체주 동반 급락(-9%~-13%) 7월 미시간대 소비자심리지수(예비치) 54.4로 예상(51.0) 큰 폭 상회 CME FedWatch, 7/29 FOMC 동결확률 90%로 유지 6월 주택착공 142.7만건으로 급증했으나 건축허가는 136.7만건으로 감소, 엇갈린 신호"><a class="card" href="reports/2026-07-18.html">
+      <div class="row1"><span class="d">2026-07-18 (토)</span><span>미국 기준일 2026-07-17</span></div>
+      <div class="hl">SOX 반도체지수, 6월 고점 대비 20% 이상 하락하며 기술적 약세장(bear market) 진입</div>
+      <p class="sm">TSM 2분기 실적은 매출·수익성 컨센서스 상회(“더블 비트”)했으나, 상향된 CAPEX 가이던스가 마진압박 우려로 해석되며 주가 하락(-2.8~-7%)<br>중국 스타트업 Moonshot, 오픈소스 대형 AI모델 “Kimi K3” 공개<br>UBS, 하이퍼스케일러 CAPEX 증가율이 2026년 76%→2028년 6%로 둔화될 것이라는 전망 보도</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">실적</span><span class="tag">AI</span><span class="tag">에너지</span></div>
+    </a></li>
+    <li data-tags="반도체,연준,빅테크,물가" data-text="이란-미 갈등 확전 → Fed 7/29 FOMC 인상확률 급등(34%→46.5%, 9월은 최대 100%대 근접) 6월 PPI 예상치 대폭 하회(MoM -0.3%, 예상 0.0% / Core +0.2%, 예상 +0.4%) Micron -9.4% · AMD -6.4%, 중국 메모리(YMTC·CXMT) 경쟁 우려로 반도체 섹터 동반 매도 TSMC 2분기 실적 오늘(7/16) 발표 예정 반도체 연준 빅테크 물가 이란-미 갈등 확전 → Fed 7/29 FOMC 인상확률 급등(34%→46.5%, 9월은 최대 100%대 근접) 6월 PPI 예상치 대폭 하회(MoM -0.3%, 예상 0.0% / Core +0.2%, 예상 +0.4%) Micron -9.4% · AMD -6.4%, 중국 메모리(YMTC·CXMT) 경쟁 우려로 반도체 섹터 동반 매도 TSMC 2분기 실적 오늘(7/16) 발표 예정 FOMC 7/28~29 회의 예정, 인상확률 최근 급상승 AAPL +4% 사상 최고가, MSFT·AMZN·GOOGL +3% ETF 자금흐름: SOXX 주간 +$5.3B·SMH +$2.5B 유입 vs QQQ -$8B 유출(7/10 종료 주, 최신성 낮음) 소매판매·신규실업수당·필라델피아 연은 제조업지수 오늘(7/16) 발표 예정(수집시점 미발표) VIX -3.85%(16.50) Vertiv 말레이시아 신규 생산시설 발표, Supermicro-Red Hat 엣지AI 어플라이언스 공동 출시"><a class="card" href="reports/2026-07-16.html">
+      <div class="row1"><span class="d">2026-07-16 (목)</span><span>미국 기준일 2026-07-15</span></div>
+      <div class="hl">이란-미 갈등 확전 → Fed 7/29 FOMC 인상확률 급등(34%→46.5%, 9월은 최대 100%대 근접)</div>
+      <p class="sm">6월 PPI 예상치 대폭 하회(MoM -0.3%, 예상 0.0% / Core +0.2%, 예상 +0.4%)<br>Micron -9.4% · AMD -6.4%, 중국 메모리(YMTC·CXMT) 경쟁 우려로 반도체 섹터 동반 매도<br>TSMC 2분기 실적 오늘(7/16) 발표 예정</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">연준</span><span class="tag">빅테크</span><span class="tag">물가</span></div>
+    </a></li>
+    <li data-tags="실적,물가,AI,금융" data-text="6월 CPI 서프라이즈 완화(헤드라인 YoY 3.5%, 예상 3.8%) 美-이란 호르무즈 해협 무력충돌 3일째 지속, 트럼프 대통령 통행료 20% 부과 발표 · → IBM 장중 -24%, 2분기 실적 사전경고(1961년 이후 최악의 하루) · ↓ Goldman Sachs·JPMorgan·BofA 실적 호조 실적 물가 AI 금융 6월 CPI 서프라이즈 완화(헤드라인 YoY 3.5%, 예상 3.8%) 美-이란 호르무즈 해협 무력충돌 3일째 지속, 트럼프 대통령 통행료 20% 부과 발표 · → IBM 장중 -24%, 2분기 실적 사전경고(1961년 이후 최악의 하루) · ↓ Goldman Sachs·JPMorgan·BofA 실적 호조 Fed 워시 의장 취임 후 첫 하원 증언 TSMC 2분기 매출 +36% YoY PPI(6월) 07-15 발표 예정 CleanSpark +11%, 조지아 데이터센터 20년 임대계약($66억) · ↑ AVGO, Anthropic向 커스텀 AI칩 수주 2건($100억+$110억) 재확인 · → Apple, OpenAI·전직임원 상대 영업비밀 소송 제기 · →"><a class="card" href="reports/2026-07-15.html">
+      <div class="row1"><span class="d">2026-07-15 (수)</span><span>미국 기준일 2026-07-15</span></div>
+      <div class="hl">6월 CPI 서프라이즈 완화(헤드라인 YoY 3.5%, 예상 3.8%)</div>
+      <p class="sm">美-이란 호르무즈 해협 무력충돌 3일째 지속, 트럼프 대통령 통행료 20% 부과 발표 · →<br>IBM 장중 -24%, 2분기 실적 사전경고(1961년 이후 최악의 하루) · ↓<br>Goldman Sachs·JPMorgan·BofA 실적 호조</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">물가</span><span class="tag">AI</span><span class="tag">금융</span></div>
+    </a></li>
+    <li data-tags="반도체,에너지,연준,금리" data-text="S&amp;P500 -0.79% / 나스닥 -1.55%(3대 지수 중 최대 낙폭), 이란 해상 봉쇄 재시행으로 미-이란 충돌 격화 Brent 원유 야간선물 +9.6%(2020년 이후 최대 일일 상승) · VIX 17.16(+14.17%) Fed 거버너 Waller &quot;금리 인상 가능성 여전히 열려있다&quot; 발언 · CME FedWatch 7월 인상 확률 39%(07-13 인용) 미국 CPI(6월), 오늘 밤 21:30 KST 발표 예정(컨센서스 YoY 3.8%, 전월 4.2%) 반도체 에너지 연준 금리 S&amp;P500 -0.79% / 나스닥 -1.55%(3대 지수 중 최대 낙폭), 이란 해상 봉쇄 재시행으로 미-이란 충돌 격화 Brent 원유 야간선물 +9.6%(2020년 이후 최대 일일 상승) · VIX 17.16(+14.17%) Fed 거버너 Waller &quot;금리 인상 가능성 여전히 열려있다&quot; 발언 · CME FedWatch 7월 인상 확률 39%(07-13 인용) 미국 CPI(6월), 오늘 밤 21:30 KST 발표 예정(컨센서스 YoY 3.8%, 전월 4.2%) Fed 워시 의장, 취임 후 첫 하원 반기 통화정책 증언(CPI 발표 90분 뒤, 오늘 23:00 KST) SK Hynix 한국 상장분 -15%(사상 최대 낙폭) · 메모리 3사(마이크론·샌디스크·웨스턴디지털) 각각 -6% HBM 2026년 생산능력 전량 매진 · DRAM 계약가 +13~18%, NAND 계약가 +10~15% 전망(3분기) 미국 대형 은행 5곳(JP모건·BoA·골드만삭스·씨티·웰스파고) Q2 실적, 오늘 장전 발표로 실적시즌 개막 AppLovin -11~12%, 특정 뉴스 없이 S&amp;P500 내 최악 수익률 종목 AMD, 07-22 Advancing AI 2026 컨퍼런스에서 Zen 6 EPYC(코드네임 Venice) 서버 CPU 공개 예고(씨티 &quot;업계를 뒤흔들 발표&quot; 기대)"><a class="card" href="reports/2026-07-14.html">
+      <div class="row1"><span class="d">2026-07-14 (화)</span><span>미국 기준일 2026-07-14</span></div>
+      <div class="hl">S&amp;P500 -0.79% / 나스닥 -1.55%(3대 지수 중 최대 낙폭), 이란 해상 봉쇄 재시행으로 미-이란 충돌 격화</div>
+      <p class="sm">Brent 원유 야간선물 +9.6%(2020년 이후 최대 일일 상승) · VIX 17.16(+14.17%)<br>Fed 거버너 Waller &quot;금리 인상 가능성 여전히 열려있다&quot; 발언 · CME FedWatch 7월 인상 확률 39%(07-13 인용)<br>미국 CPI(6월), 오늘 밤 21:30 KST 발표 예정(컨센서스 YoY 3.8%, 전월 4.2%)</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">에너지</span><span class="tag">연준</span><span class="tag">금리</span></div>
+    </a></li>
+    <li data-tags="빅테크,AI,연준,변동성" data-text="연준 반기 통화정책보고서 · Meta 자체 AI칩 &quot;Iris&quot; 9월 생산 개시 계획 노출 · SK Hynix 나스닥 데뷔 흥행(+13%, $265억, 사상 최대 규… Meta 자체 AI칩 &quot;Iris&quot; 9월 생산 개시 계획 노출 SK Hynix 나스닥 데뷔 흥행(+13%, $265억, 사상 최대 규모 외국기업 美 상장) Nvidia 시가총액 $5조 재돌파(종가 $210.96) 빅테크 AI 연준 변동성 연준 반기 통화정책보고서 Meta 자체 AI칩 &quot;Iris&quot; 9월 생산 개시 계획 노출 SK Hynix 나스닥 데뷔 흥행(+13%, $265억, 사상 최대 규모 외국기업 美 상장) Nvidia 시가총액 $5조 재돌파(종가 $210.96) TSMC 첨단공정 웨이퍼가격 5~10% 인상 확인 DRAM +13~18%·NAND +10~15% 계약가 상승 전망(2026 3분기) Stifel, AMD 목표주가 $450→$635 상향(공급제약 내러티브) Apple, OpenAI 상대 영업비밀 침해 소송 제기 EU, Meta &quot;중독적 설계&quot; DSA 위반 예비판단(최대 매출 6% 과징금 가능) Micron 조정 지속(-1.24%, 고점 대비 -22%) 속 VIX 저변동성(15.03)"><a class="card" href="reports/2026-07-13.html">
+      <div class="row1"><span class="d">2026-07-13 (월)</span><span>미국 기준일 2026-07-13</span></div>
+      <div class="hl">연준 반기 통화정책보고서 · Meta 자체 AI칩 &quot;Iris&quot; 9월 생산 개시 계획 노출 · SK Hynix 나스닥 데뷔 흥행(+13%, $265억, 사상 최대 규…</div>
+      <p class="sm">Meta 자체 AI칩 &quot;Iris&quot; 9월 생산 개시 계획 노출<br>SK Hynix 나스닥 데뷔 흥행(+13%, $265억, 사상 최대 규모 외국기업 美 상장)<br>Nvidia 시가총액 $5조 재돌파(종가 $210.96)</p>
+      <div class="tags"><span class="tag">빅테크</span><span class="tag">AI</span><span class="tag">연준</span><span class="tag">변동성</span></div>
+    </a></li>
+    <li data-tags="고용,반도체,에너지,환율" data-text="반도체 섹터 전반 랠리 + 반도체 ETF(SOXX) 사상 최대 일일 자금유입($54.3억) 美-이란 긴장 재점화(&quot;휴전 끝났다&quot;), 이란 원유 제재 유예 철회, 유가 급등 후 조정 Broadcom-Apple 커스텀 AI칩 계약 2031년까지 확장(3백억달러+) 6월 비농업고용 서프라이즈 미스(-58,000명), 실업률 4.2% 고용 반도체 에너지 환율 반도체 섹터 전반 랠리 + 반도체 ETF(SOXX) 사상 최대 일일 자금유입($54.3억) 美-이란 긴장 재점화(&quot;휴전 끝났다&quot;), 이란 원유 제재 유예 철회, 유가 급등 후 조정 Broadcom-Apple 커스텀 AI칩 계약 2031년까지 확장(3백억달러+) 6월 비농업고용 서프라이즈 미스(-58,000명), 실업률 4.2% Micron-GlobalWafers 전략적 투자·10년 공급계약(최대 30억달러) SK Hynix 미국 ADR(SKHY) 나스닥 상장, 청약 약 7배 초과(280억달러 조달 목표) MARA +18%, 텍사스 부지·전력 인프라(최대 2GW) 인수 Intel 누적 -21%(06-30~07-07), 서버 CPU 점유율 72.8%→66.8% 하락(YoY) NVIDIA Rubin Ultra용 Kyber랙 시스템, 제조 문제로 2028년 지연 CME FedWatch: 07-29 FOMC 동결 확률 74.9%, 연말 &quot;최소 1회 인상&quot; 확률 75%대로 상승"><a class="card" href="reports/2026-07-10.html">
+      <div class="row1"><span class="d">2026-07-10 (금)</span><span>미국 기준일 2026-07-09</span></div>
+      <div class="hl">반도체 섹터 전반 랠리 + 반도체 ETF(SOXX) 사상 최대 일일 자금유입($54.3억)</div>
+      <p class="sm">美-이란 긴장 재점화(&quot;휴전 끝났다&quot;), 이란 원유 제재 유예 철회, 유가 급등 후 조정<br>Broadcom-Apple 커스텀 AI칩 계약 2031년까지 확장(3백억달러+)<br>6월 비농업고용 서프라이즈 미스(-58,000명), 실업률 4.2%</p>
+      <div class="tags"><span class="tag">고용</span><span class="tag">반도체</span><span class="tag">에너지</span><span class="tag">환율</span></div>
+    </a></li>
+    <li data-tags="반도체,환율,연준,금리" data-text="트럼프 대통령 &quot;이란 휴전 끝났다&quot; 발언 → 유가 급등 → 다우 -1.09% 급락 CME FedWatch 9월 금리인상 확률 62%→68.8% 급등(12월 85.3%) FOMC 의사록 공개 애플-브로드컴 300억 달러 칩 공급계약을 2031년까지 확대, 브로드컴(AVGO) +5% 반도체 환율 연준 금리 트럼프 대통령 &quot;이란 휴전 끝났다&quot; 발언 → 유가 급등 → 다우 -1.09% 급락 CME FedWatch 9월 금리인상 확률 62%→68.8% 급등(12월 85.3%) FOMC 의사록 공개 애플-브로드컴 300억 달러 칩 공급계약을 2031년까지 확대, 브로드컴(AVGO) +5% 중국 정부, 알리바바·바이트댄스·딥시크 등에 엔비디아 H200 칩 제한적 구매 허용 방침, 엔비디아(NVDA) +3.47% 인텔(INTC) 7거래일 연속 급락(-7.67~-9.66%) 나스닥 나홀로 반등(+0.20%) VIX +3.6%(장중 18선 근접) TSM, 씨티 목표주가 상향(NT$3,800)·2026년 매출성장률 30%+ 전망(7/16 실적과 연계) 반도체 ETF SMH, 7/6 단일일 +18억 달러 순유입(단, 5일·1개월 기준과는 상충)"><a class="card" href="reports/2026-07-09.html">
+      <div class="row1"><span class="d">2026-07-09 (목)</span><span>미국 기준일 2026-07-08</span></div>
+      <div class="hl">트럼프 대통령 &quot;이란 휴전 끝났다&quot; 발언 → 유가 급등 → 다우 -1.09% 급락</div>
+      <p class="sm">CME FedWatch 9월 금리인상 확률 62%→68.8% 급등(12월 85.3%)<br>FOMC 의사록 공개<br>애플-브로드컴 300억 달러 칩 공급계약을 2031년까지 확대, 브로드컴(AVGO) +5%</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">환율</span><span class="tag">연준</span><span class="tag">금리</span></div>
+    </a></li>
+    <li data-tags="반도체,연준,금리,실적" data-text="삼성전자 &quot;기대 미충족&quot; 실적 → 반도체 섹터 -7~-10% 매도세 촉발 FOMC 의사록 오늘(7/8) 14:00 ET 공개 NVDA Kyber NVL144 12개월 지연 루머 vs. &quot;로드맵 온전&quot; 즉각 부인 기준금리 3.50~3.75% 동결 + 7/29 FOMC 인상 확률 26.6% 잔존 반도체 연준 금리 실적 삼성전자 &quot;기대 미충족&quot; 실적 → 반도체 섹터 -7~-10% 매도세 촉발 FOMC 의사록 오늘(7/8) 14:00 ET 공개 NVDA Kyber NVL144 12개월 지연 루머 vs. &quot;로드맵 온전&quot; 즉각 부인 기준금리 3.50~3.75% 동결 + 7/29 FOMC 인상 확률 26.6% 잔존 SpaceX Nasdaq-100 편입 + 패시브 강제 매수 ~$43억, SPCX -29% Dow Jones 52주 신고점 SMH -$1.24B 환매 / SOXX +$419.4M 유입 SOXL 일일 -16% 급락, 내재 스왑 파이낸싱 $79억 노출 WTI +3.63%, Brent +1.26% Goldman Sachs: NVDA 선행 PER 21.7배 = &quot;S&amp;P500 평균 수준, 5년 평균(72배) 대비 매력적&quot;"><a class="card" href="reports/2026-07-08.html">
+      <div class="row1"><span class="d">2026-07-08 (수)</span><span>미국 기준일 2026-07-07</span></div>
+      <div class="hl">삼성전자 &quot;기대 미충족&quot; 실적 → 반도체 섹터 -7~-10% 매도세 촉발</div>
+      <p class="sm">FOMC 의사록 오늘(7/8) 14:00 ET 공개<br>NVDA Kyber NVL144 12개월 지연 루머 vs. &quot;로드맵 온전&quot; 즉각 부인<br>기준금리 3.50~3.75% 동결 + 7/29 FOMC 인상 확률 26.6% 잔존</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">연준</span><span class="tag">금리</span><span class="tag">실적</span></div>
+    </a></li>
+    <li data-tags="고용,금리,빅테크,에너지" data-text="Meta Compute 발표 · 6월 NFP +57,000 · CoreWeave(CRWV) 이틀 연속 폭락 6월 NFP +57,000 CoreWeave(CRWV) 이틀 연속 폭락 NASDAQ-100 -2.02% vs. Dow ATH 52,900 고용 금리 빅테크 에너지 Meta Compute 발표 6월 NFP +57,000 CoreWeave(CRWV) 이틀 연속 폭락 NASDAQ-100 -2.02% vs. Dow ATH 52,900 TSM 목표주가 일제 상향 (UBS·BofA·Nomura·Barclays) Warsh 의장 &quot;인플레이션 리스크 완화&quot; 발언 → 국채수익률 하락 ↑채권 Bloom Energy + Brookfield AI 전력 파트너십 $5B→$25B 확대 ↑ SOXL $7.9B 스왑 포지션 강제 청산 WTI/Brent 하락 Nike(NKE) Q3 실적"><a class="card" href="reports/2026-07-03.html">
+      <div class="row1"><span class="d">2026-07-03 (금)</span><span>미국 기준일 2026-07-02</span></div>
+      <div class="hl">Meta Compute 발표 · 6월 NFP +57,000 · CoreWeave(CRWV) 이틀 연속 폭락</div>
+      <p class="sm">6월 NFP +57,000<br>CoreWeave(CRWV) 이틀 연속 폭락<br>NASDAQ-100 -2.02% vs. Dow ATH 52,900</p>
+      <div class="tags"><span class="tag">고용</span><span class="tag">금리</span><span class="tag">빅테크</span><span class="tag">에너지</span></div>
+    </a></li>
+    <li data-tags="반도체,고용,실적,연준" data-text="Kevin Warsh 연준 의장 &quot;물가가 너무 높다&quot; 발언 + 10년물 국채 4.481%로 +6bp 급등 ADP 6월 민간 고용 +98,000명 (예상 +118,000명 하회) + 내일 NFP 발표 예정 SOX(반도체 지수) -5.39%: AVGO 가이던스 여진으로 반도체 섹터 전반 충격 SMCI 대만 당국 사무소 압수수색·직원 구금: NVIDIA 칩 중국 밀수 혐의 ~$2.5B 반도체 고용 실적 연준 Kevin Warsh 연준 의장 &quot;물가가 너무 높다&quot; 발언 + 10년물 국채 4.481%로 +6bp 급등 ADP 6월 민간 고용 +98,000명 (예상 +118,000명 하회) + 내일 NFP 발표 예정 SOX(반도체 지수) -5.39%: AVGO 가이던스 여진으로 반도체 섹터 전반 충격 SMCI 대만 당국 사무소 압수수색·직원 구금: NVIDIA 칩 중국 밀수 혐의 ~$2.5B JOLTS 5월 구인 7.594M (예상 +294K 상회, 2년 최고치): ADP와 정반대 신호 AVGO Q3 AI 반도체 가이던스 $16B (일부 애널 기대치 ~$17.2B 하회 보도): 전일 발표 여진 TSM -3.51%: 7/16 실적 발표 앞두고 차익실현 + 4~5월 매출 성장률 24% YoY (기대 35% 하회 우려) AMD -4.95%: 개별 재료 없이 AVGO 여진에 반도체 섹터 동반 하락 SSTK -29%: Getty Images가 $3.7B 합병 파기 (영국 CMA 조건 불수용) BSP (Bending Spoons) IPO 첫날 +40% 데뷔: 소프트웨어 IPO 시장 강건성 신호"><a class="card" href="reports/2026-07-02.html">
+      <div class="row1"><span class="d">2026-07-02 (목)</span><span>미국 기준일 2026-07-01</span></div>
+      <div class="hl">Kevin Warsh 연준 의장 &quot;물가가 너무 높다&quot; 발언 + 10년물 국채 4.481%로 +6bp 급등</div>
+      <p class="sm">ADP 6월 민간 고용 +98,000명 (예상 +118,000명 하회) + 내일 NFP 발표 예정<br>SOX(반도체 지수) -5.39%: AVGO 가이던스 여진으로 반도체 섹터 전반 충격<br>SMCI 대만 당국 사무소 압수수색·직원 구금: NVIDIA 칩 중국 밀수 혐의 ~$2.5B</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">고용</span><span class="tag">실적</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="에너지,고용,반도체,연준" data-text="Broadcom+OpenAI &quot;Jalapeño&quot; 추론 전용 칩 발표 JOLTS 5월 구인건수 7.594M S&amp;P 500 Q2 +13.5%, Tech 섹터 +28% Brent 원유 Q2 −30% 에너지 고용 반도체 연준 Broadcom+OpenAI &quot;Jalapeño&quot; 추론 전용 칩 발표 JOLTS 5월 구인건수 7.594M S&amp;P 500 Q2 +13.5%, Tech 섹터 +28% Brent 원유 Q2 −30% Fed dot median 3.8%로 상향 Alphabet, Dow Jones 신규 편입 Nike Q4 FY2026 AMD+Rackspace, 30MW 데이터센터 배포 계약(2026~2028) NVDA 이사 Stevens, 885,000주(~$184–186M) 재량 매도(06-18) Concentrix(CNXC) −22%"><a class="card" href="reports/2026-07-01.html">
+      <div class="row1"><span class="d">2026-07-01 (수)</span><span>미국 기준일 2026-06-30</span></div>
+      <div class="hl">Broadcom+OpenAI &quot;Jalapeño&quot; 추론 전용 칩 발표</div>
+      <p class="sm">JOLTS 5월 구인건수 7.594M<br>S&amp;P 500 Q2 +13.5%, Tech 섹터 +28%<br>Brent 원유 Q2 −30%</p>
+      <div class="tags"><span class="tag">에너지</span><span class="tag">고용</span><span class="tag">반도체</span><span class="tag">연준</span></div>
+    </a></li>
+  </ul></div>
+  <div class="month"><h3>2026년 6월</h3>
+  <ul class="cards">
+    <li data-tags="반도체,AI,빅테크,연준" data-text="미국 3대 지수 동반 랠리, Dow 사상 최초 52,000pt 돌파 반도체 장비주 급등(KLAC 약+12%·AMAT 약+11%, SMH+3%대), 한국 반도체 급락 우려 완화에 따른 반등 AMD-Meta 최대 6GW GPU 배치 계약(직전 보고 유지, stale) Astera Labs(ALAB) +16.07%, Nasdaq-100 편입 + AI인프라 수요 부각 반도체 AI 빅테크 연준 미국 3대 지수 동반 랠리, Dow 사상 최초 52,000pt 돌파 반도체 장비주 급등(KLAC 약+12%·AMAT 약+11%, SMH+3%대), 한국 반도체 급락 우려 완화에 따른 반등 AMD-Meta 최대 6GW GPU 배치 계약(직전 보고 유지, stale) Astera Labs(ALAB) +16.07%, Nasdaq-100 편입 + AI인프라 수요 부각 Alphabet(GOOGL) Dow 편입(Verizon 대체), 편입일 +5% 상승 CME FedWatch: 2026-07-29 FOMC 동결 확률 70.1% Comcast(CMCSA) 미디어·테크 사업부 스핀오프 발표, +4.4% SMCI 70억 달러 지분·전환증권 조달 완료(AI서버 부품 구매 자금, stale) Caterpillar(CAT) Russell Top50 신규 편입, +3.50% VIX 17.65(-4.13%), 증시 랠리와 동행한 위험선호 회복"><a class="card" href="reports/2026-06-30.html">
+      <div class="row1"><span class="d">2026-06-30 (화)</span><span>미국 기준일 2026-06-29</span></div>
+      <div class="hl">미국 3대 지수 동반 랠리, Dow 사상 최초 52,000pt 돌파</div>
+      <p class="sm">반도체 장비주 급등(KLAC 약+12%·AMAT 약+11%, SMH+3%대), 한국 반도체 급락 우려 완화에 따른 반등<br>AMD-Meta 최대 6GW GPU 배치 계약(직전 보고 유지, stale)<br>Astera Labs(ALAB) +16.07%, Nasdaq-100 편입 + AI인프라 수요 부각</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">AI</span><span class="tag">빅테크</span><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="연준,반도체,에너지,물가" data-text="기술주 5거래일 연속 약세 + OpenAI IPO 2027년 연기 검토설 SpaceX, Russell 1000·3000 지수 편입(6/29 거래 반영 예정) SOX -5.29%(타 지수 등락률과 괴리, 신뢰도 확인 필요) CME FedWatch 7/29 FOMC 동결확률 69%, 10Y-2Y 스프레드 +31bp 연준 반도체 에너지 물가 기술주 5거래일 연속 약세 + OpenAI IPO 2027년 연기 검토설 SpaceX, Russell 1000·3000 지수 편입(6/29 거래 반영 예정) SOX -5.29%(타 지수 등락률과 괴리, 신뢰도 확인 필요) CME FedWatch 7/29 FOMC 동결확률 69%, 10Y-2Y 스프레드 +31bp Nvidia 시가총액 5조달러 하회 보도(발생일 불일치) SMH·SOXX ETF 합산 순유입 $47억(기준주 불확실) Michigan 소비자심리 확정치 49.5(예상 하회) / 1년 기대인플레 4.6%(완화) WTI·Brent 약세, 호르무즈 해협 통항 정상화 기대"><a class="card" href="reports/2026-06-29.html">
+      <div class="row1"><span class="d">2026-06-29 (월)</span><span>미국 기준일 2026-06-26</span></div>
+      <div class="hl">기술주 5거래일 연속 약세 + OpenAI IPO 2027년 연기 검토설</div>
+      <p class="sm">SpaceX, Russell 1000·3000 지수 편입(6/29 거래 반영 예정)<br>SOX -5.29%(타 지수 등락률과 괴리, 신뢰도 확인 필요)<br>CME FedWatch 7/29 FOMC 동결확률 69%, 10Y-2Y 스프레드 +31bp</p>
+      <div class="tags"><span class="tag">연준</span><span class="tag">반도체</span><span class="tag">에너지</span><span class="tag">물가</span></div>
+    </a></li>
+    <li data-tags="반도체,AI,실적,빅테크" data-text="DRAM·NAND·HBM 가격 급등, HBM 생산능력 매진 Apple·Microsoft, 메모리 원가 상승을 이유로 소비자가 인상 Micron(MU) FQ3 실적 가이던스 상단 초과(+17%) Broadcom·OpenAI, 커스텀 AI칩 &quot;Jalapeño&quot; 공동 발표 반도체 AI 실적 빅테크 DRAM·NAND·HBM 가격 급등, HBM 생산능력 매진 Apple·Microsoft, 메모리 원가 상승을 이유로 소비자가 인상 Micron(MU) FQ3 실적 가이던스 상단 초과(+17%) Broadcom·OpenAI, 커스텀 AI칩 &quot;Jalapeño&quot; 공동 발표 Qualcomm(QCOM), 데이터센터 비휴대폰 매출목표 상향 + Meta 공급계약 AMD-Meta, 최대 6GW 규모 Instinct GPU 다년 공급계약(보도) PCE(5월) 헤드라인·코어 MoM 컨센서스 하회, YoY는 혼재 Bio-Techne(TECH), Merck KGaA에 113억 달러 현금 인수 합의 WTI·Brent 약세, 미-이란 휴전 진전 VIX 급락(-5.75%), 리스크 선호 회복"><a class="card" href="reports/2026-06-26.html">
+      <div class="row1"><span class="d">2026-06-26 (금)</span><span>미국 기준일 2026-06-25</span></div>
+      <div class="hl">DRAM·NAND·HBM 가격 급등, HBM 생산능력 매진</div>
+      <p class="sm">Apple·Microsoft, 메모리 원가 상승을 이유로 소비자가 인상<br>Micron(MU) FQ3 실적 가이던스 상단 초과(+17%)<br>Broadcom·OpenAI, 커스텀 AI칩 &quot;Jalapeño&quot; 공동 발표</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">AI</span><span class="tag">실적</span><span class="tag">빅테크</span></div>
+    </a></li>
+    <li data-tags="실적,연준,AI,반도체" data-text="Micron(MU) 실적 서프라이즈 · FOMC 점도표 상향(3.4%→3.8%) · Broadcom/OpenAI 커스텀 추론칩 &quot;Jalapeño&quot; 샘플 인도 FOMC 점도표 상향(3.4%→3.8%) Broadcom/OpenAI 커스텀 추론칩 &quot;Jalapeño&quot; 샘플 인도 하이퍼스케일러 공격적 capex 우려 실적 연준 AI 반도체 Micron(MU) 실적 서프라이즈 FOMC 점도표 상향(3.4%→3.8%) Broadcom/OpenAI 커스텀 추론칩 &quot;Jalapeño&quot; 샘플 인도 하이퍼스케일러 공격적 capex 우려 유가·금 급락(미·이란 협상 진전, 호르무즈 운항 재개 보도) Cerebras 상장 후 첫 실적, 마진둔화 가이던스로 -11% FedEx 매출 소폭 상회에도 -6% 10년물 4.49% 하락추세 KB Home 매출 소폭 상회 +3% CME FedWatch 동결확률 88.8%(6/13 기준, 데이터 오래됨)"><a class="card" href="reports/2026-06-25.html">
+      <div class="row1"><span class="d">2026-06-25 (목)</span><span>미국 기준일 2026-06-24</span></div>
+      <div class="hl">Micron(MU) 실적 서프라이즈 · FOMC 점도표 상향(3.4%→3.8%) · Broadcom/OpenAI 커스텀 추론칩 &quot;Jalapeño&quot; 샘플 인도</div>
+      <p class="sm">FOMC 점도표 상향(3.4%→3.8%)<br>Broadcom/OpenAI 커스텀 추론칩 &quot;Jalapeño&quot; 샘플 인도<br>하이퍼스케일러 공격적 capex 우려</p>
+      <div class="tags"><span class="tag">실적</span><span class="tag">연준</span><span class="tag">AI</span><span class="tag">반도체</span></div>
+    </a></li>
+    <li data-tags="반도체,실적,금리,물가" data-text="메모리·반도체 섹터 동반 급락 · BofA, 2026년 내 0.25%p씩 3회 금리인상(9·10·12월)… · Micron(MU) -11.4%, 사상 최고가 직후 급락(BofA는 목… BofA, 2026년 내 0.25%p씩 3회 금리인상(9·10·12월) 전망으로 변경 Micron(MU) -11.4%, 사상 최고가 직후 급락(BofA는 목표가 오히려 상향에도 매도) Micron FY2026 3분기 실적 6/24(오늘) 발표 예정 반도체 실적 금리 물가 메모리·반도체 섹터 동반 급락 BofA, 2026년 내 0.25%p씩 3회 금리인상(9·10·12월) 전망으로 변경 Micron(MU) -11.4%, 사상 최고가 직후 급락(BofA는 목표가 오히려 상향에도 매도) Micron FY2026 3분기 실적 6/24(오늘) 발표 예정 GDP 3차 추정치·PCE/Core PCE(5월) 6/25(목) 동시 발표 예정 FedEx 실적 컨센서스 상회했지만 FY27 가이던스 중간값이 소폭 하회, 장후 -5.4~5.7% IBM, JPMorgan이 Neutral→Overweight 상향(목표가 $291), +4~5% NVIDIA $25B 투자등급 회사채 발행 완료, 주문 $85B(발행액의 약 3.4배) Super Micro $7.0B 지분·지분연계 금융조달 발표(AI서버 부품 구매 자금) (참고) 한국 코스피 -9.99%(서킷브레이커 발동), 외국인 약 5.79조원(~$3.8B) 순매도"><a class="card" href="reports/2026-06-24.html">
+      <div class="row1"><span class="d">2026-06-24 (수)</span><span>미국 기준일 2026-06-23</span></div>
+      <div class="hl">메모리·반도체 섹터 동반 급락 · BofA, 2026년 내 0.25%p씩 3회 금리인상(9·10·12월)… · Micron(MU) -11.4%, 사상 최고가 직후 급락(BofA는 목…</div>
+      <p class="sm">BofA, 2026년 내 0.25%p씩 3회 금리인상(9·10·12월) 전망으로 변경<br>Micron(MU) -11.4%, 사상 최고가 직후 급락(BofA는 목표가 오히려 상향에도 매도)<br>Micron FY2026 3분기 실적 6/24(오늘) 발표 예정</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">실적</span><span class="tag">금리</span><span class="tag">물가</span></div>
+    </a></li>
+    <li data-tags="반도체,에너지,연준,금리" data-text="Fed 점도표가 매파적으로 급변(위원 18명 중 9명이 2026년 내 금리 인상 지지, 3월엔 0명) 대형 기술주 동반 약세(Alphabet -5%·AI 인재이탈, Amazon -4.8%, Microsoft -3%, Meta -2.3%) 반도체 ETF(SMH)에 사상 최대 단일일 자금($6.93B) 유입 + AMD·Broadcom·TSMC 동반 강세 SpaceX 3거래일 연속 급락(누적 -23%, 시총 약 6,000억 달러 증발) + 투자등급 회사채 첫 발행 계획 반도체 에너지 연준 금리 Fed 점도표가 매파적으로 급변(위원 18명 중 9명이 2026년 내 금리 인상 지지, 3월엔 0명) 대형 기술주 동반 약세(Alphabet -5%·AI 인재이탈, Amazon -4.8%, Microsoft -3%, Meta -2.3%) 반도체 ETF(SMH)에 사상 최대 단일일 자금($6.93B) 유입 + AMD·Broadcom·TSMC 동반 강세 SpaceX 3거래일 연속 급락(누적 -23%, 시총 약 6,000억 달러 증발) + 투자등급 회사채 첫 발행 계획 Russell 2000 사상 최초 3,000선 돌파(+0.83%) 미·이란 디에스컬레이션 진전으로 유가 하락(WTI -2.3%, Brent -1.6%) Credo Technology 4분기 매출 전년대비 +157%, 단 상위 2개 고객이 매출 61% 차지(10-K 공시) NVIDIA 임원 매도 2건 합계 $109.9M(거래유형 미확인) SOXX(반도체 ETF) 5일 $255M·1개월 $4.08B 유입 Applied Digital, Goldman Sachs 주선 최대 $350M 신용공급계약 체결"><a class="card" href="reports/2026-06-23.html">
+      <div class="row1"><span class="d">2026-06-23 (화)</span><span>미국 기준일 2026-06-22</span></div>
+      <div class="hl">Fed 점도표가 매파적으로 급변(위원 18명 중 9명이 2026년 내 금리 인상 지지, 3월엔 0명)</div>
+      <p class="sm">대형 기술주 동반 약세(Alphabet -5%·AI 인재이탈, Amazon -4.8%, Microsoft -3%, Meta -2.3%)<br>반도체 ETF(SMH)에 사상 최대 단일일 자금($6.93B) 유입 + AMD·Broadcom·TSMC 동반 강세<br>SpaceX 3거래일 연속 급락(누적 -23%, 시총 약 6,000억 달러 증발) + 투자등급 회사채 첫 발행 계획</p>
+      <div class="tags"><span class="tag">반도체</span><span class="tag">에너지</span><span class="tag">연준</span><span class="tag">금리</span></div>
+    </a></li>
+    <li data-tags="연준" data-text="미·이란 협상 연기 · Marvell·Flex, S&amp;P500 신규편입(2026-06-22 개장… · SOXX ETF 자금유입 지속(5일 +$548.41M · 1개월 +$3… Marvell·Flex, S&amp;P500 신규편입(2026-06-22 개장 전 발효) SOXX ETF 자금유입 지속(5일 +$548.41M · 1개월 +$3.75B) ES선물 약 -0.4%(6/19 거래 기준, 이란 이슈 연계 약세) 연준 미·이란 협상 연기 Marvell·Flex, S&amp;P500 신규편입(2026-06-22 개장 전 발효) SOXX ETF 자금유입 지속(5일 +$548.41M · 1개월 +$3.75B) ES선물 약 -0.4%(6/19 거래 기준, 이란 이슈 연계 약세) FOMC 동결(3.50~3.75%)·매파적 점도표"><a class="card" href="reports/2026-06-20.html">
+      <div class="row1"><span class="d">2026-06-20 (토)</span><span>미국 기준일 2026-06-18</span></div>
+      <div class="hl">미·이란 협상 연기 · Marvell·Flex, S&amp;P500 신규편입(2026-06-22 개장… · SOXX ETF 자금유입 지속(5일 +$548.41M · 1개월 +$3…</div>
+      <p class="sm">Marvell·Flex, S&amp;P500 신규편입(2026-06-22 개장 전 발효)<br>SOXX ETF 자금유입 지속(5일 +$548.41M · 1개월 +$3.75B)<br>ES선물 약 -0.4%(6/19 거래 기준, 이란 이슈 연계 약세)</p>
+      <div class="tags"><span class="tag">연준</span></div>
+    </a></li>
+    <li data-tags="반도체" data-text="6/18(목) 미국 3대 지수는 모두 상승 마감했습니다. S&amp;P500은 +1.08%(7,500.58), 나스닥은 +1.91%(26,517.93), 다우는 +0.14%(51,564.70)를 기록했고, 중소형주 지수인 러… 특히 반도체 업종 지수인 필라델피아반도체지수(SOX)는 +6.67%(14,376.34)로 급등했습니다. 반도체"><a class="card" href="reports/2026-06-19.html">
+      <div class="row1"><span class="d">2026-06-19 (금)</span><span>미국 기준일 2026-06-18</span></div>
+      <div class="hl">6/18(목) 미국 3대 지수는 모두 상승 마감했습니다.</div>
+      <p class="sm">S&amp;P500은 +1.08%(7,500.58), 나스닥은 +1.91%(26,517.93), 다우는 +0.14%(51,564.70)를 기록했고, 중소형주 지수인 러…<br>특히 반도체 업종 지수인 필라델피아반도체지수(SOX)는 +6.67%(14,376.34)로 급등했습니다.</p>
+      <div class="tags"><span class="tag">반도체</span></div>
+    </a></li>
+  </ul></div>
+  </div>
+  <div class="empty" id="noresult" hidden>검색 결과가 없습니다</div>
+</section>
+<footer>
+  <p>자동 생성 리포트 · 투자 조언이 아닙니다. 모든 수치는 원문 출처를 확인하세요.</p>
+  <p>데이터 출처: Yahoo Finance · CBOE · Finnhub · FRED · Nasdaq. 시세는 지연될 수 있으며 기준시각(ET)은 각 항목에 표기됩니다.</p>
+</footer>
 </div>
+<script src="assets/site.js" defer></script>
 </body>
 </html>

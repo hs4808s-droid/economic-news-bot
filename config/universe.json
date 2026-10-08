@@ -1,0 +1,62 @@
+{
+  "_doc": "수집 대상. policy: session=정규장 종가일이 직전 미국 거래일과 같아야 함 / continuous=선물·환율·BTC(24h 근접) / fred=FRED(영업일 1일 지연 허용). kind: price|yield|vol|spread",
+  "groups": [
+    { "id": "index", "label": "미국 주요 지수", "items": {
+      "^GSPC": { "label": "S&P500", "policy": "session" },
+      "^IXIC": { "label": "나스닥종합", "policy": "session" },
+      "^DJI":  { "label": "다우", "policy": "session" },
+      "^RUT":  { "label": "러셀2000", "policy": "session" },
+      "^SOX":  { "label": "SOX (필라델피아 반도체)", "policy": "session" }
+    }},
+    { "id": "futures", "label": "선물 (한국 아침 시점)", "items": {
+      "ES=F":  { "label": "S&P500 선물 (ES)", "policy": "continuous" },
+      "NQ=F":  { "label": "나스닥100 선물 (NQ)", "policy": "continuous" },
+      "YM=F":  { "label": "다우 선물 (YM)", "policy": "continuous" },
+      "RTY=F": { "label": "러셀2000 선물 (RTY)", "policy": "continuous" }
+    }},
+    { "id": "rates", "label": "금리", "items": {
+      "^TNX": { "label": "미 10년물 금리 (Yahoo)", "policy": "session", "kind": "yield" },
+      "^TYX": { "label": "미 30년물 금리 (Yahoo)", "policy": "session", "kind": "yield" },
+      "FRED:DGS2":  { "label": "미 2년물 금리 (FRED)", "policy": "fred", "kind": "yield" },
+      "FRED:DGS10": { "label": "미 10년물 금리 (FRED)", "policy": "fred", "kind": "yield" }
+    }},
+    { "id": "vol", "label": "변동성 구조", "items": {
+      "^VIX":   { "label": "VIX (30일)", "policy": "session", "kind": "vol" },
+      "^VIX9D": { "label": "VIX9D (9일)", "policy": "session", "kind": "vol" },
+      "^VIX3M": { "label": "VIX3M (3개월)", "policy": "session", "kind": "vol" },
+      "^VVIX":  { "label": "VVIX (VIX의 변동성)", "policy": "session", "kind": "vol" },
+      "^SKEW":  { "label": "SKEW (테일리스크)", "policy": "session", "kind": "vol" }
+    }},
+    { "id": "macro", "label": "매크로", "items": {
+      "DX-Y.NYB": { "label": "달러지수 (DXY)", "policy": "continuous" },
+      "KRW=X":    { "label": "USD/KRW", "policy": "continuous" },
+      "CL=F":     { "label": "WTI", "policy": "continuous" },
+      "BZ=F":     { "label": "Brent", "policy": "continuous" },
+      "GC=F":     { "label": "금", "policy": "continuous" },
+      "HG=F":     { "label": "구리", "policy": "continuous" },
+      "BTC-USD":  { "label": "비트코인", "policy": "continuous" },
+      "FRED:BAMLH0A0HYM2": { "label": "하이일드 스프레드 (OAS, %p)", "policy": "fred", "kind": "spread" }
+    }},
+    { "id": "sector", "label": "섹터 ETF", "items": {
+      "XLK": { "label": "기술", "policy": "session" },
+      "XLF": { "label": "금융", "policy": "session" },
+      "XLE": { "label": "에너지", "policy": "session" },
+      "XLV": { "label": "헬스케어", "policy": "session" },
+      "XLY": { "label": "경기소비재", "policy": "session" },
+      "XLP": { "label": "필수소비재", "policy": "session" },
+      "XLI": { "label": "산업재", "policy": "session" },
+      "XLB": { "label": "소재", "policy": "session" },
+      "XLU": { "label": "유틸리티", "policy": "session" },
+      "XLRE": { "label": "부동산", "policy": "session" },
+      "XLC": { "label": "커뮤니케이션", "policy": "session" },
+      "SMH": { "label": "반도체", "policy": "session" },
+      "IGV": { "label": "소프트웨어", "policy": "session" },
+      "KRE": { "label": "지역은행", "policy": "session" },
+      "XBI": { "label": "바이오", "policy": "session" }
+    }},
+    { "id": "ref", "label": "기준 (SPY, 내부 계산용)", "hidden": true, "items": {
+      "SPY": { "label": "SPY", "policy": "session" }
+    }}
+  ],
+  "earnings_tickers": ["AAPL","MSFT","NVDA","AMZN","GOOGL","META","AVGO","TSLA","BRK.B","LLY","JPM","V","WMT","XOM","MA","UNH","ORCL","COST","HD","PG","NFLX","JNJ","BAC","ABBV","CRM","CVX","KO","AMD","TMUS","WFC","CSCO","MRK","PEP","ACN","ADBE","LIN","MCD","IBM","GE","ABT","NOW","QCOM","TXN","INTU","CAT","DIS","MS","GS","AXP","TSM","ASML","MU","ANET","LRCX","AMAT","KLAC","PLTR","UBER","BLK","C","NKE","UNP","PFE","T","VZ"]
+}

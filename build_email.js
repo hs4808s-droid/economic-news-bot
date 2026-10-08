@@ -77,14 +77,15 @@ function tokensToLines(tokens, out = []) {
 }
 
 function markdownToPlainText(md) {
-  const lines = tokensToLines(marked.lexer(md));
+  // 코드가 쓰는 마커(<!-- DASHBOARD --> 등)와 검증 배너 표지는 사람이 읽는 메일에 보이면 안 된다.
+  const lines = tokensToLines(marked.lexer(md.replace(/<!--[\s\S]*?-->/g, '').replace(/\r\n/g, '\n')));
   // 연속 빈 줄은 하나로 정리.
   return lines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
 }
 
 function main() {
   const date = process.argv[2] && /^\d{4}-\d{2}-\d{2}$/.test(process.argv[2]) ? process.argv[2] : kstDate();
-  const logDir = path.join(ROOT, 'logs', date);
+  const logDir = path.join(ROOT, 'logs', process.env.LOG_NAME || date);
   const reportFile = path.join(logDir, '3_report.md');
 
   if (!fs.existsSync(reportFile)) {
