@@ -111,6 +111,10 @@
     "name_ko": "브로드컴",
     "sector": "반도체"
   },
+  "AXP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "AXT": {
     "name_ko": "?",
     "sector": "?"
@@ -387,6 +391,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "FCC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "FDA": {
     "name_ko": "?",
     "sector": "?"
@@ -479,6 +487,10 @@
     "name_ko": "HCA헬스케어",
     "sector": "헬스케어"
   },
+  "HCL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "HDB": {
     "name_ko": "HDFC은행",
     "sector": "금융"
@@ -566,6 +578,10 @@
   "ISRG": {
     "name_ko": "인튜이티브서지컬",
     "sector": "헬스케어"
+  },
+  "ITM": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "ITUB": {
     "name_ko": "?",
@@ -867,6 +883,10 @@
     "name_ko": "펩시코",
     "sector": "필수소비재"
   },
+  "PERM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "PG": {
     "name_ko": "P&G",
     "sector": "필수소비재"
@@ -1047,6 +1067,10 @@
     "name_ko": "컨스텔레이션브랜즈",
     "sector": "필수소비재"
   },
+  "SU": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "SWKS": {
     "name_ko": "스카이웍스",
     "sector": "반도체"
@@ -1168,6 +1192,10 @@
     "sector": "전기장비"
   },
   "VYLR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "VZ": {
     "name_ko": "?",
     "sector": "?"
   },
