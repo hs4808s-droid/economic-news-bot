@@ -11,6 +11,10 @@
     "name_ko": "에어비앤비",
     "sector": "경기소비재"
   },
+  "ABR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "ABT": {
     "name_ko": "애보트",
     "sector": "헬스케어"
@@ -223,7 +227,15 @@
     "name_ko": "컴캐스트",
     "sector": "커뮤니케이션"
   },
+  "CME": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "CMG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CMS": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -416,6 +428,10 @@
     "sector": "?"
   },
   "FRVO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GB": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1207,6 +1223,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "WELL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "WFC": {
     "name_ko": "웰스파고",
     "sector": "금융"
@@ -1278,6 +1298,10 @@
   "XOM": {
     "name_ko": "엑슨모빌",
     "sector": "에너지"
+  },
+  "XPU": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "XPV": {
     "name_ko": "?",
