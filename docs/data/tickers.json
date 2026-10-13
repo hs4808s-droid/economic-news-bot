@@ -151,6 +151,10 @@
     "name_ko": "블랙록",
     "sector": "금융"
   },
+  "BMBL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "BP": {
     "name_ko": "?",
     "sector": "?"
@@ -210,6 +214,10 @@
   "CIEN": {
     "name_ko": "시에나",
     "sector": "네트워크장비"
+  },
+  "CIK": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "CJ": {
     "name_ko": "?",
@@ -407,6 +415,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "FCX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "FDA": {
     "name_ko": "?",
     "sector": "?"
@@ -531,6 +543,10 @@
     "name_ko": "HPE",
     "sector": "IT하드웨어"
   },
+  "HSBC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "HUBS": {
     "name_ko": "?",
     "sector": "?"
@@ -558,6 +574,10 @@
   "IGV": {
     "name_ko": "소프트웨어 ETF",
     "sector": "ETF"
+  },
+  "IIF": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "INCY": {
     "name_ko": "?",
@@ -656,6 +676,10 @@
     "sector": "반도체장비"
   },
   "KMX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "KO": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -762,6 +786,10 @@
   "MS": {
     "name_ko": "모건스탠리",
     "sector": "금융"
+  },
+  "MSA": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "MSCI": {
     "name_ko": "?",
@@ -871,6 +899,10 @@
     "name_ko": "오라클",
     "sector": "소프트웨어"
   },
+  "ORW": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "OSAT": {
     "name_ko": "?",
     "sector": "?"
@@ -963,6 +995,10 @@
     "name_ko": "나스닥100 ETF(소액)",
     "sector": "ETF"
   },
+  "RDIMM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "RF": {
     "name_ko": "?",
     "sector": "?"
@@ -999,6 +1035,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "SCCO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "SCHW": {
     "name_ko": "찰스슈왑",
     "sector": "금융"
@@ -1031,6 +1071,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "SLC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "SMCI": {
     "name_ko": "슈퍼마이크로",
     "sector": "IT하드웨어"
@@ -1059,6 +1103,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "SPGI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "SPOT": {
     "name_ko": "?",
     "sector": "?"
@@ -1066,6 +1114,10 @@
   "SPY": {
     "name_ko": "S&P500 ETF",
     "sector": "ETF"
+  },
+  "SRMO": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "SSTK": {
     "name_ko": "?",
@@ -1108,6 +1160,10 @@
     "sector": "?"
   },
   "TDOC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TE": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1167,6 +1223,10 @@
     "name_ko": "UBS",
     "sector": "금융"
   },
+  "UDIMM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "UNH": {
     "name_ko": "유나이티드헬스",
     "sector": "헬스케어"
@@ -1179,6 +1239,10 @@
     "name_ko": "US뱅코프",
     "sector": "금융"
   },
+  "USFP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "UTC": {
     "name_ko": "?",
     "sector": "?"
@@ -1188,6 +1252,10 @@
     "sector": "?"
   },
   "UWMC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "V": {
     "name_ko": "?",
     "sector": "?"
   },
