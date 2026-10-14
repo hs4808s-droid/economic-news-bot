@@ -27,6 +27,10 @@
     "name_ko": "어도비",
     "sector": "소프트웨어"
   },
+  "ADP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "ADS": {
     "name_ko": "?",
     "sector": "?"
@@ -63,6 +67,10 @@
     "name_ko": "AMD",
     "sector": "반도체"
   },
+  "AML": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "AMZN": {
     "name_ko": "아마존",
     "sector": "경기소비재"
@@ -70,6 +78,10 @@
   "ANET": {
     "name_ko": "아리스타네트웍스",
     "sector": "네트워크장비"
+  },
+  "APH": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "APLD": {
     "name_ko": "어플라이드디지털",
@@ -139,6 +151,10 @@
     "name_ko": "뱅크오브아메리카",
     "sector": "금융"
   },
+  "BBVA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "BFLY": {
     "name_ko": "?",
     "sector": "?"
@@ -162,6 +178,10 @@
   "BRK": {
     "name_ko": "버크셔해서웨이",
     "sector": "금융"
+  },
+  "BRK.A": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "BRK.B": {
     "name_ko": "버크셔해서웨이B",
@@ -411,6 +431,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "EQIX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "FCC": {
     "name_ko": "?",
     "sector": "?"
@@ -440,6 +464,10 @@
     "sector": "?"
   },
   "FRVO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "FTNT": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -700,6 +728,10 @@
     "sector": "?"
   },
   "LESL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "LG": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -983,6 +1015,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "PSX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "QCOM": {
     "name_ko": "퀄컴",
     "sector": "반도체"
@@ -1082,6 +1118,10 @@
   "SMH": {
     "name_ko": "반도체 ETF(VanEck)",
     "sector": "ETF"
+  },
+  "SMTC": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "SNDK": {
     "name_ko": "샌디스크",
@@ -1211,6 +1251,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "TX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "TXN": {
     "name_ko": "텍사스인스트루먼츠",
     "sector": "반도체"
@@ -1298,6 +1342,10 @@
   "WFC": {
     "name_ko": "웰스파고",
     "sector": "금융"
+  },
+  "WMT": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "WOR": {
     "name_ko": "?",

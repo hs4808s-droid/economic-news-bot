@@ -1,10 +1,10 @@
 {
   "facts": {
     "fedwatch": {
-      "value": "동결 81.7~82.8% · 25bp 인상 18.3%(일부 소스 18%) · 인하 1%",
+      "value": "7,718.94",
       "source": "CME FedWatch",
-      "last_verified": "2026-10-14"
+      "last_verified": "2026-10-15"
     }
   },
-  "updated_at": "2026-10-13T21:42:45.386Z"
+  "updated_at": "2026-10-14T21:41:27.695Z"
 }
