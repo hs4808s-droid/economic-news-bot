@@ -132,22 +132,38 @@
     var lo = addDays(anchor, -2), hi = addDays(anchor, 14);
     var evs = (events || []).filter(function (e) { return e.date_et >= lo && e.date_et <= hi; });
     var tk = function (t) { var m = tickers && tickers[t]; return t ? (m && m.name_ko && m.name_ko !== '?' ? t + ' ' + m.name_ko : t) : '—'; };
+    var BASIS = { adjusted: '조정', gaap: 'GAAP' };
+    var HOLD = '검증 대기';
+    var holdCell = function (e) { var c = td(HOLD, 'r hold'); c.title = e.hold || '측정 기준 미확인'; return c; };
     var earn = evs.filter(function (e) { return e.type === 'earnings'; }).map(function (e) {
-      return h('tr', null, td(e.date_et), td(tk(e.ticker)), td(TIMING[e.timing] || '—'), td(usd(e.prior_eps), 'r num'), td(usd(e.cons_eps), 'r num'),
-        td(usd(e.actual_eps), 'r num'), surpriseCell(e.surprise_eps, function (v) { return v.toFixed(2); }), td(usdB(e.cons_rev), 'r num'), td(e.implied_move != null ? '±' + e.implied_move + '%' : '—', 'r'));
+      var held = !!e.hold, hasAct = isNum(e.actual_eps);
+      var src = e.src_url ? h('td', null, h('a', { href: e.src_url, target: '_blank', rel: 'noopener', text: '1차 출처' })) : td(hasAct ? '공급자(미검증)' : '—');
+      return h('tr', null, td(e.date_et), td(tk(e.ticker)), td(TIMING[e.timing] || '—'), td(BASIS[e.eps_basis] || (hasAct ? '미확인' : '—')),
+        td(usd(e.prior_eps), 'r num'), td(usd(e.cons_eps), 'r num'), held && hasAct ? holdCell(e) : td(usd(e.actual_eps), 'r num'),
+        held ? holdCell(e) : surpriseCell(e.surprise_eps, function (v) { return v.toFixed(2); }),
+        td(usdB(e.cons_rev), 'r num'), held && isNum(e.actual_rev) ? holdCell(e) : td(usdB(e.actual_rev), 'r num'),
+        held ? holdCell(e) : surpriseCell(e.surprise_rev_pct, function (v) { return v.toFixed(1) + '%'; }), src);
     });
+    var UNITS = { '%': function (v) { return (v > 0 ? '+' : '') + v.toFixed(1) + '%'; }, K: function (v) { return (v > 0 ? '+' : '') + Math.round(v).toLocaleString('en-US') + 'K'; } };
+    var fv = function (v, u) { return isNum(v) ? (UNITS[u] ? UNITS[u](v) : String(v)) : null; };
+    var MEAS = { mom: '전월비', yoy: '전년비', qoq: '전기비', level: '수준', index: '지수' };
     var macro = evs.filter(function (e) { return e.type === 'macro' || e.type === 'fed'; }).map(function (e) {
-      // 측정 기준(measure)이 없는 발표값은 MoM/YoY 혼용을 걸러낼 수 없으므로 숫자를 노출하지 않는다.
-      var pending = !e.measure && (e.actual != null || e.surprise != null);
-      return h('tr', null, td(e.date_et), td(e.time_et), td(e.title), td('★'.repeat(Math.max(1, Math.min(3, e.importance || 1)))),
-        td(e.prior, 'r'), td(e.consensus, 'r'), td(pending ? '검증 대기' : e.actual, 'r'), pending ? td('검증 대기', 'r') : surpriseCell(typeof e.surprise === 'number' ? e.surprise : null, function (v) { return String(v); }));
+      // 보류(hold) 행 또는 측정 기준이 없는 숫자 행은 숫자를 노출하지 않는다.
+      var hasNum = e.prior != null || e.consensus != null || e.actual != null;
+      var pending = !!e.hold || (e.type === 'macro' && hasNum && !e.measure);
+      var u = e.unit, basis = e.measure ? (MEAS[e.measure] || e.measure) + (e.seasonal ? ' · ' + (e.seasonal === 'sa' ? '계절조정' : '비계절조정') : '') : '—';
+      var cell = function (v, f) { return pending ? holdCell(e) : td(f ? f(v) : fv(v, u), 'r'); };
+      var cons = pending ? holdCell(e) : td(fv(e.consensus, u), 'r');
+      if (!pending && e.consensus != null && e.consensus_source) cons.title = '출처: ' + e.consensus_source;
+      return h('tr', null, td(e.date_et), td(e.time_et), td(e.title), td(basis), td('★'.repeat(Math.max(1, Math.min(3, e.importance || 1)))),
+        cell(e.prior), cons, cell(e.actual), pending ? holdCell(e) : surpriseCell(isNum(e.surprise) ? e.surprise : null, function (v) { return UNITS[u] ? (u === '%' ? v.toFixed(1) + '%p' : UNITS[u](v).replace(/^\+/, '')) : String(v); }));
     });
     var corp = evs.filter(function (e) { return e.type === 'corporate'; }).map(function (e) {
       return h('tr', null, td(e.date_et), td(tk(e.ticker)), td(e.title), td(e.source));
     });
     return [
-      ['earnings', '실적', earn, table([['날짜(ET)'], ['종목'], ['시점'], ['전년 EPS', 'r'], ['예상 EPS', 'r'], ['실제 EPS', 'r'], ['서프라이즈', 'r'], ['예상 매출', 'r'], ['예상 변동폭', 'r']], earn)],
-      ['macro', '지표·연준', macro, table([['날짜(ET)'], ['시각'], ['이벤트'], ['중요도'], ['직전', 'r'], ['예상', 'r'], ['발표', 'r'], ['서프라이즈', 'r']], macro)],
+      ['earnings', '실적', earn, table([['날짜(ET)'], ['종목'], ['시점'], ['EPS 기준'], ['전년 동기 EPS', 'r'], ['예상 EPS', 'r'], ['실제 EPS', 'r'], ['EPS 서프라이즈', 'r'], ['예상 매출', 'r'], ['실제 매출', 'r'], ['매출 서프라이즈', 'r'], ['출처']], earn)],
+      ['macro', '지표·연준', macro, table([['날짜(ET)'], ['시각'], ['이벤트'], ['측정 기준'], ['중요도'], ['직전', 'r'], ['예상(컨센서스)', 'r'], ['발표', 'r'], ['서프라이즈', 'r']], macro)],
       ['corporate', '기업 이벤트', corp, table([['날짜(ET)'], ['종목'], ['이벤트'], ['출처']], corp)],
     ];
   }

@@ -9,6 +9,7 @@ const fs = require('fs');
 const path = require('path');
 const C = require('../lib/common');
 const F = require('../fetch_market_data');
+const M = require('../lib/macro');
 const { extractTickers } = require('./tickers_lib');
 
 const args = process.argv.slice(2);
@@ -123,7 +124,7 @@ async function verifyCross(data) {
 // --- 캘린더·티커 -------------------------------------------------------------
 function verifyCalendar(asOfDay) {
   const G = '캘린더';
-  const p = path.join(C.ROOT, 'docs', 'data', 'calendar.json');
+  const p = process.env.CAL_PATH || path.join(C.ROOT, 'docs', 'data', 'calendar.json');
   if (!fs.existsSync(p)) { check(G, 'calendar.json 존재', false, '없음'); return null; }
   const cal = JSON.parse(fs.readFileSync(p, 'utf8'));
   const events = cal.events || [];
@@ -136,20 +137,60 @@ function verifyCalendar(asOfDay) {
   const stale = events.filter((e) => e.date_et > hi);
   check(G, `원장 날짜가 D+14(${hi}) 이내`, stale.length === 0, stale.slice(0, 3).map((e) => e.id).join(', '));
   check(G, `표시 대상(${lo}~${hi}) 1건 이상`, shown.length > 0, '표시할 일정 없음');
+  // ── 원장 전체(표시 창 밖 포함)를 같은 규칙으로 검사한다. 이 검사가 사고(2026-10-14 CPI)를 잡았어야 했다. ──
+  const macros = events.filter((e) => e.type === 'macro');
+  const numeric = macros.filter((e) => e.prior != null || e.consensus != null || e.actual != null);
+  const noBasis = numeric.filter((e) => !e.metric || !e.measure || !e.unit);
+  check(G, '숫자가 있는 지표 행은 metric·measure·unit 보유', noBasis.length === 0, noBasis.slice(0, 4).map((e) => e.id).join(', '));
+  const dupKey = new Map();
+  for (const e of macros.filter((x) => x.metric && x.measure)) { const k = `${e.date_et}|${e.metric}|${e.measure}`; dupKey.set(k, (dupKey.get(k) || 0) + 1); }
+  check(G, '원장 키(발표일·metric·measure) 중복 없음', [...dupKey.values()].every((n) => n === 1), [...dupKey].filter(([, n]) => n > 1).map(([k]) => k).slice(0, 3).join(', '));
+  const mixed = macros.filter((e) => e.mixed && (e.prior != null || e.consensus != null || e.actual != null));
+  check(G, '헤드라인·근원 혼합 행에 숫자 없음', mixed.length === 0, mixed.map((e) => e.id).join(', '));
+  const notNum = numeric.filter((e) => ['prior', 'consensus', 'actual', 'surprise'].some((f) => e[f] != null && typeof e[f] !== 'number'));
+  check(G, '지표 값이 숫자 타입(문자열 "+0.6%" 금지)', notNum.length === 0, notNum.slice(0, 4).map((e) => e.id).join(', '));
+  const badSrc = macros.filter((e) => e.consensus != null && M.classifySource(e.consensus_source) !== 'allowed');
+  check(G, '예상값(consensus)은 시장 컨센서스 출처만 (nowcast·예측시장 금지)', badSrc.length === 0, badSrc.slice(0, 4).map((e) => `${e.id}[${e.consensus_source}]`).join(', '));
+  const hand = macros.filter((e) => e.actual != null && M.ruleFor(e.metric, e.measure)?.fred && !/^FRED /.test(e.actual_source || ''));
+  check(G, 'FRED 지원 지표의 발표값은 코드 수집(actual_source=FRED)', hand.length === 0, hand.slice(0, 4).map((e) => e.id).join(', '));
+  const sBad = macros.filter((e) => typeof e.actual === 'number' && typeof e.consensus === 'number' && !near(e.surprise, +(e.actual - e.consensus).toFixed(3), 1e-6));
+  check(G, '서프라이즈 = 발표값−예상값 (숫자 타입 기준)', sBad.length === 0, sBad.slice(0, 3).map((e) => e.id).join(', '));
+  const eBad = events.filter((e) => typeof e.actual_eps === 'number' && typeof e.cons_eps === 'number' && !near(e.surprise_eps, +(e.actual_eps - e.cons_eps).toFixed(4), 1e-4));
+  check(G, 'EPS 서프라이즈 = 실제−예상', eBad.length === 0, eBad.slice(0, 3).map((e) => e.id).join(', '));
+  // 그럴듯함: 규칙을 어긴 행은 반드시 hold 가 찍혀 있어야 한다(= 사이트·리포트에 숫자로 안 나간다). hold 는 실패가 아니라 안전장치.
+  const unstamped = events.filter((e) => M.checkEvent(e) && !e.hold);
+  check(G, '그럴듯함 검사 실패 행은 모두 hold 처리됨', unstamped.length === 0, unstamped.slice(0, 4).map((e) => `${e.id}: ${M.checkEvent(e)}`).join(' | '));
+  const held = events.filter((e) => e.hold);
+  check(G, `보류(검증 대기) ${held.length}건`, true, held.map((e) => `${e.id}: ${e.hold}`).join(' | ') || '없음');
+  const unverifiedBasis = events.filter((e) => e.type === 'earnings' && e.verified && (!e.src_url || !e.eps_basis || e.actual_rev == null));
+  check(G, '검증 표시된 실적 행은 출처 URL·EPS 기준·실제 매출 보유', unverifiedBasis.length === 0, unverifiedBasis.slice(0, 4).map((e) => e.id).join(', '));
+  // 사고 당일 CPI 는 4줄이어야 한다 (발표일에 CPI 행이 하나라도 있으면 헤드라인/근원 × MoM/YoY)
+  const cpiDays = [...new Set(macros.filter((e) => ['CPI', 'CORECPI'].includes(e.metric)).map((e) => e.date_et))];
+  const short = cpiDays.filter((d) => ['CPI', 'CORECPI'].flatMap((m) => ['mom', 'yoy'].map((x) => `${d}-${m}-${x}`)).some((id) => !ids.has(id)));
+  check(G, 'CPI 발표일마다 헤드라인·근원 × MoM·YoY 4줄', short.length === 0, short.join(', '));
   const noSrc = [];
   for (const e of shown) {
     for (const f of ['consensus', 'prior', 'cons_eps', 'cons_rev', 'prior_eps', 'prior_rev']) {
-      if (e[f] != null && (!e.source || !e.collected_at)) noSrc.push(`${e.id}.${f}`);
+      if (e[f] != null && !e.source && !e.consensus_source && !e.prior_source) noSrc.push(`${e.id}.${f}`);
     }
   }
-  check(G, '값이 있는 consensus·prior 는 source·collected_at 보유', noSrc.length === 0, noSrc.slice(0, 5).join(', '));
+  check(G, '값이 있는 consensus·prior 는 출처 보유', noSrc.length === 0, noSrc.slice(0, 5).join(', '));
   const badFmt = events.filter((e) => !/^\d{4}-\d{2}-\d{2}$/.test(e.date_et) || !['macro', 'fed', 'earnings', 'corporate'].includes(e.type));
   check(G, '날짜·type 형식', badFmt.length === 0, badFmt.slice(0, 3).map((e) => e.id).join(', '));
-  const sBad = events.filter((e) => typeof e.actual === 'number' && typeof e.consensus === 'number' && !near(e.surprise, +(e.actual - e.consensus).toFixed(6), 1e-6));
-  check(G, '서프라이즈 = 실제−예상', sBad.length === 0, sBad.slice(0, 3).map((e) => e.id).join(', '));
-  const eBad = events.filter((e) => typeof e.actual_eps === 'number' && typeof e.cons_eps === 'number' && !near(e.surprise_eps, +(e.actual_eps - e.cons_eps).toFixed(4), 1e-4));
-  check(G, 'EPS 서프라이즈 = 실제−예상', eBad.length === 0, eBad.slice(0, 3).map((e) => e.id).join(', '));
   return { events, shown };
+}
+
+// FRED 를 다시 받아 원장의 발표값·직전값이 코드 계산과 같은지 대조한다(수작업·LLM 값 혼입 탐지).
+async function verifyMacroLive(events) {
+  const G = '캘린더(FRED 재계산)';
+  const rows = events.filter((e) => e.type === 'macro' && e.actual != null && e.metric && e.measure && M.ruleFor(e.metric, e.measure)?.fred);
+  for (const e of rows) {
+    try {
+      const v = await M.fredValue(e.metric, e.measure, e.period, e.date_et);
+      check(G, `${e.id} 발표값=FRED 재계산`, v && v.actual === e.actual, `원장 ${e.actual} vs FRED ${v?.actual}`);
+      check(G, `${e.id} 직전값=FRED 재계산`, v && (e.prior == null || v.prior === e.prior), `원장 ${e.prior} vs FRED ${v?.prior}`);
+    } catch (err) { check(G, `${e.id} FRED 조회`, false, err.message); }
+  }
 }
 
 async function verifyTickers(events) {
@@ -183,6 +224,7 @@ async function main() {
   verifyMarket(data);
   if (!offline) await verifyCross(data);
   const cal = verifyCalendar(C.expectedTradingDay(new Date(data.generated_at)));
+  if (cal && !offline) await verifyMacroLive(cal.events);
   if (cal) await verifyTickers(cal.events);
 
   for (const g of [...new Set(results.map((r) => r.group))]) {
@@ -196,5 +238,20 @@ async function main() {
   process.exit(failed ? 1 : 0);
 }
 
-if (require.main === module) main().catch((e) => { console.error(e); process.exit(1); });
+// --selftest: 사고 당시 원장(fixtures)을 먹여 검증기가 반드시 실패시키는지 본다 (회귀 방지).
+function selftest() {
+  const assert = require('assert');
+  process.env.CAL_PATH = path.join(__dirname, 'fixtures', 'incident_2026-10-15_calendar.json');
+  results.length = 0;
+  verifyCalendar('2026-10-14');
+  const failed = (name) => results.some((r) => !r.ok && r.name.includes(name));
+  assert(failed('metric·measure·unit'), 'MoM/YoY 측정 기준 없는 CPI 행을 못 잡음');
+  assert(failed('숫자 타입'), '문자열 값("+0.6%")을 못 잡음');
+  assert(failed('시장 컨센서스 출처'), 'Scotiabank/Kiplinger 출처 혼용을 못 잡음');
+  assert(failed('hold 처리'), '그럴듯함 검사(APLD -145% 포함) 실패 행의 hold 누락을 못 잡음');
+  console.log('selftest 통과: 사고 원장(2026-10-14 CPI 2줄 · 문자열 값 · 혼용 출처)을 검증기가 모두 실패시킨다');
+}
+
+if (process.argv.includes('--selftest')) selftest();
+else if (require.main === module) main().catch((e) => { console.error(e); process.exit(1); });
 module.exports = { verifyMarket, results };

@@ -86,6 +86,43 @@ async function main() {
     check(`일정 탭 ${tab}: 행 ${rows}개 또는 '예정 없음'`, (rows > 0 || /예정 없음/.test(empty)) && !BAD_TEXT.test(text), `rows=${rows}`);
   }
 
+  // 3-b. 정정 검증 (2026-10-14 CPI 사고 회귀): 지표·연준 탭과 실적 탭을 실제로 눌러 값과 표기를 확인한다
+  const rowsOf = async () => page.$$eval('#cal-panel tbody tr', (trs) => trs.map((tr) => [...tr.children].map((td) => td.textContent.trim())));
+  await page.click('#calendar [data-tab="macro"]');
+  const mh = await page.$$eval('#cal-panel thead th', (e) => e.map((x) => x.textContent.trim()));
+  const mrows = await rowsOf();
+  await page.locator('#calendar').screenshot({ path: path.join(OUT, `${TAG}_calendar_macro.png`) });
+  check('지표·연준 탭: 열 = 측정 기준·직전·예상(컨센서스)·발표·서프라이즈', ['측정 기준', '직전', '예상(컨센서스)', '발표', '서프라이즈'].every((h) => mh.includes(h)), mh.join(','));
+  check('지표·연준 탭: 혼합 행("CPI/Core CPI") 없음', !mrows.some((r) => /CPI\/Core CPI/.test(r[2])));
+  const numRows = mrows.filter((r) => /\d/.test(r.slice(5).join('')) && !/검증 대기/.test(r.slice(5).join('')));
+  check('지표·연준 탭: 숫자가 있는 행은 모두 측정 기준 표기', numRows.every((r) => r[3] && r[3] !== '—'), numRows.filter((r) => r[3] === '—').map((r) => r[2]).join('; '));
+  check('지표·연준 탭: 서프라이즈에 단위(%p/K) 표기', mrows.every((r) => !/\d/.test(r[8]) || /%p|K|검증 대기/.test(r[8]) || /[+-]?\d+(\.\d+)?$/.test(r[8])) && mrows.filter((r) => /\d/.test(r[8])).every((r) => /%p|K/.test(r[8])), mrows.map((r) => r[8]).join(' '));
+  const cpi = mrows.filter((r) => /^\d월 (Core )?CPI/.test(r[2]) && r[0] === '2026-10-14');
+  if (cpi.length) {
+    // 10/14 CPI: 직전·예상·발표·서프라이즈 (BLS 보도자료 + Dow Jones 서베이)
+    const WANT = { '9월 CPI (MoM)': ['+0.4%', '+0.6%', '+0.6%', '0.0%p'], '9월 CPI (YoY)': ['+3.4%', '+3.6%', '+3.7%', '+0.1%p'], '9월 Core CPI (MoM)': ['+0.3%', '+0.2%', '+0.3%', '+0.1%p'], '9월 Core CPI (YoY)': ['+2.4%', '+2.5%', '+2.6%', '+0.1%p'] };
+    check('10/14 CPI 정확히 4줄 (헤드라인·근원 × 전월비·전년비)', cpi.length === 4, cpi.map((r) => r[2]).join(' | '));
+    for (const [t, want] of Object.entries(WANT)) {
+      const r = cpi.find((x) => x[2] === t);
+      check(`10/14 ${t}: 직전·예상·발표·서프라이즈 = ${want.join(' / ')}`, !!r && [r[5], r[6], r[7], r[8].replace(/^[▲▼–]\s*/, '')].join('|') === want.join('|'), r ? [r[5], r[6], r[7], r[8]].join(' / ') : '행 없음');
+    }
+    check('10/14 CPI: 사고 값(+0.6% 예상 +3.6% 서프 -3 등) 노출 없음', !cpi.some((r) => /-3(\.0)?%?p?$|-2\.2/.test(r[8])) && !cpi.find((r) => r[2] === '9월 CPI (YoY)' && /0\.6%/.test(r[7])));
+  } else console.log('  (건너뜀) 창 안에 10/14 CPI 가 없음 — 날짜가 지나면 정상');
+  await page.click('#calendar [data-tab="earnings"]');
+  const eh = await page.$$eval('#cal-panel thead th', (e) => e.map((x) => x.textContent.trim()));
+  const erows = await rowsOf();
+  await page.locator('#calendar').screenshot({ path: path.join(OUT, `${TAG}_calendar_earnings.png`) });
+  check('실적 탭: 열 = EPS 기준·전년 동기 EPS·실제 매출·매출 서프라이즈·출처', ['EPS 기준', '전년 동기 EPS', '실제 매출', '매출 서프라이즈', '출처'].every((h) => eh.includes(h)), eh.join(','));
+  const hasAct = erows.filter((r) => /^\$/.test(r[6] || '') || /검증 대기/.test(r[6] || ''));
+  check('실적 탭: 실제 EPS 가 있는 행은 EPS 기준 표기(조정/GAAP/미확인)', hasAct.every((r) => /조정|GAAP|미확인/.test(r[3])), hasAct.filter((r) => !/조정|GAAP|미확인/.test(r[3])).map((r) => r[1]).join(','));
+  const WANTE = { JPM: ['조정', '$5.07', '$5.75'], C: ['조정', '$2.24', '$2.85'], GS: ['GAAP', '$12.25', '$17.01'], WFC: ['GAAP', '$1.66', '$1.87'], BAC: ['조정', '$1.04', '$1.08'], MS: ['GAAP', '$2.80', '$3.03'], BLK: ['조정', '$11.55', '$15.93'], JNJ: ['조정', '$2.80', '$2.59'], UNH: ['조정', '$2.92', '$4.69'] };
+  const shown = Object.keys(WANTE).filter((t) => erows.some((r) => r[1].startsWith(t)));
+  for (const t of shown) { const r = erows.find((x) => x[1].startsWith(t)); check(`실적 ${t}: 기준·전년·실제 EPS = ${WANTE[t].join(' / ')}`, [r[3], r[4], r[6]].join('|') === WANTE[t].join('|'), [r[3], r[4], r[6]].join(' / ')); }
+  const links = await page.$$eval('#cal-panel tbody a', (a) => a.map((x) => x.href));
+  check('실적 탭: 검증된 행에 1차 출처 링크(sec.gov·IR)', shown.length === 0 || links.filter((u) => /sec\.gov|citigroup\.com|applieddigital/.test(u)).length >= shown.length, `${links.length}개`);
+  const apld = erows.find((r) => r[1].startsWith('APLD'));
+  if (apld) check('실적 APLD(서프라이즈 97% 초과): 숫자 대신 검증 대기', /검증 대기/.test(apld.join('|')) && !/\+?0\.30/.test(apld[7]), apld.join(' | '));
+
   // 4. 태그 필터
   const total = await page.$$eval('#archive li[data-tags]', (e) => e.length);
   const countOf = async () => Number((await page.textContent('#count')).replace(/\D/g, ''));

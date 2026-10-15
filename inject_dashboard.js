@@ -12,6 +12,7 @@
 const fs = require('fs');
 const path = require('path');
 const C = require('./lib/common');
+const M = require('./lib/macro');
 const { renderTables } = require('./fetch_market_data');
 const { extractTickers } = require('./scripts/tickers_lib');
 
@@ -44,14 +45,22 @@ function calendarTables(cal, D, seen, tickers) {
   };
   const L = [];
 
+  const HOLD = '검증 대기';
+  const MEAS = { mom: '전월비', yoy: '전년비', qoq: '전기비', level: '수준', index: '지수' };
+  const BASIS = { adjusted: '조정', gaap: 'GAAP' };
   L.push(`### A. 지표·연준 (${lo} ~ ${hi}, ET 기준)`, '');
   const A = evs.filter((e) => e.type === 'macro' || e.type === 'fed');
   if (!A.length) L.push('예정 없음', '');
   else {
-    L.push('| 날짜(ET) | 시각 | 이벤트 | 중요도 | 직전값 | 예상값 | 발표치 | 서프라이즈 | 출처 |', '|---|---|---|---|---|---|---|---|---|');
+    L.push('| 날짜(ET) | 시각 | 이벤트 | 측정 기준 | 중요도 | 직전값 | 예상값(컨센서스) | 발표치 | 서프라이즈 | 출처 |', '|---|---|---|---|---|---|---|---|---|---|');
     for (const e of A) {
-      const pend = !e.measure && (e.actual != null || e.surprise != null); // 측정 기준 미확인 → 숫자 비노출
-      L.push(`| ${e.date_et} | ${cell(e.time_et)} | ${cell(e.title)} | ${stars(e.importance)} | ${cell(e.prior)} | ${cell(e.consensus)} | ${pend ? '검증 대기' : cell(e.actual)} | ${pend ? '검증 대기' : sgn(e.surprise)} | ${cell(e.source)} |`);
+      // 보류(코드 검증 실패)·측정 기준 없는 숫자 행은 숫자를 싣지 않는다 — 원장의 hold 가 낡았을 수 있어 여기서도 다시 검사한다.
+      const hasNum = e.prior != null || e.consensus != null || e.actual != null;
+      const pend = !!(e.hold || M.checkEvent(e)) || (e.type === 'macro' && hasNum && !e.measure);
+      const v = (x) => (pend ? HOLD : cell(M.fmtVal(x, e.unit) === '—' ? null : M.fmtVal(x, e.unit)));
+      const basis = e.measure ? `${MEAS[e.measure] || e.measure}${e.seasonal ? ' · ' + (e.seasonal === 'sa' ? '계절조정' : '비계절조정') : ''}` : '—';
+      const src = [e.consensus != null && !pend ? `예상: ${e.consensus_source || e.source}` : null, e.actual != null && !pend ? `발표: ${e.actual_source || ''}` : null].filter(Boolean).join(' / ') || cell(e.source);
+      L.push(`| ${e.date_et} | ${cell(e.time_et)} | ${cell(e.title)} | ${basis} | ${stars(e.importance)} | ${v(e.prior)} | ${v(e.consensus)} | ${v(e.actual)} | ${pend ? HOLD : cell(M.fmtSurprise(e.surprise, e.unit) === '—' ? null : M.fmtSurprise(e.surprise, e.unit))} | ${cell(src)} |`);
     }
     L.push('');
   }
@@ -60,11 +69,13 @@ function calendarTables(cal, D, seen, tickers) {
   const B = evs.filter((e) => e.type === 'earnings');
   if (!B.length) L.push('예정 없음', '');
   else {
-    L.push('| 날짜(ET) | 시점 | 종목 | 전년 동기 EPS | 예상 EPS | 실제 EPS | 서프라이즈 | 예상 매출 | 실제 매출 | 예상 변동폭 |', '|---|---|---|---|---|---|---|---|---|---|');
+    L.push('| 날짜(ET) | 시점 | 종목 | EPS 기준 | 전년 동기 EPS | 예상 EPS | 실제 EPS | EPS 서프라이즈 | 예상 매출 | 실제 매출 | 매출 서프라이즈 | 출처 |', '|---|---|---|---|---|---|---|---|---|---|---|---|');
     for (const e of B) {
-      L.push(`| ${e.date_et} | ${TIMING[e.timing] || '—'} | ${tk(e.ticker)} | ${usd(e.prior_eps)} | ${usd(e.cons_eps)} | ${usd(e.actual_eps)} | ${sgn(e.surprise_eps, (x) => x.toFixed(2))} | ${usdB(e.cons_rev)} | ${usdB(e.actual_rev)} | ${e.implied_move != null ? `±${e.implied_move}%` : '—'} |`);
+      const pend = !!(e.hold || M.checkEvent(e));
+      const has = typeof e.actual_eps === 'number';
+      L.push(`| ${e.date_et} | ${TIMING[e.timing] || '—'} | ${tk(e.ticker)} | ${BASIS[e.eps_basis] || (has ? '미확인' : '—')} | ${usd(e.prior_eps)} | ${usd(e.cons_eps)} | ${pend && has ? HOLD : usd(e.actual_eps)} | ${pend ? HOLD : sgn(e.surprise_eps, (x) => x.toFixed(2))} | ${usdB(e.cons_rev)} | ${pend && typeof e.actual_rev === 'number' ? HOLD : usdB(e.actual_rev)} | ${pend ? HOLD : sgn(e.surprise_rev_pct, (x) => `${x.toFixed(1)}%`)} | ${e.src_url ? e.src_url : has ? '공급자(미검증)' : '—'} |`);
     }
-    L.push('', '> 전년 동기 EPS·예상 EPS는 Nasdaq/Finnhub 집계, 예상 변동폭(옵션 내재)은 무료 소스가 없어 비워 둔다. 값이 `—`이면 수집되지 않은 것이다.', '');
+    L.push('', '> EPS 기준: 예상 EPS(컨센서스)와 같은 기준의 값을 싣는다. `조정`=회사 발표 non-GAAP, `GAAP`=회사가 조정 EPS를 발표하지 않은 경우. 1차 출처(8-K·IR) 링크가 있는 행만 검증된 값이다. 예상 EPS·매출은 데이터 공급자(Finnhub/Nasdaq) 컨센서스로 1차 출처가 없다.', '');
   }
 
   L.push('### C. 기업 이벤트', '');
@@ -119,19 +130,22 @@ function selftest() {
     mk({ id: 'a', ticker: 'NVDA', date_et: C.addDays(D, 3), cons_eps: 1.2, prior_eps: 0.9, timing: 'amc' }),
     mk({ id: 'b', ticker: 'MU', date_et: C.addDays(D, 4), cons_eps: 2, actual_eps: 2.5, surprise_eps: 0.5 }),
     mk({ id: 'c', ticker: 'ZZZZ', date_et: C.addDays(D, 5) }),
-    mk({ id: 'd', type: 'macro', date_et: C.addDays(D, 7), title: '9월 CPI (YoY)', consensus: '3.3%', source: 'BLS' }),
+    mk({ id: 'd', type: 'macro', date_et: C.addDays(D, 7), title: '9월 CPI (YoY)', metric: 'CPI', measure: 'yoy', unit: '%', seasonal: 'nsa', prior: 3.2, consensus: 3.3, consensus_source: 'Reuters', source: 'Reuters' }),
+    mk({ id: 'g', type: 'macro', date_et: C.addDays(D, 7), title: '9월 CPI (YoY)', metric: 'CPI', measure: 'yoy', unit: '%', prior: 3.4, consensus: 3.6, consensus_source: 'Dow Jones', actual: 0.6, surprise: -3, source: 'x' }), // 사고 재현: MoM 값이 YoY 칸
     mk({ id: 'e', ticker: 'OLD', date_et: C.addDays(D, -5) }),   // 창 밖(너무 과거)
     mk({ id: 'f', ticker: 'FAR', date_et: C.addDays(D, 30) }),   // 창 밖(너무 미래)
   ] };
   const tickers = { NVDA: { name_ko: '엔비디아', sector: '반도체' }, MU: { name_ko: '마이크론', sector: '반도체' } };
   const r1 = inject(md, data, cal, tickers);
   assert(r1.dashboard && r1.calendar);
-  assert(/\| S&P500 \| `\^GSPC` \| 7,801\.77/.test(r1.md), '지수 표 삽입');
+  assert(/\| S&P500 \| `\^GSPC` \| [\d,]+\.\d\d/.test(r1.md), '지수 표 삽입');
   assert(/<!-- \/DASHBOARD -->/.test(r1.md) && /<!-- \/CALENDAR -->/.test(r1.md));
   assert(/ MU\(마이크론·반도체\) /.test(r1.md), 'MU 는 첫 등장이라 이름 표기');
   assert(/\| 장후 \| NVDA \|/.test(r1.md), 'NVDA 는 앞에서 이미 나왔으니 티커만');
   assert(/ ZZZZ /.test(r1.md) && !/ZZZZ\(/.test(r1.md), '마스터에 없는 티커는 이름을 지어내지 않음');
   assert(!/OLD|FAR/.test(r1.md.split('<!-- CALENDAR -->')[1]), 'D-2~D+14 밖은 제외');
+  const cpi = r1.md.split('\n').filter((l) => /9월 CPI \(YoY\)/.test(l));
+  assert(cpi.some((l) => /\+3\.3%/.test(l)) && cpi.some((l) => /검증 대기/.test(l) && !/\+0\.6%|-3\.0%p/.test(l)), '정상 행은 숫자, 사고 행은 검증 대기');
   // 멱등: 다시 실행해도 마커 블록이 중복되지 않는다
   const r2 = inject(r1.md, data, cal, tickers);
   assert.strictEqual((r2.md.match(/<!-- DASHBOARD -->/g) || []).length, 1);

@@ -32,6 +32,14 @@ GitHub Pages 홈페이지에 게시 + 이메일로 발송하는 프로젝트.
 - **화면 변경은 `build_site.js`(템플릿)와 `docs/assets/`에서만 한다.** `docs/index.html`·`docs/reports/*.html`은 매일 통째로 재생성된다. 매일 갱신되는 원장은 `docs/data/`에 둔다(워크플로가 `docs logs`만 커밋한다). 사람이 커밋하는 설정은 `config/`.
 - 리포트 파일명·폴더명 날짜는 **KST 작성일**이다. 미국 기준일은 `us_date`(summaries.json·카드)로 따로 표시한다.
 
+## 경제지표 데이터 규칙 (2026-10-15 CPI 사고 이후 고정)
+- **측정 기준 필수.** 원장(`docs/data/calendar.json`)의 macro 항목은 `metric`·`measure`(mom|yoy|qoq|level|index)·`unit`(%|K|index)·`seasonal`(sa|nsa)·`period`를 가진다. 원장 키는 `(발표일, metric, measure)` (`2026-10-14-CPI-yoy`). CPI·PCE는 헤드라인/근원 × MoM/YoY 4줄. 서프라이즈는 숫자(발표값−예상값)이며 %는 `%p`로 표시한다. 문자열 값("+0.6%")은 금지, 숫자+unit으로 저장한다.
+- **발표값(actual)·직전값(prior)은 코드가 FRED에서 직접 채운다**(`lib/macro.js fredValue`, 규칙은 `config/macro_rules.json`). CPI 전월비=SA 지수(`CPIAUCSL`/`CPILFESL`), 전년비=NSA 지수(`CPIAUCNS`/`CPILFENS`) — BLS 공식 방식. LLM(Collect)은 일정·예상값·예상출처만 준다. LLM이 쓴 발표치는 원장에 들어가지 않는다.
+- **예상값(consensus) 출처 우선순위 고정:** 1순위 시장 컨센서스(Reuters/Bloomberg/WSJ·Dow Jones/FactSet/Briefing/MarketWatch/CNBC 서베이). 클리블랜드 연은 nowcast·예측시장·개별 캘린더 값은 `consensus`에 쓰지 않고 `ref_consensus`(참고)로만 둔다. 1차 보도로 확인한 컨센서스는 `config/macro_consensus_verified.json`에 URL과 함께 둔다.
+- **그럴듯함 검사(코드)와 비노출:** `lib/macro.js checkEvent`가 모든 원장 행을 검사한다(지표별 서프라이즈·직전값 이탈·범위 한도는 `config/macro_rules.json`; 실적은 서프라이즈 ±50%·EPS 기준(조정/GAAP) 불일치·매출 ±25%). 실패 행은 원장에 `hold`가 찍히고 사이트·리포트·메일에서 숫자 대신 `검증 대기`로 나온다. 실패해도 파이프라인은 계속된다.
+- **실적:** 행마다 `eps_basis`(adjusted|gaap)와 출처(`src_url` 또는 "공급자(미검증)")를 표시하고, 실제 매출·매출 서프라이즈를 포함한다. 1차 출처(8-K Ex-99.1·IR)로 확인한 값은 `config/earnings_verified.json`이 덮어쓴다. 발표일이 지나면 예상치는 동결한다(발표 후 컨센서스 사후 갱신 방지).
+- **검증 범위:** `verify_data.js`는 리포트가 아니라 원장 전체를 매일 검사하고, `validate_report.js`는 본문 CPI 수치를 원장과 대조한다. `npm test`의 회귀 테스트는 사고 케이스(MoM→YoY 칸·헤드라인/근원 혼합·중복·nowcast 출처)를 고정한다.
+
 ## 실행 환경
 - GitHub Actions(`.github/workflows/daily.yml`)에서 매 거래일 실행. 로컬 PC 불필요.
 - 실행 트리거: 외부 cron-job.org가 KST 화~토 06:30에 `workflow_dispatch`를 호출한다(GitHub 자체 `schedule:`은 2시간 지연돼 제거함 — `daily.yml`에 `schedule:` 블록을 다시 추가하지 말 것). 러너 TZ는 `Asia/Seoul`로 고정.
@@ -47,7 +55,7 @@ npm run inject    # 3_report.md 의 DASHBOARD/CALENDAR 마커에 표 삽입
 npm run validate  # 3_report.md 검증 (validate.md 작성, 실패 시 경고 배너)
 npm run email     # email_to_send.txt만 재생성 (Claude 미사용, 발송 안 함)
 npm run site      # docs/ HTML 재빌드
-npm run verify    # DoD-1 데이터 정확성 검증 (시세·교차·캘린더·티커)
+npm run verify    # DoD-1 데이터 정확성 검증 (시세·교차·원장 전체 검사·FRED 재계산·티커)
 npm run e2e       # DoD-2 Playwright 클릭 테스트 (먼저: npx http-server docs -p 8080 -s) — 라이브: node scripts/e2e_site.js --base <URL> --tag live
 npm test          # 코드 단계 단위 테스트(selftest) 전부
 bash run_daily.sh # 전체 파이프라인 (테스트용: REPORT_DATE · LOG_NAME · RUN_STEPS 환경변수)

@@ -1,0 +1,9 @@
+{
+  "_doc": "시장 컨센서스(Reuters/Bloomberg/WSJ·Dow Jones 서베이 등)를 1차 보도에서 확인한 예상값. update_calendar 가 consensus 칸에 덮어쓴다. nowcast·예측시장 값은 여기 쓰지 않는다.",
+  "items": [
+    { "date_et": "2026-10-14", "metric": "CPI",     "measure": "mom", "consensus": 0.6, "source": "Dow Jones 서베이 (CNBC)", "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html", "verified_at": "2026-10-15" },
+    { "date_et": "2026-10-14", "metric": "CPI",     "measure": "yoy", "consensus": 3.6, "source": "Dow Jones 서베이 (CNBC)", "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html", "verified_at": "2026-10-15" },
+    { "date_et": "2026-10-14", "metric": "CORECPI", "measure": "mom", "consensus": 0.2, "source": "Dow Jones 서베이 (CNBC)", "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html", "verified_at": "2026-10-15" },
+    { "date_et": "2026-10-14", "metric": "CORECPI", "measure": "yoy", "consensus": 2.5, "source": "Dow Jones 서베이 (CNBC)", "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html", "verified_at": "2026-10-15" }
+  ]
+}

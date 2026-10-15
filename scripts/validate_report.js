@@ -82,7 +82,30 @@ function checkNumbers(body, data, checks) {
   }
 }
 
-function validate(md, data, tickers) {
+// ⑦ 일정표·CPI 본문 대조 (원장 calendar.json 이 기준). 사고(2026-10-14): 본문/표의 CPI 수치가 서로 다른 측정 기준이었는데 아무도 대조하지 않았다.
+function checkCalendar(md, cal, checks) {
+  if (!cal?.events) return;
+  const M = require('../lib/macro');
+  // (a) 삽입된 일정 블록에는 보류(hold) 행의 숫자가 없어야 한다
+  const blk = /<!-- CALENDAR -->([\s\S]*?)<!-- \/CALENDAR -->/.exec(md)?.[1] || '';
+  const leaked = cal.events.filter((e) => e.type === 'macro' && (e.hold || M.checkEvent(e)) && blk.includes(e.title) && blk.split('\n').some((l) => l.includes(e.title) && /\+?\d+\.\d%/.test(l.replace(/\d{4}-\d{2}-\d{2}/g, '')) && !/검증 대기/.test(l)));
+  checks.push({ name: '일정표: 보류 행 숫자 비노출', ok: leaked.length === 0, detail: leaked.length ? leaked.map((e) => e.id).join(', ') : '보류 행 없음 또는 모두 "검증 대기"' });
+  // (b) 본문(주입 블록 밖)의 "CPI/Core CPI + YoY/MoM + 수치"는 원장 발표값과 같아야 한다 (발표값이 코드로 확정된 경우만)
+  // '정정 기록' 절은 오류 수치를 일부러 인용하므로 대조에서 제외한다
+  const body = md.replace(/\n### 정정 기록[\s\S]*$/, '\n').replace(/<!-- CALENDAR -->[\s\S]*?<!-- \/CALENDAR -->/, '').replace(/<!-- DASHBOARD -->[\s\S]*?<!-- \/DASHBOARD -->/, '');
+  const bad = [];
+  let n = 0;
+  for (const e of cal.events.filter((x) => x.type === 'macro' && ['CPI', 'CORECPI'].includes(x.metric) && typeof x.actual === 'number')) {
+    const core = e.metric === 'CORECPI';
+    const mm = e.measure === 'mom' ? String.raw`MoM|전월(?:비|\s*대비)` : String.raw`YoY|전년(?:비|\s*대비|\s*동월)`;
+    const who = core ? String.raw`(?:Core\s*CPI|근원\s*CPI)` : String.raw`(?<!Core\s)CPI`;
+    const re = new RegExp(String.raw`(?<![A-Za-z])${who}[^\n|]{0,24}?(?:${mm})[^\n|\d+-]{0,12}([+-]?\d+\.\d)%`, 'gi');
+    for (const m of body.matchAll(re)) { n++; if (Math.abs(Number(m[1]) - e.actual) > 0.05) bad.push(`${e.metric} ${e.measure}: 본문 ${m[1]}% ≠ 원장 ${e.actual}%`); }
+  }
+  checks.push({ name: '본문 CPI 수치 = 원장(FRED 코드 수집)', ok: bad.length === 0, detail: bad.length ? bad.slice(0, 3).join(' ; ') : `인용 ${n}건 일치` });
+}
+
+function validate(md, data, tickers, cal) {
   const checks = [];
   const warnings = [];
   const body = stripInjected(md);
@@ -125,6 +148,8 @@ function validate(md, data, tickers) {
   // ④⑤ 수치
   if (data) checkNumbers(body, data, checks);
   else warnings.push('0_data.json 이 없어 수치 대조를 건너뜀');
+
+  checkCalendar(md, cal, checks);
 
   // ⑥ 기준일
   const hd = /기준일[^\d\n]{0,30}(\d{4}-\d{2}-\d{2})/.exec(body);
@@ -193,6 +218,19 @@ function selftest() {
   assert(/VALIDATION-BANNER/.test(bannered) && bannered.indexOf('VALIDATION-BANNER') < bannered.indexOf('## 0.'));
   assert.strictEqual(applyBanner(bannered, r1), bannered, '같은 결과로 다시 달아도 배너가 중복되지 않아야 함');
   assert(!/VALIDATION-BANNER/.test(applyBanner(bannered, r0)));
+  // 망가뜨린 4 (사고 회귀): 본문 CPI 수치가 원장과 다름 / 보류 행 숫자가 일정표에 새어 나옴
+  const cal = { events: [
+    { type: 'macro', id: 'a', title: '9월 CPI (YoY)', metric: 'CPI', measure: 'yoy', actual: 3.7 },
+    { type: 'macro', id: 'b', title: '9월 CPI (MoM)', metric: 'CPI', measure: 'mom', actual: 0.6 },
+    { type: 'macro', id: 'c', title: '9월 Core CPI (MoM)', metric: 'CORECPI', measure: 'mom', actual: 0.3 },
+    { type: 'macro', id: 'h', title: '잘못된 행', hold: '측정 기준 미확인' },
+  ] };
+  const run = (txt) => { const ck = []; checkCalendar(txt, cal, ck); return ck; };
+  assert(run('9월 CPI YoY +3.7%(예상 +3.6%), 헤드라인 CPI MoM +0.6%, Core CPI MoM +0.3%').every((c) => c.ok), '정상 인용은 통과');
+  assert(run('9월 CPI YoY +0.6%로 발표').some((c) => !c.ok && c.name.includes('CPI')), 'MoM 값을 YoY 로 적은 본문을 못 잡음');
+  assert(run('Core CPI MoM +2.6%').some((c) => !c.ok && c.name.includes('CPI')), '근원 MoM 오인용을 못 잡음');
+  assert(run('<!-- CALENDAR -->\n| 2026-10-14 | 08:30 | 잘못된 행 | +0.6% | +3.6% |\n<!-- /CALENDAR -->').some((c) => !c.ok && c.name.includes('보류')), '보류 행 숫자 노출을 못 잡음');
+  assert(run('<!-- CALENDAR -->\n| 2026-10-14 | 08:30 | 잘못된 행 | 검증 대기 | 검증 대기 |\n<!-- /CALENDAR -->').every((c) => c.ok), '검증 대기 표기는 통과');
   console.log('selftest 통과: 정상 1건 통과 · 섹션 누락/숫자 불일치/미등록 티커(+첫 등장 형식)/N-A 규칙을 각각 정확히 검출 · 배너 멱등');
 }
 
@@ -206,7 +244,7 @@ function main() {
   const dataFile = val('--data') || path.join(dir, '0_data.json');
   if (!fs.existsSync(file)) { console.error(`리포트 없음: ${file}`); process.exit(1); }
   const md = fs.readFileSync(file, 'utf8');
-  const res = validate(md, C.readJson(dataFile, null), C.readJson(path.join(C.ROOT, 'docs', 'data', 'tickers.json'), {}));
+  const res = validate(md, C.readJson(dataFile, null), C.readJson(path.join(C.ROOT, 'docs', 'data', 'tickers.json'), {}), C.readJson(path.join(C.ROOT, 'docs', 'data', 'calendar.json'), null));
   const out = render(date, res);
   if (!val('--file')) fs.writeFileSync(path.join(dir, 'validate.md'), out, 'utf8');
   if (!args.includes('--no-banner') && !val('--file')) fs.writeFileSync(file, applyBanner(md, res), 'utf8');

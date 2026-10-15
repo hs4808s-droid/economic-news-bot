@@ -1,0 +1,25 @@
+{
+  "_doc": "경제지표 측정 기준·허용 범위·예상값 출처 규칙. 코드(lib/macro.js)가 읽는다. fred = 발표값을 코드가 채울 FRED 시리즈(kind: pct_mom|pct_yoy|diff|level), seasonal 은 BLS/BEA 공식 기준.",
+  "consensus_sources_allowed": ["Reuters", "Bloomberg", "WSJ", "Wall Street Journal", "Dow Jones", "FactSet", "Briefing", "MarketWatch", "CNBC"],
+  "consensus_sources_reference_only": ["Cleveland", "클리블랜드", "nowcast", "Kalshi", "Polymarket", "예측시장", "Kiplinger", "Scotiabank"],
+  "metrics": {
+    "CPI":     { "name": "CPI",      "importance": 3, "measures": { "mom": { "unit": "%", "seasonal": "sa",  "fred": { "id": "CPIAUCSL", "kind": "pct_mom" }, "surprise_max": 0.3, "gap_max": 0.7, "range": [-2, 3] },
+                                                                      "yoy": { "unit": "%", "seasonal": "nsa", "fred": { "id": "CPIAUCNS", "kind": "pct_yoy" }, "surprise_max": 0.4, "gap_max": 0.8, "range": [-3, 15] } } },
+    "CORECPI": { "name": "Core CPI", "importance": 3, "measures": { "mom": { "unit": "%", "seasonal": "sa",  "fred": { "id": "CPILFESL", "kind": "pct_mom" }, "surprise_max": 0.3, "gap_max": 0.7, "range": [-2, 3] },
+                                                                      "yoy": { "unit": "%", "seasonal": "nsa", "fred": { "id": "CPILFENS", "kind": "pct_yoy" }, "surprise_max": 0.4, "gap_max": 0.8, "range": [-3, 15] } } },
+    "PCE":     { "name": "PCE",      "importance": 3, "measures": { "mom": { "unit": "%", "seasonal": "sa", "fred": { "id": "PCEPI",    "kind": "pct_mom" }, "surprise_max": 0.3, "gap_max": 0.7, "range": [-2, 3] },
+                                                                      "yoy": { "unit": "%", "seasonal": "sa", "fred": { "id": "PCEPI",    "kind": "pct_yoy" }, "surprise_max": 0.4, "gap_max": 0.8, "range": [-3, 15] } } },
+    "COREPCE": { "name": "Core PCE", "importance": 3, "measures": { "mom": { "unit": "%", "seasonal": "sa", "fred": { "id": "PCEPILFE", "kind": "pct_mom" }, "surprise_max": 0.3, "gap_max": 0.7, "range": [-2, 3] },
+                                                                      "yoy": { "unit": "%", "seasonal": "sa", "fred": { "id": "PCEPILFE", "kind": "pct_yoy" }, "surprise_max": 0.4, "gap_max": 0.8, "range": [-3, 15] } } },
+    "PPI":     { "name": "PPI(최종수요)", "importance": 2, "measures": { "mom": { "unit": "%", "seasonal": "sa", "fred": { "id": "PPIFIS", "kind": "pct_mom" }, "surprise_max": 0.5, "gap_max": 1.0, "range": [-3, 4] },
+                                                                      "yoy": { "unit": "%", "seasonal": "sa", "fred": { "id": "PPIFIS", "kind": "pct_yoy" }, "surprise_max": 0.7, "gap_max": 1.5, "range": [-5, 20] } } },
+    "RETAIL":  { "name": "소매판매", "importance": 2, "measures": { "mom": { "unit": "%", "seasonal": "sa", "fred": { "id": "RSAFS", "kind": "pct_mom" }, "surprise_max": 1.0, "gap_max": 2.0, "range": [-5, 5] } } },
+    "NFP":     { "name": "비농업고용(전월 대비 증감)", "importance": 3, "measures": { "level": { "unit": "K", "seasonal": "sa", "fred": { "id": "PAYEMS", "kind": "diff" }, "surprise_max": 150, "gap_max": 250, "range": [-1000, 1000] } } },
+    "UNEMP":   { "name": "실업률",   "importance": 2, "measures": { "level": { "unit": "%", "seasonal": "sa", "fred": { "id": "UNRATE", "kind": "level" }, "surprise_max": 0.3, "gap_max": 0.5, "range": [0, 20] } } },
+    "CLAIMS":  { "name": "신규 실업수당 청구", "importance": 1, "measures": { "level": { "unit": "K", "seasonal": "sa", "fred": { "id": "ICSA", "kind": "weekly_k" }, "surprise_max": 40, "gap_max": 60, "range": [100, 1000] } } },
+    "GDP":     { "name": "GDP", "importance": 3, "measures": { "qoq": { "unit": "%", "seasonal": "sa", "surprise_max": 1.0, "gap_max": 3.0, "range": [-10, 10] } } },
+    "ISM":     { "name": "ISM", "importance": 2, "measures": { "index": { "unit": "index", "seasonal": "sa", "surprise_max": 3, "gap_max": 5, "range": [20, 80] } } },
+    "JOLTS":   { "name": "JOLTS", "importance": 2, "measures": { "level": { "unit": "K", "seasonal": "sa", "surprise_max": 600, "gap_max": 1000, "range": [3000, 15000] } } }
+  },
+  "earnings": { "surprise_pct_max": 50, "rev_surprise_pct_max": 25 }
+}
