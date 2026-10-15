@@ -1,10 +1,10 @@
 {
   "facts": {
     "fedwatch": {
-      "value": "7,718.94",
+      "value": "10/14 기준: 동결 약 66% / 25bp 인상 약 34%. 9월 PPI 발표(10/15) 이후 인상 확률 30% 미만으로 하락(동결 약 70~71%). 12월까지 1회 이상 인상 확률 약 89.7%(10/14 19:23 ET 기준, Fed funds futures). CME 홈페이지 직접 접속은 이번 세션에서 불가 — 2차 매체의 CME FedWatc",
       "source": "CME FedWatch",
-      "last_verified": "2026-10-15"
+      "last_verified": "2026-10-16"
     }
   },
-  "updated_at": "2026-10-14T21:41:27.695Z"
+  "updated_at": "2026-10-15T21:40:49.833Z"
 }

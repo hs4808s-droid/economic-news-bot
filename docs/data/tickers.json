@@ -171,6 +171,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "BMY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "BP": {
     "name_ko": "?",
     "sector": "?"
@@ -192,6 +196,10 @@
     "sector": "?"
   },
   "BTC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "BUD": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -331,6 +339,10 @@
     "name_ko": "시스코",
     "sector": "네트워크장비"
   },
+  "CT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "CTSH": {
     "name_ko": "?",
     "sector": "?"
@@ -419,6 +431,10 @@
     "name_ko": "이베이",
     "sector": "경기소비재"
   },
+  "EBIT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "EL": {
     "name_ko": "에스티로더",
     "sector": "필수소비재"
@@ -432,6 +448,10 @@
     "sector": "?"
   },
   "EQIX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ERIC": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -456,6 +476,10 @@
     "sector": "?"
   },
   "FIX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "FMC": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -492,6 +516,10 @@
     "sector": "전기장비"
   },
   "GGP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GILD": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -599,11 +627,19 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "ICSA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "IGV": {
     "name_ko": "소프트웨어 ETF",
     "sector": "ETF"
   },
   "IIF": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "IMF": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -743,6 +779,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "LIN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "LITE": {
     "name_ko": "루멘텀",
     "sector": "광통신"
@@ -775,6 +815,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "MAN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "MARA": {
     "name_ko": "?",
     "sector": "?"
@@ -782,6 +826,10 @@
   "MCD": {
     "name_ko": "맥도날드",
     "sector": "경기소비재"
+  },
+  "MCHP": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "MDB": {
     "name_ko": "?",
@@ -800,6 +848,10 @@
     "sector": "?"
   },
   "MNDY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "MO": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -875,6 +927,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "NIC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "NIVF": {
     "name_ko": "?",
     "sector": "?"
@@ -886,6 +942,10 @@
   "NOW": {
     "name_ko": "서비스나우",
     "sector": "소프트웨어"
+  },
+  "NSA": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "NSC": {
     "name_ko": "?",
@@ -1047,6 +1107,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "RSAFS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "RTX": {
     "name_ko": "RTX",
     "sector": "산업재"
@@ -1060,6 +1124,10 @@
     "sector": "?"
   },
   "RXO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SA": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1080,6 +1148,10 @@
     "sector": "금융"
   },
   "SCKT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SHEL": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1187,6 +1259,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "SYK": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "SYNA": {
     "name_ko": "?",
     "sector": "?"
@@ -1239,7 +1315,15 @@
     "name_ko": "TSMC",
     "sector": "반도체"
   },
+  "TT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "TTD": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TTE": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1276,6 +1360,10 @@
     "sector": "헬스케어"
   },
   "UNP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "URL": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1324,6 +1412,10 @@
     "sector": "?"
   },
   "VZ": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "WB": {
     "name_ko": "?",
     "sector": "?"
   },
