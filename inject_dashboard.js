@@ -49,7 +49,10 @@ function calendarTables(cal, D, seen, tickers) {
   if (!A.length) L.push('예정 없음', '');
   else {
     L.push('| 날짜(ET) | 시각 | 이벤트 | 중요도 | 직전값 | 예상값 | 발표치 | 서프라이즈 | 출처 |', '|---|---|---|---|---|---|---|---|---|');
-    for (const e of A) L.push(`| ${e.date_et} | ${cell(e.time_et)} | ${cell(e.title)} | ${stars(e.importance)} | ${cell(e.prior)} | ${cell(e.consensus)} | ${cell(e.actual)} | ${sgn(e.surprise)} | ${cell(e.source)} |`);
+    for (const e of A) {
+      const pend = !e.measure && (e.actual != null || e.surprise != null); // 측정 기준 미확인 → 숫자 비노출
+      L.push(`| ${e.date_et} | ${cell(e.time_et)} | ${cell(e.title)} | ${stars(e.importance)} | ${cell(e.prior)} | ${cell(e.consensus)} | ${pend ? '검증 대기' : cell(e.actual)} | ${pend ? '검증 대기' : sgn(e.surprise)} | ${cell(e.source)} |`);
+    }
     L.push('');
   }
 

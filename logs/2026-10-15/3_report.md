@@ -1,5 +1,9 @@
 # 미국 시장 데일리 리포트
 
+<!-- CORRECTION-BANNER -->
+> 🚨 **정정 안내** — 10/14 CPI 수치 표기 오류 — 정정 중. 본문 일정표의 CPI 발표값·서프라이즈는 측정 기준(MoM/YoY) 혼용으로 잘못 표기돼 '검증 대기'로 바꿨고, 1차 출처(BLS) 대조 후 정정본을 게시합니다.
+<!-- /CORRECTION-BANNER -->
+
 <!-- VALIDATION-BANNER -->
 > ⚠️ **자동 검증 경고** — 다음 검사를 통과하지 못했습니다: 티커 첫 등장 형식 `T(이름·섹터)` · 수치 미 10년물 = 0_data.json · 수치 미 2년물 = 0_data.json. 수치가 원본 데이터와 다를 수 있으니 원문 출처로 다시 확인하세요. (내역: logs 폴더의 validate.md)
 <!-- /VALIDATION-BANNER -->
@@ -375,8 +379,8 @@ PPI·GDP·Payroll·실업률·실업수당·소매판매·ISM: 해당 기간(202
 | 날짜(ET) | 시각 | 이벤트 | 중요도 | 직전값 | 예상값 | 발표치 | 서프라이즈 | 출처 |
 |---|---|---|---|---|---|---|---|---|
 | 2026-10-14 | 05:40 | Fed Bowman 발언 — "Supervision and Regulation" (IIF Annual Membership Summit, 방콕) | ★★ | — | — | — | — | forth.news https://www.forth.news/lists/fed/CfzWwHrjg8YVaTusZAaXX |
-| 2026-10-14 | 08:30 | CPI (9월, CPI/Core CPI) | ★★★ | — | +2.5% | +0.3% | -2.2 | Scotiabank 경제캘린더 [P3] |
-| 2026-10-14 | 08:30 | 9월 CPI (YoY) | ★★★ | — | +3.6% | +0.6% | -3 | Kiplinger https://www.kiplinger.com/investing/economy/this-weeks-economic-calendar |
+| 2026-10-14 | 08:30 | CPI (9월, CPI/Core CPI) | ★★★ | — | +2.5% | 검증 대기 | 검증 대기 | Scotiabank 경제캘린더 [P3] |
+| 2026-10-14 | 08:30 | 9월 CPI (YoY) | ★★★ | — | +3.6% | 검증 대기 | 검증 대기 | Kiplinger https://www.kiplinger.com/investing/economy/this-weeks-economic-calendar |
 | 2026-10-14 | 08:30 | 실질임금 (9월) | ★ | — | — | — | — | BLS [P1] |
 | 2026-10-14 | 14:00 | 베이지북(Beige Book) 공개 | ★★ | — | — | — | — | fedratecalc.com [P3] |
 | 2026-10-14 | 22:55 | Fed Bowman 발언 — "Supervisory Modernization After Silicon Valley Bank" (Bangkok Economic Festival) | ★★ | — | — | — | — | forth.news https://www.forth.news/lists/fed/CfzWwHrjg8YVaTusZAaXX |

@@ -121,6 +121,10 @@ const FOOT = `<footer>
   <p>데이터 출처: Yahoo Finance · CBOE · Finnhub · FRED · Nasdaq. 시세는 지연될 수 있으며 기준시각(ET)은 각 항목에 표기됩니다.</p>
 </footer>`;
 
+const NOTICE = (() => { try { const n = JSON.parse(fs.readFileSync(path.join(ROOT, 'config', 'notice.json'), 'utf8')); return n.text && (!n.until || n.until >= new Date().toISOString().slice(0, 10)) ? n.text : ''; } catch { return ''; } })();
+const noticeHtml = () => (NOTICE ? `<div class="notice" role="alert">⚠️ ${esc(NOTICE)}</div>
+` : '');
+
 const page = ({ title, description, body, assets, wrapClass = '' }) => `<!doctype html>
 <html lang="ko">
 <head>
@@ -135,7 +139,7 @@ ${HEAD_SCRIPT}
 </head>
 <body>
 <div class="wrap ${wrapClass}">
-${body}
+${noticeHtml()}${body}
 </div>
 <script src="${assets}site.js" defer></script>
 </body>

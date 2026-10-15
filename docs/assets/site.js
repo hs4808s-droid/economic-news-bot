@@ -137,8 +137,10 @@
         td(usd(e.actual_eps), 'r num'), surpriseCell(e.surprise_eps, function (v) { return v.toFixed(2); }), td(usdB(e.cons_rev), 'r num'), td(e.implied_move != null ? '±' + e.implied_move + '%' : '—', 'r'));
     });
     var macro = evs.filter(function (e) { return e.type === 'macro' || e.type === 'fed'; }).map(function (e) {
+      // 측정 기준(measure)이 없는 발표값은 MoM/YoY 혼용을 걸러낼 수 없으므로 숫자를 노출하지 않는다.
+      var pending = !e.measure && (e.actual != null || e.surprise != null);
       return h('tr', null, td(e.date_et), td(e.time_et), td(e.title), td('★'.repeat(Math.max(1, Math.min(3, e.importance || 1)))),
-        td(e.prior, 'r'), td(e.consensus, 'r'), td(e.actual, 'r'), surpriseCell(typeof e.surprise === 'number' ? e.surprise : null, function (v) { return String(v); }));
+        td(e.prior, 'r'), td(e.consensus, 'r'), td(pending ? '검증 대기' : e.actual, 'r'), pending ? td('검증 대기', 'r') : surpriseCell(typeof e.surprise === 'number' ? e.surprise : null, function (v) { return String(v); }));
     });
     var corp = evs.filter(function (e) { return e.type === 'corporate'; }).map(function (e) {
       return h('tr', null, td(e.date_et), td(tk(e.ticker)), td(e.title), td(e.source));
