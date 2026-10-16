@@ -7,6 +7,10 @@
     "name_ko": "애플",
     "sector": "IT하드웨어"
   },
+  "ABBV": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "ABNB": {
     "name_ko": "에어비앤비",
     "sector": "경기소비재"
@@ -83,6 +87,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "API": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "APLD": {
     "name_ko": "어플라이드디지털",
     "sector": "데이터센터"
@@ -143,6 +151,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "AZN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "BA": {
     "name_ko": "보잉",
     "sector": "산업재"
@@ -200,6 +212,10 @@
     "sector": "?"
   },
   "BUD": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "BX": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -370,6 +386,10 @@
   "DAL": {
     "name_ko": "델타항공",
     "sector": "산업재"
+  },
+  "DBS": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "DC": {
     "name_ko": "?",
@@ -559,6 +579,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "GV": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "GWRE": {
     "name_ko": "?",
     "sector": "?"
@@ -604,6 +628,10 @@
     "sector": "?"
   },
   "HUBS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "HUD": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1220,6 +1248,10 @@
     "sector": "?"
   },
   "SPOT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SPR": {
     "name_ko": "?",
     "sector": "?"
   },
