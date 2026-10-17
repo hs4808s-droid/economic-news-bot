@@ -13,7 +13,7 @@
     "validate": "node scripts/validate_report.js",
     "verify": "node scripts/verify_data.js",
     "e2e": "node scripts/e2e_site.js",
-    "test": "node scripts/update_calendar.js --selftest && node scripts/verify_data.js --selftest && node scripts/update_facts.js --selftest && node inject_dashboard.js --selftest && node scripts/validate_report.js --selftest && node scripts/should_run.js --selftest && node build_site.js --selftest && node build_email.js --selftest",
+    "test": "node scripts/update_calendar.js --selftest && node scripts/verify_data.js --selftest && node scripts/update_facts.js --selftest && node inject_dashboard.js --selftest && node scripts/validate_report.js --selftest && node scripts/should_run.js --selftest && node build_site.js --selftest && node build_email.js --selftest && node scripts/build_brief_preview.js --selftest",
     "verify:offline": "node scripts/verify_data.js --offline"
   },
   "dependencies": {

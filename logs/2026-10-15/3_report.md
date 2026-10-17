@@ -1,8 +1,6 @@
 # 미국 시장 데일리 리포트
 
-<!-- VALIDATION-BANNER -->
-> ⚠️ **자동 검증 경고** — 다음 검사를 통과하지 못했습니다: 티커 첫 등장 형식 `T(이름·섹터)` · 수치 미 10년물 = 0_data.json · 수치 미 2년물 = 0_data.json. 수치가 원본 데이터와 다를 수 있으니 원문 출처로 다시 확인하세요. (내역: logs 폴더의 validate.md)
-<!-- /VALIDATION-BANNER -->
+
 
 
 <!-- CORRECTION-BANNER -->
