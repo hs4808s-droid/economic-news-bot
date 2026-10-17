@@ -1,9 +1,91 @@
 {
-  "_doc": "시장 컨센서스(Reuters/Bloomberg/WSJ·Dow Jones 서베이 등)를 1차 보도에서 확인한 예상값. update_calendar 가 consensus 칸에 덮어쓴다. nowcast·예측시장 값은 여기 쓰지 않는다.",
+  "_doc": "시장 컨센서스(Reuters/Bloomberg/WSJ·Dow Jones 서베이 등)를 1차 보도에서 확인한 예상값. update_calendar 가 consensus 칸에 덮어쓴다. nowcast·예측시장 값은 여기 쓰지 않는다. surprise_ok=true: 발표값을 1차 출처(BLS 등)로 확인했고 서프라이즈가 허용 한도를 넘는 것이 실제 사건(예: 2026-09 PPI +1.3%)일 때만 쓴다. alt_surveys 는 다른 서베이의 값(참고).",
   "items": [
-    { "date_et": "2026-10-14", "metric": "CPI",     "measure": "mom", "consensus": 0.6, "source": "Dow Jones 서베이 (CNBC)", "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html", "verified_at": "2026-10-15" },
-    { "date_et": "2026-10-14", "metric": "CPI",     "measure": "yoy", "consensus": 3.6, "source": "Dow Jones 서베이 (CNBC)", "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html", "verified_at": "2026-10-15" },
-    { "date_et": "2026-10-14", "metric": "CORECPI", "measure": "mom", "consensus": 0.2, "source": "Dow Jones 서베이 (CNBC)", "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html", "verified_at": "2026-10-15" },
-    { "date_et": "2026-10-14", "metric": "CORECPI", "measure": "yoy", "consensus": 2.5, "source": "Dow Jones 서베이 (CNBC)", "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html", "verified_at": "2026-10-15" }
+    {
+      "date_et": "2026-10-14",
+      "metric": "CPI",
+      "measure": "mom",
+      "consensus": 0.6,
+      "source": "Dow Jones 서베이 (CNBC)",
+      "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html",
+      "verified_at": "2026-10-15"
+    },
+    {
+      "date_et": "2026-10-14",
+      "metric": "CPI",
+      "measure": "yoy",
+      "consensus": 3.6,
+      "source": "Dow Jones 서베이 (CNBC)",
+      "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html",
+      "verified_at": "2026-10-15"
+    },
+    {
+      "date_et": "2026-10-14",
+      "metric": "CORECPI",
+      "measure": "mom",
+      "consensus": 0.2,
+      "source": "Dow Jones 서베이 (CNBC)",
+      "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html",
+      "verified_at": "2026-10-15"
+    },
+    {
+      "date_et": "2026-10-14",
+      "metric": "CORECPI",
+      "measure": "yoy",
+      "consensus": 2.5,
+      "source": "Dow Jones 서베이 (CNBC)",
+      "url": "https://www.cnbc.com/2026/10/14/cpi-inflation-report-september-2026.html",
+      "verified_at": "2026-10-15"
+    },
+    {
+      "date_et": "2026-10-15",
+      "metric": "PPI",
+      "measure": "mom",
+      "consensus": 0.6,
+      "source": "Dow Jones 서베이 (CNBC)",
+      "url": "https://www.cnbc.com/2026/10/15/september-producer-price-index-retail-sales-data.html",
+      "verified_at": "2026-10-17",
+      "alt_surveys": [
+        {
+          "source": "Reuters 설문",
+          "value": 0.5,
+          "url": "https://www.reuters.com/business/us-producer-prices-post-largest-increase-4-12-years-september-2026-10-15/"
+        },
+        {
+          "source": "FactSet",
+          "value": 0.5,
+          "url": "https://www.cnn.com/2026/10/15/economy/us-retail-sales-wholesale-inflation-ppi-september"
+        }
+      ],
+      "surprise_ok": true,
+      "actual_url": "https://www.bls.gov/news.release/ppi.nr0.htm"
+    },
+    {
+      "date_et": "2026-10-15",
+      "metric": "RETAIL",
+      "measure": "mom",
+      "consensus": 0.3,
+      "source": "Reuters 설문",
+      "url": "https://www.reuters.com/business/us-retail-sales-beat-expectations-september-higher-gasoline-prices-2026-10-15/",
+      "verified_at": "2026-10-17",
+      "alt_surveys": [
+        {
+          "source": "CNBC(출처 미표기 '경제학자')",
+          "value": 0.4,
+          "url": "https://www.cnbc.com/2026/10/15/september-producer-price-index-retail-sales-data.html"
+        }
+      ],
+      "actual_url": "https://www.census.gov/retail/sales.html"
+    },
+    {
+      "date_et": "2026-10-15",
+      "metric": "CLAIMS",
+      "measure": "level",
+      "consensus": 200,
+      "source": "Reuters 설문",
+      "url": "https://www.reuters.com/world/us/us-weekly-jobless-claims-rise-marginally-amid-low-layoffs-2026-10-15/",
+      "verified_at": "2026-10-17",
+      "actual_url": "https://www.dol.gov/ui/data.pdf"
+    }
   ]
 }

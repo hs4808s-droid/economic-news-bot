@@ -12,7 +12,8 @@
 
 const fs = require('fs');
 const path = require('path');
-const { marked } = require('marked');
+const { marked } = require('./lib/md');
+const { readerMd } = require('./lib/sanitize');
 
 const ROOT = __dirname;
 const kstDate = () => new Date().toLocaleDateString('sv-SE', { timeZone: 'Asia/Seoul' });
@@ -95,11 +96,19 @@ function main() {
 
   const { homepage } = JSON.parse(fs.readFileSync(path.join(ROOT, 'package.json'), 'utf8'));
   const reportUrl = `${homepage}reports/${date}.html`;
-  const body = markdownToPlainText(fs.readFileSync(reportFile, 'utf8'));
+  const body = markdownToPlainText(readerMd(fs.readFileSync(reportFile, 'utf8')));
 
   const out = `Subject: [경제 뉴스 리포트] ${date} 미국 시장 요약\n\n전체 리포트: ${reportUrl}\n\n${body}\n`;
   fs.writeFileSync(path.join(logDir, 'email_to_send.txt'), out, 'utf8');
   console.log(`완료: logs/${date}/email_to_send.txt`);
 }
 
-main();
+function selftest() {
+  const assert = require('assert');
+  const txt = markdownToPlainText(['지수 76.5~81센트, 15~16%대', '', '| 항목 | 값 |', '|---|---|', '| 영업이익 | 523억~543억 |', '', '- 전망 -11~14% 전후', ''].join('\n'));
+  for (const r of ['76.5~81센트', '15~16%대', '523억~543억', '-11~14%']) assert(txt.includes(r), `메일 범위 보존: ${r}`);
+  console.log('selftest 통과: 메일 물결표 범위 4종');
+}
+
+if (process.argv.includes('--selftest')) selftest();
+else main();

@@ -11,3 +11,6 @@ node_modules/
 logs/**/*.run.log
 logs/**/*.err.log
 logs/**/*.log
+
+# e2e 스크린샷은 로컬 산출물(워크플로가 logs 를 통째로 add 하므로 제외)
+logs/**/e2e/

@@ -226,6 +226,7 @@ CPI·Core CPI·PCE·Core PCE·PPI·GDP·Payroll·실업률·실업수당·소매
 > 구분은 `macro`(지표) 또는 `fed`(FOMC·Fed 연설).
 > **이벤트명 규칙(코드가 측정 기준을 제목에서 읽는다):** `<기준월> <지표명> (<MoM|YoY|QoQ>)` — 예: `9월 CPI (YoY)`, `9월 Core CPI (MoM)`, `9월 PCE (YoY)`. 헤드라인/근원, MoM/YoY는 **행을 따로** 적는다. `CPI/Core CPI`처럼 한 행에 합치지 않는다. 비농업고용·실업률·실업수당은 측정 기준이 하나라 `(MoM)` 등을 붙이지 않는다. 측정 기준을 알 수 없는 제목은 코드가 숫자를 버린다.
 > **예상값은 시장 컨센서스만:** Reuters·Bloomberg·WSJ(Dow Jones)·FactSet·Briefing·MarketWatch·CNBC가 인용한 이코노미스트 서베이 값에 한한다. **클리블랜드 연은 nowcast·Kalshi/Polymarket 등 예측시장·개별 블로그/캘린더(Kiplinger·Scotiabank 등) 값은 예상값 칸에 쓰지 않는다**(쓰면 코드가 참고값으로만 따로 보관). 컨센서스를 확인 못 했으면 `N/A`.
+> **컨센서스 선수집(필수):** 향후 3일 안에 발표되는 ★★ 이상 지표(CPI·PCE·PPI·소매판매·고용·GDP·ISM 등)는 **발표 1~3일 전부터** 컨센서스를 검색해 `예상값`·`예상출처`를 채운다(CNBC/Reuters/Bloomberg의 "week ahead", "economists expect" 기사). 3일 안인데도 N/A로 남기면 [9] 확인 필요에 "예상값 미확보: 지표명"을 적는다. 발표 후에 예상값을 채우는 것은 가능하지만 발표 직전 컨센서스여야 한다.
 > **예상출처 칸**에 그 값의 출처를 매체/기관명으로 적는다(`Dow Jones 서베이 (CNBC)`). 예상값은 해당 행의 측정 기준과 같은 기준이어야 한다.
 > **직전값은 비워도 된다** — CPI·PCE·PPI·소매판매·고용·실업률·실업수당의 직전값과 발표치는 코드가 FRED에서 채운다. 코드가 못 채우는 지표(GDP·ISM·JOLTS)만 `3.2%`, `+150K`처럼 **단위를 붙여** 적는다.
 > 날짜·출처 규칙: 날짜는 `YYYY-MM-DD`(ET), 출처 칸이 비면 코드가 값을 버린다.

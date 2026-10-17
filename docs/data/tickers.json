@@ -8,8 +8,8 @@
     "sector": "IT하드웨어"
   },
   "ABBV": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "애브비",
+    "sector": "헬스케어"
   },
   "ABNB": {
     "name_ko": "에어비앤비",
@@ -32,8 +32,8 @@
     "sector": "소프트웨어"
   },
   "ADP": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "ADP",
+    "sector": "IT서비스"
   },
   "ADS": {
     "name_ko": "?",
@@ -84,8 +84,8 @@
     "sector": "네트워크장비"
   },
   "APH": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "암페놀",
+    "sector": "IT하드웨어"
   },
   "API": {
     "name_ko": "?",
@@ -136,8 +136,8 @@
     "sector": "반도체"
   },
   "AXP": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "아메리칸익스프레스",
+    "sector": "금융"
   },
   "AXT": {
     "name_ko": "?",
@@ -152,8 +152,8 @@
     "sector": "?"
   },
   "AZN": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "아스트라제네카",
+    "sector": "헬스케어"
   },
   "BA": {
     "name_ko": "보잉",
@@ -164,8 +164,8 @@
     "sector": "금융"
   },
   "BBVA": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "BBVA",
+    "sector": "금융"
   },
   "BFLY": {
     "name_ko": "?",
@@ -184,12 +184,12 @@
     "sector": "?"
   },
   "BMY": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "브리스톨마이어스스퀴브",
+    "sector": "헬스케어"
   },
   "BP": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "BP",
+    "sector": "에너지"
   },
   "BRK": {
     "name_ko": "버크셔해서웨이",
@@ -212,8 +212,8 @@
     "sector": "?"
   },
   "BUD": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "AB인베브",
+    "sector": "필수소비재"
   },
   "BX": {
     "name_ko": "?",
@@ -280,8 +280,8 @@
     "sector": "커뮤니케이션"
   },
   "CME": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "CME그룹",
+    "sector": "금융"
   },
   "CMG": {
     "name_ko": "?",
@@ -468,8 +468,8 @@
     "sector": "?"
   },
   "EQIX": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "에퀴닉스",
+    "sector": "데이터센터"
   },
   "ERIC": {
     "name_ko": "?",
@@ -480,8 +480,8 @@
     "sector": "?"
   },
   "FCX": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "프리포트맥모란",
+    "sector": "소재"
   },
   "FDA": {
     "name_ko": "?",
@@ -512,8 +512,8 @@
     "sector": "?"
   },
   "FTNT": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "포티넷",
+    "sector": "소프트웨어"
   },
   "GB": {
     "name_ko": "?",
@@ -540,8 +540,8 @@
     "sector": "?"
   },
   "GILD": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "길리어드",
+    "sector": "헬스케어"
   },
   "GLW": {
     "name_ko": "코닝",
@@ -624,8 +624,8 @@
     "sector": "IT하드웨어"
   },
   "HSBC": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "HSBC",
+    "sector": "금융"
   },
   "HUBS": {
     "name_ko": "?",
@@ -772,8 +772,8 @@
     "sector": "?"
   },
   "KO": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "코카콜라",
+    "sector": "필수소비재"
   },
   "KRE": {
     "name_ko": "지역은행 ETF",
@@ -808,8 +808,8 @@
     "sector": "?"
   },
   "LIN": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "린데",
+    "sector": "소재"
   },
   "LITE": {
     "name_ko": "루멘텀",
@@ -840,8 +840,8 @@
     "sector": "경기소비재"
   },
   "MA": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "마스터카드",
+    "sector": "금융"
   },
   "MAN": {
     "name_ko": "?",
@@ -880,8 +880,8 @@
     "sector": "?"
   },
   "MO": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "알트리아",
+    "sector": "필수소비재"
   },
   "MRK": {
     "name_ko": "머크",
@@ -936,12 +936,12 @@
     "sector": "?"
   },
   "NEE": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "넥스트에라에너지",
+    "sector": "유틸리티"
   },
   "NEM": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "뉴몬트",
+    "sector": "소재"
   },
   "NET": {
     "name_ko": "?",
@@ -992,8 +992,8 @@
     "sector": "반도체"
   },
   "NVS": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "노바티스",
+    "sector": "헬스케어"
   },
   "NYB": {
     "name_ko": "?",
@@ -1104,8 +1104,8 @@
     "sector": "?"
   },
   "PSX": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "필립스66",
+    "sector": "에너지"
   },
   "QCOM": {
     "name_ko": "퀄컴",
@@ -1164,12 +1164,12 @@
     "sector": "소프트웨어"
   },
   "SBUX": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "스타벅스",
+    "sector": "경기소비재"
   },
   "SCCO": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "서던코퍼",
+    "sector": "소재"
   },
   "SCHW": {
     "name_ko": "찰스슈왑",
@@ -1180,8 +1180,8 @@
     "sector": "?"
   },
   "SHEL": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "셸",
+    "sector": "에너지"
   },
   "SHOE": {
     "name_ko": "?",
@@ -1220,8 +1220,8 @@
     "sector": "ETF"
   },
   "SMTC": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "셈테크",
+    "sector": "반도체"
   },
   "SNDK": {
     "name_ko": "샌디스크",
@@ -1244,12 +1244,12 @@
     "sector": "?"
   },
   "SPGI": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "S&P글로벌",
+    "sector": "금융"
   },
   "SPOT": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "스포티파이",
+    "sector": "커뮤니케이션"
   },
   "SPR": {
     "name_ko": "?",
@@ -1292,8 +1292,8 @@
     "sector": "?"
   },
   "SYK": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "스트라이커",
+    "sector": "헬스케어"
   },
   "SYNA": {
     "name_ko": "?",
@@ -1348,16 +1348,16 @@
     "sector": "반도체"
   },
   "TT": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "트레인테크놀로지스",
+    "sector": "산업재"
   },
   "TTD": {
     "name_ko": "?",
     "sector": "?"
   },
   "TTE": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "토탈에너지스",
+    "sector": "에너지"
   },
   "TWLO": {
     "name_ko": "?",
@@ -1392,8 +1392,8 @@
     "sector": "헬스케어"
   },
   "UNP": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "유니온퍼시픽",
+    "sector": "산업재"
   },
   "URL": {
     "name_ko": "?",
@@ -1420,8 +1420,8 @@
     "sector": "?"
   },
   "V": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "비자",
+    "sector": "금융"
   },
   "VICR": {
     "name_ko": "?",
@@ -1444,8 +1444,8 @@
     "sector": "?"
   },
   "VZ": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "버라이즌",
+    "sector": "커뮤니케이션"
   },
   "WB": {
     "name_ko": "?",
@@ -1460,8 +1460,8 @@
     "sector": "?"
   },
   "WELL": {
-    "name_ko": "?",
-    "sector": "?"
+    "name_ko": "웰타워",
+    "sector": "부동산"
   },
   "WFC": {
     "name_ko": "웰스파고",

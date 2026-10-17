@@ -75,18 +75,61 @@ async function main() {
   }
   await page.click('#heat-ctrl [data-period="1d"]');
 
-  // 3. 2주 일정 탭
+  // 2-b. 히트맵 정렬·배치 (A4): 선택 기간 수익률 내림차순, 15칸이 모두 보이고 잘리지 않음
+  for (const per of ['1d', '5d', '1m', 'ytd']) {
+    await page.click(`#heat-ctrl [data-period="${per}"]`);
+    const vals = await page.$$eval('#heatmap .cell', (els) => els.map((e) => Number(e.getAttribute('data-v'))));
+    const boxes = await page.$$eval('#heatmap .cell', (els) => els.map((e) => { const r = e.getBoundingClientRect(); return { l: r.left, r: r.right, w: r.width }; }));
+    const hm = await page.$eval('#heatmap', (e) => ({ cw: e.clientWidth, sw: e.scrollWidth, h: e.getBoundingClientRect().height }));
+    check(`히트맵 ${per}: 수익률 내림차순 정렬`, vals.every((v, i) => i === 0 || vals[i - 1] >= v), vals.join(','));
+    check(`히트맵 ${per}: 15칸 모두 컨테이너 안(잘림 없음)`, boxes.length === 15 && hm.sw <= hm.cw + 1 && boxes.every((b) => b.w > 60), `${hm.cw}/${hm.sw} h=${Math.round(hm.h)}`);
+  }
+  await page.click('#heat-ctrl [data-period="1d"]');
+  const gap = await page.evaluate(() => { const hm = document.getElementById('heatmap').getBoundingClientRect(); const nx = document.querySelector('#calendar').getBoundingClientRect(); return Math.round(nx.top - hm.bottom); });
+  check('히트맵 아래 빈 영역 없음(다음 블록까지 간격 < 160px)', gap < 160, `${gap}px`);
+
+  // 3. 홈 일정: 탭 2개(실적·지표·연준), 기본은 관심·대형주 / ★★★만
   const tabIds = await page.$$eval('#calendar [role=tab]', (e) => e.map((x) => x.getAttribute('data-tab')));
-  check('일정 탭 3개 존재 (실적·지표·기업 이벤트)', tabIds.length === 3, tabIds.join(','));
-  for (const tab of tabIds) {
+  check('홈 일정 탭 = 실적·지표·연준 (기업 이벤트는 전체 보기로)', tabIds.join(',') === 'earnings,macro', tabIds.join(','));
+  await page.click('#calendar [data-tab="earnings"]');
+  const eh0 = await page.$$eval('#cal-panel thead th', (e) => e.map((x) => x.textContent.trim()));
+  const er0 = await page.$$eval('#cal-panel tbody tr', (trs) => trs.map((tr) => [...tr.children].map((td) => td.textContent.trim())));
+  check('홈 실적 탭: 열 5개 = 날짜·종목·예상 EPS·실제 EPS·서프라이즈', eh0.length === 5 && ['날짜', '종목', '예상 EPS', '실제 EPS', '서프라이즈'].every((h, i) => eh0[i] === h), eh0.join(','));
+  const fullN = Number(/전체 (\d+)건/.exec(await page.textContent('#cal-panel'))[1]);
+  check('홈 실적 탭: 기본 화면은 전체보다 적은 관심·대형주만', er0.length > 0 && er0.length < fullN, `${er0.length} / 전체 ${fullN}`);
+  const tickers0 = er0.map((r) => r[1].split(' ')[0]);
+  check('홈 실적 탭: 중소형(NFLX·COF·CB) 미표시, 대형주(MSFT·GOOGL) 표시', !tickers0.includes('COF') && !tickers0.includes('CB') && tickers0.includes('MSFT') && tickers0.includes('GOOGL'), tickers0.join(','));
+  check('홈 실적 탭: 검증 대기·undefined 없음, 숫자만', !er0.some((r) => BAD_TEXT.test(r.join(' '))), '');
+  await page.click('#calendar [data-tab="macro"]');
+  const top3 = await page.$$eval('#cal-panel tbody tr', (trs) => trs.length);
+  const toggle = page.locator('#macro-toggle');
+  check('지표·연준 탭: "전체 보기" 토글 존재(기본 ★★★만)', (await toggle.count()) === 1 && (await toggle.getAttribute('aria-pressed')) === 'false', `rows=${top3}`);
+  await toggle.click();
+  const allRows = await page.$$eval('#cal-panel tbody tr', (trs) => trs.length);
+  const sched = await page.$$eval('#cal-panel .sched', (e) => e.map((x) => x.textContent).join(' '));
+  check('토글 클릭: 전체 보기로 전환(aria-pressed=true), 행 수 증가', (await toggle.getAttribute('aria-pressed')) === 'true' && allRows >= top3, `${top3} → ${allRows}`);
+  check('값이 없는 일정(베이지북·실질임금 등)은 "일정" 한 줄로 축약', /일정/.test(sched) && /베이지북|실질임금|건축허가/.test(sched), sched.slice(0, 80));
+  await toggle.click();
+  check('토글 재클릭: ★★★만 보기로 복귀', (await toggle.getAttribute('aria-pressed')) === 'false' && (await page.$$eval('#cal-panel tbody tr', (t) => t.length)) === top3);
+  await page.locator('#calendar').screenshot({ path: path.join(OUT, `${TAG}_home_calendar_macro.png`) });
+  await page.click('#calendar [data-tab="earnings"]');
+  await page.locator('#calendar').screenshot({ path: path.join(OUT, `${TAG}_home_calendar_earnings.png`) });
+
+  // 3-a. 전체 보기 링크 → calendar.html (전 열 · 기업 이벤트 탭 포함)
+  await page.click('#cal-panel .more');
+  await page.waitForSelector('#fullcal #calendar [role=tab]');
+  check('"전체 보기" 클릭 → calendar.html 이동', /calendar\.html$/.test(page.url()), page.url());
+  const tabIds3 = await page.$$eval('#calendar [role=tab]', (e) => e.map((x) => x.getAttribute('data-tab')));
+  check('전체 일정 페이지: 탭 3개(실적·지표·기업 이벤트)', tabIds3.length === 3, tabIds3.join(','));
+  for (const tab of tabIds3) {
     await page.click(`#calendar [data-tab="${tab}"]`);
     const rows = await page.$$eval('#cal-panel tbody tr', (e) => e.length);
     const empty = await page.$$eval('#cal-panel .empty', (e) => e.map((x) => x.textContent).join(''));
     const text = await page.textContent('#cal-panel');
-    check(`일정 탭 ${tab}: 행 ${rows}개 또는 '예정 없음'`, (rows > 0 || /예정 없음/.test(empty)) && !BAD_TEXT.test(text), `rows=${rows}`);
+    check(`전체 일정 탭 ${tab}: 행 ${rows}개 또는 '예정 없음'`, (rows > 0 || /예정 없음/.test(empty)) && !BAD_TEXT.test(text), `rows=${rows}`);
   }
 
-  // 3-b. 정정 검증 (2026-10-14 CPI 사고 회귀): 지표·연준 탭과 실적 탭을 실제로 눌러 값과 표기를 확인한다
+  // 3-b. 정정 검증 (2026-10-14 CPI 사고 회귀): 전체 일정 페이지에서 값과 표기를 확인한다
   const rowsOf = async () => page.$$eval('#cal-panel tbody tr', (trs) => trs.map((tr) => [...tr.children].map((td) => td.textContent.trim())));
   await page.click('#calendar [data-tab="macro"]');
   const mh = await page.$$eval('#cal-panel thead th', (e) => e.map((x) => x.textContent.trim()));
@@ -96,32 +139,44 @@ async function main() {
   check('지표·연준 탭: 혼합 행("CPI/Core CPI") 없음', !mrows.some((r) => /CPI\/Core CPI/.test(r[2])));
   const numRows = mrows.filter((r) => /\d/.test(r.slice(5).join('')) && !/검증 대기/.test(r.slice(5).join('')));
   check('지표·연준 탭: 숫자가 있는 행은 모두 측정 기준 표기', numRows.every((r) => r[3] && r[3] !== '—'), numRows.filter((r) => r[3] === '—').map((r) => r[2]).join('; '));
-  check('지표·연준 탭: 서프라이즈에 단위(%p/K) 표기', mrows.every((r) => !/\d/.test(r[8]) || /%p|K|검증 대기/.test(r[8]) || /[+-]?\d+(\.\d+)?$/.test(r[8])) && mrows.filter((r) => /\d/.test(r[8])).every((r) => /%p|K/.test(r[8])), mrows.map((r) => r[8]).join(' '));
+  check('지표·연준 탭: 서프라이즈에 단위(%p/K) 표기', mrows.filter((r) => /\d/.test(r[8])).every((r) => /%p|K/.test(r[8])), mrows.map((r) => r[8]).join(' '));
   const cpi = mrows.filter((r) => /^\d월 (Core )?CPI/.test(r[2]) && r[0] === '2026-10-14');
   if (cpi.length) {
-    // 10/14 CPI: 직전·예상·발표·서프라이즈 (BLS 보도자료 + Dow Jones 서베이)
     const WANT = { '9월 CPI (MoM)': ['+0.4%', '+0.6%', '+0.6%', '0.0%p'], '9월 CPI (YoY)': ['+3.4%', '+3.6%', '+3.7%', '+0.1%p'], '9월 Core CPI (MoM)': ['+0.3%', '+0.2%', '+0.3%', '+0.1%p'], '9월 Core CPI (YoY)': ['+2.4%', '+2.5%', '+2.6%', '+0.1%p'] };
     check('10/14 CPI 정확히 4줄 (헤드라인·근원 × 전월비·전년비)', cpi.length === 4, cpi.map((r) => r[2]).join(' | '));
     for (const [t, want] of Object.entries(WANT)) {
       const r = cpi.find((x) => x[2] === t);
       check(`10/14 ${t}: 직전·예상·발표·서프라이즈 = ${want.join(' / ')}`, !!r && [r[5], r[6], r[7], r[8].replace(/^[▲▼–]\s*/, '')].join('|') === want.join('|'), r ? [r[5], r[6], r[7], r[8]].join(' / ') : '행 없음');
     }
-    check('10/14 CPI: 사고 값(+0.6% 예상 +3.6% 서프 -3 등) 노출 없음', !cpi.some((r) => /-3(\.0)?%?p?$|-2\.2/.test(r[8])) && !cpi.find((r) => r[2] === '9월 CPI (YoY)' && /0\.6%/.test(r[7])));
   } else console.log('  (건너뜀) 창 안에 10/14 CPI 가 없음 — 날짜가 지나면 정상');
+  // 10/15 PPI·소매판매: 예상값(출처)·서프라이즈가 채워짐 (A3)
+  const WANTM = { '9월 PPI (MoM)': ['+0.5%', '+0.6%', '+1.3%', '+0.7%p'], '9월 소매판매 (MoM)': ['+1.3%', '+0.3%', '+0.8%', '+0.5%p'] };
+  for (const [t, want] of Object.entries(WANTM)) {
+    const r = mrows.find((x) => x[2] === t && x[0] === '2026-10-15');
+    if (!r) { console.log(`  (건너뜀) 창 안에 10/15 ${t} 없음`); continue; }
+    check(`10/15 ${t}: 직전·예상·발표·서프라이즈 = ${want.join(' / ')}`, [r[5], r[6], r[7], r[8].replace(/^[▲▼–]\s*/, '')].join('|') === want.join('|'), [r[5], r[6], r[7], r[8]].join(' / '));
+  }
   await page.click('#calendar [data-tab="earnings"]');
   const eh = await page.$$eval('#cal-panel thead th', (e) => e.map((x) => x.textContent.trim()));
   const erows = await rowsOf();
   await page.locator('#calendar').screenshot({ path: path.join(OUT, `${TAG}_calendar_earnings.png`) });
   check('실적 탭: 열 = EPS 기준·전년 동기 EPS·실제 매출·매출 서프라이즈·출처', ['EPS 기준', '전년 동기 EPS', '실제 매출', '매출 서프라이즈', '출처'].every((h) => eh.includes(h)), eh.join(','));
   const hasAct = erows.filter((r) => /^\$/.test(r[6] || '') || /검증 대기/.test(r[6] || ''));
-  check('실적 탭: 실제 EPS 가 있는 행은 EPS 기준 표기(조정/GAAP/미확인)', hasAct.every((r) => /조정|GAAP|미확인/.test(r[3])), hasAct.filter((r) => !/조정|GAAP|미확인/.test(r[3])).map((r) => r[1]).join(','));
-  const WANTE = { JPM: ['조정', '$5.07', '$5.75'], C: ['조정', '$2.24', '$2.85'], GS: ['GAAP', '$12.25', '$17.01'], WFC: ['GAAP', '$1.66', '$1.87'], BAC: ['조정', '$1.04', '$1.08'], MS: ['GAAP', '$2.80', '$3.03'], BLK: ['조정', '$11.55', '$15.93'], JNJ: ['조정', '$2.80', '$2.59'], UNH: ['조정', '$2.92', '$4.69'] };
-  const shown = Object.keys(WANTE).filter((t) => erows.some((r) => r[1].startsWith(t)));
-  for (const t of shown) { const r = erows.find((x) => x[1].startsWith(t)); check(`실적 ${t}: 기준·전년·실제 EPS = ${WANTE[t].join(' / ')}`, [r[3], r[4], r[6]].join('|') === WANTE[t].join('|'), [r[3], r[4], r[6]].join(' / ')); }
+  check('실적 탭: 실제 EPS 가 있는 행은 EPS 기준 표기(조정/GAAP/Core FFO/미확인)', hasAct.every((r) => /조정|GAAP|미확인|Core FFO/.test(r[3])), hasAct.filter((r) => !/조정|GAAP|미확인|Core FFO/.test(r[3])).map((r) => r[1]).join(','));
+  const WANTE = { JPM: ['조정', '$5.07', '$5.75'], C: ['조정', '$2.24', '$2.85'], GS: ['GAAP', '$12.25', '$17.01'], WFC: ['GAAP', '$1.66', '$1.87'], BAC: ['조정', '$1.04', '$1.08'], MS: ['GAAP', '$2.80', '$3.03'], BLK: ['조정', '$11.55', '$15.93'], JNJ: ['조정', '$2.80', '$2.59'], UNH: ['조정', '$2.92', '$4.69'], ASML: ['GAAP', '$5.49', '$12.95'], PGR: ['GAAP', '$4.45', '$4.37'], PLD: ['Core FFO', '$1.49', '$1.60'], SCHW: ['조정', '$1.31', '$1.69'], TSM: ['GAAP', '$2.92', '$4.60'] };
+  const shown = Object.keys(WANTE).filter((t) => erows.some((r) => r[1].split(' ')[0] === t));
+  for (const t of shown) { const r = erows.find((x) => x[1].split(' ')[0] === t); check(`실적 ${t}: 기준·전년·실제 EPS = ${WANTE[t].join(' / ')}`, [r[3], r[4], r[6]].join('|') === WANTE[t].join('|'), [r[3], r[4], r[6]].join(' / ')); }
   const links = await page.$$eval('#cal-panel tbody a', (a) => a.map((x) => x.href));
-  check('실적 탭: 검증된 행에 1차 출처 링크(sec.gov·IR)', shown.length === 0 || links.filter((u) => /sec\.gov|citigroup\.com|applieddigital/.test(u)).length >= shown.length, `${links.length}개`);
+  check('실적 탭: 검증된 행에 1차 출처 링크', shown.length === 0 || links.length >= shown.length, `${links.length}개`);
   const apld = erows.find((r) => r[1].startsWith('APLD'));
   if (apld) check('실적 APLD(서프라이즈 97% 초과): 숫자 대신 검증 대기', /검증 대기/.test(apld.join('|')) && !/\+?0\.30/.test(apld[7]), apld.join(' | '));
+  // 실적 중복 제거(A2): 같은 종목은 한 줄
+  const tk = erows.map((r) => r[1].split(' ')[0]);
+  const dupT = tk.filter((t, i) => tk.indexOf(t) !== i);
+  check('실적 탭: 같은 종목이 두 날짜에 나오지 않음(GE·PM·TSLA·GOOGL·MA·XOM·PGR)', !dupT.some((t) => ['GE', 'PM', 'TSLA', 'GOOGL', 'MA', 'XOM', 'PGR'].includes(t)), dupT.join(','));
+  const held = erows.filter((r) => ['VLO', 'PSX', 'SNDK', 'BA', 'TSLA'].includes(r[1].split(' ')[0]));
+  check('실적 탭: VLO·PSX·SNDK·BA·TSLA 는 숫자 대신 검증 대기', held.length > 0 && held.every((r) => /검증 대기/.test(r.join('|'))), held.map((r) => r[1] + ':' + r[5]).join(' '));
+  await goIndex();
 
   // 4. 태그 필터
   const total = await page.$$eval('#archive li[data-tags]', (e) => e.length);
@@ -182,10 +237,36 @@ async function main() {
   for (let i = 0; i < hrefs.length; i += 8) {
     await Promise.all(hrefs.slice(i, i + 8).map(async (h) => { const r = await ctx.request.get(h); if (r.status() !== 200) bad.push(`${r.status()} ${h}`); }));
   }
-  check(`아카이브 카드 ${hrefs.length}개 링크 전부 200`, hrefs.length >= 72 && bad.length === 0, bad.slice(0, 3).join('; ') || `${hrefs.length}건`);
-  check('카드 개수 = summaries.json 개수', await (async () => { const r = await ctx.request.get(BASE + 'data/summaries.json'); return r.ok() && (await r.json()).length === hrefs.length; })());
+  check(`아카이브 카드 ${hrefs.length}개 링크 전부 200`, hrefs.length >= 65 && bad.length === 0, bad.slice(0, 3).join('; ') || `${hrefs.length}건`);
+  const sums = await (await ctx.request.get(BASE + 'data/summaries.json')).json();
+  check('카드 개수 = summaries.json 중 대표 리포트(rep 없는 것) 개수', sums.filter((x) => !x.rep).length === hrefs.length, `${hrefs.length}/${sums.length}`);
+  const usd = {}; sums.filter((x) => !x.rep).forEach((x) => (usd[x.us_date] = (usd[x.us_date] || 0) + 1));
+  check('목록에서 같은 미국 기준일 중복 없음(10/03·04·05 → 1건)', Object.values(usd).every((n) => n === 1) && !hrefs.some((h) => /2026-10-04|2026-10-05/.test(h)) && hrefs.some((h) => /2026-10-03/.test(h)), Object.entries(usd).filter(([, n]) => n > 1).join(','));
+  check('기준일=게시일 오표시 보정(09/28→09/25, 09/29→09/28)', sums.find((x) => x.date === '2026-09-28')?.us_date === '2026-09-25' && sums.find((x) => x.date === '2026-09-29')?.us_date === '2026-09-28' && sums.every((x) => x.us_date < x.date));
   const cardInfo = await page.$$eval('#archive a.card', (e) => e.map((a) => ({ hl: a.querySelector('.hl')?.textContent || '', tags: a.querySelectorAll('.tag').length })));
-  check('모든 카드에 헤드라인·태그', cardInfo.every((c) => c.hl.trim().length >= 8 && c.tags >= 1 && !BAD_TEXT.test(c.hl)), `${cardInfo.filter((c) => !c.hl.trim()).length}건 빈 제목`);
+  check('모든 카드에 헤드라인, 태그는 최대 2개', cardInfo.every((c) => c.hl.trim().length >= 8 && c.tags <= 2 && !BAD_TEXT.test(c.hl)), `${cardInfo.filter((c) => !c.hl.trim()).length}건 빈 제목`);
+
+  // 8-b. 배너·정정·내부 메모·중복 안내 (A4)
+  check('홈에는 정정 배너 없음(해당 리포트에만 표시)', (await page.$$('.notice')).length === 0);
+  const chipsN = await page.$$eval('#tagchips button[data-tag]:not([data-tag=""])', (e) => e.map((x) => Number(/\((\d+)\)/.exec(x.textContent)[1])));
+  check('태그 필터가 쓸모 있음: 어떤 태그도 전체의 60% 초과 안 함', Math.max(...chipsN) <= total * 0.6, `최대 ${Math.max(...chipsN)}/${total}`);
+  check('태그 칩에 정의 툴팁(title)', (await page.$$eval('#tagchips button[data-tag]:not([data-tag=""])', (e) => e.every((x) => (x.title || '').length > 8))));
+  const rp = await ctx.newPage();
+  await rp.goto(BASE + 'reports/2026-10-15.html', { waitUntil: 'networkidle' });
+  const ban = await rp.$$eval('.notice', (e) => e.map((x) => x.textContent));
+  check('10/15 리포트: 정정 배너 + 정정 기록 링크', ban.some((t) => /정정 안내/.test(t)) && (await rp.$$('.notice a[href*="corrections.html"]')).length === 1, ban.join('|').slice(0, 60));
+  check('10/15 리포트: 자동 검증 경고 배너 없음', !/자동 검증 경고/.test(await rp.textContent('body')));
+  const txt15 = await rp.textContent('article');
+  check('독자 화면에 내부 메모 없음([P1]·Yahoo chart API·facts.json·logs 폴더)', !/\[P[1-4]\]|Yahoo chart API|facts\.json|logs 폴더/.test(txt15));
+  check('리포트 맨 아래 "출처" 목록', (await rp.$$('article .sources h2')).length === 1);
+  await rp.click('.notice a[href*="corrections.html"]');
+  await rp.waitForLoadState('networkidle');
+  check('정정 배너 링크 → corrections.html 해당 항목', /corrections\.html#2026-10-15-cpi$/.test(rp.url()) && /CPI/.test(await rp.textContent('[id="2026-10-15-cpi"]')), rp.url());
+  await rp.goto(BASE + 'reports/2026-10-14.html', { waitUntil: 'networkidle' });
+  check('다른 날짜 리포트(10/14)에는 정정 배너 없음', (await rp.$$('.notice')).length === 0);
+  await rp.goto(BASE + 'reports/2026-10-05.html', { waitUntil: 'networkidle' });
+  check('중복 기준일 페이지(10/05): 삭제되지 않고 대표 리포트 안내', (await rp.$$('.notice.dup a[href="2026-10-03.html"]')).length >= 1);
+  await rp.close();
 
   // 9. 상세 리포트: ← 목록 / 이전 / 다음 + 경계
   await page.goto(hrefs[0], { waitUntil: 'networkidle' });

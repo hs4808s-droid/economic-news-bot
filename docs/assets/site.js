@@ -60,7 +60,7 @@
   /* ---------- 대시보드 ---------- */
   var TILES = [
     ['지수', [['^GSPC', 'S&P500'], ['^IXIC', '나스닥'], ['^DJI', '다우'], ['^RUT', '러셀2000'], ['^SOX', 'SOX']]],
-    ['금리', [['FRED:DGS2', '미 2년물'], ['^TNX', '미 10년물'], ['@spread', '10Y−2Y']]],
+    ['금리', [['FRED:DGS2', '미 2년물'], ['FRED:DGS10', '미 10년물'], ['@spread', '10Y−2Y']]],
     ['변동성', [['^VIX', 'VIX']]],
     ['달러·환율', [['DX-Y.NYB', 'DXY'], ['KRW=X', 'USD/KRW']]],
     ['원자재·크립토', [['CL=F', 'WTI'], ['GC=F', '금'], ['BTC-USD', '비트코인']]],
@@ -96,7 +96,8 @@
   var PERIODS = [['1d', '1D'], ['5d', '5D'], ['1m', '1M'], ['ytd', 'YTD']];
   function renderHeat(data, box, ctrl, period) {
     var cells = Object.keys(data.items).map(function (k) { return [k, data.items[k]]; })
-      .filter(function (p) { return p[1].group === 'sector'; });
+      .filter(function (p) { return p[1].group === 'sector'; })
+      .sort(function (a, b) { var x = a[1]['chg_' + period], y = b[1]['chg_' + period]; return (isNum(y) ? y : -1e9) - (isNum(x) ? x : -1e9); });
     var vals = cells.map(function (p) { return Math.abs(p[1]['chg_' + period]); }).filter(isNum);
     var max = Math.max.apply(null, vals.concat([0.01]));
     box.textContent = '';
@@ -116,72 +117,114 @@
   function th(txt, cls) { return h('th', { class: cls || '', text: txt }); }
   function surpriseCell(v, f) {
     if (!isNum(v)) return td('—');
-    var cell = td(arrow(v) + ' ' + (v > 0 ? '+' : '') + f(v), dir(v) + ' num');
-    return cell;
+    return td(arrow(v) + ' ' + (v > 0 ? '+' : '') + f(v), dir(v) + ' num');
   }
   function table(head, rows) {
     var t = h('table', null, h('thead', null, h('tr', null, head.map(function (x) { return th(x[0], x[1]); }))));
     var tb = h('tbody'); rows.forEach(function (r) { tb.appendChild(r); }); t.appendChild(tb);
     return h('div', { class: 'tablewrap' }, t);
   }
-  var usd = function (v) { return isNum(v) ? '$' + v.toFixed(2) : '—'; };
-  var usdB = function (v) { return isNum(v) ? '$' + (v / 1e9).toFixed(2) + 'B' : '—'; };
+  var usd = function (v) { return isNum(v) ? (v < 0 ? '-$' + Math.abs(v).toFixed(2) : '$' + v.toFixed(2)) : '—'; };
+  var usdB = function (v, cur) { return isNum(v) ? (cur === 'EUR' ? '€' : '$') + (v / 1e9).toFixed(2) + 'B' : '—'; };
   var TIMING = { bmo: '장전', amc: '장후' };
+  var BASIS = { adjusted: '조정', gaap: 'GAAP' };
+  var HOLD = '검증 대기';
+  var md = function (d) { return d.slice(5).replace('-', '/'); };
+  var UNITS = { '%': function (v) { return (v > 0 ? '+' : '') + v.toFixed(1) + '%'; }, K: function (v) { return (v > 0 ? '+' : '') + Math.round(v).toLocaleString('en-US') + 'K'; } };
+  var fv = function (v, u) { return isNum(v) ? (UNITS[u] ? UNITS[u](v) : String(v)) : null; };
+  var MEAS = { mom: '전월비', yoy: '전년비', qoq: '전기비', level: '수준', index: '지수' };
 
-  function calPanels(events, tickers, anchor) {
-    var lo = addDays(anchor, -2), hi = addDays(anchor, 14);
+  function calPanels(events, tickers, anchor, full) {
+    var lo = addDays(anchor, full ? -2 : -4), hi = addDays(anchor, full ? 14 : 14);
     var evs = (events || []).filter(function (e) { return e.date_et >= lo && e.date_et <= hi; });
-    var tk = function (t) { var m = tickers && tickers[t]; return t ? (m && m.name_ko && m.name_ko !== '?' ? t + ' ' + m.name_ko : t) : '—'; };
-    var BASIS = { adjusted: '조정', gaap: 'GAAP' };
-    var HOLD = '검증 대기';
+    var tk = function (t) { var m = tickers && tickers[t]; return t ? (m && m.name_ko && m.name_ko !== '?' && m.name_ko !== t ? t + ' ' + m.name_ko : t) : '—'; };
     var holdCell = function (e) { var c = td(HOLD, 'r hold'); c.title = e.hold || '측정 기준 미확인'; return c; };
-    var earn = evs.filter(function (e) { return e.type === 'earnings'; }).map(function (e) {
+    var earnAll = evs.filter(function (e) { return e.type === 'earnings'; });
+    // 홈 기본 화면: 관심 종목·대형주(featured) + 최근 발표된 검증 종목. 나머지는 전체 일정 페이지.
+    var earnRows = full ? earnAll : earnAll.filter(function (e) { return e.featured || e.verified; });
+
+    function dateCell(e) {
+      var c = td(e.date_tbd ? md(e.date_et) + '~ 미정' : md(e.date_et));
+      if (e.date_tbd) c.title = '발표일 미확정 — 후보 ' + [e.date_et].concat(e.date_alt || []).join(', ');
+      else if (e.date_confirmed) c.title = '회사 IR 로 확정';
+      return c;
+    }
+    var earnShort = earnRows.map(function (e) {
       var held = !!e.hold, hasAct = isNum(e.actual_eps);
+      var act = held && hasAct ? holdCell(e) : td(hasAct ? usd(e.actual_eps) + (BASIS[e.eps_basis] ? ' · ' + BASIS[e.eps_basis] : '') : '—', 'r num');
+      var cons = held ? holdCell(e) : td(usd(e.cons_eps), 'r num');
+      var sp = !held && hasAct && isNum(e.cons_eps) && e.cons_eps !== 0 ? (e.actual_eps - e.cons_eps) / Math.abs(e.cons_eps) * 100 : null;
+      var tr = h('tr', { 'data-t': e.ticker }, dateCell(e), td(tk(e.ticker)), cons, act, held ? holdCell(e) : surpriseCell(sp, function (v) { return v.toFixed(1) + '%'; }));
+      return tr;
+    });
+    var earnFull = earnRows.map(function (e) {
+      var held = !!e.hold, hasAct = isNum(e.actual_eps), cur = e.currency;
       var src = e.src_url ? h('td', null, h('a', { href: e.src_url, target: '_blank', rel: 'noopener', text: '1차 출처' })) : td(hasAct ? '공급자(미검증)' : '—');
-      return h('tr', null, td(e.date_et), td(tk(e.ticker)), td(TIMING[e.timing] || '—'), td(BASIS[e.eps_basis] || (hasAct ? '미확인' : '—')),
-        td(usd(e.prior_eps), 'r num'), td(usd(e.cons_eps), 'r num'), held && hasAct ? holdCell(e) : td(usd(e.actual_eps), 'r num'),
+      return h('tr', { 'data-t': e.ticker }, dateCell(e), td(tk(e.ticker)), td(TIMING[e.timing] || '—'), td((e.eps_label || BASIS[e.eps_basis]) || (hasAct ? '미확인' : '—')),
+        td(usd(e.prior_eps), 'r num'), held ? holdCell(e) : td(usd(e.cons_eps), 'r num'), held && hasAct ? holdCell(e) : td(usd(e.actual_eps), 'r num'),
         held ? holdCell(e) : surpriseCell(e.surprise_eps, function (v) { return v.toFixed(2); }),
-        td(usdB(e.cons_rev), 'r num'), held && isNum(e.actual_rev) ? holdCell(e) : td(usdB(e.actual_rev), 'r num'),
+        td(usdB(e.cons_rev), 'r num'), held && isNum(e.actual_rev) ? holdCell(e) : td(usdB(e.actual_rev, cur), 'r num'),
         held ? holdCell(e) : surpriseCell(e.surprise_rev_pct, function (v) { return v.toFixed(1) + '%'; }), src);
     });
-    var UNITS = { '%': function (v) { return (v > 0 ? '+' : '') + v.toFixed(1) + '%'; }, K: function (v) { return (v > 0 ? '+' : '') + Math.round(v).toLocaleString('en-US') + 'K'; } };
-    var fv = function (v, u) { return isNum(v) ? (UNITS[u] ? UNITS[u](v) : String(v)) : null; };
-    var MEAS = { mom: '전월비', yoy: '전년비', qoq: '전기비', level: '수준', index: '지수' };
-    var macro = evs.filter(function (e) { return e.type === 'macro' || e.type === 'fed'; }).map(function (e) {
-      // 보류(hold) 행 또는 측정 기준이 없는 숫자 행은 숫자를 노출하지 않는다.
-      var hasNum = e.prior != null || e.consensus != null || e.actual != null;
-      var pending = !!e.hold || (e.type === 'macro' && hasNum && !e.measure);
+
+    var macroAll = evs.filter(function (e) { return e.type === 'macro' || e.type === 'fed'; });
+    var hasVal = function (e) { return e.prior != null || e.consensus != null || e.actual != null; };
+    function macroRow(e, fullCols) {
+      var pending = !!e.hold || (e.type === 'macro' && hasVal(e) && !e.measure);
       var u = e.unit, basis = e.measure ? (MEAS[e.measure] || e.measure) + (e.seasonal ? ' · ' + (e.seasonal === 'sa' ? '계절조정' : '비계절조정') : '') : '—';
-      var cell = function (v, f) { return pending ? holdCell(e) : td(f ? f(v) : fv(v, u), 'r'); };
+      var cell = function (v) { return pending ? holdCell(e) : td(fv(v, u), 'r'); };
       var cons = pending ? holdCell(e) : td(fv(e.consensus, u), 'r');
       if (!pending && e.consensus != null && e.consensus_source) cons.title = '출처: ' + e.consensus_source;
-      return h('tr', null, td(e.date_et), td(e.time_et), td(e.title), td(basis), td('★'.repeat(Math.max(1, Math.min(3, e.importance || 1)))),
-        cell(e.prior), cons, cell(e.actual), pending ? holdCell(e) : surpriseCell(isNum(e.surprise) ? e.surprise : null, function (v) { return UNITS[u] ? (u === '%' ? v.toFixed(1) + '%p' : UNITS[u](v).replace(/^\+/, '')) : String(v); }));
-    });
-    var corp = evs.filter(function (e) { return e.type === 'corporate'; }).map(function (e) {
-      return h('tr', null, td(e.date_et), td(tk(e.ticker)), td(e.title), td(e.source));
-    });
-    return [
-      ['earnings', '실적', earn, table([['날짜(ET)'], ['종목'], ['시점'], ['EPS 기준'], ['전년 동기 EPS', 'r'], ['예상 EPS', 'r'], ['실제 EPS', 'r'], ['EPS 서프라이즈', 'r'], ['예상 매출', 'r'], ['실제 매출', 'r'], ['매출 서프라이즈', 'r'], ['출처']], earn)],
-      ['macro', '지표·연준', macro, table([['날짜(ET)'], ['시각'], ['이벤트'], ['측정 기준'], ['중요도'], ['직전', 'r'], ['예상(컨센서스)', 'r'], ['발표', 'r'], ['서프라이즈', 'r']], macro)],
-      ['corporate', '기업 이벤트', corp, table([['날짜(ET)'], ['종목'], ['이벤트'], ['출처']], corp)],
+      var sur = pending ? holdCell(e) : surpriseCell(isNum(e.surprise) ? e.surprise : null, function (v) { return UNITS[u] ? (u === '%' ? v.toFixed(1) + '%p' : UNITS[u](v).replace(/^\+/, '')) : String(v); });
+      if (!fullCols) return h('tr', null, td(md(e.date_et)), h('td', null, e.title, h('div', { class: 'sub', text: basis })), cell(e.prior), cons, cell(e.actual), sur);
+      return h('tr', null, td(e.date_et), td(e.time_et), td(e.title), td(basis), td('★'.repeat(Math.max(1, Math.min(3, e.importance || 1)))), cell(e.prior), cons, cell(e.actual), sur);
+    }
+    function macroPanel(onlyTop) {
+      var rows = macroAll.filter(function (e) { return !onlyTop || (e.importance || 1) >= 3; });
+      var withVal = rows.filter(hasVal), sched = rows.filter(function (e) { return !hasVal(e); });
+      var wrap = h('div');
+      if (withVal.length) wrap.appendChild(table(full ? [['날짜(ET)'], ['시각'], ['이벤트'], ['측정 기준'], ['중요도'], ['직전', 'r'], ['예상(컨센서스)', 'r'], ['발표', 'r'], ['서프라이즈', 'r']] : [['날짜'], ['지표'], ['직전', 'r'], ['예상', 'r'], ['발표', 'r'], ['서프라이즈', 'r']], withVal.map(function (e) { return macroRow(e, full); })));
+      if (sched.length) wrap.appendChild(h('p', { class: 'sched' }, h('b', { text: '일정 ' }), sched.map(function (e) { return md(e.date_et) + ' ' + e.title; }).join(' · ')));
+      return { n: rows.length, node: wrap };
+    }
+
+    var corp = evs.filter(function (e) { return e.type === 'corporate'; }).map(function (e) { return h('tr', null, td(e.date_et), td(tk(e.ticker)), td(e.title), td(e.source)); });
+    var panels = [
+      ['earnings', '실적', earnRows.length, table(full ? [['날짜(ET)'], ['종목'], ['시점'], ['EPS 기준'], ['전년 동기 EPS', 'r'], ['예상 EPS', 'r'], ['실제 EPS', 'r'], ['EPS 서프라이즈', 'r'], ['예상 매출', 'r'], ['실제 매출', 'r'], ['매출 서프라이즈', 'r'], ['출처']] : [['날짜'], ['종목'], ['예상 EPS', 'r'], ['실제 EPS', 'r'], ['서프라이즈', 'r']], full ? earnFull : earnShort), { total: earnAll.length }],
+      ['macro', '지표·연준', null, null, { macroPanel: macroPanel, total: macroAll.length }],
     ];
+    if (full) panels.push(['corporate', '기업 이벤트', corp.length, table([['날짜(ET)'], ['종목'], ['이벤트'], ['출처']], corp), {}]);
+    return panels;
   }
 
-  function renderCalendar(cal, tickers, anchor, box) {
-    var panels = calPanels(cal.events, tickers, anchor);
+  function renderCalendar(cal, tickers, anchor, box, full) {
+    var panels = calPanels(cal.events, tickers, anchor, full);
     box.textContent = '';
     var tabs = h('div', { class: 'tabs', role: 'tablist', 'aria-label': '2주 일정' });
     var body = h('div', { id: 'cal-panel', role: 'tabpanel' });
+    var onlyTop = true;
     function show(id) {
       tabs.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-selected', String(b.getAttribute('data-tab') === id)); });
       var p = panels.filter(function (x) { return x[0] === id; })[0];
       body.textContent = '';
-      body.setAttribute('data-rows', String(p[2].length));
-      body.appendChild(p[2].length ? p[3] : h('div', { class: 'empty', text: '예정 없음' }));
+      if (id === 'macro') {
+        var mp = p[4].macroPanel(!full && onlyTop);
+        body.setAttribute('data-rows', String(mp.n));
+        if (!full) {
+          var tg = h('button', { type: 'button', id: 'macro-toggle', class: 'toggle', 'aria-pressed': String(!onlyTop), text: onlyTop ? '전체 보기 (★★★ 외 포함)' : '★★★만 보기' });
+          tg.addEventListener('click', function () { onlyTop = !onlyTop; show('macro'); });
+          body.appendChild(h('div', { class: 'ctl' }, tg, h('a', { class: 'more', href: 'calendar.html', text: '전체 일정 페이지 →' })));
+        }
+        body.appendChild(mp.n ? mp.node : h('div', { class: 'empty', text: '예정 없음' }));
+      } else {
+        body.setAttribute('data-rows', String(p[2]));
+        if (!full) body.appendChild(h('div', { class: 'ctl' }, h('span', { class: 'note', text: '관심 종목·시총 상위 ' + p[2] + '건 / 전체 ' + p[4].total + '건' }), h('a', { class: 'more', href: 'calendar.html', text: '전체 보기 →' })));
+        body.appendChild(p[2] ? p[3] : h('div', { class: 'empty', text: '예정 없음' }));
+      }
     }
     panels.forEach(function (p) {
-      var b = h('button', { type: 'button', role: 'tab', 'data-tab': p[0], text: p[1] + ' (' + p[2].length + ')' });
+      var n = p[2] == null ? p[4].macroPanel(!full).n : p[2];
+      var b = h('button', { type: 'button', role: 'tab', 'data-tab': p[0], text: p[1] + ' (' + n + ')' });
       b.addEventListener('click', function () { show(p[0]); });
       tabs.appendChild(b);
     });
@@ -209,7 +252,7 @@
         upd.textContent = '최종 업데이트 ' + (data.generated_at_kst || '') + ' KST' + (et ? ' · ' + et + ' ET' : '') + (data.us_date ? ' · 미국 기준일 ' + data.us_date : '');
       }
       return Promise.all([getJson(base + 'data/calendar.json'), getJson(base + 'data/tickers.json').catch(function () { return {}; })]).then(function (r) {
-        renderCalendar(r[0], r[1], data.us_date || ymd(new Date()), calBox);
+        renderCalendar(r[0], r[1], data.us_date || ymd(new Date()), calBox, false);
       }).catch(function () { fail(calBox); });
     }).catch(function () {
       fail(tilesBox); fail(heatBox); fail(calBox);
@@ -247,6 +290,16 @@
     apply();
   }
 
-  function init() { initDashboard(); initArchive(); }
+  /* ---------- 전체 일정 페이지 ---------- */
+  function initCalendarPage() {
+    var sec = document.getElementById('fullcal');
+    if (!sec) return;
+    var box = document.getElementById('calendar');
+    Promise.all([getJson('data/calendar.json'), getJson('data/tickers.json').catch(function () { return {}; }), getJson('data/latest.json').catch(function () { return {}; })]).then(function (r) {
+      renderCalendar(r[0], r[1], r[2].us_date || ymd(new Date()), box, true);
+    }).catch(function () { box.textContent = ''; box.appendChild(h('div', { class: 'error', text: '데이터를 불러오지 못했습니다' })); });
+  }
+
+  function init() { initDashboard(); initCalendarPage(); initArchive(); }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();

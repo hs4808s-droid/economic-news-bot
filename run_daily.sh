@@ -101,6 +101,7 @@ if [ "$SKIP_REPORT" -eq 0 ]; then
   if want ledger; then
     echo "[1b] 일정 원장·facts·티커 마스터 갱신 (코드)"
     node scripts/update_calendar.js "$DATE" || echo "  경고: 캘린더 갱신 실패 — 기존 원장 유지" >&2
+    node scripts/calendar_facts.js "$DATE" || echo "  경고: calendar_facts 생성 실패 — 2·3단계가 원장만 보고 쓴다" >&2
     node scripts/update_facts.js "$DATE" || echo "  경고: facts 갱신 실패 — 기존 값 유지" >&2
     node scripts/build_tickers.js || echo "  경고: 티커 마스터 갱신 실패" >&2
   fi

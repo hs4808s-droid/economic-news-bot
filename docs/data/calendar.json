@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-16T21:37:13.625Z",
+  "updated_at": "2026-10-17T01:59:48.586Z",
   "events": [
     {
       "id": "2026-10-07-APLD",
@@ -35,7 +35,11 @@
       "verified_at": "2026-10-15",
       "note": "회계연도 FQ1(2026-08-31 종료). 조정 EPS 는 계속영업 기준",
       "surprise_rev_pct": 148.5,
-      "hold": "EPS 서프라이즈 97% 가 허용 ±50% 초과"
+      "hold": "EPS 서프라이즈 97% 가 허용 ±50% 초과",
+      "currency": "USD",
+      "eps_label": null,
+      "watch": true,
+      "featured": true
     },
     {
       "id": "2026-10-08-PEP",
@@ -71,7 +75,10 @@
       "verified_at": "2026-10-15",
       "note": "조정 = 회사의 Core EPS",
       "surprise_rev_pct": 0.2,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "featured": false
     },
     {
       "id": "2026-10-13-C",
@@ -108,7 +115,10 @@
       "verified_at": "2026-10-15",
       "note": "2026-3Q 는 특이항목 없음(GAAP=조정). 전년 2.24 는 Banamex 영업권 손상 제외, GAAP 은 1.86",
       "surprise_rev_pct": -1.5,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "featured": false
     },
     {
       "id": "2026-10-13-GS",
@@ -145,7 +155,10 @@
       "verified_at": "2026-10-15",
       "note": "회사가 조정 EPS 를 발표하지 않음(GAAP)",
       "surprise_rev_pct": 6.6,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "featured": false
     },
     {
       "id": "2026-10-13-JNJ",
@@ -182,7 +195,10 @@
       "verified_at": "2026-10-15",
       "note": null,
       "surprise_rev_pct": -0.7,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "featured": false
     },
     {
       "id": "2026-10-13-JPM",
@@ -219,7 +235,10 @@
       "verified_at": "2026-10-15",
       "note": "조정 EPS = 특이항목(투자증권 손실 $658M) 제외. 매출은 reported 기준",
       "surprise_rev_pct": -2.9,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "featured": false
     },
     {
       "id": "2026-10-13-UNH",
@@ -256,7 +275,10 @@
       "verified_at": "2026-10-15",
       "note": null,
       "surprise_rev_pct": 0.2,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "featured": false
     },
     {
       "id": "2026-10-13-WFC",
@@ -293,7 +315,10 @@
       "verified_at": "2026-10-15",
       "note": "회사가 조정 EPS 를 발표하지 않음(GAAP). 공급자의 전년 1.73 은 회사 발표(1.66)와 달라 교체",
       "surprise_rev_pct": -3.3,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "featured": false
     },
     {
       "id": "2026-10-14-ASML",
@@ -308,20 +333,34 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:59:48.586Z",
       "timing": "bmo",
-      "prior_eps": 6.41,
+      "prior_eps": 5.49,
       "prior_rev": null,
-      "cons_eps": 12.47,
+      "cons_eps": null,
       "cons_rev": null,
-      "actual_eps": 14.89,
-      "actual_rev": null,
-      "surprise_eps": 2.42,
+      "actual_eps": 12.95,
+      "actual_rev": 11662000000,
+      "surprise_eps": null,
       "implied_move": null,
-      "cons_basis": "adjusted",
+      "cons_basis": "gaap",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "eps_basis": "gaap",
+      "prior_basis": "gaap",
+      "eps_gaap": 12.95,
+      "eps_adjusted": null,
+      "rev_basis": "total net sales €11,662M (EUR)",
+      "currency": "EUR",
+      "eps_label": null,
+      "verified": true,
+      "src_url": "https://investor.asml.com/news-releases/news-release-details/asml-reports-eu11.7-billion-total-net-sales-and-eu5.0-billion-net-income-q3-2026",
+      "verified_at": "2026-10-17",
+      "note": "US GAAP 기본(basic) EPS, 유로. Q3'25 5.49 (Q3 2025 보도자료). 기존 원장 14.89/6.41 은 USD 환산 값으로 추정",
+      "cons_note": "공급자 예상치의 통화(EUR/USD) 불명 — 비교 불가",
+      "mcap": 638806650000,
+      "featured": true
     },
     {
       "id": "2026-10-14-BAC",
@@ -336,7 +375,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:59:48.586Z",
       "timing": "bmo",
       "prior_eps": 1.04,
       "prior_rev": null,
@@ -358,7 +397,11 @@
       "verified_at": "2026-10-15",
       "note": "조정 EPS = 규제 합의금 $1.2B($0.17) 제외. 공급자의 전년 1.06 은 회사 발표(1.04)와 달라 교체",
       "surprise_rev_pct": -4.2,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "mcap": 361525084000,
+      "featured": false
     },
     {
       "id": "2026-10-14-BLK",
@@ -373,7 +416,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:59:48.586Z",
       "timing": "bmo",
       "prior_eps": 11.55,
       "prior_rev": null,
@@ -395,7 +438,11 @@
       "verified_at": "2026-10-15",
       "note": null,
       "surprise_rev_pct": 1.6,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "mcap": 173574373000,
+      "featured": false
     },
     {
       "id": "2026-10-14-MS",
@@ -410,7 +457,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:59:48.586Z",
       "timing": "bmo",
       "prior_eps": 2.8,
       "prior_rev": null,
@@ -432,7 +479,11 @@
       "verified_at": "2026-10-15",
       "note": "회사가 조정 EPS 를 발표하지 않음(GAAP)",
       "surprise_rev_pct": -2.6,
-      "hold": null
+      "hold": null,
+      "currency": "USD",
+      "eps_label": null,
+      "mcap": 286000120000,
+      "featured": false
     },
     {
       "id": "2026-10-14-PGR",
@@ -447,20 +498,36 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:59:48.586Z",
       "timing": "bmo",
-      "prior_eps": 4.05,
+      "prior_eps": 4.45,
       "prior_rev": null,
       "cons_eps": 4.46,
       "cons_rev": null,
-      "actual_eps": 4.6,
+      "actual_eps": 4.37,
       "actual_rev": null,
-      "surprise_eps": 0.14,
+      "surprise_eps": -0.09,
       "implied_move": null,
-      "cons_basis": "adjusted",
+      "cons_basis": "gaap",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "date_confirmed": true,
+      "date_src": "https://investors.progressive.com/financials/financial-news-releases/news-details/2026/Progressive-Reports-September-2026-Results/default.aspx",
+      "cons_eps_alt": 4.37,
+      "eps_basis": "gaap",
+      "prior_basis": "gaap",
+      "eps_gaap": 4.37,
+      "eps_adjusted": null,
+      "rev_basis": "총매출 미확인(보도자료는 순보험료 earned $21,869M만 제시)",
+      "currency": "USD",
+      "eps_label": null,
+      "verified": true,
+      "src_url": "https://investors.progressive.com/financials/financial-news-releases/news-details/2026/Progressive-Reports-September-2026-Results/default.aspx",
+      "verified_at": "2026-10-17",
+      "note": "3분기(분기 누계) 주당순이익 $4.37, 전년 $4.45. 월간 9월은 $1.08. 기존 원장 4.6/4.05 오류",
+      "mcap": 124268216000,
+      "featured": false
     },
     {
       "id": "2026-10-14-FED-fed-bowman-발언-supervisio",
@@ -662,20 +729,33 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.49,
       "prior_rev": null,
       "cons_eps": 1.58,
       "cons_rev": null,
       "actual_eps": 1.6,
-      "actual_rev": null,
+      "actual_rev": 2388000000,
       "surprise_eps": 0.02,
       "implied_move": null,
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "eps_basis": "adjusted",
+      "prior_basis": "adjusted",
+      "eps_gaap": 0.86,
+      "eps_adjusted": 1.6,
+      "rev_basis": "total revenues",
+      "currency": "USD",
+      "eps_label": "Core FFO",
+      "verified": true,
+      "src_url": "https://ir.prologis.com/news-events/press-releases/detail/1055/prologis-reports-third-quarter-2026-results",
+      "verified_at": "2026-10-17",
+      "note": "리츠라 컨센서스는 Core FFO/주 기준. GAAP 희석 EPS 0.86 (전년 0.82)",
+      "mcap": 120348770000,
+      "featured": false
     },
     {
       "id": "2026-10-15-SCHW",
@@ -690,20 +770,33 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.31,
       "prior_rev": null,
       "cons_eps": 1.66,
       "cons_rev": null,
       "actual_eps": 1.69,
-      "actual_rev": null,
+      "actual_rev": 7171000000,
       "surprise_eps": 0.03,
       "implied_move": null,
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "eps_basis": "adjusted",
+      "prior_basis": "adjusted",
+      "eps_gaap": 1.62,
+      "eps_adjusted": 1.69,
+      "rev_basis": "net revenues",
+      "currency": "USD",
+      "eps_label": null,
+      "verified": true,
+      "src_url": "https://content.schwab.com/web/retail/public/about-schwab/schwab_q3_2026_earnings_release.pdf",
+      "verified_at": "2026-10-17",
+      "note": "조정 EPS 1.69(GAAP 1.62)",
+      "mcap": 162834252000,
+      "featured": false
     },
     {
       "id": "2026-10-15-TSM",
@@ -718,20 +811,33 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:59:48.586Z",
       "timing": "bmo",
       "prior_eps": 2.92,
       "prior_rev": null,
       "cons_eps": 4.45,
       "cons_rev": null,
       "actual_eps": 4.6,
-      "actual_rev": null,
+      "actual_rev": 46720000000,
       "surprise_eps": 0.15,
       "implied_move": null,
-      "cons_basis": "adjusted",
+      "cons_basis": "gaap",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "eps_basis": "gaap",
+      "prior_basis": "gaap",
+      "eps_gaap": 4.6,
+      "eps_adjusted": null,
+      "rev_basis": "US$ 환산 매출 (NT$1,494.24B)",
+      "currency": "USD",
+      "eps_label": null,
+      "verified": true,
+      "src_url": "https://pr.tsmc.com/english/news/3346",
+      "verified_at": "2026-10-17",
+      "note": "ADR 1주(5주) 기준 US$ — 3Q26 US$4.60 (NT$29.43/주), 3Q25 US$2.92 (NT$17.44/주)",
+      "mcap": 2190001700000,
+      "featured": true
     },
     {
       "id": "2026-10-15-CLAIMS-level",
@@ -741,9 +847,9 @@
       "title": "신규 실업수당 청구 (10/10 마감주)",
       "ticker": null,
       "prior": 198,
-      "consensus": null,
+      "consensus": 200,
       "actual": 199,
-      "surprise": null,
+      "surprise": -1,
       "importance": 1,
       "source": "babypips.com https://www.babypips.com/news/headline-us-initial-jobless-claims-layoffs-2026-10-09",
       "collected_at": "2026-10-15T21:40:20.754Z",
@@ -754,7 +860,10 @@
       "period": "2026-09",
       "prior_source": "FRED ICSA",
       "hold": null,
-      "actual_source": "FRED ICSA"
+      "actual_source": "FRED ICSA",
+      "consensus_source": "Reuters 설문",
+      "consensus_url": "https://www.reuters.com/world/us/us-weekly-jobless-claims-rise-marginally-amid-low-layoffs-2026-10-15/",
+      "actual_url": "https://www.dol.gov/ui/data.pdf"
     },
     {
       "id": "2026-10-15-PPI-mom",
@@ -764,9 +873,9 @@
       "title": "9월 PPI (MoM)",
       "ticker": null,
       "prior": 0.5,
-      "consensus": null,
+      "consensus": 0.6,
       "actual": 1.3,
-      "surprise": null,
+      "surprise": 0.7,
       "importance": 2,
       "source": "investinglive.com https://investinglive.com/news/week-ahead-us-inflation-and-retail-sales-lead-a-busy-economic-calendar-be-aware/",
       "collected_at": "2026-10-15T21:40:20.754Z",
@@ -779,7 +888,23 @@
       "ref_source": "investinglive.com https://investinglive.com/news/week-ahead-us-inflation-and-retail-sales-lead-a-busy-economic-calendar-be-aware/",
       "prior_source": "FRED PPIFIS",
       "hold": null,
-      "actual_source": "FRED PPIFIS"
+      "actual_source": "FRED PPIFIS",
+      "consensus_source": "Dow Jones 서베이 (CNBC)",
+      "consensus_url": "https://www.cnbc.com/2026/10/15/september-producer-price-index-retail-sales-data.html",
+      "alt_surveys": [
+        {
+          "source": "Reuters 설문",
+          "value": 0.5,
+          "url": "https://www.reuters.com/business/us-producer-prices-post-largest-increase-4-12-years-september-2026-10-15/"
+        },
+        {
+          "source": "FactSet",
+          "value": 0.5,
+          "url": "https://www.cnn.com/2026/10/15/economy/us-retail-sales-wholesale-inflation-ppi-september"
+        }
+      ],
+      "surprise_ok": true,
+      "actual_url": "https://www.bls.gov/news.release/ppi.nr0.htm"
     },
     {
       "id": "2026-10-15-RETAIL-mom",
@@ -789,9 +914,9 @@
       "title": "9월 소매판매 (MoM)",
       "ticker": null,
       "prior": 1.3,
-      "consensus": null,
+      "consensus": 0.3,
       "actual": 0.8,
-      "surprise": null,
+      "surprise": 0.5,
       "importance": 2,
       "source": "investinglive.com https://investinglive.com/news/week-ahead-us-inflation-and-retail-sales-lead-a-busy-economic-calendar-be-aware/",
       "collected_at": "2026-10-15T21:40:20.754Z",
@@ -804,7 +929,17 @@
       "ref_source": "investinglive.com https://investinglive.com/news/week-ahead-us-inflation-and-retail-sales-lead-a-busy-economic-calendar-be-aware/",
       "prior_source": "FRED RSAFS",
       "hold": null,
-      "actual_source": "FRED RSAFS"
+      "actual_source": "FRED RSAFS",
+      "consensus_source": "Reuters 설문",
+      "consensus_url": "https://www.reuters.com/business/us-retail-sales-beat-expectations-september-higher-gasoline-prices-2026-10-15/",
+      "alt_surveys": [
+        {
+          "source": "CNBC(출처 미표기 '경제학자')",
+          "value": 0.4,
+          "url": "https://www.cnbc.com/2026/10/15/september-producer-price-index-retail-sales-data.html"
+        }
+      ],
+      "actual_url": "https://www.census.gov/retail/sales.html"
     },
     {
       "id": "2026-10-15-SMTC-data-center-teach-in-투자자",
@@ -851,7 +986,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": null,
       "prior_eps": 0.44,
       "prior_rev": null,
@@ -864,7 +999,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 120735318000,
+      "featured": false
     },
     {
       "id": "2026-10-16-IBN",
@@ -879,7 +1016,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": null,
       "prior_eps": 0.39,
       "prior_rev": null,
@@ -892,7 +1029,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 105396855000,
+      "featured": false
     },
     {
       "id": "2026-10-16-MACRO-산업생산-industrial-producti",
@@ -937,34 +1076,6 @@
       "hold": null
     },
     {
-      "id": "2026-10-19-GE",
-      "date_et": "2026-10-19",
-      "time_et": null,
-      "type": "earnings",
-      "title": "GE 실적",
-      "ticker": "GE",
-      "prior": null,
-      "consensus": null,
-      "actual": null,
-      "surprise": null,
-      "importance": 2,
-      "source": "Finnhub",
-      "collected_at": "2026-10-15T21:40:20.754Z",
-      "timing": "bmo",
-      "prior_eps": null,
-      "prior_rev": null,
-      "cons_eps": 2.0576,
-      "cons_rev": 13222814375,
-      "actual_eps": null,
-      "actual_rev": null,
-      "surprise_eps": null,
-      "implied_move": null,
-      "surprise_rev_pct": null,
-      "hold": null,
-      "cons_basis": "adjusted",
-      "data_source": "provider(미검증)"
-    },
-    {
       "id": "2026-10-20-CB",
       "date_et": "2026-10-20",
       "time_et": null,
@@ -977,7 +1088,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 7.49,
       "prior_rev": null,
@@ -990,7 +1101,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 136106336000,
+      "featured": false
     },
     {
       "id": "2026-10-20-COF",
@@ -1005,7 +1118,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 5.95,
       "prior_rev": null,
@@ -1018,7 +1131,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 4.83,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 121997591000,
+      "featured": false
     },
     {
       "id": "2026-10-20-GE",
@@ -1033,7 +1150,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.66,
       "prior_rev": null,
@@ -1046,7 +1163,14 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "date_confirmed": true,
+      "date_src": "https://www.geaerospace.com/investor-relations/events-reports",
+      "cons_eps_alt": 2.0576,
+      "prior_gaap_sec": 2.02,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 323719496000,
+      "featured": false
     },
     {
       "id": "2026-10-20-ISRG",
@@ -1061,7 +1185,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 1.96,
       "prior_rev": null,
@@ -1074,7 +1198,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.95,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 151153541000,
+      "featured": false
     },
     {
       "id": "2026-10-20-NFLX",
@@ -1088,12 +1216,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 0.59,
       "prior_rev": null,
-      "cons_eps": 0.8391,
+      "cons_eps": 0.82,
       "cons_rev": 13136855206,
       "actual_eps": null,
       "actual_rev": null,
@@ -1102,35 +1230,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
-    },
-    {
-      "id": "2026-10-20-PM",
-      "date_et": "2026-10-20",
-      "time_et": null,
-      "type": "earnings",
-      "title": "PM 실적",
-      "ticker": "PM",
-      "prior": null,
-      "consensus": null,
-      "actual": null,
-      "surprise": null,
-      "importance": 2,
-      "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
-      "timing": "bmo",
-      "prior_eps": 2.24,
-      "prior_rev": null,
-      "cons_eps": 2.31,
-      "cons_rev": null,
-      "actual_eps": null,
-      "actual_rev": null,
-      "surprise_eps": null,
-      "implied_move": null,
-      "cons_basis": "adjusted",
-      "data_source": "provider(미검증)",
-      "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 5.87,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 302343651000,
+      "featured": false
     },
     {
       "id": "2026-10-20-RTX",
@@ -1145,7 +1249,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.7,
       "prior_rev": null,
@@ -1158,33 +1262,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
-    },
-    {
-      "id": "2026-10-20-TSLA",
-      "date_et": "2026-10-20",
-      "time_et": null,
-      "type": "earnings",
-      "title": "TSLA 실적",
-      "ticker": "TSLA",
-      "prior": null,
-      "consensus": null,
-      "actual": null,
-      "surprise": null,
-      "importance": 3,
-      "source": "Finnhub",
-      "collected_at": "2026-10-08T21:39:37.792Z",
-      "timing": "amc",
-      "prior_eps": null,
-      "prior_rev": null,
-      "cons_eps": 0.4343,
-      "cons_rev": 28069555287,
-      "actual_eps": null,
-      "actual_rev": null,
-      "surprise_eps": null,
-      "implied_move": null,
-      "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.41,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 251963392000,
+      "featured": false
     },
     {
       "id": "2026-10-20-MACRO-9월-건축허가-building-permits",
@@ -1293,12 +1375,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.3,
       "prior_rev": null,
-      "cons_eps": 1.4302,
+      "cons_eps": 1.42,
       "cons_rev": 13134827254,
       "actual_eps": null,
       "actual_rev": null,
@@ -1307,7 +1389,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 181136523000,
+      "featured": false
     },
     {
       "id": "2026-10-21-CME",
@@ -1322,7 +1406,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 2.68,
       "prior_rev": null,
@@ -1335,7 +1419,11 @@
       "surprise_rev_pct": null,
       "hold": null,
       "cons_basis": "adjusted",
-      "data_source": "provider(미검증)"
+      "data_source": "provider(미검증)",
+      "prior_gaap_sec": 2.49,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 104083816000,
+      "featured": false
     },
     {
       "id": "2026-10-21-DHR",
@@ -1350,7 +1438,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.89,
       "prior_rev": null,
@@ -1363,7 +1451,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.27,
+      "prior_gaap_sec_end": "2025-09-26",
+      "mcap": 162741273000,
+      "featured": false
     },
     {
       "id": "2026-10-21-IBM",
@@ -1377,12 +1469,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 2.65,
       "prior_rev": null,
-      "cons_eps": 2.8957,
+      "cons_eps": 2.87,
       "cons_rev": 16989872085,
       "actual_eps": null,
       "actual_rev": null,
@@ -1391,7 +1483,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.84,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 220572500000,
+      "featured": false
     },
     {
       "id": "2026-10-21-IBM-2026년-3분기-실적-발표-컨센서스-eps",
@@ -1421,12 +1517,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 1.26,
       "prior_rev": null,
-      "cons_eps": 2.2189,
+      "cons_eps": 2.17,
       "cons_rev": 8306592543,
       "actual_eps": null,
       "actual_rev": null,
@@ -1435,7 +1531,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 347220214000,
+      "featured": false
     },
     {
       "id": "2026-10-21-META",
@@ -1448,13 +1546,13 @@
       "consensus": null,
       "actual": null,
       "surprise": null,
-      "importance": 3,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "importance": 2,
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:59:22.156Z",
       "timing": "amc",
       "prior_eps": 7.25,
       "prior_rev": null,
-      "cons_eps": 6.3122,
+      "cons_eps": 6.67,
       "cons_rev": 64569820807,
       "actual_eps": null,
       "actual_rev": null,
@@ -1463,7 +1561,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.05,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 1876798730000,
+      "featured": true
     },
     {
       "id": "2026-10-21-META-2026년-3분기-실적-발표",
@@ -1494,7 +1596,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.13,
       "prior_rev": null,
@@ -1507,33 +1609,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
-    },
-    {
-      "id": "2026-10-21-PGR",
-      "date_et": "2026-10-21",
-      "time_et": null,
-      "type": "earnings",
-      "title": "PGR 실적",
-      "ticker": "PGR",
-      "prior": null,
-      "consensus": null,
-      "actual": null,
-      "surprise": null,
-      "importance": 2,
-      "source": "Nasdaq",
-      "collected_at": "2026-10-08T21:39:37.792Z",
-      "timing": null,
-      "prior_eps": 4.05,
-      "prior_rev": null,
-      "cons_eps": 4.37,
-      "cons_rev": null,
-      "actual_eps": null,
-      "actual_rev": null,
-      "surprise_eps": null,
-      "implied_move": null,
-      "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 164708844000,
+      "featured": false
     },
     {
       "id": "2026-10-21-PM",
@@ -1548,7 +1626,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 2.24,
       "prior_rev": null,
@@ -1561,7 +1639,14 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "date_confirmed": true,
+      "date_src": "https://www.pmi.com/investor-relations/press-releases-and-events/press-releases-overview/press-release-details?newsId=30436",
+      "cons_eps_alt": 2.31,
+      "prior_gaap_sec": 2.23,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 311566828000,
+      "featured": false
     },
     {
       "id": "2026-10-21-SAP",
@@ -1576,7 +1661,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 1.86,
       "prior_rev": null,
@@ -1589,7 +1674,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 276413448000,
+      "featured": false
     },
     {
       "id": "2026-10-21-T",
@@ -1603,12 +1690,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 0.54,
       "prior_rev": null,
-      "cons_eps": 0.6106,
+      "cons_eps": 0.61,
       "cons_rev": 32319419436,
       "actual_eps": null,
       "actual_rev": null,
@@ -1617,7 +1704,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.29,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 161031062000,
+      "featured": false
     },
     {
       "id": "2026-10-21-TMO",
@@ -1632,7 +1723,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 5.79,
       "prior_rev": null,
@@ -1645,7 +1736,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 4.27,
+      "prior_gaap_sec_end": "2025-09-27",
+      "mcap": 257525285000,
+      "featured": false
     },
     {
       "id": "2026-10-21-TSLA",
@@ -1658,13 +1753,13 @@
       "consensus": null,
       "actual": null,
       "surprise": null,
-      "importance": 3,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "importance": 2,
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:59:22.156Z",
       "timing": "amc",
       "prior_eps": 0.37,
       "prior_rev": null,
-      "cons_eps": 0.4459,
+      "cons_eps": 0.21,
       "cons_rev": 28422467973,
       "actual_eps": null,
       "actual_rev": null,
@@ -1673,7 +1768,14 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": "예상 EPS 출처 간 불일치(0.21 ↔ 0.4343)",
+      "date_confirmed": true,
+      "date_src": "https://ir.tesla.com/press-release/tesla-third-quarter-2026-production-deliveries-and-deployments",
+      "cons_eps_alt": 0.4343,
+      "prior_gaap_sec": 0.39,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 1431474010000,
+      "featured": true
     },
     {
       "id": "2026-10-21-TSLA-2026년-3분기-실적-발표-컨콜-17-30",
@@ -1703,12 +1805,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 1.48,
       "prior_rev": null,
-      "cons_eps": 2.4391,
+      "cons_eps": 2.39,
       "cons_rev": 5975350526,
       "actual_eps": null,
       "actual_rev": null,
@@ -1717,7 +1819,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.48,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 254905696000,
+      "featured": false
     },
     {
       "id": "2026-10-21-MACRO-임금근로자-주간소득-3q",
@@ -1785,7 +1891,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 6.95,
       "prior_rev": null,
@@ -1798,33 +1904,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
-    },
-    {
-      "id": "2026-10-22-MA",
-      "date_et": "2026-10-22",
-      "time_et": null,
-      "type": "earnings",
-      "title": "MA 실적",
-      "ticker": "MA",
-      "prior": null,
-      "consensus": null,
-      "actual": null,
-      "surprise": null,
-      "importance": 2,
-      "source": "Finnhub",
-      "collected_at": "2026-10-08T21:39:37.792Z",
-      "timing": "bmo",
-      "prior_eps": null,
-      "prior_rev": null,
-      "cons_eps": 5.3041,
-      "cons_rev": 9929432852,
-      "actual_eps": null,
-      "actual_rev": null,
-      "surprise_eps": null,
-      "implied_move": null,
-      "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 6.95,
+      "prior_gaap_sec_end": "2025-09-28",
+      "mcap": 122928390000,
+      "featured": false
     },
     {
       "id": "2026-10-22-NEM",
@@ -1839,7 +1923,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 1.71,
       "prior_rev": null,
@@ -1852,7 +1936,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.67,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 122007028000,
+      "featured": false
     },
     {
       "id": "2026-10-22-PG",
@@ -1866,12 +1954,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.99,
       "prior_rev": null,
-      "cons_eps": 1.9391,
+      "cons_eps": 1.89,
       "cons_rev": 23466762816,
       "actual_eps": null,
       "actual_rev": null,
@@ -1880,7 +1968,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 365121929000,
+      "featured": false
     },
     {
       "id": "2026-10-22-SPOT",
@@ -1895,7 +1985,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 3.83,
       "prior_rev": null,
@@ -1908,7 +1998,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 109784891000,
+      "featured": false
     },
     {
       "id": "2026-10-22-UNP",
@@ -1922,12 +2014,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 3.08,
       "prior_rev": null,
-      "cons_eps": 3.5034,
+      "cons_eps": 3.47,
       "cons_rev": 7171549914,
       "actual_eps": null,
       "actual_rev": null,
@@ -1936,7 +2028,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 3.01,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 171515544000,
+      "featured": false
     },
     {
       "id": "2026-10-22-VLO",
@@ -1951,7 +2047,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 3.66,
       "prior_rev": null,
@@ -1964,7 +2060,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": "예상 EPS(21.23)가 전년 동기(3.66)의 5.8배 — 허용 1/3~3배 밖",
+      "prior_gaap_sec": 3.53,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 127857066000,
+      "featured": false
     },
     {
       "id": "2026-10-22-WDC",
@@ -1979,7 +2079,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 1.64,
       "prior_rev": null,
@@ -1992,7 +2092,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 133158306000,
+      "featured": false
     },
     {
       "id": "2026-10-23-AXP",
@@ -2006,12 +2108,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 4.14,
       "prior_rev": null,
-      "cons_eps": 4.5287,
+      "cons_eps": 4.47,
       "cons_rev": 20323276176,
       "actual_eps": null,
       "actual_rev": null,
@@ -2020,35 +2122,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
-    },
-    {
-      "id": "2026-10-23-XOM",
-      "date_et": "2026-10-23",
-      "time_et": null,
-      "type": "earnings",
-      "title": "XOM 실적",
-      "ticker": "XOM",
-      "prior": null,
-      "consensus": null,
-      "actual": null,
-      "surprise": null,
-      "importance": 2,
-      "source": "Finnhub",
-      "collected_at": "2026-10-15T21:40:20.754Z",
-      "timing": null,
-      "prior_eps": null,
-      "prior_rev": null,
-      "cons_eps": 3.8736,
-      "cons_rev": 103044396348,
-      "actual_eps": null,
-      "actual_rev": null,
-      "surprise_eps": null,
-      "implied_move": null,
-      "surprise_rev_pct": null,
       "hold": null,
-      "cons_basis": "adjusted",
-      "data_source": "provider(미검증)"
+      "prior_gaap_sec": 4.14,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 211959497000,
+      "featured": false
     },
     {
       "id": "2026-10-26-CLS",
@@ -2063,7 +2141,7 @@
       "surprise": null,
       "importance": 3,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 1.44,
       "prior_rev": null,
@@ -2076,7 +2154,12 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 2.31,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 36135633000,
+      "watch": true,
+      "featured": true
     },
     {
       "id": "2026-10-26-VZ",
@@ -2090,12 +2173,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.21,
       "prior_rev": null,
-      "cons_eps": 1.3111,
+      "cons_eps": 1.27,
       "cons_rev": 35786346491,
       "actual_eps": null,
       "actual_rev": null,
@@ -2104,7 +2187,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.17,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 184472027000,
+      "featured": false
     },
     {
       "id": "2026-10-26-WELL",
@@ -2119,7 +2206,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 1.34,
       "prior_rev": null,
@@ -2132,7 +2219,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 169108390000,
+      "featured": false
     },
     {
       "id": "2026-10-27-BA",
@@ -2147,7 +2236,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 7.47,
       "prior_rev": null,
@@ -2160,7 +2249,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": "전년 EPS 부호 오류 의심(공급자 7.47 ↔ SEC GAAP -7.14)",
+      "prior_gaap_sec": -7.14,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 149166539000,
+      "featured": false
     },
     {
       "id": "2026-10-27-CLS-2026-investor-analyst-da",
@@ -2191,7 +2284,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 0.5,
       "prior_rev": null,
@@ -2204,7 +2297,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 0.46,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 100607386000,
+      "featured": false
     },
     {
       "id": "2026-10-27-FOMC",
@@ -2235,7 +2332,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 0.67,
       "prior_rev": null,
@@ -2248,35 +2345,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
-    },
-    {
-      "id": "2026-10-27-GOOGL",
-      "date_et": "2026-10-27",
-      "time_et": null,
-      "type": "earnings",
-      "title": "GOOGL 실적",
-      "ticker": "GOOGL",
-      "prior": null,
-      "consensus": null,
-      "actual": null,
-      "surprise": null,
-      "importance": 3,
-      "source": "Finnhub",
-      "collected_at": "2026-10-15T21:40:20.754Z",
-      "timing": "amc",
-      "prior_eps": null,
-      "prior_rev": null,
-      "cons_eps": 3.0983,
-      "cons_rev": 131763712514,
-      "actual_eps": null,
-      "actual_rev": null,
-      "surprise_eps": null,
-      "implied_move": null,
-      "surprise_rev_pct": null,
       "hold": null,
-      "cons_basis": "adjusted",
-      "data_source": "provider(미검증)"
+      "prior_gaap_sec": 0.5,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 119241990000,
+      "featured": false
     },
     {
       "id": "2026-10-27-HCA",
@@ -2291,7 +2364,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 6.96,
       "prior_rev": null,
@@ -2304,7 +2377,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 101430952000,
+      "featured": false
     },
     {
       "id": "2026-10-27-HSBC",
@@ -2319,7 +2394,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": null,
       "prior_eps": 1.8,
       "prior_rev": null,
@@ -2332,7 +2407,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 323122364000,
+      "featured": false
     },
     {
       "id": "2026-10-27-KO",
@@ -2346,12 +2423,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 0.82,
       "prior_rev": null,
-      "cons_eps": 0.9065,
+      "cons_eps": 0.87,
       "cons_rev": 13304743470,
       "actual_eps": null,
       "actual_rev": null,
@@ -2360,7 +2437,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 395834524000,
+      "featured": false
     },
     {
       "id": "2026-10-27-NVS",
@@ -2375,7 +2454,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 2.25,
       "prior_rev": null,
@@ -2388,7 +2467,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 286947836000,
+      "featured": false
     },
     {
       "id": "2026-10-27-SCCO",
@@ -2403,7 +2484,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": null,
       "prior_eps": 1.35,
       "prior_rev": null,
@@ -2416,7 +2497,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.35,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 168276361000,
+      "featured": false
     },
     {
       "id": "2026-10-27-SPGI",
@@ -2431,7 +2516,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 4.73,
       "prior_rev": null,
@@ -2444,7 +2529,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 125233988000,
+      "featured": false
     },
     {
       "id": "2026-10-27-STX",
@@ -2459,7 +2546,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 2.51,
       "prior_rev": null,
@@ -2472,7 +2559,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 158001070000,
+      "featured": false
     },
     {
       "id": "2026-10-27-V",
@@ -2486,12 +2575,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 2.98,
       "prior_rev": null,
-      "cons_eps": 3.5033,
+      "cons_eps": 3.43,
       "cons_rev": 12316984816,
       "actual_eps": null,
       "actual_rev": null,
@@ -2500,7 +2589,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 714255430000,
+      "featured": true
     },
     {
       "id": "2026-10-27-MACRO-9월-내구재수주-선행지표-durable-go",
@@ -2536,7 +2627,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 2.49,
       "prior_rev": null,
@@ -2549,7 +2640,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 113189257000,
+      "featured": false
     },
     {
       "id": "2026-10-28-APH",
@@ -2564,7 +2657,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 0.47,
       "prior_rev": null,
@@ -2577,7 +2670,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 0.97,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 200951644000,
+      "featured": false
     },
     {
       "id": "2026-10-28-BBVA",
@@ -2592,7 +2689,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 0.49,
       "prior_rev": null,
@@ -2605,7 +2702,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 147104416000,
+      "featured": false
     },
     {
       "id": "2026-10-28-EQIX",
@@ -2633,7 +2732,10 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 3.81,
+      "prior_gaap_sec_end": "2025-09-30",
+      "featured": false
     },
     {
       "id": "2026-10-28-FTNT",
@@ -2648,7 +2750,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 0.65,
       "prior_rev": null,
@@ -2661,7 +2763,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 0.62,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 133469848000,
+      "featured": false
     },
     {
       "id": "2026-10-28-GEV",
@@ -2676,7 +2782,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.64,
       "prior_rev": null,
@@ -2689,7 +2795,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.64,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 246742090000,
+      "featured": false
     },
     {
       "id": "2026-10-28-GOOG",
@@ -2704,7 +2814,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 2.87,
       "prior_rev": null,
@@ -2717,7 +2827,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 2.87,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 4270960670000,
+      "featured": true
     },
     {
       "id": "2026-10-28-GOOGL",
@@ -2730,9 +2844,9 @@
       "consensus": null,
       "actual": null,
       "surprise": null,
-      "importance": 3,
+      "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:59:22.156Z",
       "timing": "amc",
       "prior_eps": 2.87,
       "prior_rev": null,
@@ -2745,7 +2859,14 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "date_confirmed": true,
+      "date_src": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Date-of-Third-Quarter-2026-Financial-Results-Conference-Call-2026-8tpGZsLS6v/default.aspx",
+      "cons_eps_alt": 3.0983,
+      "prior_gaap_sec": 2.87,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 4270960670000,
+      "featured": true
     },
     {
       "id": "2026-10-28-KLAC",
@@ -2773,7 +2894,8 @@
       "surprise_rev_pct": null,
       "hold": null,
       "cons_basis": "adjusted",
-      "data_source": "provider(미검증)"
+      "data_source": "provider(미검증)",
+      "featured": false
     },
     {
       "id": "2026-10-28-MSFT",
@@ -2786,13 +2908,13 @@
       "consensus": null,
       "actual": null,
       "surprise": null,
-      "importance": 3,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "importance": 2,
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:59:22.156Z",
       "timing": "amc",
       "prior_eps": 4.13,
       "prior_rev": null,
-      "cons_eps": 4.8214,
+      "cons_eps": 4.71,
       "cons_rev": 92463188557,
       "actual_eps": null,
       "actual_rev": null,
@@ -2801,7 +2923,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 4005636340000,
+      "featured": true
     },
     {
       "id": "2026-10-28-NOW",
@@ -2815,12 +2939,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 0.59,
       "prior_rev": null,
-      "cons_eps": 1.0376,
+      "cons_eps": 0.56,
       "cons_rev": 4135406478,
       "actual_eps": null,
       "actual_rev": null,
@@ -2829,7 +2953,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 2.4,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 153621381000,
+      "featured": false
     },
     {
       "id": "2026-10-28-PSX",
@@ -2844,7 +2972,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 2.52,
       "prior_rev": null,
@@ -2857,7 +2985,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": "예상 EPS(10.87)가 전년 동기(2.52)의 4.3배 — 허용 1/3~3배 밖",
+      "prior_gaap_sec": 0.32,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 115396846000,
+      "featured": false
     },
     {
       "id": "2026-10-28-TMUS",
@@ -2871,12 +3003,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 2.59,
       "prior_rev": null,
-      "cons_eps": 2.9699,
+      "cons_eps": 2.86,
       "cons_rev": 23600426460,
       "actual_eps": null,
       "actual_rev": null,
@@ -2885,7 +3017,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 2.41,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 168441627000,
+      "featured": false
     },
     {
       "id": "2026-10-28-UBS",
@@ -2900,7 +3036,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T04:19:26.421Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 0.76,
       "prior_rev": null,
@@ -2913,7 +3049,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 148282130000,
+      "featured": false
     },
     {
       "id": "2026-10-28-VRT",
@@ -2927,12 +3065,12 @@
       "actual": null,
       "surprise": null,
       "importance": 3,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.24,
       "prior_rev": null,
-      "cons_eps": 1.8536,
+      "cons_eps": 1.83,
       "cons_rev": 3797283779,
       "actual_eps": null,
       "actual_rev": null,
@@ -2941,7 +3079,12 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.02,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 82676212000,
+      "watch": true,
+      "featured": true
     },
     {
       "id": "2026-10-28-FOMC",
@@ -3018,13 +3161,13 @@
       "consensus": null,
       "actual": null,
       "surprise": null,
-      "importance": 3,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "importance": 2,
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:59:22.156Z",
       "timing": "amc",
       "prior_eps": 1.95,
       "prior_rev": null,
-      "cons_eps": 1.9998,
+      "cons_eps": 2.02,
       "cons_rev": 206192815298,
       "actual_eps": null,
       "actual_rev": null,
@@ -3033,7 +3176,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.95,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 2747921330000,
+      "featured": true
     },
     {
       "id": "2026-10-29-BMY",
@@ -3048,7 +3195,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.63,
       "prior_rev": null,
@@ -3061,7 +3208,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.08,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 123727225000,
+      "featured": false
     },
     {
       "id": "2026-10-29-BUD",
@@ -3076,7 +3227,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 0.99,
       "prior_rev": null,
@@ -3089,7 +3240,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 160294978000,
+      "featured": false
     },
     {
       "id": "2026-10-29-CAT",
@@ -3103,12 +3256,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 4.95,
       "prior_rev": null,
-      "cons_eps": 7.1459,
+      "cons_eps": 6.95,
       "cons_rev": 20964040143,
       "actual_eps": null,
       "actual_rev": null,
@@ -3117,7 +3270,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 4.88,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 338155241000,
+      "featured": false
     },
     {
       "id": "2026-10-29-GILD",
@@ -3132,7 +3289,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": null,
       "prior_eps": 2.47,
       "prior_rev": null,
@@ -3145,7 +3302,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 2.43,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 195131736000,
+      "featured": false
     },
     {
       "id": "2026-10-29-INTC",
@@ -3160,7 +3321,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 0.11,
       "prior_rev": null,
@@ -3173,7 +3334,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 0.9,
+      "prior_gaap_sec_end": "2025-09-27",
+      "mcap": 504037081000,
+      "featured": true
     },
     {
       "id": "2026-10-29-LIN",
@@ -3187,12 +3352,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 4.21,
       "prior_rev": null,
-      "cons_eps": 4.5612,
+      "cons_eps": 4.51,
       "cons_rev": 9231276204,
       "actual_eps": null,
       "actual_rev": null,
@@ -3201,7 +3366,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 4.09,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 227364635000,
+      "featured": false
     },
     {
       "id": "2026-10-29-LLY",
@@ -3214,13 +3383,13 @@
       "consensus": null,
       "actual": null,
       "surprise": null,
-      "importance": 3,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "importance": 2,
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:59:22.156Z",
       "timing": "bmo",
       "prior_eps": 7.02,
       "prior_rev": null,
-      "cons_eps": 7.4912,
+      "cons_eps": 5.38,
       "cons_rev": 22678953494,
       "actual_eps": null,
       "actual_rev": null,
@@ -3229,7 +3398,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 6.21,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 1178211980000,
+      "featured": true
     },
     {
       "id": "2026-10-29-MA",
@@ -3243,12 +3416,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 4.38,
       "prior_rev": null,
-      "cons_eps": 5.3058,
+      "cons_eps": 5.13,
       "cons_rev": 9932286219,
       "actual_eps": null,
       "actual_rev": null,
@@ -3257,7 +3430,14 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "date_confirmed": true,
+      "date_src": "https://investor.mastercard.com/investor-news/investor-news-details/2026/Mastercard-Incorporated-to-Host-Conference-Call-on-Third-Quarter-2026-Financial-Results/default.aspx",
+      "cons_eps_alt": 5.3041,
+      "prior_gaap_sec": 4.34,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 539902444000,
+      "featured": true
     },
     {
       "id": "2026-10-29-MO",
@@ -3272,7 +3452,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.45,
       "prior_rev": null,
@@ -3285,7 +3465,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.41,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 123293893000,
+      "featured": false
     },
     {
       "id": "2026-10-29-MRK",
@@ -3299,12 +3483,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 2.58,
       "prior_rev": null,
-      "cons_eps": 2.1151,
+      "cons_eps": 2.12,
       "cons_rev": 17450186897,
       "actual_eps": null,
       "actual_rev": null,
@@ -3313,7 +3497,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 2.32,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 358208635000,
+      "featured": false
     },
     {
       "id": "2026-10-29-SBUX",
@@ -3328,7 +3516,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 0.52,
       "prior_rev": null,
@@ -3341,7 +3529,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 110443201000,
+      "featured": false
     },
     {
       "id": "2026-10-29-SHEL",
@@ -3356,7 +3546,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.86,
       "prior_rev": null,
@@ -3369,7 +3559,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 286308696000,
+      "featured": false
     },
     {
       "id": "2026-10-29-SNDK",
@@ -3384,7 +3576,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 0.9,
       "prior_rev": null,
@@ -3397,7 +3589,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": "예상 EPS(45.22)가 전년 동기(0.9)의 50.2배 — 허용 1/3~3배 밖",
+      "mcap": 202707403000,
+      "featured": false
     },
     {
       "id": "2026-10-29-SYK",
@@ -3412,7 +3606,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "amc",
       "prior_eps": 3.19,
       "prior_rev": null,
@@ -3425,7 +3619,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 2.22,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 112475128000,
+      "featured": false
     },
     {
       "id": "2026-10-29-TT",
@@ -3440,7 +3638,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 3.88,
       "prior_rev": null,
@@ -3453,7 +3651,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 3.78,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 100629799000,
+      "featured": false
     },
     {
       "id": "2026-10-29-TTE",
@@ -3468,7 +3670,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-15T21:40:20.754Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.77,
       "prior_rev": null,
@@ -3481,7 +3683,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 196032201000,
+      "featured": false
     },
     {
       "id": "2026-10-29-COREPCE-mom",
@@ -3620,12 +3824,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.86,
       "prior_rev": null,
-      "cons_eps": 3.8234,
+      "cons_eps": 3.76,
       "cons_rev": 17702881065,
       "actual_eps": null,
       "actual_rev": null,
@@ -3634,7 +3838,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 0.1,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 500801044000,
+      "featured": true
     },
     {
       "id": "2026-10-30-AZN",
@@ -3649,7 +3857,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 2.38,
       "prior_rev": null,
@@ -3662,7 +3870,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 252370010000,
+      "featured": false
     },
     {
       "id": "2026-10-30-BP",
@@ -3677,7 +3887,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 0.85,
       "prior_rev": null,
@@ -3690,7 +3900,9 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "mcap": 127648801000,
+      "featured": false
     },
     {
       "id": "2026-10-30-CVX",
@@ -3704,12 +3916,12 @@
       "actual": null,
       "surprise": null,
       "importance": 2,
-      "source": "Finnhub+Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "source": "Nasdaq",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": "bmo",
       "prior_eps": 1.85,
       "prior_rev": null,
-      "cons_eps": 4.8752,
+      "cons_eps": 4.74,
       "cons_rev": 60967780299,
       "actual_eps": null,
       "actual_rev": null,
@@ -3718,7 +3930,11 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "prior_gaap_sec": 1.82,
+      "prior_gaap_sec_end": "2025-09-30",
+      "mcap": 433326162000,
+      "featured": true
     },
     {
       "id": "2026-10-30-XOM",
@@ -3733,7 +3949,7 @@
       "surprise": null,
       "importance": 2,
       "source": "Nasdaq",
-      "collected_at": "2026-10-16T21:37:13.625Z",
+      "collected_at": "2026-10-17T01:58:00.551Z",
       "timing": null,
       "prior_eps": 1.88,
       "prior_rev": null,
@@ -3746,7 +3962,12 @@
       "cons_basis": "adjusted",
       "data_source": "provider(미검증)",
       "surprise_rev_pct": null,
-      "hold": null
+      "hold": null,
+      "date_confirmed": true,
+      "date_src": "https://investor.exxonmobil.com/",
+      "cons_eps_alt": 3.8736,
+      "mcap": 718268790000,
+      "featured": true
     },
     {
       "id": "2026-10-30-XOM-2026년-3분기-실적-발표",

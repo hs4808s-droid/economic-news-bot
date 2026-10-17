@@ -321,6 +321,7 @@ function buildMarkdown(date, data, news, wire, newsSkipReason) {
   L.push('');
   L.push('> 이 파일의 수치는 **이미 검증된 사실**이다. 1_collect 단계에서 다시 검색하지 말고 그대로 인용한다.');
   L.push('> 값이 `N/A`인 항목은 수집에 실패한 것이다. 추정치로 메우지 않는다.');
+  L.push('> **금리 기준 통일:** 2년물·10년물·10Y-2Y 는 FRED 일별 값(같은 기준일)만 본문에 쓴다. Yahoo ^TNX·^TYX 는 당일 참고용이라 FRED 값과 섞어 인용하지 않는다.');
   L.push('> 금리·스프레드의 등락은 bp(1bp=0.01%p) 단위다. FRED 값은 영업일 기준 하루 늦게 확정될 수 있다(기준 열 참고).');
   L.push('');
   L.push(...renderTables(data));

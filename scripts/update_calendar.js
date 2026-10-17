@@ -154,7 +154,11 @@ async function fetchEarnings(from, to) {
     const k = `${r.date}|${r.ticker}`;
     const cur = rows.get(k);
     if (!cur) rows.set(k, { ...r, _src: [tag] });
-    else { for (const f of Object.keys(r)) if (cur[f] == null && r[f] != null) cur[f] = r[f]; cur._src.push(tag); }
+    else {
+      for (const f of Object.keys(r)) if (cur[f] == null && r[f] != null) cur[f] = r[f];
+      if (cur.cons_eps != null && r.cons_eps != null && cur.cons_eps !== r.cons_eps) cur.cons_eps_alt = r.cons_eps; // 출처 간 불일치 감시용
+      cur._src.push(tag);
+    }
   };
   const key = process.env.FINNHUB_API_KEY;
   if (key) {
@@ -183,10 +187,10 @@ function earningsToEvents(rows, nowIso) {
     const sur = r.actual_eps != null && r.cons_eps != null ? +(r.actual_eps - r.cons_eps).toFixed(4) : null;
     return {
       ...EMPTY, id: `${r.date}-${r.ticker}`, date_et: r.date, time_et: null, type: 'earnings', title: `${r.ticker} 실적`, ticker: r.ticker,
-      timing: r.timing, prior_eps: r.prior_eps, prior_rev: r.prior_rev, cons_eps: r.cons_eps, cons_rev: r.cons_rev,
-      actual_eps: r.actual_eps, actual_rev: r.actual_rev, surprise_eps: sur, implied_move: null,
+      timing: r.timing, prior_eps: r.prior_eps, prior_rev: r.prior_rev, cons_eps: r.cons_eps, cons_eps_alt: r.cons_eps_alt ?? null, cons_rev: r.cons_rev,
+      actual_eps: r.actual_eps, actual_rev: r.actual_rev, surprise_eps: sur, implied_move: null, mcap: r.mcap ?? null,
       cons_basis: 'adjusted', data_source: 'provider(미검증)', // ponytail: 공급자 컨센서스는 Street(조정) 기준이라고 가정 — 검증 항목은 아래 verified 로 덮어씀
-      importance: WATCH.includes(r.ticker) || (idx >= 0 && idx < 10) ? 3 : 2,
+      importance: WATCH.includes(r.ticker) ? 3 : 2,
       source: [...new Set(r._src)].join('+'), collected_at: nowIso,
     };
   });
@@ -293,8 +297,9 @@ function applyVerifiedEarnings(ledger, nowIso) {
     Object.assign(ev, {
       actual_eps: basis === 'adjusted' ? v.eps_adjusted : v.eps_gaap, prior_eps: basis === 'adjusted' ? v.prior_adjusted : v.prior_gaap,
       eps_basis: basis, prior_basis: basis, cons_basis: v.cons_basis || basis, eps_gaap: v.eps_gaap, eps_adjusted: v.eps_adjusted ?? null,
-      actual_rev: v.revenue, rev_basis: v.revenue_basis || 'reported', verified: true, src_url: v.source_url, verified_at: v.verified_at || nowIso, note: v.note || null,
+      actual_rev: v.revenue, rev_basis: v.revenue_basis || 'reported', currency: v.currency || 'USD', eps_label: v.eps_label || null, verified: true, src_url: v.source_url, verified_at: v.verified_at || nowIso, note: v.note || null,
     });
+    if ('cons_eps' in v) { ev.cons_eps = v.cons_eps; ev.cons_rev = v.cons_rev ?? null; ev.cons_note = v.cons_note || null; } // 공급자 예상치를 못 믿을 때(통화 불명 등) 비운다
     n++;
   }
   return n;
@@ -328,8 +333,69 @@ function applyVerifiedConsensus(ledger) {
   for (const v of items) {
     const ev = ledger.events.find((e) => e.type === 'macro' && e.date_et === v.date_et && e.metric === v.metric && e.measure === v.measure);
     if (!ev) continue;
-    Object.assign(ev, { consensus: v.consensus, consensus_source: v.source, consensus_url: v.url });
+    Object.assign(ev, { consensus: v.consensus, consensus_source: v.source, consensus_url: v.url, alt_surveys: v.alt_surveys || undefined, surprise_ok: v.surprise_ok || undefined, actual_url: v.actual_url || undefined });
     n++;
+  }
+  return n;
+}
+
+// 같은 (티커, 회계분기)가 두 날짜에 있으면 한 줄만 남긴다. 같은 티커의 행이 45일 안에 모여 있으면 한 분기로 본다.
+// 우선순위: 발표값이 있는 행 > config/earnings_dates.json 의 확정 날짜 > (미확정) 가장 이른 날짜 + date_tbd.
+function earningsDates() { return C.readJson(path.join(C.ROOT, 'config', 'earnings_dates.json'), { items: [] }).items; }
+function dedupeEarnings(ledger, dates = earningsDates()) {
+  const byT = new Map();
+  for (const e of ledger.events) if (e.type === 'earnings' && e.ticker) (byT.get(e.ticker) || byT.set(e.ticker, []).get(e.ticker)).push(e);
+  const drop = new Set();
+  for (const [t, rows] of byT) {
+    rows.sort((a, b) => a.date_et.localeCompare(b.date_et));
+    const clusters = [];
+    for (const r of rows) {
+      const last = clusters[clusters.length - 1];
+      if (last && (new Date(r.date_et) - new Date(last[last.length - 1].date_et)) / 864e5 <= 45) last.push(r); else clusters.push([r]);
+    }
+    for (const cl of clusters) {
+      if (cl.length < 2) continue;
+      const conf = dates.find((d) => d.ticker === t && cl.some((r) => r.date_et === d.date_et));
+      const keep = cl.find((r) => r.actual_eps != null || r.verified) || (conf && cl.find((r) => r.date_et === conf.date_et)) || cl[0];
+      const alts = cl.filter((r) => r !== keep);
+      alts.forEach((r) => drop.add(r));
+      if (conf && keep.date_et === conf.date_et) { keep.date_confirmed = true; keep.date_src = conf.url; delete keep.date_tbd; delete keep.date_alt; }
+      else if (!keep.verified && keep.actual_eps == null) { keep.date_tbd = true; keep.date_alt = alts.map((r) => r.date_et); }
+      if (keep.cons_eps_alt == null) { const a = alts.find((r) => r.cons_eps != null && keep.cons_eps != null && r.cons_eps !== keep.cons_eps); if (a) keep.cons_eps_alt = a.cons_eps; }
+    }
+  }
+  const before = ledger.events.length;
+  ledger.events = ledger.events.filter((e) => !drop.has(e));
+  const seen = new Set();
+  ledger.events = ledger.events.filter((e) => (seen.has(e.id) ? false : (seen.add(e.id), true)));
+  return before - ledger.events.length;
+}
+
+// 전년 동기 GAAP EPS 를 SEC 분기 이력(XBRL)에서 읽어 둔다 — checkEarnings 가 공급자 prior_eps 의 부호 오류(BA 사례)를 잡는다.
+// getHist/pick 은 테스트 주입용. 외국 기업·회계연도가 다른 기업은 이력이 없어 건너뛴다(검증 불가 ≠ 오류).
+async function fillPriorSec(ledger, today, getHist, pick) {
+  const S = require('../lib/sec');
+  const hist = getHist || S.quarterlyEps, find = pick || S.priorYearQuarter;
+  const cache = new Map();
+  let n = 0;
+  for (const ev of ledger.events) {
+    if (ev.type !== 'earnings' || ev.actual_eps != null || ev.date_et < today) continue;
+    if (!cache.has(ev.ticker)) { try { cache.set(ev.ticker, await hist(ev.ticker)); } catch { cache.set(ev.ticker, null); } }
+    const q = cache.get(ev.ticker) && find(cache.get(ev.ticker), ev.date_et);
+    if (q) { ev.prior_gaap_sec = q.val; ev.prior_gaap_sec_end = q.end; n++; } else { delete ev.prior_gaap_sec; delete ev.prior_gaap_sec_end; }
+  }
+  return n;
+}
+
+// 홈 실적 탭 기본 화면용: 관심 종목(config/watchlist.json) · 유니버스 상위 10 · 시총 4,000억 달러 이상 대형주
+const BIG_MCAP = 4e11;
+function markFeatured(ledger) {
+  let n = 0;
+  for (const e of ledger.events) {
+    if (e.type !== 'earnings') continue;
+    e.watch = WATCH.includes(e.ticker) || undefined;
+    e.featured = !!(e.watch || (e.mcap || 0) >= BIG_MCAP);
+    if (e.featured) n++;
   }
   return n;
 }
@@ -362,17 +428,23 @@ async function run(dateArg) {
   } else stats.collect = '1_collect.md 없음 — macro/fed/corporate 갱신 건너뜀';
 
   const er = await fetchEarnings(from, to);
-  if (er.ok) stats.earnings = { ...merge(ledger, earningsToEvents(er.rows, nowIso).filter(inWin)), sources: er.srcs.join(', ') };
+  const confirmed = earningsDates();
+  // 회사 IR 로 날짜가 확정된 종목은 다른 날짜로 들어온 공급자 행을 처음부터 받지 않는다
+  const dateOk = (e) => !confirmed.some((d) => d.ticker === e.ticker && d.date_et !== e.date_et && Math.abs(new Date(d.date_et) - new Date(e.date_et)) / 864e5 <= 45);
+  if (er.ok) stats.earnings = { ...merge(ledger, earningsToEvents(er.rows, nowIso).filter(inWin).filter(dateOk)), sources: er.srcs.join(', ') };
   else stats.earnings = `수집 실패 — earnings 는 기존 원장 유지 (${er.srcs.join(', ')})`;
 
   stats.migrated = (stats.migrated || 0) + migrate(ledger);
   stats.deduped = dedupe(ledger);
+  stats.deduped_earnings = dedupeEarnings(ledger);
+  stats.prior_sec = await fillPriorSec(ledger, C.etDay(Date.now() / 1000));
   stats.expanded = expandFamilies(ledger, nowIso);
   stats.verified_consensus = applyVerifiedConsensus(ledger);
   stats.actuals = await fillActuals(ledger, nowIso);
   stats.verified_earnings = applyVerifiedEarnings(ledger, nowIso);
   computeSurprises(ledger);
   stats.held = stampHolds(ledger);
+  stats.featured = markFeatured(ledger);
   ledger.updated_at = nowIso;
   ledger.window = { from, to, anchor_us_date: D };
   C.writeJson(CAL_PATH, ledger);
@@ -474,6 +546,24 @@ async function selftest() {
   assert.deepStrictEqual([f[0].timing, f[0].cons_eps, f[0].actual_eps], ['amc', 1.2, null]);
   const nq = normNasdaq('2026-10-14', { data: { rows: [{ symbol: 'BAC', time: 'time-pre-market', epsForecast: '$1.12', lastYearEPS: '$1.06', marketCap: '$378,237,747,000' }] } });
   assert.deepStrictEqual([nq[0].timing, nq[0].cons_eps, nq[0].prior_eps, nq[0].mcap], ['bmo', 1.12, 1.06, 378237747000]);
+  // ⑪ 실적 중복 제거(GE·PM·TSLA 사례): 같은 종목이 두 날짜에 있으면 IR 확정 날짜 한 줄만, 확정 전이면 date_tbd 한 줄
+  const ER = (t, d, o = {}) => ({ ...EMPTY, id: `${d}-${t}`, date_et: d, type: 'earnings', ticker: t, cons_eps: 2, ...o });
+  const dl = { events: [ER('GE', '2026-10-19'), ER('GE', '2026-10-20'), ER('ZZ', '2026-10-27'), ER('ZZ', '2026-10-28', { cons_eps: 3 }), ER('PGR', '2026-10-14', { actual_eps: 4.37 }), ER('PGR', '2026-10-21')] };
+  dedupeEarnings(dl, [{ ticker: 'GE', date_et: '2026-10-20', url: 'u' }, { ticker: 'PGR', date_et: '2026-10-14', url: 'u' }]);
+  assert.deepStrictEqual(dl.events.filter((e) => e.ticker === 'GE').map((e) => e.date_et), ['2026-10-20']);
+  assert.strictEqual(dl.events.find((e) => e.ticker === 'GE').date_confirmed, true);
+  assert.deepStrictEqual(dl.events.filter((e) => e.ticker === 'PGR').map((e) => e.date_et), ['2026-10-14'], '발표 완료 행이 남는다');
+  const zz = dl.events.filter((e) => e.ticker === 'ZZ');
+  assert(zz.length === 1 && zz[0].date_tbd && zz[0].date_alt[0] === '2026-10-28', '확정 전이면 날짜 미확정 한 줄');
+  // ⑫ 그럴듯함: 예상 EPS 3배 초과(VLO·SNDK 사례) · 전년 EPS 부호 오류(BA 사례, SEC 이력 주입) · 출처 간 예상값 불일치(TSLA 사례)
+  const U = (o) => M.checkEarnings({ type: 'earnings', cons_eps: 2, prior_eps: 2, ...o });
+  assert.strictEqual(U({}), null);
+  assert(/배/.test(U({ cons_eps: 21.23, prior_eps: 3.66 })) && /배/.test(U({ cons_eps: 45.22, prior_eps: 0.9 })) && /배/.test(U({ cons_eps: 0.5, prior_eps: 2 })), '3배 초과/1/3 미만');
+  assert(/부호/.test(U({ cons_eps: 0.17, prior_eps: 7.47, prior_gaap_sec: -7.14 })), 'BA: 공급자 +7.47 ↔ SEC -7.14');
+  assert.strictEqual(U({ cons_eps: 2.1, prior_eps: 1.5, prior_gaap_sec: 1.4 }), null, '같은 부호는 통과');
+  assert(/불일치/.test(U({ cons_eps: 0.21, prior_eps: 0.37, cons_eps_alt: 0.4343 })), 'TSLA 0.21 ↔ 0.43');
+  const sec = await fillPriorSec({ events: [ER('BA', '2026-10-27', { prior_eps: 7.47 })] }, '2026-10-17', async () => [{ end: '2025-09-30', val: -7.14 }], (h) => h[0]);
+  assert.strictEqual(sec, 1);
   console.log('selftest 통과: 원장 키(발표일·metric·measure) · 혼합/중복/출처혼용 차단 · FRED 발표값(BLS 9월 CPI 재현) · 사고 회귀(MoM→YoY칸 등) · 옛 원장 이전 · 실적 보류 규칙');
 }
 
@@ -481,4 +571,4 @@ if (require.main === module && process.argv.includes('--selftest')) selftest().c
 else if (require.main === module) {
   run(process.argv.slice(2).find((a) => /^\d{4}-\d{2}-\d{2}$/.test(a))).catch((e) => { console.error(e.message || e); process.exit(1); });
 }
-module.exports = { expandFamilies, applyVerifiedConsensus, merge, eventsFromCollect, fillActuals, computeSurprises, migrate, dedupe, stampHolds, applyVerifiedEarnings };
+module.exports = { markFeatured, dedupeEarnings, fillPriorSec, expandFamilies, applyVerifiedConsensus, merge, eventsFromCollect, fillActuals, computeSurprises, migrate, dedupe, stampHolds, applyVerifiedEarnings };

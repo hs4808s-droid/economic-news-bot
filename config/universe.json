@@ -15,10 +15,10 @@
       "RTY=F": { "label": "러셀2000 선물 (RTY)", "policy": "continuous" }
     }},
     { "id": "rates", "label": "금리", "items": {
-      "^TNX": { "label": "미 10년물 금리 (Yahoo)", "policy": "session", "kind": "yield" },
-      "^TYX": { "label": "미 30년물 금리 (Yahoo)", "policy": "session", "kind": "yield" },
-      "FRED:DGS2":  { "label": "미 2년물 금리 (FRED)", "policy": "fred", "kind": "yield" },
-      "FRED:DGS10": { "label": "미 10년물 금리 (FRED)", "policy": "fred", "kind": "yield" }
+      "FRED:DGS2":  { "label": "미 2년물 금리 (FRED·기준)", "policy": "fred", "kind": "yield" },
+      "FRED:DGS10": { "label": "미 10년물 금리 (FRED·기준)", "policy": "fred", "kind": "yield" },
+      "^TNX": { "label": "미 10년물 금리 (Yahoo 당일·참고)", "policy": "session", "kind": "yield" },
+      "^TYX": { "label": "미 30년물 금리 (Yahoo 당일·참고)", "policy": "session", "kind": "yield" }
     }},
     { "id": "vol", "label": "변동성 구조", "items": {
       "^VIX":   { "label": "VIX (30일)", "policy": "session", "kind": "vol" },

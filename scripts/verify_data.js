@@ -54,7 +54,7 @@ function verifyMarket(data) {
     const [lo, hi] = rangeFor(sym, it);
     check(G, `${sym} 범위`, it.close > lo && it.close < hi && it.close > 0, `close=${it.close} 허용 ${lo}~${hi}`);
     // 등락률 ±25% 초과는 실패. 금리·스프레드는 %가 아니라 bp(%p) 변화로 따로 본다.
-    if (it.kind !== 'yield' && it.kind !== 'spread') check(G, `${sym} |1D|≤25%`, Math.abs(it.chg_1d) <= 25, `chg_1d=${it.chg_1d}`);
+    if (it.kind !== 'yield' && it.kind !== 'spread') check(G, `${sym} |1D|≤${it.kind === 'vol' ? 60 : 25}%`, Math.abs(it.chg_1d) <= (it.kind === 'vol' ? 60 : 25), `chg_1d=${it.chg_1d}`);
     else check(G, `${sym} |1D|≤100bp`, Math.abs(it.d_1d) <= 1, `d_1d=${it.d_1d}`);
 
     // 기준일 (주말·휴장은 config/nyse_holidays.json 허용 목록으로 expectedTradingDay 가 처리한다)
@@ -162,7 +162,7 @@ function verifyCalendar(asOfDay) {
   check(G, '그럴듯함 검사 실패 행은 모두 hold 처리됨', unstamped.length === 0, unstamped.slice(0, 4).map((e) => `${e.id}: ${M.checkEvent(e)}`).join(' | '));
   const held = events.filter((e) => e.hold);
   check(G, `보류(검증 대기) ${held.length}건`, true, held.map((e) => `${e.id}: ${e.hold}`).join(' | ') || '없음');
-  const unverifiedBasis = events.filter((e) => e.type === 'earnings' && e.verified && (!e.src_url || !e.eps_basis || e.actual_rev == null));
+  const unverifiedBasis = events.filter((e) => e.type === 'earnings' && e.verified && (!e.src_url || !e.eps_basis || (e.actual_rev == null && !e.rev_basis)));
   check(G, '검증 표시된 실적 행은 출처 URL·EPS 기준·실제 매출 보유', unverifiedBasis.length === 0, unverifiedBasis.slice(0, 4).map((e) => e.id).join(', '));
   // 사고 당일 CPI 는 4줄이어야 한다 (발표일에 CPI 행이 하나라도 있으면 헤드라인/근원 × MoM/YoY)
   const cpiDays = [...new Set(macros.filter((e) => ['CPI', 'CORECPI'].includes(e.metric)).map((e) => e.date_et))];

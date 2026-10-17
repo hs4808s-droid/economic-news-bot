@@ -32,7 +32,7 @@ const NUMERIC = [
   { name: '러셀2000', re: /러셀|Russell/i, keys: ['^RUT'], abs: 0.011, rel: 1e-4 },
   { name: 'SOX', re: /\bSOX(?!X|L)|필라델피아 반도체/, keys: ['^SOX'], abs: 0.011, rel: 1e-4 },
   { name: 'VIX', re: /\bVIX\b(?!\s?9D|\s?3M)/, keys: ['^VIX'], abs: 0.06, rel: 0 },
-  { name: '미 10년물', re: /10년물|\b10Y\b(?!\s?-\s?2Y)/, keys: ['^TNX', 'FRED:DGS10'], abs: 0.0061, rel: 0 },
+  { name: '미 10년물', re: /10년물|\b10Y\b(?!\s?-\s?2Y)/, keys: ['FRED:DGS10'], altRe: /Yahoo|장중|\^TNX/, altKeys: ['^TNX'], abs: 0.0061, rel: 0 },
   { name: '미 2년물', re: /(?<![\d-])2년물|(?<!-)\b2Y\b/, keys: ['FRED:DGS2'], abs: 0.0061, rel: 0 },
   { name: '미 30년물', re: /30년물|\b30Y\b/, keys: ['^TYX'], abs: 0.0061, rel: 0 },
 ];
@@ -53,15 +53,21 @@ function checkNumbers(body, data, checks) {
   const cut = body.search(/^##\s+9\./m);
   const lines = (cut >= 0 ? body.slice(0, cut) : body).split('\n').filter((l) => !/1_collect|2_analysis/.test(l));
   for (const spec of NUMERIC) {
-    const vals = spec.keys.map((k) => data.items?.[k]).filter((it) => it && !it.error && typeof it.close === 'number').map((it) => it.close);
-    if (!vals.length) { checks.push({ name: `수치 ${spec.name}`, ok: true, detail: 'JSON 값 null → N/A 허용' }); continue; }
+    const closes = (keys) => keys.map((k) => data.items?.[k]).filter((it) => it && !it.error && typeof it.close === 'number').map((it) => it.close);
+    const vals0 = closes(spec.keys), altVals = spec.altKeys ? closes(spec.altKeys) : [];
+    let vals = vals0;
+    if (!vals0.length) { checks.push({ name: `수치 ${spec.name}`, ok: true, detail: 'JSON 값 null → N/A 허용' }); continue; }
     const tol = (x) => Math.max(spec.abs, Math.abs(x) * spec.rel);
     // 직전 종가·최근 종가를 인용하는 것("직전 7,818.93")은 정상이다: 이 값들과 일치하면 통과시킨다.
-    const history = spec.keys.flatMap((k) => [data.items?.[k]?.prev, ...((data.raw?.[k]?.bars) || []).map((b) => b.close)]).filter((x) => typeof x === 'number');
+    const histOf = (keys) => keys.flatMap((k) => [data.items?.[k]?.prev, ...((data.raw?.[k]?.bars) || []).map((b) => b.close)]).filter((x) => typeof x === 'number');
+    const history0 = histOf(spec.keys), historyAlt = spec.altKeys ? histOf(spec.altKeys) : [];
+    let history = history0;
     const bad = [];
     let seen = 0;
     for (const raw of lines) {
       if (!spec.re.test(raw)) continue;
+      const useAlt = !!(spec.altRe && spec.altRe.test(raw) && altVals.length);
+      vals = useAlt ? altVals : vals0; history = useAlt ? historyAlt : history0;
       const line = raw.replace(/https?:\/\/\S+/g, '');
       for (const n of numbersIn(line)) {
         // 종가를 인용한 숫자만 본다: JSON 값과 5% 이내인데 허용오차를 넘으면 "다른 수치를 쓴 것"
@@ -103,6 +109,80 @@ function checkCalendar(md, cal, checks) {
     for (const m of body.matchAll(re)) { n++; if (Math.abs(Number(m[1]) - e.actual) > 0.05) bad.push(`${e.metric} ${e.measure}: 본문 ${m[1]}% ≠ 원장 ${e.actual}%`); }
   }
   checks.push({ name: '본문 CPI 수치 = 원장(FRED 코드 수집)', ok: bad.length === 0, detail: bad.length ? bad.slice(0, 3).join(' ; ') : `인용 ${n}건 일치` });
+}
+
+// ⑧ 실적 본문 ↔ 원장 (A2): 본문의 종목별 EPS·발표일은 calendar.json 과 같아야 한다. 보류 종목은 숫자를 쓰면 안 된다.
+const bodyOnly = (md) => md.replace(/\n### 정정 기록[\s\S]*$/, '\n').replace(/<!-- CALENDAR -->[\s\S]*?<!-- \/CALENDAR -->/g, '').replace(/<!-- DASHBOARD -->[\s\S]*?<!-- \/DASHBOARD -->/g, '').replace(/https?:\/\/\S+/g, ' ');
+const SHORT_TICKERS = new Set(['T', 'V', 'MA', 'PM', 'GE', 'BA', 'ON', 'EL', 'MU', 'DE', 'CB', 'NOW', 'HD', 'BP', 'SU', 'SO']);
+
+function checkEarningsBody(md, cal, checks) {
+  if (!cal?.events) return;
+  const body = bodyOnly(md);
+  const ev = cal.events.filter((e) => e.type === 'earnings' && e.ticker);
+  const byT = new Map();
+  for (const e of ev) (byT.get(e.ticker) || byT.set(e.ticker, []).get(e.ticker)).push(e);
+  const mentions = (line) => [...byT.keys()].filter((t) => new RegExp(String.raw`(?<![A-Za-z0-9가-힣_.])${t}${SHORT_TICKERS.has(t) ? String.raw`\(` : String.raw`(?![A-Za-z0-9_])`}`).test(line));
+  const bad = [];
+  let n = 0;
+  for (const line of body.split('\n')) {
+    if (!/실적|EPS|컨센서스|어닝|발표/.test(line)) continue;
+    const ts = mentions(line);
+    if (ts.length !== 1) continue; // 한 줄에 여러 종목이면 어느 숫자가 누구 것인지 모호 — 검사하지 않는다
+    const rows = byT.get(ts[0]);
+    const held = rows.some((e) => e.hold);
+    const nums = [...line.matchAll(/(?:EPS|주당순이익|컨센서스|예상)[^\d\n$]{0,14}\$?(-?\d+\.\d{2})(?!\d)/g)].map((m) => Number(m[1]));
+    for (const v of nums) {
+      n++;
+      if (held) { bad.push(`${ts[0]}: 검증 대기 종목인데 EPS ${v} 인용`); continue; }
+      const ok = rows.some((e) => [e.cons_eps, e.prior_eps, e.actual_eps].some((x) => typeof x === 'number' && Math.abs(Math.abs(x) - Math.abs(v)) < 0.006));
+      if (!ok) bad.push(`${ts[0]}: 본문 EPS ${v} ≠ 원장 예상 ${rows.map((e) => e.cons_eps).join('/')}`);
+    }
+    const dates = [...line.matchAll(/(?:2026-(\d{2})-(\d{2}))|(?<![\d/.])(\d{1,2})\/(\d{1,2})(?![\d/])/g)].map((m) => (m[1] ? `2026-${m[1]}-${m[2]}` : `2026-${String(m[3]).padStart(2, '0')}-${String(m[4]).padStart(2, '0')}`));
+    if (dates.length && /실적|발표|컨콜/.test(line)) {
+      n++;
+      const okDates = new Set(rows.flatMap((e) => [e.date_et, ...(e.date_alt || [])]));
+      const tbd = rows.some((e) => e.date_tbd);
+      if (!dates.some((d) => okDates.has(d))) bad.push(`${ts[0]}: 본문 날짜 ${dates.join(',')} ≠ 원장 ${[...okDates].join(',')}`);
+      else if (tbd && /확정/.test(line) && !/미확정/.test(line)) bad.push(`${ts[0]}: 날짜 미확정인데 "확정"으로 서술`);
+    }
+  }
+  checks.push({ name: '본문 실적 EPS·날짜 = 원장', ok: bad.length === 0, detail: bad.length ? `${bad.length}건: ${bad.slice(0, 3).join(' ; ')}` : `인용 ${n}건 일치` });
+}
+
+// ⑨ 예상값이 없는 지표에 "예상 상회/하회/서프라이즈" 표현 금지 (A3)
+const METRIC_ALIAS = { CPI: /CPI/, CORECPI: /CPI/, PCE: /PCE/, COREPCE: /PCE/, PPI: /PPI|생산자물가/, RETAIL: /소매\s?판매/, NFP: /NFP|비농업/, UNEMP: /실업률/, CLAIMS: /실업수당|신규\s?청구/, GDP: /GDP/, ISM: /ISM/, JOLTS: /JOLTS|구인/ };
+const SURPRISE_RE = /서프라이즈|예상(?:치|값)?\s?(?:을|를|보다|대비|에)?\s?(?:상회|하회|웃돌|밑돌|부합|못\s?미치|넘어)|컨센서스\s?(?:를|을|보다|대비)?\s?(?:상회|하회|웃돌|밑돌|부합)|(?:상회|하회|부합)했|예상보다|예상\s?대비/;
+function noConsensusMetrics(cal, usDate) {
+  const from = C.addDays(usDate, -3), to = C.addDays(usDate, 14);
+  const byM = new Map();
+  for (const e of cal.events) if (e.type === 'macro' && e.metric && e.date_et >= from && e.date_et <= to && e.importance >= 2) (byM.get(e.metric) || byM.set(e.metric, []).get(e.metric)).push(e);
+  return [...byM].filter(([, rows]) => rows.every((e) => e.consensus == null || e.hold)).map(([m]) => m);
+}
+function checkNoConsensusWords(md, cal, usDate, checks) {
+  if (!cal?.events || !usDate) return;
+  const body = bodyOnly(md);
+  const metrics = noConsensusMetrics(cal, usDate);
+  const bad = [];
+  for (const line of body.split('\n')) {
+    if (!SURPRISE_RE.test(line)) continue;
+    for (const m of metrics) {
+      const a = METRIC_ALIAS[m];
+      if (!a) continue;
+      // 지표명 뒤 40자 안에 서프라이즈 표현이 있고, 같은 구간에 다른 (예상값이 있는) 지표명이 끼어 있지 않을 때
+      const re = new RegExp(`(${a.source})[^\\n]{0,40}?(${SURPRISE_RE.source})`);
+      const mm = re.exec(line);
+      if (mm && !/\bvs\b/.test(mm[0])) bad.push(`${m}: "${mm[0].slice(0, 40)}"`);
+    }
+  }
+  checks.push({ name: '예상값 없는 지표에 상회/하회 표현 금지', ok: bad.length === 0, detail: bad.length ? `${bad.length}건: ${bad.slice(0, 3).join(' ; ')}` : `대상 지표 ${metrics.length}개(${metrics.join(',') || '없음'}) 위반 없음` });
+}
+
+// 독자 화면에 나오면 안 되는 내부 메모 (build_site 가 숨긴다)
+const MEMO_RE = /\[P[1-4]\]|Yahoo chart API[^\n|]{0,6}자동\s?수집|facts\.json\s?이월(?:값)?|logs\s?폴더|\b0_data\.(?:md|json)\b|\b1_collect\b|\b2_analysis\b/g;
+function internalMemos(body) {
+  const out = [];
+  for (const m of bodyOnly(body).matchAll(MEMO_RE)) out.push(m[0]);
+  return out;
 }
 
 function validate(md, data, tickers, cal) {
@@ -150,6 +230,10 @@ function validate(md, data, tickers, cal) {
   else warnings.push('0_data.json 이 없어 수치 대조를 건너뜀');
 
   checkCalendar(md, cal, checks);
+  checkEarningsBody(body, cal, checks);
+  checkNoConsensusWords(body, cal, data?.us_date, checks);
+  const memos = internalMemos(body);
+  if (memos.length) warnings.push(`독자 화면에서 숨겨질 내부 메모 ${memos.length}건: ${memos.slice(0, 4).join(' / ')}`);
 
   // ⑥ 기준일
   const hd = /기준일[^\d\n]{0,30}(\d{4}-\d{2}-\d{2})/.exec(body);
@@ -189,7 +273,7 @@ function selftest() {
     '## 0. 헤드라인', '**금리 부담에 기술주 조정**', '- 요약', '태그: #금리', '### 오늘의 핵심 TOP', '1. NVDA(엔비디아·반도체) 약세 — ↓ · ★★★★☆ · AI영향 부정 · 확신 중간', '',
     '## 1. 대시보드', '<!-- DASHBOARD -->', '| S&P500 | 9,999.99 |', '<!-- /DASHBOARD -->', 'S&P500은 7,801.77로 마감, VIX 15.08.', '',
     '## 2. 어제 대비 변화', '변화 없음', '## 3. 섹터 카드', '#### 기술 (XLK)', '- 주목 종목: MU(마이크론·반도체), NVDA',
-    '## 4. 연준·금리', '미 10년물 5.277%, 2년물 4.79%, 30년물 5.661%', '## 5. AI 밸류체인', '해당 없음', '## 6. 수급·포지셔닝·내부자', 'JPM(JP모건·금융) 내부자 매도', '## 7. 향후 2주 일정', '<!-- CALENDAR -->', '| x |', '<!-- /CALENDAR -->', '## 8. 종합·시나리오', '종합', '## 9. 확인 필요', '해당 없음', '',
+    '## 4. 연준·금리', '미 10년물 5.27%, 2년물 4.79%, 30년물 5.661%', '## 5. AI 밸류체인', '해당 없음', '## 6. 수급·포지셔닝·내부자', 'JPM(JP모건·금융) 내부자 매도', '## 7. 향후 2주 일정', '<!-- CALENDAR -->', '| x |', '<!-- /CALENDAR -->', '## 8. 종합·시나리오', '종합', '## 9. 확인 필요', '해당 없음', '',
   ].join('\n');
   const r0 = validate(good, data, tickers);
   assert(r0.ok, `정상 리포트가 실패: ${JSON.stringify(r0.checks.filter((c) => !c.ok))}`);
@@ -198,7 +282,7 @@ function selftest() {
   const r1 = validate(good.replace('## 6. 수급·포지셔닝·내부자\nJPM(JP모건·금융) 내부자 매도\n', ''), data, tickers);
   assert(!r1.ok && r1.checks.find((c) => c.name === '필수 섹션 10개' && !c.ok), '섹션 누락을 못 잡음');
   // 망가뜨린 2: 숫자 불일치 (S&P 7,801.77 → 7,780.10, 10년물 5.277 → 5.365)
-  const r2 = validate(good.replace('7,801.77', '7,780.10').replace('5.277%', '5.365%'), data, tickers);
+  const r2 = validate(good.replace('7,801.77', '7,780.10').replace('5.27%', '5.365%'), data, tickers);
   const f2 = r2.checks.filter((c) => !c.ok).map((c) => c.name);
   assert(f2.some((n) => n.includes('S&P500')) && f2.some((n) => n.includes('10년물')), `숫자 불일치를 못 잡음: ${f2}`);
   // 망가뜨린 2-b: JSON 에 값이 있는데 N/A
@@ -231,6 +315,26 @@ function selftest() {
   assert(run('Core CPI MoM +2.6%').some((c) => !c.ok && c.name.includes('CPI')), '근원 MoM 오인용을 못 잡음');
   assert(run('<!-- CALENDAR -->\n| 2026-10-14 | 08:30 | 잘못된 행 | +0.6% | +3.6% |\n<!-- /CALENDAR -->').some((c) => !c.ok && c.name.includes('보류')), '보류 행 숫자 노출을 못 잡음');
   assert(run('<!-- CALENDAR -->\n| 2026-10-14 | 08:30 | 잘못된 행 | 검증 대기 | 검증 대기 |\n<!-- /CALENDAR -->').every((c) => c.ok), '검증 대기 표기는 통과');
+  // 망가뜨린 5 (A2/A3): 본문 실적 숫자·날짜 ↔ 원장, 예상값 없는 지표의 상회/하회 표현, 내부 메모
+  const cal2 = { events: [
+    { type: 'earnings', ticker: 'TSLA', date_et: '2026-10-21', cons_eps: 0.4459, prior_eps: 0.37, hold: '예상 EPS 출처 간 불일치' },
+    { type: 'earnings', ticker: 'GOOGL', date_et: '2026-10-28', cons_eps: 3.0983, prior_eps: 2.87 },
+    { type: 'earnings', ticker: 'GE', date_et: '2026-10-19', date_alt: ['2026-10-20'], date_tbd: true, cons_eps: 2.02 },
+    { type: 'macro', metric: 'PCE', measure: 'yoy', date_et: '2026-10-29', importance: 3, consensus: null },
+    { type: 'macro', metric: 'CPI', measure: 'yoy', date_et: '2026-10-14', importance: 3, consensus: 3.6 },
+  ] };
+  const eb = (txt) => { const ck = []; checkEarningsBody(txt, cal2, ck); return ck[0]; };
+  assert(!eb('TSLA(테슬라·경기소비재) 실적 10/21 장마감후').ok === false, '날짜만 맞으면 통과');
+  assert(!eb('TSLA 3분기 실적 컨센서스 EPS 0.21달러').ok, '검증 대기 종목 숫자 인용을 못 잡음');
+  assert(eb('GOOGL 실적 10/28, 컨센서스 EPS 3.10달러').ok, '원장 3.0983 ≈ 3.10 은 통과해야 함');
+  assert(!eb('GOOGL 실적 10/27 발표, 컨센서스 EPS 3.10달러').ok, '날짜 불일치를 못 잡음');
+  assert(!eb('GOOGL 실적 컨센서스 EPS 2.94달러').ok, '원장과 다른 EPS 를 못 잡음');
+  assert(!eb('GE(GE에어로스페이스·산업재) 실적 10/20 확정').ok, '날짜 미확정을 확정으로 서술한 것을 못 잡음');
+  const nc = (txt) => { const ck = []; checkNoConsensusWords(txt, cal2, '2026-10-16', ck); return ck[0]; };
+  assert(!nc('9월 PCE 전년비가 예상을 상회했다').ok, '예상값 없는 PCE 에 상회 표현을 못 잡음');
+  assert(nc('9월 CPI 전년비가 예상을 상회했다').ok, '예상값 있는 CPI 는 허용');
+  assert(internalMemos('근거: CBOE(Yahoo chart API 자동수집)[P1], facts.json 이월').length >= 3, '내부 메모 검출');
+  assert(!/\[P1\]|facts\.json|Yahoo chart API/.test(require('../lib/sanitize').readerMd('근거: CBOE(Yahoo chart API 자동수집)[P1], facts.json 이월값 사용')), '독자용 변환이 내부 메모를 못 지움');
   console.log('selftest 통과: 정상 1건 통과 · 섹션 누락/숫자 불일치/미등록 티커(+첫 등장 형식)/N-A 규칙을 각각 정확히 검출 · 배너 멱등');
 }
 
@@ -247,10 +351,11 @@ function main() {
   const res = validate(md, C.readJson(dataFile, null), C.readJson(path.join(C.ROOT, 'docs', 'data', 'tickers.json'), {}), C.readJson(path.join(C.ROOT, 'docs', 'data', 'calendar.json'), null));
   const out = render(date, res);
   if (!val('--file')) fs.writeFileSync(path.join(dir, 'validate.md'), out, 'utf8');
-  if (!args.includes('--no-banner') && !val('--file')) fs.writeFileSync(file, applyBanner(md, res), 'utf8');
+  // 독자 화면에는 검증 경고를 띄우지 않는다(로그 validate.md 에만 남김). 과거에 달린 배너가 있으면 걷어낸다.
+  if (!val('--file') && BANNER_RE.test(md)) fs.writeFileSync(file, md.replace(BANNER_RE, ''), 'utf8');
   console.log(out);
   process.exit(res.ok ? 0 : 1);
 }
 
 if (require.main === module) main();
-module.exports = { validate, applyBanner, render };
+module.exports = { validate, applyBanner, render, checkEarningsBody, checkNoConsensusWords, internalMemos };

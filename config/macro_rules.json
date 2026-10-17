@@ -21,5 +21,5 @@
     "ISM":     { "name": "ISM", "importance": 2, "measures": { "index": { "unit": "index", "seasonal": "sa", "surprise_max": 3, "gap_max": 5, "range": [20, 80] } } },
     "JOLTS":   { "name": "JOLTS", "importance": 2, "measures": { "level": { "unit": "K", "seasonal": "sa", "surprise_max": 600, "gap_max": 1000, "range": [3000, 15000] } } }
   },
-  "earnings": { "surprise_pct_max": 50, "rev_surprise_pct_max": 25 }
+  "earnings": { "surprise_pct_max": 50, "rev_surprise_pct_max": 25, "cons_prior_ratio_max": 3, "cons_alt_pct_max": 20 }
 }

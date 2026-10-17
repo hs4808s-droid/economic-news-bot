@@ -15,7 +15,7 @@ GitHub Pages 홈페이지에 게시 + 이메일로 발송하는 프로젝트.
 | 0 | `fetch_market_data.js` (코드) | `logs/<날짜>/0_data.md`(LLM용) · `0_data.json`(검증·사이트용) · `docs/data/latest.json` — 지수·선물·금리(FRED 2Y 포함)·VIX 구조·매크로·섹터 ETF 15종(1D/5D/1M/YTD·스파크라인)·Put/Call·섹터 뉴스. 종목 목록은 `config/universe.json` |
 | 중복 확인 | `scripts/should_run.js` (코드) | 0_data.json 의 미국 기준일이 직전 리포트와 같으면 1~3단계·메일을 건너뛰고 `logs/<날짜>/skip.md`만 남긴다 (파일명은 계속 KST 작성일) |
 | 1 | `prompts/1_collect.md` (LLM) | `logs/<날짜>/1_collect.md` — 사실만. 0_data.md·`docs/data/facts.json`을 먼저 Read해 그대로 인용. [8]은 코드가 파싱하는 ISO 날짜 표 |
-| 1b | `scripts/update_calendar.js` · `update_facts.js` · `build_tickers.js` (코드) | `docs/data/calendar.json`(2주 일정 원장, 누적) · `facts.json`(CAPEX·FedWatch) · `tickers.json`(티커 마스터) |
+| 1b | `scripts/update_calendar.js` · `calendar_facts.js` · `update_facts.js` · `build_tickers.js` (코드) | `docs/data/calendar.json`(2주 일정 원장, 누적) · `logs/<날짜>/calendar_facts.md`(2·3단계 인용용) · `facts.json`(CAPEX·FedWatch) · `tickers.json`(티커 마스터) |
 | 2 | `prompts/2_analyze.md` (LLM) | `logs/<날짜>/2_analysis.md` — ★ 등급·해석·섹터 카드·전일 판단 점검 (파일명 `analysis`) |
 | 3 | `prompts/3_report.md` (LLM) | `logs/<날짜>/3_report.md` — `## 0.`~`## 9.` 고정 구조. 숫자 표 자리는 `<!-- DASHBOARD -->`·`<!-- CALENDAR -->` 마커 |
 | 3b | `inject_dashboard.js` (코드) | 마커 자리에 0_data.json·calendar.json 기반 표 삽입 (메일·사이트가 같은 숫자를 받는다) |
@@ -39,6 +39,16 @@ GitHub Pages 홈페이지에 게시 + 이메일로 발송하는 프로젝트.
 - **그럴듯함 검사(코드)와 비노출:** `lib/macro.js checkEvent`가 모든 원장 행을 검사한다(지표별 서프라이즈·직전값 이탈·범위 한도는 `config/macro_rules.json`; 실적은 서프라이즈 ±50%·EPS 기준(조정/GAAP) 불일치·매출 ±25%). 실패 행은 원장에 `hold`가 찍히고 사이트·리포트·메일에서 숫자 대신 `검증 대기`로 나온다. 실패해도 파이프라인은 계속된다.
 - **실적:** 행마다 `eps_basis`(adjusted|gaap)와 출처(`src_url` 또는 "공급자(미검증)")를 표시하고, 실제 매출·매출 서프라이즈를 포함한다. 1차 출처(8-K Ex-99.1·IR)로 확인한 값은 `config/earnings_verified.json`이 덮어쓴다. 발표일이 지나면 예상치는 동결한다(발표 후 컨센서스 사후 갱신 방지).
 - **검증 범위:** `verify_data.js`는 리포트가 아니라 원장 전체를 매일 검사하고, `validate_report.js`는 본문 CPI 수치를 원장과 대조한다. `npm test`의 회귀 테스트는 사고 케이스(MoM→YoY 칸·헤드라인/근원 혼합·중복·nowcast 출처)를 고정한다.
+
+## 리포트 신뢰도·화면 규칙 (2026-10-17 점검 이후 고정)
+- **마크다운 변환은 `lib/md.js`의 `marked`만 쓴다.** 취소선(`~`)을 끈 인스턴스다 — 범위 표기 `76.5~81센트`가 `76.581센트`로 깨지던 사고 방지. `build_site.js`·`build_email.js`가 직접 `require('marked')` 하지 않는다(회귀 테스트: `build_site.js`·`build_email.js --selftest`).
+- **독자 화면(사이트·메일)은 `lib/sanitize.js readerMd()`를 거친다:** `[P1]`~`[P4]`·"Yahoo chart API 자동수집"·"facts.json 이월값"·"logs 폴더" 같은 내부 메모와 자동 검증 경고 배너를 지운다. 출처 URL은 리포트 맨 아래 "출처" 목록으로 모은다. 원본 `3_report.md`는 감사용으로 그대로 둔다. **자동 검증 경고는 독자 화면에 띄우지 않고 `validate.md`에만 남긴다**(`validate_report.js`는 배너를 달지 않는다).
+- **실적 원장:** 같은 (티커, 분기)는 한 줄(`dedupeEarnings`). 날짜는 `config/earnings_dates.json`(회사 IR 확정)이 우선이고 확정 전 충돌은 `date_tbd`(날짜 미확정) 한 줄. 이미 발표된 종목은 `config/earnings_verified.json`(8-K/6-K/IR URL, 통화 `currency`, 기준 `eps_basis`·`eps_label`)이 덮어쓴다. 공급자 예상치를 못 믿으면 `cons_eps: null`로 비운다.
+- **그럴듯함 검사 추가(`checkEarnings`):** 예상 EPS가 전년 동기의 3배 초과·1/3 미만, 전년 EPS 부호가 SEC XBRL 분기 이력(`lib/sec.js`)과 반대(BA 사례), 출처 간 예상 EPS 20% 초과 불일치(`cons_eps_alt`)면 `hold`(검증 대기). 서프라이즈가 실제 사건이라 한도를 넘는 지표는 BLS 등 1차 출처로 확인한 뒤 `macro_consensus_verified.json`에 `surprise_ok`로만 풀어 준다.
+- **본문 ↔ 원장:** 2·3단계는 `logs/<날짜>/calendar_facts.md`(코드가 `calendar.json`에서 생성, `scripts/calendar_facts.js`)의 숫자·날짜만 인용한다. 이 파일은 "예상값이 없는 지표" 목록을 넘기고, 그 지표에는 "예상 상회/하회/부합/서프라이즈" 표현을 쓰지 못한다. `validate_report.js`가 본문 EPS·발표일(`checkEarningsBody`)과 해당 표현(`checkNoConsensusWords`)을 검사한다.
+- **금리는 한 기준:** 2Y·10Y·10Y-2Y는 FRED 일별(같은 기준일). Yahoo `^TNX`·`^TYX`는 당일 참고용이라 본문에 FRED 값과 섞어 쓰지 않는다(검증기는 `Yahoo/장중` 라벨이 없으면 FRED 값만 허용). 사이트 타일의 10년물도 FRED.
+- **Collect:** 향후 3일 안 ★★ 이상 지표의 컨센서스를 발표 1~3일 전부터 수집한다(`prompts/1_collect.md` [8]).
+- **사이트 구조(`build_site.js` + `docs/assets/site.js`):** 홈 실적 탭 = 날짜·종목·예상·실제·서프라이즈 5열, 관심 종목(`config/watchlist.json`)·시총 4,000억 달러 이상(`featured`, `update_calendar.js markFeatured`)·최근 발표 검증 종목만. 지표·연준 탭 = 기본 ★★★, "전체 보기" 토글, 값 없는 일정은 한 줄 축약. 전체는 `docs/calendar.html`. 히트맵은 선택 기간 수익률 내림차순 5×3 고정 격자. 태그는 `config/tags.json` 고정 어휘·하루 최대 2개(코드가 점수로 계산, LLM 태그 줄은 무시). 정정은 `config/corrections.json` → 해당 리포트에만 7일 배너 + `docs/corrections.html`. 같은 미국 기준일 리포트는 목록에 가장 먼저 게시된 1건만 보이고 나머지 페이지는 삭제하지 않고 대표 리포트 안내를 단다. 미국 기준일이 작성일 이상이면 직전 미국 거래일로 보정한다.
 
 ## 실행 환경
 - GitHub Actions(`.github/workflows/daily.yml`)에서 매 거래일 실행. 로컬 PC 불필요.

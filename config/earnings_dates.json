@@ -1,0 +1,12 @@
+{
+ "_doc": "회사 IR·공식 보도자료로 확정된 실적 발표일. update_calendar 의 dedupeEarnings 가 같은 (티커, 분기)의 다른 날짜 행을 지운다. 확정 전 종목은 날짜가 갈리면 date_tbd(날짜 미확정) 한 줄만 남는다.",
+ "items": [
+  { "ticker": "GE",    "fq": "2026Q3", "date_et": "2026-10-20", "url": "https://www.geaerospace.com/investor-relations/events-reports", "note": "GE Aerospace 3rd Quarter 2026 Earnings Webcast, Oct 20 07:30 ET" },
+  { "ticker": "PM",    "fq": "2026Q3", "date_et": "2026-10-21", "url": "https://www.pmi.com/investor-relations/press-releases-and-events/press-releases-overview/press-release-details?newsId=30436", "note": "PMI 보도자료(2026-10-14): 10/21 07:00 ET 발표, 09:00 ET 웹캐스트" },
+  { "ticker": "TSLA",  "fq": "2026Q3", "date_et": "2026-10-21", "url": "https://ir.tesla.com/press-release/tesla-third-quarter-2026-production-deliveries-and-deployments", "note": "Tesla IR: 2026-10-21(수) 장 마감 후" },
+  { "ticker": "GOOGL", "fq": "2026Q3", "date_et": "2026-10-28", "url": "https://abc.xyz/investor/news/news-details/2026/Alphabet-Announces-Date-of-Third-Quarter-2026-Financial-Results-Conference-Call-2026-8tpGZsLS6v/default.aspx", "note": "Alphabet IR(2026-10-06): 10/28 컨퍼런스콜 16:30 ET" },
+  { "ticker": "MA",    "fq": "2026Q3", "date_et": "2026-10-29", "url": "https://investor.mastercard.com/investor-news/investor-news-details/2026/Mastercard-Incorporated-to-Host-Conference-Call-on-Third-Quarter-2026-Financial-Results/default.aspx", "note": "Mastercard IR(2026-10-08): 10/29 발표" },
+  { "ticker": "XOM",   "fq": "2026Q3", "date_et": "2026-10-30", "url": "https://investor.exxonmobil.com/", "note": "ExxonMobil IR: 3Q 2026 Earnings Call Oct 30 08:30 CT" },
+  { "ticker": "PGR",   "fq": "2026Q3", "date_et": "2026-10-14", "url": "https://investors.progressive.com/financials/financial-news-releases/news-details/2026/Progressive-Reports-September-2026-Results/default.aspx", "note": "Progressive 9월·3분기 결과 2026-10-14 발표 완료. 10/21 행은 중복" }
+ ]
+}
