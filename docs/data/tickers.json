@@ -267,6 +267,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "CLF": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "CLS": {
     "name_ko": "셀레스티카",
     "sector": "IT하드웨어"
@@ -288,6 +292,10 @@
     "sector": "?"
   },
   "CMS": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "CNN": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -475,6 +483,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "ESUN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "FCC": {
     "name_ko": "?",
     "sector": "?"
@@ -570,6 +582,10 @@
   "GS": {
     "name_ko": "골드만삭스",
     "sector": "금융"
+  },
+  "GSK": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "GSPC": {
     "name_ko": "?",
@@ -835,6 +851,10 @@
     "name_ko": "램리서치",
     "sector": "반도체장비"
   },
+  "LTSB": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "LULU": {
     "name_ko": "룰루레몬",
     "sector": "경기소비재"
@@ -844,6 +864,10 @@
     "sector": "금융"
   },
   "MAN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "MAR": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -910,6 +934,10 @@
   "MSFT": {
     "name_ko": "마이크로소프트",
     "sector": "소프트웨어"
+  },
+  "MTBF": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "MTCH": {
     "name_ko": "?",
@@ -1007,6 +1035,14 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "OKX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "OLED": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "ON": {
     "name_ko": "온세미",
     "sector": "반도체"
@@ -1062,6 +1098,10 @@
   "PGR": {
     "name_ko": "프로그레시브",
     "sector": "금융"
+  },
+  "PH": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "PINS": {
     "name_ko": "?",
@@ -1176,6 +1216,10 @@
     "sector": "금융"
   },
   "SCKT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SENKO": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1387,6 +1431,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "UK": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "UNH": {
     "name_ko": "유나이티드헬스",
     "sector": "헬스케어"
@@ -1438,6 +1486,10 @@
   "VRT": {
     "name_ko": "버티브",
     "sector": "전기장비"
+  },
+  "VRTX": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "VYLR": {
     "name_ko": "?",

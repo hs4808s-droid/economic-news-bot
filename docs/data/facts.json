@@ -1,10 +1,10 @@
 {
   "facts": {
     "fedwatch": {
-      "value": "동결(hold) 약 87.3%, 25bp 인상 약 12.7%, 인하 확률은 가격에 반영되지 않음 (10/16 기준)",
+      "value": "[2] CME FedWatch(10/28 FOMC): 동결 약 87.3% / 25bp 인상 약 12.7%(최종확인 10/17 이월) · CME FedWatch [P1]",
       "source": "CME FedWatch",
-      "last_verified": "2026-10-17"
+      "last_verified": "2026-10-20"
     }
   },
-  "updated_at": "2026-10-16T21:37:39.270Z"
+  "updated_at": "2026-10-19T21:40:45.038Z"
 }
