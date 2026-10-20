@@ -71,6 +71,10 @@
     "name_ko": "AMD",
     "sector": "반도체"
   },
+  "AMGN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "AML": {
     "name_ko": "?",
     "sector": "?"
@@ -168,6 +172,10 @@
     "sector": "금융"
   },
   "BFLY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "BKNG": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -484,6 +492,10 @@
     "sector": "?"
   },
   "ESUN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ETN": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -899,6 +911,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "MMM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "MNDY": {
     "name_ko": "?",
     "sector": "?"
@@ -906,6 +922,10 @@
   "MO": {
     "name_ko": "알트리아",
     "sector": "필수소비재"
+  },
+  "MPC": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "MRK": {
     "name_ko": "머크",
@@ -1091,6 +1111,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "PFE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "PG": {
     "name_ko": "P&G",
     "sector": "필수소비재"
@@ -1228,6 +1252,10 @@
     "sector": "에너지"
   },
   "SHOE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SHOP": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1420,6 +1448,10 @@
     "sector": "반도체"
   },
   "UAE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "UAL": {
     "name_ko": "?",
     "sector": "?"
   },
