@@ -239,6 +239,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "CAPE": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "CASY": {
     "name_ko": "?",
     "sector": "?"
@@ -487,6 +491,10 @@
     "name_ko": "에퀴닉스",
     "sector": "데이터센터"
   },
+  "EQNR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "ERIC": {
     "name_ko": "?",
     "sector": "?"
@@ -600,6 +608,10 @@
     "sector": "?"
   },
   "GSPC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "GTC": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -871,6 +883,10 @@
     "name_ko": "룰루레몬",
     "sector": "경기소비재"
   },
+  "LUV": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "MA": {
     "name_ko": "마스터카드",
     "sector": "금융"
@@ -892,6 +908,10 @@
     "sector": "경기소비재"
   },
   "MCHP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "MCK": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1038,6 +1058,10 @@
   "NVDA": {
     "name_ko": "엔비디아",
     "sector": "반도체"
+  },
+  "NVO": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "NVS": {
     "name_ko": "노바티스",
@@ -1223,6 +1247,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "SAN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "SAP": {
     "name_ko": "SAP",
     "sector": "소프트웨어"
@@ -1263,6 +1291,10 @@
     "name_ko": "셔윈윌리엄스",
     "sector": "소재"
   },
+  "SI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "SKHY": {
     "name_ko": "?",
     "sector": "?"
@@ -1302,6 +1334,10 @@
   "SNPS": {
     "name_ko": "시높시스",
     "sector": "소프트웨어"
+  },
+  "SNY": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "SOXL": {
     "name_ko": "반도체 3배 레버리지 ETF",
@@ -1399,6 +1435,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "TM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "TMC": {
     "name_ko": "?",
     "sector": "?"
@@ -1452,6 +1492,10 @@
     "sector": "?"
   },
   "UAL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "UBER": {
     "name_ko": "?",
     "sector": "?"
   },
