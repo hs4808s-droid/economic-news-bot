@@ -311,6 +311,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "CNQ": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "CNXC": {
     "name_ko": "?",
     "sector": "?"
@@ -326,6 +330,10 @@
   "COIN": {
     "name_ko": "코인베이스",
     "sector": "금융"
+  },
+  "COP": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "COPPA": {
     "name_ko": "?",
@@ -504,6 +512,10 @@
     "sector": "?"
   },
   "ETN": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "FBA": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -939,6 +951,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "MNST": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "MO": {
     "name_ko": "알트리아",
     "sector": "필수소비재"
@@ -992,6 +1008,10 @@
     "sector": "반도체"
   },
   "MW": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "NBC": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1339,6 +1359,14 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "SO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SONY": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "SOXL": {
     "name_ko": "반도체 3배 레버리지 ETF",
     "sector": "ETF"
@@ -1451,6 +1479,10 @@
     "name_ko": "T-모바일",
     "sector": "커뮤니케이션"
   },
+  "TSEM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "TSLA": {
     "name_ko": "테슬라",
     "sector": "경기소비재"
@@ -1520,6 +1552,10 @@
     "sector": "산업재"
   },
   "URL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "US": {
     "name_ko": "?",
     "sector": "?"
   },
