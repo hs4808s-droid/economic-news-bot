@@ -1,9 +1,9 @@
 {
   "facts": {
     "fedwatch": {
-      "value": "[2] CME FedWatch 라이브 수치 재확인 안 됨 — facts.json 직전값(동결 84~88%) 이월(최종확인 10/22) [이월]",
+      "value": "[2] CME FedWatch 공식 수치 재확인 안 됨, 2차 매체 84~92%로 상충 — facts.json 직전값(동결 84~88%) 이월(최종확인 10/22) [이월]",
       "source": "CME FedWatch",
-      "last_verified": "2026-10-23"
+      "last_verified": "2026-10-24"
     },
     "capex_microsoft": {
       "value": "2026년 캘린더 연도 캡엑스 가이던스 약 1,750억달러(4월 최초 전망 1,900억달러에서 하향, 데이터센터·건물 예상 사용연수 변경 반영분 포함). FY2027(2026.7~) 1분기 캡엑스는 500억달러 초과 전망",
@@ -24,11 +24,11 @@
       "last_verified": "2026-10-21"
     },
     "capex_meta": {
-      "value": "3Q26 캡엑스 349억달러 집행. FY2026 연간 캡엑스 가이던스를 1,350억~1,450억달러로 상향(기존 1,300억~1,450억달러, 하단 50억달러 상향). 캡엑스가 분기 영업현금흐름(328억달러)을 처음으로 초과, FCF -21.2억달러. CFO Susan Li는 실적콜에서 \"현재로서는 2027년 캡엑스에 대한 구체적 전망을 제시하지 않는다\"고 언급",
-      "source": "Meta 8-K Exhibit 99.1(SEC) [P1], Bloomberg · \"Meta Raises Capex Guidance as Its AI Bet Pays Off\" [P2]",
+      "value": "3Q26 캡엑스 349억달러 집행. FY2026 연간 캡엑스 가이던스 1,350억~1,450억달러로 상향(기존 1,300억~1,450억달러, 하단 50억달러 상향). CFO Susan Li는 2027년 캡엑스에 대한 구체적 전망은 아직 제시하지 않는다고 언급(10/21 실적콜, 기보도)",
+      "source": "Meta 8-K Exhibit 99.1(SEC) [P1]",
       "source_date": "2026-10-21",
-      "last_verified": "2026-10-23"
+      "last_verified": "2026-10-24"
     }
   },
-  "updated_at": "2026-10-22T21:42:44.226Z"
+  "updated_at": "2026-10-23T21:44:52.546Z"
 }

@@ -79,6 +79,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "AMT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "AMZN": {
     "name_ko": "아마존",
     "sector": "경기소비재"
@@ -132,6 +136,10 @@
     "sector": "?"
   },
   "ATM": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "AU": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -254,6 +262,10 @@
   "CB": {
     "name_ko": "처브",
     "sector": "금융"
+  },
+  "CCI": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "CCL": {
     "name_ko": "카니발",
@@ -427,6 +439,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "DECK": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "DELL": {
     "name_ko": "델",
     "sector": "IT하드웨어"
@@ -459,11 +475,19 @@
     "name_ko": "디지털리얼티",
     "sector": "부동산"
   },
+  "DOL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "DRI": {
     "name_ko": "?",
     "sector": "?"
   },
   "DSX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "DTCC": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -488,6 +512,10 @@
     "sector": "필수소비재"
   },
   "EMIB": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "ENB": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -679,6 +707,10 @@
     "name_ko": "HSBC",
     "sector": "금융"
   },
+  "HTH": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "HUBS": {
     "name_ko": "?",
     "sector": "?"
@@ -714,6 +746,10 @@
   "IGV": {
     "name_ko": "소프트웨어 ETF",
     "sector": "ETF"
+  },
+  "IGX": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "IIF": {
     "name_ko": "?",
@@ -764,6 +800,10 @@
     "sector": "?"
   },
   "ITUB": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "IVV": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1067,6 +1107,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "NTT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "NUE": {
     "name_ko": "뉴코어",
     "sector": "소재"
@@ -1235,6 +1279,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "RNG": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "ROG": {
     "name_ko": "?",
     "sector": "?"
@@ -1274,6 +1322,14 @@
   "SAP": {
     "name_ko": "SAP",
     "sector": "소프트웨어"
+  },
+  "SBA": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SBAC": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "SBUX": {
     "name_ko": "스타벅스",
@@ -1383,6 +1439,10 @@
     "name_ko": "S&P글로벌",
     "sector": "금융"
   },
+  "SPIL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "SPOT": {
     "name_ko": "스포티파이",
     "sector": "커뮤니케이션"
@@ -1460,6 +1520,10 @@
     "sector": "반도체장비"
   },
   "TJX": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "TLC": {
     "name_ko": "?",
     "sector": "?"
   },
