@@ -91,6 +91,10 @@
     "name_ko": "아리스타네트웍스",
     "sector": "네트워크장비"
   },
+  "ANT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "APH": {
     "name_ko": "암페놀",
     "sector": "IT하드웨어"
@@ -531,6 +535,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "EQT": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "ERIC": {
     "name_ko": "?",
     "sector": "?"
@@ -562,6 +570,10 @@
   "FDX": {
     "name_ko": "페덱스",
     "sector": "산업재"
+  },
+  "FFO": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "FICO": {
     "name_ko": "?",
@@ -820,6 +832,10 @@
     "sector": "?"
   },
   "JBL": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "JBLU": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1095,6 +1111,10 @@
     "name_ko": "나이키",
     "sector": "경기소비재"
   },
+  "NOI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "NOW": {
     "name_ko": "서비스나우",
     "sector": "소프트웨어"
@@ -1247,6 +1267,10 @@
     "name_ko": "PNC",
     "sector": "금융"
   },
+  "PR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "PRGS": {
     "name_ko": "?",
     "sector": "?"
@@ -1288,6 +1312,10 @@
     "sector": "?"
   },
   "ROIV": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "RRC": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1762,6 +1790,10 @@
   "XLY": {
     "name_ko": "경기소비재 섹터 ETF",
     "sector": "ETF"
+  },
+  "XNCR": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "XOM": {
     "name_ko": "엑슨모빌",
