@@ -399,6 +399,10 @@
     "name_ko": "시스코",
     "sector": "네트워크장비"
   },
+  "CSGP": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "CT": {
     "name_ko": "?",
     "sector": "?"
@@ -523,6 +527,10 @@
     "name_ko": "?",
     "sector": "?"
   },
+  "ENPH": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "EOSE": {
     "name_ko": "?",
     "sector": "?"
@@ -598,6 +606,10 @@
   "FTNT": {
     "name_ko": "포티넷",
     "sector": "소프트웨어"
+  },
+  "FX": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "GB": {
     "name_ko": "?",
@@ -1151,6 +1163,10 @@
     "name_ko": "노바티스",
     "sector": "헬스케어"
   },
+  "NXPI": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "NYB": {
     "name_ko": "?",
     "sector": "?"
@@ -1200,6 +1216,14 @@
     "sector": "소프트웨어"
   },
   "PAYC": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PBR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "PBR.A": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1267,6 +1291,10 @@
     "name_ko": "PNC",
     "sector": "금융"
   },
+  "PNR": {
+    "name_ko": "?",
+    "sector": "?"
+  },
   "PR": {
     "name_ko": "?",
     "sector": "?"
@@ -1294,6 +1322,10 @@
   "QQQM": {
     "name_ko": "나스닥100 ETF(소액)",
     "sector": "ETF"
+  },
+  "RCL": {
+    "name_ko": "?",
+    "sector": "?"
   },
   "RDIMM": {
     "name_ko": "?",
@@ -1444,6 +1476,10 @@
     "sector": "?"
   },
   "SO": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "SOFI": {
     "name_ko": "?",
     "sector": "?"
   },
@@ -1808,6 +1844,10 @@
     "sector": "?"
   },
   "XRPNW": {
+    "name_ko": "?",
+    "sector": "?"
+  },
+  "XYL": {
     "name_ko": "?",
     "sector": "?"
   },

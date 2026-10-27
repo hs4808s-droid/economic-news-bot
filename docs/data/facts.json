@@ -1,9 +1,9 @@
 {
   "facts": {
     "fedwatch": {
-      "value": "[2] CME FedWatch(2차 인용, 10/25 기준) 동결 확률 약 89.7~90.6%, 25bp 인상 확률 약 9.3~10.3% — 1차 페이지 직접 확인 못함 · Yahoo Finance/CNBC 종합 [P2]",
+      "value": "[2] CME FedWatch(2차 인용) 10/27 장중 동결 확률 88.4~90.6% 범위로 보도(단일 확정값 아님) · Bloomingbit 등 종합 [P2]",
       "source": "CME FedWatch",
-      "last_verified": "2026-10-27"
+      "last_verified": "2026-10-28"
     },
     "capex_microsoft": {
       "value": "2026년 캘린더 연도 캡엑스 가이던스 약 1,750억달러(4월 최초 전망 1,900억달러에서 하향, 데이터센터·건물 예상 사용연수 변경 반영분 포함). FY2027(2026.7~) 1분기 캡엑스는 500억달러 초과 전망",
@@ -30,5 +30,5 @@
       "last_verified": "2026-10-24"
     }
   },
-  "updated_at": "2026-10-26T21:38:49.798Z"
+  "updated_at": "2026-10-27T21:42:39.972Z"
 }
