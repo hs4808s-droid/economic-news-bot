@@ -1,9 +1,9 @@
 {
   "facts": {
     "fedwatch": {
-      "value": "[2] CME FedWatch(2차 인용) 10/27 장중 동결 확률 88.4~90.6% 범위로 보도(단일 확정값 아님) · Bloomingbit 등 종합 [P2]",
+      "value": "89.7~90.6% 범위로 보도(CME FedWatch 집계 인용, 단일 확정값 아님)",
       "source": "CME FedWatch",
-      "last_verified": "2026-10-28"
+      "last_verified": "2026-10-29"
     },
     "capex_microsoft": {
       "value": "2026년 캘린더 연도 캡엑스 가이던스 약 1,750억달러(4월 최초 전망 1,900억달러에서 하향, 데이터센터·건물 예상 사용연수 변경 반영분 포함). FY2027(2026.7~) 1분기 캡엑스는 500억달러 초과 전망",
@@ -18,10 +18,10 @@
       "last_verified": "2026-10-21"
     },
     "capex_alphabet": {
-      "value": "2026년 연간 캡엑스 가이던스 1,950~2,050억달러로 2차 상향(최초 1,800~1,900억달러). 최근 분기 캡엑스 448억달러(전년동기 대비 약 2배)",
-      "source": "복수 매체 [P3] — 신규 변동 없음, 직전 가이던스 유지(최종확인 10/20)",
-      "source_date": "2026-10-20",
-      "last_verified": "2026-10-21"
+      "value": "Google Cloud 매출 307억달러(+103% YoY). 실적콜에서 TPU 수요(\"광범위한 고객군에서 강한 수요\")를 언급. 2026-10-28 Oracle Cloud를 통해 2027년부터 TPU를 외부에 최초로 제공한다고 발표(Anthropic 기존 최대 100만개 TPU 계약 보유, OpenAI도 TPU 구매 계획 언급). GB200·Blackwell(Nvidia 세대명) 관련 언급은 이번 콜에서 확인되지 않음",
+      "source": "Google corporate blog(blog.google) [P1]; CNBC \"Google alters its cloud playbook, enlisting partners to sell more AI chips\" 2026-10-28 [P2]",
+      "source_date": "2026-10-28",
+      "last_verified": "2026-10-29"
     },
     "capex_meta": {
       "value": "3Q26 캡엑스 349억달러 집행. FY2026 연간 캡엑스 가이던스 1,350억~1,450억달러로 상향(기존 1,300억~1,450억달러, 하단 50억달러 상향). CFO Susan Li는 2027년 캡엑스에 대한 구체적 전망은 아직 제시하지 않는다고 언급(10/21 실적콜, 기보도)",
@@ -30,5 +30,5 @@
       "last_verified": "2026-10-24"
     }
   },
-  "updated_at": "2026-10-27T21:42:39.972Z"
+  "updated_at": "2026-10-28T21:49:52.668Z"
 }
