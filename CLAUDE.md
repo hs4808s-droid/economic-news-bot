@@ -47,7 +47,9 @@ GitHub Pages 홈페이지에 게시 + 이메일로 발송하는 프로젝트.
 - **그럴듯함 검사 추가(`checkEarnings`):** 예상 EPS가 전년 동기의 3배 초과·1/3 미만, 전년 EPS 부호가 SEC XBRL 분기 이력(`lib/sec.js`)과 반대(BA 사례), 출처 간 예상 EPS 20% 초과 불일치(`cons_eps_alt`)면 `hold`(검증 대기). 서프라이즈가 실제 사건이라 한도를 넘는 지표는 BLS 등 1차 출처로 확인한 뒤 `macro_consensus_verified.json`에 `surprise_ok`로만 풀어 준다.
 - **본문 ↔ 원장:** 2·3단계는 `logs/<날짜>/calendar_facts.md`(코드가 `calendar.json`에서 생성, `scripts/calendar_facts.js`)의 숫자·날짜만 인용한다. 이 파일은 "예상값이 없는 지표" 목록을 넘기고, 그 지표에는 "예상 상회/하회/부합/서프라이즈" 표현을 쓰지 못한다. `validate_report.js`가 본문 EPS·발표일(`checkEarningsBody`)과 해당 표현(`checkNoConsensusWords`)을 검사한다.
 - **금리는 한 기준:** 2Y·10Y·10Y-2Y는 FRED 일별(같은 기준일). Yahoo `^TNX`·`^TYX`는 당일 참고용이라 본문에 FRED 값과 섞어 쓰지 않는다(검증기는 `Yahoo/장중` 라벨이 없으면 FRED 값만 허용). 사이트 타일의 10년물도 FRED.
-- **Collect:** 향후 3일 안 ★★ 이상 지표의 컨센서스를 발표 1~3일 전부터 수집한다(`prompts/1_collect.md` [8]).
+- **Collect(2026-10-29 변경):** 토큰 절약을 위해 예상값(컨센서스)·직전값은 검색하지 않는다. [8]은 일자별 일정만 적고 해당 칸은 `N/A`. 발표값·직전값은 코드가 FRED에서 채운다. 따라서 예상값 없는 지표에는 '예상 상회/하회' 표현이 금지된다(기존 검증기 규칙 그대로).
+- **LLM 입력 규칙(2026-10-29):** 2·3단계는 `docs/data/calendar.json`을 읽지 않는다(117KB). `calendar_facts.md`만 읽는다(지표·실적·연준·기업 이벤트 포함).
+- **모델·사용량:** `run_daily.sh`가 `claude -p --model ${CLAUDE_MODEL:-sonnet} --output-format json`으로 실행한다. 단계별 토큰 사용량은 `logs/<날짜>/*.run.log`(JSON `usage`)에서 본다.
 - **사이트 구조(`build_site.js` + `docs/assets/site.js`):** 홈 실적 탭 = 날짜·종목·예상·실제·서프라이즈 5열, 관심 종목(`config/watchlist.json`)·시총 4,000억 달러 이상(`featured`, `update_calendar.js markFeatured`)·최근 발표 검증 종목만. 지표·연준 탭 = 기본 ★★★, "전체 보기" 토글, 값 없는 일정은 한 줄 축약. 전체는 `docs/calendar.html`. 히트맵은 선택 기간 수익률 내림차순 5×3 고정 격자. 태그는 `config/tags.json` 고정 어휘·하루 최대 2개(코드가 점수로 계산, LLM 태그 줄은 무시). 정정은 `config/corrections.json` → 해당 리포트에만 7일 배너 + `docs/corrections.html`. 같은 미국 기준일 리포트는 목록에 가장 먼저 게시된 1건만 보이고 나머지 페이지는 삭제하지 않고 대표 리포트 안내를 단다. 미국 기준일이 작성일 이상이면 직전 미국 거래일로 보정한다.
 
 ## 실행 환경

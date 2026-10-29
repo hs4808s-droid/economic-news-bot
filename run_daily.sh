@@ -44,6 +44,8 @@ ${EXTRA_CONTEXT:-}
 
 ---
 $(cat "$prompt_file")" \
+    --model "${CLAUDE_MODEL:-sonnet}" \
+    --output-format json \
     --allowedTools "${tools[@]}" \
     > "$out_file" 2> "${out_file%.md}.err.log"
 

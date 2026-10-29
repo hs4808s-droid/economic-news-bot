@@ -44,6 +44,16 @@ function build(cal, usDate) {
     const sur = !h && e.actual_eps != null && e.cons_eps != null ? `${(e.actual_eps - e.cons_eps >= 0 ? '+' : '') + (e.actual_eps - e.cons_eps).toFixed(2)}` : '—';
     L.push(`| ${day(e.date_et)} | ${e.ticker} | ${st} | ${h ? '검증 대기' : eps(e.cons_eps)} | ${h ? '검증 대기' : eps(e.prior_eps)} | ${h ? '검증 대기' : eps(e.actual_eps)} | ${e.eps_label || e.eps_basis || '—'} | ${sur} |`);
   });
+  // 연준·기업 이벤트 — 측정 기준이 없어 위 표에서 빠지는 일정. LLM이 calendar.json 을 읽지 않아도 일정 서술을 할 수 있게 한다.
+  const fed = ev.filter((e) => e.type === 'fed' && !(e.metric && e.measure)).sort((a, b) => a.date_et.localeCompare(b.date_et));
+  const corp = ev.filter((e) => e.type === 'corporate' && !/실적\s*발표|earnings/i.test(e.title)).sort((a, b) => a.date_et.localeCompare(b.date_et));
+  const dedup = (arr) => { const seen = new Set(); return arr.filter((e) => { const k = `${e.date_et}|${e.ticker || ''}|${e.title}`; if (seen.has(k)) return false; seen.add(k); return true; }); };
+  L.push('', '## 연준 일정 (날짜 ET)', '');
+  if (!fed.length) L.push('- 없음');
+  else dedup(fed).forEach((e) => L.push(`- ${day(e.date_et)}${e.time_et ? ' ' + e.time_et : ''} ${e.title}`));
+  L.push('', '## 기업 이벤트 (날짜 ET · 출처 확인분만 원장에 있음)', '');
+  if (!corp.length) L.push('- 없음');
+  else dedup(corp).forEach((e) => L.push(`- ${day(e.date_et)} ${e.ticker ? e.ticker + ' ' : ''}${e.title}`));
   L.push('', '※ "검증 대기" 종목은 숫자를 쓰지 않는다. "날짜 미확정" 종목은 날짜를 단정하지 않는다.');
   return L.join('\n') + '\n';
 }
