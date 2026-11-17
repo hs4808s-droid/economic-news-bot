@@ -136,7 +136,7 @@ function weather(counts, small) {
   const n = counts.good + counts.mid + counts.warn;
   if (!n) return 'none';
   if (small) { // 지표가 몇 개뿐인 묶음
-    if (counts.warn * 2 >= n) return 'rain';
+    if (counts.warn * 2 > n) return 'rain';   // 절반을 넘을 때만 비(딱 절반은 흐림)
     if (counts.warn >= 1) return 'cloudy';
     return counts.good === n ? 'sunny' : 'partly';
   }
@@ -181,8 +181,8 @@ function assemble(cfg, results, extra = {}) {
   const sr = cfg.status_rule;
   const indicators = cfg.indicators.map((ind) => {
     const r = results[ind.id];
-    const base = { id: ind.id, group: ind.group, label: ind.label, unit: ind.unit, decimals: ind.decimals, signed: !!ind.signed, bad: ind.bad, freq: ind.freq, source: `FRED:${ind.fred}`, what: ind.what, read: ind.read, rule_note: ind.rule ? ind.rule.note : null, rule_line: ind.rule ? ind.rule.warn : null, window_note: ind.window_note || null };
-    if (!r || r.error) return { ...base, value: null, status: 'na', error: (r && r.error) || '수집 안 됨' };
+    const base = { id: ind.id, group: ind.group, label: ind.label, unit: ind.unit, decimals: ind.decimals, signed: !!ind.signed, bad: ind.bad, freq: ind.freq, source: `FRED:${ind.fred}`, what: ind.what, read: ind.read, now: ind.now || null, rule_note: ind.rule ? ind.rule.note : null, rule_line: ind.rule ? ind.rule.warn : null, window_note: ind.window_note || null };
+    if (!r || (r.error && r.value == null)) return { ...base, value: null, status: 'na', error: (r && r.error) || '수집 안 됨' };
     return { ...base, ...r };
   });
   const tally = (list) => list.reduce((a, x) => { if (a[x.status] != null) a[x.status]++; return a; }, { good: 0, mid: 0, warn: 0, info: 0, na: 0 });
@@ -191,14 +191,29 @@ function assemble(cfg, results, extra = {}) {
     return { ...g, counts, weather: weather(counts, true) };
   });
   const counts = tally(indicators);
+  // 색을 줄 지표의 절반도 못 받았으면 전체 날씨를 정하지 않는다(몇 개만으로 '맑음'이 나오는 것을 막는다)
+  const judgeable = cfg.indicators.filter((x) => x.bad !== 'none').length;
+  const enough = counts.good + counts.mid + counts.warn >= judgeable / 2;
   const days = indicators.map((x) => x.asof).filter(Boolean).sort();
   return {
     schema: 1,
     generated_at: new Date().toISOString(), generated_kst: C.kstTime(),
     latest_data_day: days.length ? days[days.length - 1] : null,
-    status_rule: sr, counts, weather: weather(counts, false),
+    status_rule: sr, counts, weather: enough ? weather(counts, false) : 'none', weather_short: !enough,
     groups, indicators, ...extra,
   };
+}
+
+// 이번에 못 받은 지표는 지난번에 받은 실제 값을 그대로 둔다(추정이 아니다). 화면은 '새 자료를 받지 못했다'고 알린다.
+// 지난 값도 없으면 value:null + error.
+const KEEP = ['calc', 'skipped_latest', 'value', 'asof', 'v1m', 'v3m', 'v1y', 'pct', 'pct3m', 'pct_n', 'pct_from', 'spark', 'source'];
+function carryOver(ind, prev, error, sr) {
+  const old = prev && !prev.demo && Array.isArray(prev.indicators) ? prev.indicators.find((x) => x.id === ind.id) : null;
+  if (!old || old.value == null) return { error };
+  const kept = {};
+  for (const k of KEEP) if (old[k] !== undefined) kept[k] = old[k];
+  const j = judge(ind, old.value, old.pct, sr);
+  return { ...kept, status: j.status, basis: j.basis, error, carried: true, carried_since: old.carried_since || prev.generated_kst || null };
 }
 
 // --- 실행 --------------------------------------------------------------------
@@ -208,6 +223,7 @@ async function main() {
   const start = addDays(C.kstDate(), -Math.round(365.25 * 8)); // 5년 위치 + 전년비 + 200일 평균 여유
   const cache = {};
   const results = {};
+  const prev = C.readJson(OUT);
   for (const ind of cfg.indicators) {
     try {
       const key = ind.yahoo ? `Y:${ind.yahoo}` : ind.fred;
@@ -220,8 +236,8 @@ async function main() {
       results[ind.id] = { ...buildIndicator(ind, cache[key].rows, cfg.status_rule), source: cache[key].source };
       console.log(`ok   ${ind.id.padEnd(14)} ${results[ind.id].asof} ${results[ind.id].value} (${results[ind.id].status})`);
     } catch (e) {
-      results[ind.id] = { error: String(e.message || e) };
-      console.log(`FAIL ${ind.id.padEnd(14)} ${results[ind.id].error}`);
+      results[ind.id] = carryOver(ind, prev, String(e.message || e), cfg.status_rule);
+      console.log(`FAIL ${ind.id.padEnd(14)} ${results[ind.id].error}${results[ind.id].carried ? ' → 지난번 값 유지' : ''}`);
     }
     await new Promise((r) => setTimeout(r, 250));
   }
@@ -267,6 +283,26 @@ function demo(outPath) {
 
 function selftest() {
   const assert = (c, m) => { if (!c) { console.error('FAIL', m); process.exit(1); } };
+  // 못 받은 지표: 지난 값이 있으면 유지(색은 지금 규칙으로 다시 판정), 없으면 null
+  {
+    const sr0 = { warn_at_badness: 80, mid_at_badness: 50, window_years: 5 };
+    const indV = { id: 'V', bad: 'high', rule: { dir: 'high', mid: 20, warn: 30 } };
+    const prev0 = { generated_kst: '2026-11-16 07:23', indicators: [{ id: 'V', value: 31, asof: '2026-11-13', pct: 90, status: 'good', label: '옛 이름', spark: [] }] };
+    const k = carryOver(indV, prev0, 'HTTP 500', sr0);
+    assert(k.carried && k.value === 31 && k.status === 'warn' && k.error === 'HTTP 500' && k.carried_since === '2026-11-16 07:23' && k.label === undefined, 'carryOver: 지난 값 유지 + 재판정');
+    assert(carryOver(indV, null, 'x', sr0).value === undefined && carryOver(indV, { demo: true, indicators: prev0.indicators }, 'x', sr0).carried === undefined, 'carryOver: 지난 값 없음/예시 자료는 쓰지 않음');
+    assert(weather({ good: 2, mid: 0, warn: 2 }, true) === 'cloudy' && weather({ good: 1, mid: 0, warn: 2 }, true) === 'rain' && weather({ good: 0, mid: 0, warn: 2 }, true) === 'rain', '묶음 날씨: 절반은 흐림, 절반 초과는 비');
+    const cfg0 = { status_rule: sr0, groups: [{ id: 'g' }], indicators: [{ id: 'A', group: 'g', bad: 'high' }, { id: 'B', group: 'g', bad: 'high' }, { id: 'C', group: 'g', bad: 'high' }] };
+    const few = assemble(cfg0, { A: { value: 1, status: 'good' }, B: { error: 'x' }, C: { error: 'x' } });
+    assert(few.weather === 'none' && few.weather_short === true, '절반도 못 받으면 전체 날씨 없음');
+    const kept = assemble(cfg0, { A: { value: 1, status: 'good' }, B: { value: 2, status: 'good', error: 'x', carried: true }, C: { error: 'x' } });
+    assert(kept.weather_short === false && kept.indicators[1].value === 2 && kept.indicators[1].carried && kept.indicators[2].status === 'na', '유지된 값은 색에 포함');
+    const cfgReal = C.readJson(CONFIG);
+    for (const ind of cfgReal.indicators) {
+      const keys = Object.keys(ind.now || {}).sort().join(',');
+      assert(keys === (ind.bad === 'none' ? 'down,flat,up' : 'good,mid,warn'), `now 문구 누락: ${ind.id}`);
+    }
+  }
   const near = (a, b, e = 1e-9) => Math.abs(a - b) < e;
   const mk = (vals, stepDays = 1, start = '2020-01-01') => vals.map((v, i) => ({ day: addDays(start, i * stepDays), v }));
   const mkM = (vals, start = '2024-01') => vals.map((v, i) => (v == null ? null : { day: `${shiftMonth(start + '-01', i)}-01`, v })).filter(Boolean);

@@ -123,6 +123,7 @@ details.learn dl{margin:4px 0 6px; font-size:14px}
 details.learn dt{font-weight:700; margin-top:8px; font-size:12.5px; color:var(--muted); letter-spacing:.02em}
 details.learn dd{margin:1px 0 0}
 .src{font-size:12px; color:var(--faint); margin-top:8px}
+.nowline{font-size:14px; line-height:1.5; margin:6px 0 2px; color:var(--ink,inherit)}
 .skip{font-size:12.5px; color:var(--muted); background:var(--mid-soft); border-radius:8px; padding:5px 8px; margin-top:6px}
 .tile.na .val{font-size:18px; color:var(--muted); font-weight:600}
 
@@ -176,7 +177,7 @@ footer{margin-top:28px; color:var(--faint); font-size:12.5px}
   <section class="guide" aria-label="처음 보신다면">
     <div class="card"><span class="n">1</span><h3>맨 위 날씨부터</h3><p>날씨는 전체 분위기입니다. 주의 지표가 많을수록 흐려집니다. 내일 주가를 맞히는 그림이 아닙니다.</p></div>
     <div class="card"><span class="n">2</span><h3>묶음별로 훑기</h3><p>금리, 고용, 소비처럼 일곱 묶음으로 나눴습니다. 묶음마다 날씨와 한 줄 읽기가 있습니다.</p></div>
-    <div class="card"><span class="n">3</span><h3>궁금한 지표는 ‘배우기’</h3><p>카드의 ＋배우기를 누르면 이 지표가 무엇이고 어떻게 읽는지, 지금은 어떤지 나옵니다.</p></div>
+    <div class="card"><span class="n">3</span><h3>궁금한 지표는 ‘배우기’</h3><p>카드의 ＋배우기를 누르면 이 지표가 무엇이고 어떻게 읽는지, 색을 어떻게 정했는지 나옵니다. 지금 상태 한 줄은 카드에 바로 보입니다.</p></div>
   </section>
 
   <section class="method" id="method">
@@ -186,6 +187,9 @@ footer{margin-top:28px; color:var(--faint); font-size:12.5px}
       <li><b>기준선이 없는 지표</b>는 최근 5년과 견줍니다. 나쁜 쪽으로 상위 20% 안이면 주의, 절반보다 나쁜 쪽이면 보통, 그 밖은 양호입니다.</li>
       <li><b>참고 지표</b>(정책금리, 달러, 유가 등)는 오르는 것이 좋은지 나쁜지 한쪽으로 말하기 어려워 색을 주지 않았습니다.</li>
       <li><b>날씨</b>는 색이 있는 지표만 셉니다. 주의가 다섯 중 둘 이상이면 비, 다섯 중 하나 이상이면 흐림, 양호가 열 중 여섯 이상이면 맑음, 그 밖은 구름 조금입니다.</li>
+      <li><b>묶음 날씨</b>는 지표가 몇 개뿐이라 따로 정합니다. 주의가 절반을 넘으면 비, 주의가 하나라도 있으면 흐림, 전부 양호면 맑음, 그 밖은 구름 조금입니다.</li>
+      <li><b>겹치는 지표가 있습니다.</b> 금리차 둘, 주택 둘, S&P 500 둘은 비슷하게 움직입니다. 날씨에는 따로따로 세므로 한쪽이 조금 크게 반영됩니다.</li>
+      <li><b>자료를 못 받은 날</b>은 지난번에 받은 값을 그대로 두고 카드에 알립니다. 색이 있는 지표의 절반도 못 받으면 전체 날씨를 정하지 않습니다.</li>
       <li>이 색과 날씨는 <b>읽기 쉽게 하려는 표시</b>입니다. 사고팔 때를 알려주는 신호가 아닙니다. 거시 지표는 ‘언제’를 잘 맞히지 못합니다.</li>
     </ul>
   </section>
@@ -233,9 +237,30 @@ function windowText(ind){
   if(ind.window_note)return '최근 3년';
   return '최근 5년';
 }
+function nowLine(ind){
+  if(ind.value==null||!ind.now)return '';
+  if(ind.bad==='none'){var d=dirOf(ind);return d?(ind.now[d]||''):'';}
+  return ind.now[ind.status]||'';
+}
+var DAYLIMIT={'매일':10,'매주':24,'매월':125};
+function oldDays(ind){
+  if(!ind.asof)return 0;
+  var age=Math.floor((Date.now()-new Date(ind.asof+'T00:00:00Z').getTime())/864e5), lim=DAYLIMIT[ind.freq]||125;
+  return age>lim?age:0;
+}
+function noteText(ind){
+  var a=[];
+  if(ind.carried)a.push('이번에는 새 자료를 받지 못했습니다. 지난번에 받은 값입니다.');
+  var od=oldDays(ind);
+  if(od)a.push('가장 최근 자료가 '+od+'일 전 것입니다. 발표가 늦어지거나 멈췄을 수 있습니다.');
+  if(ind.skipped_latest)a.push(skipText(ind));
+  return a;
+}
 function nowText(ind){
   if(ind.value==null)return '자료를 가져오지 못했습니다.';
-  var parts=[], d=dirOf(ind);
+  var parts=[], d=dirOf(ind), nl=nowLine(ind);
+  if(nl)parts.push(nl);
+  if(ind.bad==='none'){ d=null; }
   if(d==='flat')parts.push('석 달 전('+fmt(ind.v3m,ind)+')과 비슷합니다.');
   else if(d)parts.push('석 달 전('+fmt(ind.v3m,ind)+')보다 '+(d==='up'?'올랐습니다.':'내렸습니다.'));
   var pt=posText(ind);
@@ -303,7 +328,7 @@ function tile(ind){
       '<div class="poscap"><span>낮음</span><span>'+windowText(ind)+' 중 <b>'+esc(posText(ind))+'</b></span><span>높음</span></div></div>';
   }
   return '<article class="tile '+ind.status+'" id="t-'+esc(ind.id)+'"><div class="thead"><h3>'+esc(ind.label)+'</h3>'+chip(ind.status)+'</div>'+
-    '<div class="val num">'+fmt(ind.value,ind)+unit(ind)+'</div>'+delta+(ind.skipped_latest?'<div class="skip">※ '+esc(skipText(ind))+'</div>':'')+sparkSvg(ind)+pos+learn(ind)+'</article>';
+    '<div class="val num">'+fmt(ind.value,ind)+unit(ind)+'</div>'+delta+(nowLine(ind)?'<p class="nowline">'+esc(nowLine(ind))+'</p>':'')+noteText(ind).map(function(t){return '<div class="skip">※ '+esc(t)+'</div>';}).join('')+sparkSvg(ind)+pos+learn(ind)+'</article>';
 }
 function learn(ind){
   return '<details class="learn"><summary>배우기</summary><dl>'+
@@ -324,6 +349,7 @@ function groupRead(g,list){
 }
 function hero(D){
   var w=W[D.weather]||W.none, c=D.counts, n=c.good+c.mid+c.warn;
+  if(D.weather_short)w=['▫️','날씨를 정하지 않았습니다','자료를 절반 넘게 받지 못했습니다. 다음 갱신 때 다시 시도합니다.'];
   var seg=function(k,cls){return c[k]?'<i class="'+cls+'" style="flex:'+c[k]+'" title="'+ST[k][1]+' '+c[k]+'개"></i>':'';};
   return '<section class="hero" aria-label="전체 요약"><div class="sky" aria-hidden="true">'+w[0]+'</div><div>'+
     '<p class="eyebrow">오늘의 경기 날씨</p><h2>'+w[1]+'</h2>'+
