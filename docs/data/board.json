@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-17T07:04:19.706Z",
-  "generated_kst": "2026-11-17 16:04",
+  "generated_at": "2026-11-17T07:11:15.689Z",
+  "generated_kst": "2026-11-17 16:11",
   "latest_data_day": "2026-11-16",
   "status_rule": {
     "warn_at_badness": 80,
@@ -139,6 +139,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-13",
+          3.88
+        ]
+      },
+      "skipped_latest": null,
       "value": 3.88,
       "asof": "2026-11-13",
       "v1m": 3.88,
@@ -528,6 +536,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-13",
+          4.88
+        ]
+      },
+      "skipped_latest": null,
       "value": 4.88,
       "asof": "2026-11-13",
       "v1m": 4.82,
@@ -917,6 +933,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-13",
+          5.15
+        ]
+      },
+      "skipped_latest": null,
       "value": 5.15,
       "asof": "2026-11-13",
       "v1m": 5.19,
@@ -1306,18 +1330,37 @@
       "rule_note": "연준 목표 2%와의 거리로 색을 정합니다 (2.5% 넘으면 보통, 3.5% 넘으면 주의).",
       "rule_line": 3.5,
       "window_note": null,
-      "value": 3.9135,
-      "asof": "2026-10-01",
-      "v1m": 4.0015,
-      "v3m": 3.5209,
+      "calc": {
+        "kind": "yoy",
+        "cur": [
+          "2026-09-01",
+          336.94
+        ],
+        "base": [
+          "2025-09-01",
+          324.8
+        ]
+      },
+      "skipped_latest": {
+        "day": "2026-10-01",
+        "raw": 337.511
+      },
+      "value": 3.7377,
+      "asof": "2026-09-01",
+      "v1m": 3.3965,
+      "v3m": 3.5314,
       "v1y": 3.0127,
       "pct": 61.7,
-      "pct3m": 53.3,
+      "pct3m": 56.7,
       "pct_n": 60,
-      "pct_from": "2021-10-01",
+      "pct_from": "2021-09-01",
       "status": "warn",
       "basis": "rule",
       "spark": [
+        [
+          "2024-09-01",
+          2.4406
+        ],
         [
           "2024-10-01",
           2.5979
@@ -1368,51 +1411,47 @@
         ],
         [
           "2025-11-01",
-          2.6794
+          2.7351
         ],
         [
           "2025-12-01",
-          2.7135
+          2.6771
         ],
         [
           "2026-01-01",
-          3.0567
+          2.3864
         ],
         [
           "2026-02-01",
-          2.869
+          2.4141
         ],
         [
           "2026-03-01",
-          3.4884
+          3.2564
         ],
         [
           "2026-04-01",
-          4.1342
+          3.8108
         ],
         [
           "2026-05-01",
-          4.4664
+          4.2487
         ],
         [
           "2026-06-01",
-          3.8844
+          3.5314
         ],
         [
           "2026-07-01",
-          3.5209
+          3.3648
         ],
         [
           "2026-08-01",
-          3.6936
+          3.3965
         ],
         [
           "2026-09-01",
-          4.0015
-        ],
-        [
-          "2026-10-01",
-          3.9135
+          3.7377
         ]
       ]
     },
@@ -1431,6 +1470,18 @@
       "rule_note": "연준 목표 2%와의 거리로 색을 정합니다 (2.3% 넘으면 보통, 3.0% 넘으면 주의).",
       "rule_line": 3,
       "window_note": null,
+      "calc": {
+        "kind": "yoy",
+        "cur": [
+          "2026-09-01",
+          130.902
+        ],
+        "base": [
+          "2025-09-01",
+          126.94
+        ]
+      },
+      "skipped_latest": null,
       "value": 3.1212,
       "asof": "2026-09-01",
       "v1m": 3.0344,
@@ -1560,6 +1611,14 @@
       "rule_note": "0 아래(역전)면 주의, 0.5 아래면 보통으로 표시합니다.",
       "rule_line": 0,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-16",
+          0.78
+        ]
+      },
+      "skipped_latest": null,
       "value": 0.78,
       "asof": "2026-11-16",
       "v1m": 0.83,
@@ -1949,6 +2008,14 @@
       "rule_note": "0 아래(역전)면 주의, 0.25 아래면 보통으로 표시합니다.",
       "rule_line": 0,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-16",
+          0.29
+        ]
+      },
+      "skipped_latest": null,
       "value": 0.29,
       "asof": "2026-11-16",
       "v1m": 0.35,
@@ -2338,6 +2405,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-09-01",
+          1221
+        ]
+      },
+      "skipped_latest": null,
       "value": 1221,
       "asof": "2026-09-01",
       "v1m": 1288,
@@ -2467,6 +2542,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-09-01",
+          1398
+        ]
+      },
+      "skipped_latest": null,
       "value": 1398,
       "asof": "2026-09-01",
       "v1m": 1403,
@@ -2596,6 +2679,18 @@
       "rule_note": "한 달 일자리가 줄면(0 아래) 주의, 10만 명 아래면 보통으로 표시합니다.",
       "rule_line": 0,
       "window_note": null,
+      "calc": {
+        "kind": "diff",
+        "cur": [
+          "2026-10-01",
+          159293
+        ],
+        "base": [
+          "2026-09-01",
+          159128
+        ]
+      },
+      "skipped_latest": null,
       "value": 165,
       "asof": "2026-10-01",
       "v1m": 60,
@@ -2725,6 +2820,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-10-01",
+          4.1
+        ]
+      },
+      "skipped_latest": null,
       "value": 4.1,
       "asof": "2026-10-01",
       "v1m": 4.2,
@@ -2850,6 +2953,28 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "ma4",
+        "vals": [
+          [
+            "2026-10-17",
+            195000
+          ],
+          [
+            "2026-10-24",
+            195000
+          ],
+          [
+            "2026-10-31",
+            191000
+          ],
+          [
+            "2026-11-07",
+            200000
+          ]
+        ]
+      },
+      "skipped_latest": null,
       "value": 195.25,
       "asof": "2026-11-07",
       "v1m": 198.25,
@@ -3239,6 +3364,14 @@
       "rule_note": "0.50 이상이면 주의(지표를 만든 사람의 기준), 0.30 이상이면 보통으로 표시합니다.",
       "rule_line": 0.5,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-10-01",
+          0
+        ]
+      },
+      "skipped_latest": null,
       "value": 0,
       "asof": "2026-10-01",
       "v1m": 0,
@@ -3364,6 +3497,18 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "yoy",
+        "cur": [
+          "2026-09-01",
+          745021
+        ],
+        "base": [
+          "2025-09-01",
+          700948
+        ]
+      },
+      "skipped_latest": null,
       "value": 6.2876,
       "asof": "2026-09-01",
       "v1m": 5.5561,
@@ -3493,6 +3638,18 @@
       "rule_note": "1년 전보다 줄면(0 아래) 보통, 2% 넘게 줄면 주의로 표시합니다.",
       "rule_line": -2,
       "window_note": null,
+      "calc": {
+        "kind": "yoy",
+        "cur": [
+          "2026-09-01",
+          103.9506
+        ],
+        "base": [
+          "2025-09-01",
+          101.668
+        ]
+      },
+      "skipped_latest": null,
       "value": 2.2452,
       "asof": "2026-09-01",
       "v1m": 1.6155,
@@ -3622,6 +3779,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-09-01",
+          76.8504
+        ]
+      },
+      "skipped_latest": null,
       "value": 76.8504,
       "asof": "2026-09-01",
       "v1m": 76.4184,
@@ -3751,6 +3916,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-09-01",
+          48.1
+        ]
+      },
+      "skipped_latest": null,
       "value": 48.1,
       "asof": "2026-09-01",
       "v1m": 51.7,
@@ -3880,6 +4053,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": "이 자료는 최근 3년치만 공개됩니다. 그래서 3년 안에서의 위치입니다.",
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-13",
+          3.23
+        ]
+      },
+      "skipped_latest": null,
       "value": 3.23,
       "asof": "2026-11-13",
       "v1m": 3.25,
@@ -4269,6 +4450,14 @@
       "rule_note": "0 위(평소보다 빡빡함)면 주의, −0.25 위면 보통으로 표시합니다.",
       "rule_line": 0,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-06",
+          -0.462
+        ]
+      },
+      "skipped_latest": null,
       "value": -0.462,
       "asof": "2026-11-06",
       "v1m": -0.497,
@@ -4658,6 +4847,18 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "yoy",
+        "cur": [
+          "2026-09-01",
+          23413.9
+        ],
+        "base": [
+          "2025-09-01",
+          22149.2
+        ]
+      },
+      "skipped_latest": null,
       "value": 5.7099,
       "asof": "2026-09-01",
       "v1m": 5.5969,
@@ -4787,6 +4988,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-11",
+          6758867
+        ]
+      },
+      "skipped_latest": null,
       "value": 6.7589,
       "asof": "2026-11-11",
       "v1m": 6.7476,
@@ -5176,6 +5385,14 @@
       "rule_note": "흔히 쓰는 기준입니다. 20 이상이면 보통, 30 이상이면 주의로 표시합니다.",
       "rule_line": 30,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-13",
+          19.3
+        ]
+      },
+      "skipped_latest": null,
       "value": 19.3,
       "asof": "2026-11-13",
       "v1m": 16.87,
@@ -5565,6 +5782,19 @@
       "rule_note": "고점에서 5% 넘게 내리면 보통, 10% 넘게 내리면 주의(흔히 '조정'이라 부르는 선)로 표시합니다.",
       "rule_line": -10,
       "window_note": null,
+      "calc": {
+        "kind": "dd252",
+        "close": [
+          "2026-11-16",
+          7416.58984375
+        ],
+        "high": [
+          "2026-10-06",
+          7818.93017578125
+        ],
+        "days": 252
+      },
+      "skipped_latest": null,
       "value": -5.1457,
       "asof": "2026-11-16",
       "v1m": -2.0398,
@@ -5954,6 +6184,17 @@
       "rule_note": "평균선 아래(0 아래)면 주의, 2% 안쪽으로 가까우면 보통으로 표시합니다.",
       "rule_line": 0,
       "window_note": null,
+      "calc": {
+        "kind": "vs200",
+        "close": [
+          "2026-11-16",
+          7416.58984375
+        ],
+        "avg": 7342.7053,
+        "from": "2026-02-02",
+        "days": 200
+      },
+      "skipped_latest": null,
       "value": 1.0062,
       "asof": "2026-11-16",
       "v1m": 5.336,
@@ -6343,6 +6584,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-13",
+          122.6503
+        ]
+      },
+      "skipped_latest": null,
       "value": 122.6503,
       "asof": "2026-11-13",
       "v1m": 122.0037,
@@ -6732,6 +6981,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-11-11",
+          89.62
+        ]
+      },
+      "skipped_latest": null,
       "value": 89.62,
       "asof": "2026-11-11",
       "v1m": 94.99,
@@ -7121,6 +7378,14 @@
       "rule_note": null,
       "rule_line": null,
       "window_note": null,
+      "calc": {
+        "kind": "level",
+        "raw": [
+          "2026-09-01",
+          14473.05590909091
+        ]
+      },
+      "skipped_latest": null,
       "value": 14473.0559,
       "asof": "2026-09-01",
       "v1m": 14331.2648,
