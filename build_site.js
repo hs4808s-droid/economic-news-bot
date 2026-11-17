@@ -210,7 +210,7 @@ ${m.items.map((e) => card(e, n++)).join('\n')}
     description: '미국 증시·연준·경제지표·AI 인프라를 매일 분석한 한국어 데일리 리포트 모음',
     assets: 'assets/',
     body: `<header class="top">
-  <div><h1>${esc(SITE_TITLE)}</h1><p class="meta" id="updated">총 ${entries.length}건 · 최신 ${entries[0].date}</p></div>
+  <div><h1>${esc(SITE_TITLE)}</h1><p class="meta" id="updated">총 ${entries.length}건 · 최신 ${entries[0].date}</p><p class="meta"><a href="board/">🌤️ 경기 상황판 보기 →</a></p></div>
   ${settingsHtml()}
 </header>
 <section class="block" id="dashboard" data-base="" aria-label="대시보드">
