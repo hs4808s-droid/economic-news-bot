@@ -52,6 +52,15 @@ GitHub Pages 홈페이지에 게시 + 이메일로 발송하는 프로젝트.
 - **모델·사용량:** `run_daily.sh`가 `claude -p --model ${CLAUDE_MODEL:-sonnet} --output-format json`으로 실행한다. 단계별 토큰 사용량은 `logs/<날짜>/*.run.log`(JSON `usage`)에서 본다.
 - **사이트 구조(`build_site.js` + `docs/assets/site.js`):** 홈 실적 탭 = 날짜·종목·예상·실제·서프라이즈 5열, 관심 종목(`config/watchlist.json`)·시총 4,000억 달러 이상(`featured`, `update_calendar.js markFeatured`)·최근 발표 검증 종목만. 지표·연준 탭 = 기본 ★★★, "전체 보기" 토글, 값 없는 일정은 한 줄 축약. 전체는 `docs/calendar.html`. 히트맵은 선택 기간 수익률 내림차순 5×3 고정 격자. 태그는 `config/tags.json` 고정 어휘·하루 최대 2개(코드가 점수로 계산, LLM 태그 줄은 무시). 정정은 `config/corrections.json` → 해당 리포트에만 7일 배너 + `docs/corrections.html`. 같은 미국 기준일 리포트는 목록에 가장 먼저 게시된 1건만 보이고 나머지 페이지는 삭제하지 않고 대표 리포트 안내를 단다. 미국 기준일이 작성일 이상이면 직전 미국 거래일로 보정한다.
 
+## 경기 상황판 (`docs/board/`, 2026-11-17 추가)
+- 주소: `https://hs4808s-droid.github.io/economic-news-bot/board/`. 미국 거시 지표 27개를 7묶음(금리·물가, 선행, 고용, 소비·생산, 금융 여건, 심리, 원자재)으로 보여주고, 지표마다 '배우기' 설명을 단다.
+- **LLM 을 쓰지 않는다.** `scripts/build_board.js`(코드)가 FRED 키 없는 CSV(S&P 500 은 Yahoo 일별 종가 — FRED 는 최근 1년치만 준다)를 받아 `docs/data/board.json` 을 만든다. 워크플로는 `.github/workflows/board.yml`(하루 2회 + 수동 실행). 일일 리포트(`daily.yml`)와 완전히 따로 돈다.
+- 지표 목록·설명 문구·색 기준은 `config/board.json` 한 곳에서 관리한다. 화면은 `docs/board/index.html`(손으로 관리하는 정적 파일. `build_site.js` 가 만들지 않는다).
+- 색(양호·보통·주의)과 날씨는 **읽기 쉽게 하려는 표시이며 매매 신호가 아니다.** 기준선이 있는 지표는 그 선(`rule`), 없는 지표는 최근 5년 중 위치로 정한다. 좋고 나쁨을 한쪽으로 말하기 어려운 지표(`bad: none`)는 색을 주지 않는다.
+- 못 받은 지표는 `value: null` + `error` 로 남기고 화면에 '자료를 가져오지 못했습니다'로 나온다. 추정치로 메우지 않는다.
+- ISM 지수·콘퍼런스보드 선행지수는 무료 공개 자료가 아니라 넣지 않았다. 하이일드 스프레드는 FRED 가 최근 3년치만 준다.
+- 명령: `npm run board`(실제 수집) · `node scripts/build_board.js --demo <파일>`(네트워크 없이 예시 자료) · `node scripts/build_board.js --selftest`.
+
 ## 실행 환경
 - GitHub Actions(`.github/workflows/daily.yml`)에서 매 거래일 실행. 로컬 PC 불필요.
 - 실행 트리거: 외부 cron-job.org가 KST 화~토 06:30에 `workflow_dispatch`를 호출한다(GitHub 자체 `schedule:`은 2시간 지연돼 제거함 — `daily.yml`에 `schedule:` 블록을 다시 추가하지 말 것). 러너 TZ는 `Asia/Seoul`로 고정.

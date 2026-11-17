@@ -1,5 +1,5 @@
 {
-  "_doc": "경기 상황판(docs/board/) 설정. scripts/build_board.js 가 읽어 docs/data/board.json 을 만든다. transform: level|yoy(전년 같은 달 대비 %)|diff(전월 대비 차이)|ma4(4주 평균)|dd252(1년 고점 대비 %)|vs200(200일 평균선 대비 %). bad: high(높을수록 나쁨)|low(낮을수록 나쁨)|none(좋고 나쁨 없음, 참고용). rule 이 있으면 5년 위치 대신 그 기준으로 색을 정한다(warn·mid 는 경계값, dir 는 어느 쪽이 나쁜지). 색은 '읽기 쉽게 하려는 표시'이며 매매 신호가 아니다.",
+  "_doc": "경기 상황판(docs/board/) 설정. yahoo 가 있으면 Yahoo Finance 일별 종가를 먼저 쓰고(FRED 는 S&P 500 을 최근 1년치만 준다), 실패하면 fred 로 받는다. scripts/build_board.js 가 읽어 docs/data/board.json 을 만든다. transform: level|yoy(전년 같은 달 대비 %)|diff(전월 대비 차이)|ma4(4주 평균)|dd252(1년 고점 대비 %)|vs200(200일 평균선 대비 %). bad: high(높을수록 나쁨)|low(낮을수록 나쁨)|none(좋고 나쁨 없음, 참고용). rule 이 있으면 5년 위치 대신 그 기준으로 색을 정한다(warn·mid 는 경계값, dir 는 어느 쪽이 나쁜지). 색은 '읽기 쉽게 하려는 표시'이며 매매 신호가 아니다.",
   "status_rule": { "warn_at_badness": 80, "mid_at_badness": 50, "window_years": 5 },
   "groups": [
     {
@@ -112,11 +112,11 @@
       "rule": { "dir": "high", "mid": 20, "warn": 30, "note": "흔히 쓰는 기준입니다. 20 이상이면 보통, 30 이상이면 주의로 표시합니다." },
       "what": "앞으로 한 달 동안 주가가 얼마나 출렁일지에 대한 시장의 예상입니다. '공포 지수'라고도 합니다.",
       "read": "20 아래면 평온, 30을 넘으면 불안이 큰 상태입니다. 아주 높을 때가 오히려 바닥 근처였던 적도 많습니다." },
-    { "id": "SP500_DD", "fred": "SP500", "group": "mood", "label": "S&P 500, 1년 고점 대비", "unit": "%", "decimals": 1, "transform": "dd252", "bad": "low", "freq": "매일", "signed": true,
+    { "id": "SP500_DD", "fred": "SP500", "yahoo": "^GSPC", "group": "mood", "label": "S&P 500, 1년 고점 대비", "unit": "%", "decimals": 1, "transform": "dd252", "bad": "low", "freq": "매일", "signed": true,
       "rule": { "dir": "low", "mid": -5, "warn": -10, "note": "고점에서 5% 넘게 내리면 보통, 10% 넘게 내리면 주의(흔히 '조정'이라 부르는 선)로 표시합니다." },
       "what": "미국 대표 주가지수가 최근 1년의 가장 높았던 날보다 얼마나 내려와 있는지입니다.",
       "read": "0에 가까우면 고점 근처입니다. −10%는 조정, −20%는 약세장이라고 부릅니다." },
-    { "id": "SP500_200", "fred": "SP500", "group": "mood", "label": "S&P 500, 200일 평균선 대비", "unit": "%", "decimals": 1, "transform": "vs200", "bad": "low", "freq": "매일", "signed": true,
+    { "id": "SP500_200", "fred": "SP500", "yahoo": "^GSPC", "group": "mood", "label": "S&P 500, 200일 평균선 대비", "unit": "%", "decimals": 1, "transform": "vs200", "bad": "low", "freq": "매일", "signed": true,
       "rule": { "dir": "low", "mid": 2, "warn": 0, "note": "평균선 아래(0 아래)면 주의, 2% 안쪽으로 가까우면 보통으로 표시합니다." },
       "what": "지금 주가가 최근 200거래일 평균보다 얼마나 위나 아래에 있는지입니다.",
       "read": "평균선 위면 오르는 흐름, 아래면 내리는 흐름으로 봅니다. 큰 하락은 대개 평균선 아래에서 일어났습니다." },

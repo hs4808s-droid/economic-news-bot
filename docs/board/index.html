@@ -190,7 +190,7 @@ footer{margin-top:28px; color:var(--faint); font-size:12.5px}
   </section>
 
   <footer>
-    <p>자료: FRED(미국 세인트루이스 연방준비은행)의 공개 자료. 지표마다 발표가 늦는 정도가 다릅니다(카드의 기준일 참고). 하이일드 스프레드는 최근 3년치만 공개됩니다. ISM 지수와 콘퍼런스보드 선행지수는 무료 공개 자료가 아니라 넣지 않았습니다.</p>
+    <p>자료: FRED(미국 세인트루이스 연방준비은행)의 공개 자료. S&P 500은 Yahoo Finance 종가. 지표마다 발표가 늦는 정도가 다릅니다(카드 ‘배우기’ 아래의 기준 참고. 월간 지표는 한두 달 늦습니다). 하이일드 스프레드는 최근 3년치만 공개됩니다. ISM 지수와 콘퍼런스보드 선행지수는 무료 공개 자료가 아니라 넣지 않았습니다.</p>
     <p>이 화면은 공부와 참고를 위한 것이며 투자 권유가 아닙니다.</p>
   </footer>
 </div>
@@ -214,7 +214,7 @@ function fmt(v,ind,opt){
 }
 function unit(ind){return ind.unit?'<small>'+esc(ind.unit)+'</small>':'';}
 function ym(day){return day?day.slice(0,7).replace('-','.'):'';}
-function md(day){return day?day.slice(5).replace('-','.'):'';}
+function asofText(ind){if(!ind.asof)return '–';return ind.freq==='매월'?ind.asof.slice(0,4)+'년 '+Number(ind.asof.slice(5,7))+'월분':ind.asof;}
 function span(ind){var a=(ind.spark||[]).map(function(p){return p[1];});if(a.length<2)return 0;return Math.max.apply(null,a)-Math.min.apply(null,a);}
 function dirOf(ind){
   if(ind.value==null||ind.v3m==null)return null;
@@ -261,7 +261,7 @@ function sparkSvg(ind){
   var area=line+' L'+X(pts.length-1).toFixed(1)+' '+(h-1)+' L'+X(0).toFixed(1)+' '+(h-1)+' Z';
   var ref='';
   var m=ind.rule_note&&ind.rule_line!=null?ind.rule_line:null;
-  if(m!=null&&m>lo&&m<hi){ref='<line x1="0" x2="'+w+'" y1="'+Y(m).toFixed(1)+'" y2="'+Y(m).toFixed(1)+'" stroke="var(--line)" stroke-width="1"/><text x="'+(w-2)+'" y="'+(Y(m)-3).toFixed(1)+'" text-anchor="end" font-size="10" fill="var(--faint)">주의선 '+fmt(m,ind)+'</text>';}
+  if(m!=null&&m>lo&&m<hi){ref='<line x1="0" x2="'+w+'" y1="'+Y(m).toFixed(1)+'" y2="'+Y(m).toFixed(1)+'" stroke="var(--line)" stroke-width="1"/><text x="2" y="'+(Y(m)-3).toFixed(1)+'" font-size="10" fill="var(--faint)">주의선 '+fmt(m,ind)+'</text>';}
   var lx=X(pts.length-1), ly=Y(vals[vals.length-1]);
   return '<div class="spark" data-id="'+esc(ind.id)+'"><div class="tip"></div>'+
     '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" role="img" aria-label="'+esc(ind.label)+' 최근 2년 흐름">'+ref+
@@ -293,7 +293,7 @@ function learn(ind){
     '<dt>어떻게 읽어요?</dt><dd>'+esc(ind.read)+'</dd>'+
     '<dt>지금은?</dt><dd>'+esc(nowText(ind))+'</dd>'+
     '<dt>색은 어떻게 정했나요?</dt><dd>'+esc(ruleText(ind))+'</dd></dl>'+
-    '<div class="src">'+esc(ind.freq||'')+' 발표 · 기준일 '+esc(ind.asof||'–')+' · 출처 '+esc(ind.source)+(ind.error?' · 오류: '+esc(ind.error):'')+'</div></details>';
+    '<div class="src">'+esc(ind.freq||'')+' 발표 · 기준 '+esc(asofText(ind))+' · 출처 '+esc(ind.source)+(ind.error?' · 오류: '+esc(ind.error):'')+'</div></details>';
 }
 function groupRead(g,list){
   var c=g.counts, n=c.good+c.mid+c.warn;
@@ -338,10 +338,10 @@ function table(D){
     var list=D.indicators.filter(function(x){return x.group===g.id;});
     return '<tr class="gh"><td colspan="7">'+esc(g.icon+' '+g.title)+'</td></tr>'+list.map(function(x){
       var u=x.unit?' '+esc(x.unit):'';
-      return '<tr><td>'+esc(x.label)+'</td><td class="num">'+fmt(x.value,x)+u+'</td><td class="num">'+fmt(x.v3m,x)+'</td><td class="num">'+fmt(x.v1y,x)+'</td><td class="num">'+(x.pct==null?'–':Math.round(x.pct)+'%')+'</td><td>'+chip(x.status)+'</td><td class="num">'+esc(x.asof||'–')+'</td></tr>';
+      return '<tr><td>'+esc(x.label)+'</td><td class="num">'+fmt(x.value,x)+u+'</td><td class="num">'+fmt(x.v3m,x)+'</td><td class="num">'+fmt(x.v1y,x)+'</td><td class="num">'+(x.pct==null?'–':Math.round(x.pct)+'%')+'</td><td>'+chip(x.status)+'</td><td class="num">'+esc(asofText(x))+'</td></tr>';
     }).join('');
   }).join('');
-  return '<div class="tablewrap"><table><thead><tr><th>지표</th><th>지금</th><th>석 달 전</th><th>1년 전</th><th>5년 중 위치</th><th>상태</th><th>기준일</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  return '<div class="tablewrap"><table><thead><tr><th>지표</th><th>지금</th><th>석 달 전</th><th>1년 전</th><th>5년 중 위치</th><th>상태</th><th>기준</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
 }
 function render(){
   var D=DATA; if(!D)return;

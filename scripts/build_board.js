@@ -35,6 +35,26 @@ async function fredRows(id, startDay) {
   throw lastErr;
 }
 
+// Yahoo 일별 종가(지수용). FRED 는 S&P 500 을 최근 1년치만 주므로 1년 고점·200일 평균 계산에 쓴다.
+// 장중에 돌면 마지막 봉은 그 시각의 값이다(나중에 장중 갱신을 붙일 때 그대로 쓴다).
+async function yahooRows(symbol) {
+  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(symbol)}?range=10y&interval=1d`;
+  let lastErr;
+  for (let i = 0; i < 3; i++) {
+    try {
+      const r = (await C.getJson(url, 30000))?.chart?.result?.[0];
+      const q = r?.indicators?.quote?.[0]?.close || [];
+      const tz = r?.meta?.exchangeTimezoneName || 'America/New_York';
+      const rows = (r?.timestamp || [])
+        .map((t, k) => ({ day: new Date(t * 1000).toLocaleDateString('sv-SE', { timeZone: tz }), v: q[k] }))
+        .filter((b) => typeof b.v === 'number' && Number.isFinite(b.v));
+      if (rows.length < 260) throw new Error('Yahoo 행 부족');
+      return rows;
+    } catch (e) { lastErr = e; await new Promise((res) => setTimeout(res, 1500 * (i + 1))); }
+  }
+  throw lastErr;
+}
+
 // --- 변환 --------------------------------------------------------------------
 // rows: [{day, v}] 오름차순. 반환도 같은 모양.
 function transform(rows, kind, scale = 1) {
@@ -166,8 +186,14 @@ async function main() {
   const results = {};
   for (const ind of cfg.indicators) {
     try {
-      if (!cache[ind.fred]) cache[ind.fred] = await fredRows(ind.fred, start);
-      results[ind.id] = buildIndicator(ind, cache[ind.fred], cfg.status_rule);
+      const key = ind.yahoo ? `Y:${ind.yahoo}` : ind.fred;
+      if (!cache[key]) {
+        if (ind.yahoo) {
+          try { cache[key] = { rows: await yahooRows(ind.yahoo), source: `Yahoo:${ind.yahoo}` }; }
+          catch (e) { console.log(`     Yahoo 실패(${e.message}) → FRED 로 대체`); cache[key] = { rows: await fredRows(ind.fred, start), source: `FRED:${ind.fred}` }; }
+        } else cache[key] = { rows: await fredRows(ind.fred, start), source: `FRED:${ind.fred}` };
+      }
+      results[ind.id] = { ...buildIndicator(ind, cache[key].rows, cfg.status_rule), source: cache[key].source };
       console.log(`ok   ${ind.id.padEnd(14)} ${results[ind.id].asof} ${results[ind.id].value} (${results[ind.id].status})`);
     } catch (e) {
       results[ind.id] = { error: String(e.message || e) };
