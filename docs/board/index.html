@@ -240,7 +240,7 @@ function nowText(ind){
   else if(d)parts.push('석 달 전('+fmt(ind.v3m,ind)+')보다 '+(d==='up'?'올랐습니다.':'내렸습니다.'));
   var pt=posText(ind);
   if(pt)parts.push(windowText(ind)+' 가운데 '+pt+'입니다.');
-  if(ind.status==='warn')parts.push('그래서 지금은 ‘주의’로 표시했습니다.');
+  if(ind.status==='warn')parts.push('지금은 ‘주의’로 표시했습니다.');
   else if(ind.status==='mid')parts.push('지금은 ‘보통’으로 표시했습니다.');
   else if(ind.status==='good')parts.push('지금은 ‘양호’로 표시했습니다.');
   return parts.join(' ');
