@@ -1,0 +1,396 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>경기 상황판</title>
+<meta name="description" content="미국 경기를 금리·고용·소비·금융 여건·심리로 나눠 한눈에 읽는 상황판. 매매 신호가 아니라 지금 환경을 읽는 화면입니다.">
+<!-- 이 페이지는 손으로 관리하는 정적 파일이다(build_site.js 가 만들지 않는다). 숫자는 ../data/board.json(scripts/build_board.js)에서 온다. -->
+<style>
+:root{
+  --bg:#faf9f7; --surface:#fff; --surface-2:#f4f1ec; --text:#1c1b19; --muted:#6b675f; --faint:#9a958c; --line:#e5e1da;
+  --accent:#8a5a2b; --accent-soft:#f3ece3; --shadow:0 1px 2px rgba(0,0,0,.05),0 10px 28px -14px rgba(0,0,0,.14);
+  --series:#2a78d6; --series-wash:rgba(42,120,214,.10);
+  --good:#0ca30c; --mid:#fab219; --warn:#d03b3b; --info:#9a958c;
+  --good-soft:#e9f6e9; --mid-soft:#fdf3d7; --warn-soft:#fbe9e9; --info-soft:#f0eeea;
+  --hero-a:#fff7e8; --hero-b:#eef5ff;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#161513; --surface:#1f1e1b; --surface-2:#262421; --text:#eceae5; --muted:#a09a90; --faint:#7d776d; --line:#312f2b;
+    --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.7);
+    --series:#3987e5; --series-wash:rgba(57,135,229,.14);
+    --good-soft:#17301a; --mid-soft:#3a2f12; --warn-soft:#3a1c1c; --info-soft:#2a2825;
+    --hero-a:#2a2419; --hero-b:#1b2330; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#161513; --surface:#1f1e1b; --surface-2:#262421; --text:#eceae5; --muted:#a09a90; --faint:#7d776d; --line:#312f2b;
+  --accent:#d9a441; --accent-soft:#2a2621; --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 28px -14px rgba(0,0,0,.7);
+  --series:#3987e5; --series-wash:rgba(57,135,229,.14);
+  --good-soft:#17301a; --mid-soft:#3a2f12; --warn-soft:#3a1c1c; --info-soft:#2a2825;
+  --hero-a:#2a2419; --hero-b:#1b2330; color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%; scroll-behavior:smooth; scroll-padding-top:64px}
+body{margin:0; background:var(--bg); color:var(--text);
+  font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+  font-size:16px; line-height:1.65; overflow-x:hidden; word-break:keep-all}
+.wrap{max-width:1120px; margin:0 auto; padding:20px 16px 80px}
+a{color:var(--accent)}
+.num{font-variant-numeric:tabular-nums}
+button{font:inherit; color:inherit}
+:focus-visible{outline:2px solid var(--accent); outline-offset:2px; border-radius:6px}
+
+/* 머리 */
+header.top{display:flex; flex-wrap:wrap; gap:10px 16px; align-items:flex-end; justify-content:space-between; margin-bottom:18px}
+header.top h1{font-size:28px; line-height:1.25; margin:0; letter-spacing:-.02em}
+header.top p{margin:.25em 0 0; color:var(--muted); font-size:13.5px}
+.tools{display:flex; gap:8px; flex-wrap:wrap}
+.btn{border:1px solid var(--line); background:var(--surface); border-radius:9px; padding:7px 12px; font-size:13px; cursor:pointer; min-height:36px; text-decoration:none; color:var(--text); display:inline-flex; align-items:center; gap:6px}
+.btn:hover{border-color:var(--accent)}
+.btn[aria-pressed="true"]{background:var(--accent); color:var(--bg); border-color:var(--accent); font-weight:600}
+.banner{border:1px solid var(--mid); background:var(--mid-soft); border-radius:12px; padding:10px 14px; font-size:14px; margin:0 0 14px}
+
+/* 큰 그림 */
+.hero{background:linear-gradient(135deg,var(--hero-a),var(--hero-b)); border:1px solid var(--line); border-radius:22px; padding:26px 26px 22px; box-shadow:var(--shadow); display:grid; grid-template-columns:auto 1fr; gap:8px 26px; align-items:center}
+.hero .sky{font-size:92px; line-height:1; filter:drop-shadow(0 6px 10px rgba(0,0,0,.12))}
+.hero .eyebrow{font-size:13px; color:var(--muted); letter-spacing:.04em; margin:0}
+.hero h2{font-size:34px; line-height:1.2; margin:.1em 0 .25em; letter-spacing:-.02em}
+.hero .lead{font-size:16.5px; margin:0; max-width:46em}
+.mix{grid-column:1 / -1; margin-top:14px}
+.mixbar{display:flex; gap:2px; height:14px; border-radius:8px; overflow:hidden; background:var(--line)}
+.mixbar i{display:block; min-width:3px}
+.mixbar .g{background:var(--good)} .mixbar .m{background:var(--mid)} .mixbar .w{background:var(--warn)}
+.legend{display:flex; flex-wrap:wrap; gap:6px 18px; margin-top:10px; font-size:14px; color:var(--muted)}
+.legend b{color:var(--text); font-variant-numeric:tabular-nums}
+.dot{display:inline-grid; place-items:center; width:18px; height:18px; border-radius:50%; font-size:11px; font-weight:800; color:#fff; vertical-align:-3px; margin-right:6px; flex:none}
+.dot.good{background:var(--good)} .dot.mid{background:var(--mid); color:#3b2a00} .dot.warn{background:var(--warn)} .dot.info{background:var(--info)} .dot.na{background:transparent; color:var(--faint); border:1px dashed var(--faint)}
+
+/* 핵심 세 줄 */
+.brief{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin:16px 0 8px}
+.brief .card{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px 16px; box-shadow:var(--shadow)}
+.brief h3{font-size:12.5px; letter-spacing:.05em; color:var(--muted); margin:0 0 4px; font-weight:700}
+.brief p{margin:0; font-size:15px}
+
+/* 묶음 이동 */
+nav.jump{position:sticky; top:0; z-index:5; background:color-mix(in srgb,var(--bg) 88%,transparent); backdrop-filter:blur(8px); margin:14px -16px 6px; padding:8px 16px; border-bottom:1px solid var(--line); display:flex; gap:8px; overflow-x:auto; scrollbar-width:none}
+nav.jump::-webkit-scrollbar{display:none}
+nav.jump a{flex:none; text-decoration:none; color:var(--text); border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:5px 12px; font-size:13.5px; white-space:nowrap}
+nav.jump a:hover{border-color:var(--accent)}
+nav.jump a span{margin-left:4px}
+
+/* 묶음 */
+section.group{margin:30px 0 0}
+.ghead{display:flex; flex-wrap:wrap; align-items:center; gap:8px 12px; margin-bottom:4px}
+.ghead .ico{font-size:30px; line-height:1}
+.ghead h2{font-size:22px; margin:0; letter-spacing:-.01em}
+.ghead .q{color:var(--muted); font-size:15px}
+.wchip{margin-left:auto; display:inline-flex; align-items:center; gap:6px; border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:4px 12px 4px 8px; font-size:14px; font-weight:600}
+.wchip .e{font-size:20px; line-height:1}
+.gwhy{margin:2px 0 4px; color:var(--muted); font-size:14.5px; max-width:58em}
+.gread{margin:0 0 12px; font-size:15px; background:var(--accent-soft); border-radius:10px; padding:8px 12px; display:inline-block}
+.grid{display:grid; grid-template-columns:repeat(auto-fill,minmax(258px,1fr)); gap:12px}
+
+/* 지표 카드 */
+.tile{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:14px 14px 10px; box-shadow:var(--shadow); display:flex; flex-direction:column; min-width:0; position:relative}
+.tile::before{content:""; position:absolute; left:0; top:14px; bottom:14px; width:4px; border-radius:0 4px 4px 0; background:var(--info)}
+.tile.good::before{background:var(--good)} .tile.mid::before{background:var(--mid)} .tile.warn::before{background:var(--warn)} .tile.na::before{background:transparent}
+.thead{display:flex; align-items:flex-start; justify-content:space-between; gap:8px}
+.tile h3{font-size:14.5px; margin:0; font-weight:600; line-height:1.35}
+.chip{flex:none; display:inline-flex; align-items:center; border-radius:999px; padding:2px 9px 2px 3px; font-size:12.5px; font-weight:600; white-space:nowrap}
+.chip.good{background:var(--good-soft)} .chip.mid{background:var(--mid-soft)} .chip.warn{background:var(--warn-soft)} .chip.info,.chip.na{background:var(--info-soft); color:var(--muted)}
+.chip .dot{width:16px; height:16px; font-size:10px; margin-right:5px; vertical-align:0}
+.val{font-size:30px; font-weight:700; letter-spacing:-.02em; line-height:1.15; margin-top:8px}
+.val small{font-size:14px; font-weight:500; color:var(--muted); margin-left:3px; letter-spacing:0}
+.delta{font-size:13.5px; color:var(--muted); margin-top:2px}
+.delta b{color:var(--text); font-weight:600}
+.spark{margin:8px -4px 0; position:relative; touch-action:pan-y}
+.spark svg{display:block; width:100%; height:66px; overflow:visible}
+.spark .tip{position:absolute; top:-4px; transform:translateX(-50%); background:var(--text); color:var(--bg); font-size:12px; padding:2px 7px; border-radius:6px; white-space:nowrap; pointer-events:none; display:none; font-variant-numeric:tabular-nums}
+.axis{display:flex; justify-content:space-between; font-size:11px; color:var(--faint); margin-top:1px}
+.pos{margin-top:8px}
+.track{position:relative; height:6px; border-radius:3px; background:var(--surface-2); border:1px solid var(--line)}
+.track::after{content:""; position:absolute; left:50%; top:-3px; bottom:-3px; width:1px; background:var(--line)}
+.track i{position:absolute; top:50%; width:12px; height:12px; border-radius:50%; background:var(--text); border:2px solid var(--surface); transform:translate(-50%,-50%); z-index:1}
+.poscap{display:flex; justify-content:space-between; gap:8px; font-size:12px; color:var(--muted); margin-top:5px}
+details.learn{margin-top:10px; border-top:1px solid var(--line); padding-top:6px}
+details.learn summary{cursor:pointer; font-size:13.5px; color:var(--accent); font-weight:600; list-style:none; padding:4px 0; min-height:30px; display:flex; align-items:center; gap:6px}
+details.learn summary::-webkit-details-marker{display:none}
+details.learn summary::before{content:"＋"; font-weight:700}
+details.learn[open] summary::before{content:"－"}
+details.learn dl{margin:4px 0 6px; font-size:14px}
+details.learn dt{font-weight:700; margin-top:8px; font-size:12.5px; color:var(--muted); letter-spacing:.02em}
+details.learn dd{margin:1px 0 0}
+.src{font-size:12px; color:var(--faint); margin-top:8px}
+.tile.na .val{font-size:18px; color:var(--muted); font-weight:600}
+
+/* 표 */
+.tablewrap{overflow-x:auto; background:var(--surface); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); margin-top:16px}
+table{border-collapse:collapse; width:100%; font-size:14px; min-width:720px}
+th,td{padding:8px 12px; border-bottom:1px solid var(--line); text-align:right; white-space:nowrap}
+th:first-child,td:first-child{text-align:left; white-space:normal}
+th{font-size:12.5px; color:var(--muted); font-weight:600; background:var(--surface-2); position:sticky; top:0}
+tr.gh td{background:var(--accent-soft); font-weight:700; text-align:left}
+
+/* 안내 */
+.guide{margin-top:40px; display:grid; grid-template-columns:repeat(3,1fr); gap:12px}
+.guide .card,.method{background:var(--surface); border:1px solid var(--line); border-radius:16px; padding:16px 18px; box-shadow:var(--shadow)}
+.guide .n{display:inline-grid; place-items:center; width:26px; height:26px; border-radius:50%; background:var(--accent); color:var(--bg); font-weight:700; font-size:14px; margin-bottom:6px}
+.guide h3{margin:0 0 4px; font-size:16px}
+.guide p{margin:0; font-size:14.5px; color:var(--muted)}
+.method{margin-top:12px; font-size:14.5px}
+.method h3{margin:0 0 6px; font-size:16px}
+.method ul{margin:6px 0 0; padding-left:20px}
+.method li{margin:3px 0}
+footer{margin-top:28px; color:var(--faint); font-size:12.5px}
+.sk{color:var(--muted); padding:40px 0; text-align:center}
+
+@media (max-width:820px){
+  .hero{grid-template-columns:1fr; text-align:left; padding:20px 18px 18px}
+  .hero .sky{font-size:68px}
+  .hero h2{font-size:27px}
+  .brief,.guide{grid-template-columns:1fr}
+  .wchip{margin-left:0}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>경기 상황판</h1>
+      <p id="stamp">자료를 불러오는 중입니다…</p>
+    </div>
+    <div class="tools">
+      <a class="btn" href="../">← 데일리 브리핑</a>
+      <button class="btn" id="viewBtn" aria-pressed="false">표로 보기</button>
+      <button class="btn" id="themeBtn" aria-label="밝게·어둡게 바꾸기">🌓 화면</button>
+    </div>
+  </header>
+  <div id="notice"></div>
+  <main id="app"><p class="sk">불러오는 중…</p></main>
+
+  <section class="guide" aria-label="처음 보신다면">
+    <div class="card"><span class="n">1</span><h3>맨 위 날씨부터</h3><p>날씨는 전체 분위기입니다. 주의 지표가 많을수록 흐려집니다. 내일 주가를 맞히는 그림이 아닙니다.</p></div>
+    <div class="card"><span class="n">2</span><h3>묶음별로 훑기</h3><p>금리, 고용, 소비처럼 일곱 묶음으로 나눴습니다. 묶음마다 날씨와 한 줄 읽기가 있습니다.</p></div>
+    <div class="card"><span class="n">3</span><h3>궁금한 지표는 ‘배우기’</h3><p>카드의 ＋배우기를 누르면 이 지표가 무엇이고 어떻게 읽는지, 지금은 어떤지 나옵니다.</p></div>
+  </section>
+
+  <section class="method" id="method">
+    <h3>색과 날씨는 이렇게 정합니다</h3>
+    <ul>
+      <li><b>기준선이 있는 지표</b>는 그 선으로 정합니다. 예: 장단기 금리차는 0 아래면 주의, 삼의 법칙은 0.50 이상이면 주의. 기준은 각 카드의 ‘배우기’에 적혀 있습니다.</li>
+      <li><b>기준선이 없는 지표</b>는 최근 5년과 견줍니다. 나쁜 쪽으로 상위 20% 안이면 주의, 절반보다 나쁜 쪽이면 보통, 그 밖은 양호입니다.</li>
+      <li><b>참고 지표</b>(정책금리, 달러, 유가 등)는 오르는 것이 좋은지 나쁜지 한쪽으로 말하기 어려워 색을 주지 않았습니다.</li>
+      <li><b>날씨</b>는 색이 있는 지표만 셉니다. 주의가 다섯 중 둘 이상이면 비, 다섯 중 하나 이상이면 흐림, 양호가 열 중 여섯 이상이면 맑음, 그 밖은 구름 조금입니다.</li>
+      <li>이 색과 날씨는 <b>읽기 쉽게 하려는 표시</b>입니다. 사고팔 때를 알려주는 신호가 아닙니다. 거시 지표는 ‘언제’를 잘 맞히지 못합니다.</li>
+    </ul>
+  </section>
+
+  <footer>
+    <p>자료: FRED(미국 세인트루이스 연방준비은행)의 공개 자료. 지표마다 발표가 늦는 정도가 다릅니다(카드의 기준일 참고). 하이일드 스프레드는 최근 3년치만 공개됩니다. ISM 지수와 콘퍼런스보드 선행지수는 무료 공개 자료가 아니라 넣지 않았습니다.</p>
+    <p>이 화면은 공부와 참고를 위한 것이며 투자 권유가 아닙니다.</p>
+  </footer>
+</div>
+
+<script>
+(function(){
+'use strict';
+var DATA_URL='../data/board.json';
+var W={sunny:['☀️','맑음','주의로 표시된 지표가 거의 없습니다.'],partly:['🌤️','구름 조금','대체로 괜찮지만 보통 수준인 지표가 섞여 있습니다.'],cloudy:['☁️','흐림','주의 지표가 다섯 중 하나꼴을 넘습니다.'],rain:['🌧️','비','주의 지표가 다섯 중 둘꼴을 넘습니다.'],none:['▫️','참고','좋고 나쁨을 정하지 않는 지표들입니다.']};
+var ST={good:['✓','양호'],mid:['–','보통'],warn:['!','주의'],info:['i','참고'],na:['?','자료 없음']};
+var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
+var view='cards', DATA=null;
+
+function fmt(v,ind,opt){
+  if(v==null||!isFinite(v))return '–';
+  var d=ind.decimals==null?2:ind.decimals;
+  var s=Math.abs(v).toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});
+  var sign=v<0?'−':((ind.signed||(opt&&opt.sign))&&v>0?'+':'');
+  if(Number(Math.abs(v).toFixed(d))===0)sign='';
+  return sign+s;
+}
+function unit(ind){return ind.unit?'<small>'+esc(ind.unit)+'</small>':'';}
+function ym(day){return day?day.slice(0,7).replace('-','.'):'';}
+function md(day){return day?day.slice(5).replace('-','.'):'';}
+function span(ind){var a=(ind.spark||[]).map(function(p){return p[1];});if(a.length<2)return 0;return Math.max.apply(null,a)-Math.min.apply(null,a);}
+function dirOf(ind){
+  if(ind.value==null||ind.v3m==null)return null;
+  var diff=ind.value-ind.v3m, sp=span(ind);
+  if(sp===0||Math.abs(diff)<sp*0.05)return 'flat';
+  return diff>0?'up':'down';
+}
+function posText(ind){
+  if(ind.pct==null)return null;
+  var p=ind.pct;
+  if(p>=40&&p<=60)return '중간쯤';
+  return p>60?'높은 편 (상위 '+Math.max(1,Math.round(100-p))+'%)':'낮은 편 (하위 '+Math.max(1,Math.round(p))+'%)';
+}
+function windowText(ind){
+  if(ind.window_note)return '최근 3년';
+  return '최근 5년';
+}
+function nowText(ind){
+  if(ind.value==null)return '자료를 가져오지 못했습니다.';
+  var parts=[], d=dirOf(ind);
+  if(d==='flat')parts.push('석 달 전('+fmt(ind.v3m,ind)+')과 비슷합니다.');
+  else if(d)parts.push('석 달 전('+fmt(ind.v3m,ind)+')보다 '+(d==='up'?'올랐습니다.':'내렸습니다.'));
+  var pt=posText(ind);
+  if(pt)parts.push(windowText(ind)+' 가운데 '+pt+'입니다.');
+  if(ind.status==='warn')parts.push('그래서 지금은 ‘주의’로 표시했습니다.');
+  else if(ind.status==='mid')parts.push('지금은 ‘보통’으로 표시했습니다.');
+  else if(ind.status==='good')parts.push('지금은 ‘양호’로 표시했습니다.');
+  return parts.join(' ');
+}
+function ruleText(ind){
+  if(ind.bad==='none')return '오르는 것이 좋은지 나쁜지 한쪽으로 말하기 어려워 색을 주지 않았습니다.';
+  if(ind.rule_note)return ind.rule_note;
+  return (ind.bad==='high'?'높을수록 나쁜 지표입니다. ':'낮을수록 나쁜 지표입니다. ')+windowText(ind)+'과 견줘 나쁜 쪽 상위 20% 안이면 주의, 절반보다 나쁜 쪽이면 보통으로 표시합니다.'+(ind.window_note?' '+ind.window_note:'');
+}
+function chip(st){var s=ST[st]||ST.na;return '<span class="chip '+st+'"><span class="dot '+st+'" aria-hidden="true">'+s[0]+'</span>'+s[1]+'</span>';}
+
+function sparkSvg(ind){
+  var pts=ind.spark||[]; if(pts.length<2)return '';
+  var w=300,h=66,pad=6, vals=pts.map(function(p){return p[1];});
+  var lo=Math.min.apply(null,vals), hi=Math.max.apply(null,vals);
+  if(hi===lo){hi+=1;lo-=1;}
+  var X=function(i){return pad+(w-2*pad)*i/(pts.length-1);}, Y=function(v){return h-pad-(h-2*pad)*(v-lo)/(hi-lo);};
+  var line=pts.map(function(p,i){return (i?'L':'M')+X(i).toFixed(1)+' '+Y(p[1]).toFixed(1);}).join(' ');
+  var area=line+' L'+X(pts.length-1).toFixed(1)+' '+(h-1)+' L'+X(0).toFixed(1)+' '+(h-1)+' Z';
+  var ref='';
+  var m=ind.rule_note&&ind.rule_line!=null?ind.rule_line:null;
+  if(m!=null&&m>lo&&m<hi){ref='<line x1="0" x2="'+w+'" y1="'+Y(m).toFixed(1)+'" y2="'+Y(m).toFixed(1)+'" stroke="var(--line)" stroke-width="1"/><text x="'+(w-2)+'" y="'+(Y(m)-3).toFixed(1)+'" text-anchor="end" font-size="10" fill="var(--faint)">주의선 '+fmt(m,ind)+'</text>';}
+  var lx=X(pts.length-1), ly=Y(vals[vals.length-1]);
+  return '<div class="spark" data-id="'+esc(ind.id)+'"><div class="tip"></div>'+
+    '<svg viewBox="0 0 '+w+' '+h+'" preserveAspectRatio="none" role="img" aria-label="'+esc(ind.label)+' 최근 2년 흐름">'+ref+
+    '<path d="'+area+'" fill="var(--series-wash)"/><path d="'+line+'" fill="none" stroke="var(--series)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" vector-effect="non-scaling-stroke"/>'+
+    '<line class="xh" x1="0" x2="0" y1="0" y2="'+h+'" stroke="var(--faint)" stroke-width="1" visibility="hidden" vector-effect="non-scaling-stroke"/>'+
+    '<circle class="hd" r="4" fill="var(--series)" stroke="var(--surface)" stroke-width="2" visibility="hidden"/>'+
+    '<circle cx="'+lx.toFixed(1)+'" cy="'+ly.toFixed(1)+'" r="4" fill="var(--series)" stroke="var(--surface)" stroke-width="2"/></svg>'+
+    '<div class="axis"><span>'+ym(pts[0][0])+'</span><span>'+ym(pts[pts.length-1][0])+'</span></div></div>';
+}
+
+function tile(ind){
+  if(ind.value==null){
+    return '<article class="tile na"><div class="thead"><h3>'+esc(ind.label)+'</h3>'+chip('na')+'</div><div class="val">자료를 가져오지 못했습니다</div><div class="delta">다음 갱신 때 다시 시도합니다.</div>'+learn(ind)+'</article>';
+  }
+  var d=dirOf(ind), arrow=d==='up'?'▲':d==='down'?'▼':'＝';
+  var diff=ind.v3m==null?null:ind.value-ind.v3m;
+  var delta=ind.v3m==null?'':'<div class="delta num">석 달 전보다 <b>'+arrow+' '+(d==='flat'?'비슷':fmt(Math.abs(diff),ind))+'</b> <span>(그때 '+fmt(ind.v3m,ind)+')</span></div>';
+  var pos='';
+  if(ind.pct!=null){
+    pos='<div class="pos"><div class="track" role="img" aria-label="'+windowText(ind)+' 중 위치 '+Math.round(ind.pct)+'%"><i style="left:'+Math.min(98,Math.max(2,ind.pct)).toFixed(1)+'%"></i></div>'+
+      '<div class="poscap"><span>낮음</span><span>'+windowText(ind)+' 중 <b>'+esc(posText(ind))+'</b></span><span>높음</span></div></div>';
+  }
+  return '<article class="tile '+ind.status+'" id="t-'+esc(ind.id)+'"><div class="thead"><h3>'+esc(ind.label)+'</h3>'+chip(ind.status)+'</div>'+
+    '<div class="val num">'+fmt(ind.value,ind)+unit(ind)+'</div>'+delta+sparkSvg(ind)+pos+learn(ind)+'</article>';
+}
+function learn(ind){
+  return '<details class="learn"><summary>배우기</summary><dl>'+
+    '<dt>이게 뭐예요?</dt><dd>'+esc(ind.what)+'</dd>'+
+    '<dt>어떻게 읽어요?</dt><dd>'+esc(ind.read)+'</dd>'+
+    '<dt>지금은?</dt><dd>'+esc(nowText(ind))+'</dd>'+
+    '<dt>색은 어떻게 정했나요?</dt><dd>'+esc(ruleText(ind))+'</dd></dl>'+
+    '<div class="src">'+esc(ind.freq||'')+' 발표 · 기준일 '+esc(ind.asof||'–')+' · 출처 '+esc(ind.source)+(ind.error?' · 오류: '+esc(ind.error):'')+'</div></details>';
+}
+function groupRead(g,list){
+  var c=g.counts, n=c.good+c.mid+c.warn;
+  if(!n)return '이 묶음은 참고 지표입니다. 숫자의 방향만 봅니다.';
+  var s='색이 있는 지표 '+n+'개 중 양호 '+c.good+', 보통 '+c.mid+', 주의 '+c.warn+'.';
+  var w=list.filter(function(x){return x.status==='warn';}).map(function(x){return x.label;});
+  if(w.length)s+=' 눈여겨볼 것: '+w.slice(0,2).join(', ')+(w.length>2?' 외 '+(w.length-2)+'개':'')+'.';
+  return s;
+}
+function hero(D){
+  var w=W[D.weather]||W.none, c=D.counts, n=c.good+c.mid+c.warn;
+  var seg=function(k,cls){return c[k]?'<i class="'+cls+'" style="flex:'+c[k]+'" title="'+ST[k][1]+' '+c[k]+'개"></i>':'';};
+  return '<section class="hero" aria-label="전체 요약"><div class="sky" aria-hidden="true">'+w[0]+'</div><div>'+
+    '<p class="eyebrow">오늘의 경기 날씨</p><h2>'+w[1]+'</h2>'+
+    '<p class="lead">'+w[2]+' 색이 있는 지표 <b class="num">'+n+'</b>개 가운데 양호 <b class="num">'+c.good+'</b>, 보통 <b class="num">'+c.mid+'</b>, 주의 <b class="num">'+c.warn+'</b>개입니다.</p></div>'+
+    '<div class="mix"><div class="mixbar" role="img" aria-label="양호 '+c.good+', 보통 '+c.mid+', 주의 '+c.warn+'">'+seg('good','g')+seg('mid','m')+seg('warn','w')+'</div>'+
+    '<div class="legend"><span><span class="dot good" aria-hidden="true">✓</span>양호 <b>'+c.good+'</b></span><span><span class="dot mid" aria-hidden="true">–</span>보통 <b>'+c.mid+'</b></span><span><span class="dot warn" aria-hidden="true">!</span>주의 <b>'+c.warn+'</b></span><span><span class="dot info" aria-hidden="true">i</span>참고 <b>'+c.info+'</b></span>'+(c.na?'<span><span class="dot na" aria-hidden="true">?</span>자료 없음 <b>'+c.na+'</b></span>':'')+
+    '<span><a href="#method">어떻게 정했나요?</a></span></div></div></section>';
+}
+function brief(D){
+  var ok=D.indicators.filter(function(x){return x.value!=null;});
+  var warn=ok.filter(function(x){return x.status==='warn';});
+  var a=warn.length?warn.slice(0,4).map(function(x){return '<a href="#t-'+esc(x.id)+'">'+esc(x.label)+'</a>';}).join(', ')+(warn.length>4?' 외 '+(warn.length-4)+'개':''):'주의로 표시된 지표가 없습니다.';
+  var mv=ok.filter(function(x){return x.pct!=null&&x.pct3m!=null;}).map(function(x){return {x:x,d:x.pct-x.pct3m};}).sort(function(p,q){return Math.abs(q.d)-Math.abs(p.d);}).slice(0,2).filter(function(p){return Math.abs(p.d)>=10;});
+  var b=mv.length?mv.map(function(p){return '<a href="#t-'+esc(p.x.id)+'">'+esc(p.x.label)+'</a> '+(p.d>0?'▲':'▼')+' <span class="num">('+fmt(p.x.v3m,p.x)+' → '+fmt(p.x.value,p.x)+')</span>';}).join('<br>'):'석 달 사이 크게 달라진 지표가 없습니다.';
+  var g=D.groups.filter(function(x){return x.weather==='rain'||x.weather==='cloudy';}).map(function(x){return '<a href="#g-'+esc(x.id)+'">'+esc(x.icon+' '+x.title)+'</a>';});
+  var c=g.length?g.join(', '):'흐린 묶음이 없습니다.';
+  return '<section class="brief" aria-label="핵심 세 가지"><div class="card"><h3>지금 주의로 표시된 지표</h3><p>'+a+'</p></div><div class="card"><h3>석 달 사이 가장 달라진 것</h3><p>'+b+'</p></div><div class="card"><h3>흐린 묶음</h3><p>'+c+'</p></div></section>';
+}
+function cards(D){
+  var nav='<nav class="jump" aria-label="묶음으로 이동">'+D.groups.map(function(g){return '<a href="#g-'+esc(g.id)+'">'+esc(g.icon+' '+g.title)+'<span aria-hidden="true">'+(W[g.weather]||W.none)[0]+'</span></a>';}).join('')+'</nav>';
+  var body=D.groups.map(function(g){
+    var list=D.indicators.filter(function(x){return x.group===g.id;}), w=W[g.weather]||W.none;
+    return '<section class="group" id="g-'+esc(g.id)+'"><div class="ghead"><span class="ico" aria-hidden="true">'+esc(g.icon)+'</span><h2>'+esc(g.title)+'</h2><span class="q">'+esc(g.question)+'</span>'+
+      '<span class="wchip"><span class="e" aria-hidden="true">'+w[0]+'</span>'+w[1]+'</span></div>'+
+      '<p class="gwhy">'+esc(g.why)+'</p><p class="gread">'+esc(groupRead(g,list))+'</p><div class="grid">'+list.map(tile).join('')+'</div></section>';
+  }).join('');
+  return nav+body;
+}
+function table(D){
+  var rows=D.groups.map(function(g){
+    var list=D.indicators.filter(function(x){return x.group===g.id;});
+    return '<tr class="gh"><td colspan="7">'+esc(g.icon+' '+g.title)+'</td></tr>'+list.map(function(x){
+      var u=x.unit?' '+esc(x.unit):'';
+      return '<tr><td>'+esc(x.label)+'</td><td class="num">'+fmt(x.value,x)+u+'</td><td class="num">'+fmt(x.v3m,x)+'</td><td class="num">'+fmt(x.v1y,x)+'</td><td class="num">'+(x.pct==null?'–':Math.round(x.pct)+'%')+'</td><td>'+chip(x.status)+'</td><td class="num">'+esc(x.asof||'–')+'</td></tr>';
+    }).join('');
+  }).join('');
+  return '<div class="tablewrap"><table><thead><tr><th>지표</th><th>지금</th><th>석 달 전</th><th>1년 전</th><th>5년 중 위치</th><th>상태</th><th>기준일</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+}
+function render(){
+  var D=DATA; if(!D)return;
+  document.getElementById('stamp').textContent='가장 최근 자료 '+(D.latest_data_day||'–')+' · 갱신 '+(D.generated_kst||'')+' (한국 시간) · 지표 '+D.indicators.length+'개';
+  var n=[];
+  if(D.demo)n.push('<div class="banner">⚠️ 지금 보이는 숫자는 <b>화면 확인용 예시</b>입니다. 실제 자료가 아닙니다.</div>');
+  var age=(Date.now()-new Date(D.generated_at).getTime())/864e5;
+  if(!D.demo&&age>3)n.push('<div class="banner">⚠️ 마지막 갱신이 '+Math.floor(age)+'일 전입니다. 자동 갱신이 멈췄을 수 있습니다.</div>');
+  document.getElementById('notice').innerHTML=n.join('');
+  document.getElementById('app').innerHTML=hero(D)+brief(D)+(view==='cards'?cards(D):table(D));
+  bindSparks();
+}
+function bindSparks(){
+  var byId={}; DATA.indicators.forEach(function(x){byId[x.id]=x;});
+  Array.prototype.forEach.call(document.querySelectorAll('.spark'),function(el){
+    var ind=byId[el.getAttribute('data-id')], pts=ind.spark, svg=el.querySelector('svg'), tip=el.querySelector('.tip'), xh=el.querySelector('.xh'), hd=el.querySelector('.hd');
+    var w=300,h=66,pad=6, vals=pts.map(function(p){return p[1];}), lo=Math.min.apply(null,vals), hi=Math.max.apply(null,vals); if(hi===lo){hi+=1;lo-=1;}
+    function move(e){
+      var r=svg.getBoundingClientRect(), fx=(e.clientX-r.left)/r.width;
+      var i=Math.round(Math.min(1,Math.max(0,(fx*w-pad)/(w-2*pad)))*(pts.length-1));
+      var x=pad+(w-2*pad)*i/(pts.length-1), y=h-pad-(h-2*pad)*(pts[i][1]-lo)/(hi-lo);
+      xh.setAttribute('x1',x);xh.setAttribute('x2',x);xh.setAttribute('visibility','visible');
+      hd.setAttribute('cx',x);hd.setAttribute('cy',y);hd.setAttribute('visibility','visible');
+      tip.textContent=pts[i][0]+' · '+fmt(pts[i][1],ind)+(ind.unit?' '+ind.unit:'');
+      tip.style.display='block'; tip.style.left=Math.min(r.width-60,Math.max(60,x/w*r.width))+'px';
+    }
+    function leave(){xh.setAttribute('visibility','hidden');hd.setAttribute('visibility','hidden');tip.style.display='none';}
+    el.addEventListener('pointermove',move); el.addEventListener('pointerdown',move); el.addEventListener('pointerleave',leave);
+  });
+}
+function load(){
+  if(window.__BOARD__){DATA=window.__BOARD__;render();return;}
+  fetch(DATA_URL+'?t='+Math.floor(Date.now()/3e5),{cache:'no-store'}).then(function(r){if(!r.ok)throw new Error('HTTP '+r.status);return r.json();})
+    .then(function(d){DATA=d;render();})
+    .catch(function(e){if(!DATA)document.getElementById('app').innerHTML='<p class="sk">자료를 불러오지 못했습니다. 잠시 뒤 새로 고쳐 주세요. ('+esc(e.message)+')</p>';});
+}
+document.getElementById('viewBtn').addEventListener('click',function(){
+  view=view==='cards'?'table':'cards'; this.setAttribute('aria-pressed',view==='table'); this.textContent=view==='table'?'카드로 보기':'표로 보기'; render();
+});
+document.getElementById('themeBtn').addEventListener('click',function(){
+  var r=document.documentElement, cur=r.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light'), nx=cur==='dark'?'light':'dark';
+  r.setAttribute('data-theme',nx); try{localStorage.setItem('board-theme',nx);}catch(e){}
+});
+try{var t=localStorage.getItem('board-theme'); if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}
+load();
+// 나중에 장중 갱신을 붙여도 화면은 그대로 쓴다: 10분마다, 그리고 탭으로 돌아올 때 다시 읽는다.
+setInterval(load,6e5);
+document.addEventListener('visibilitychange',function(){if(!document.hidden)load();});
+})();
+</script>
+</body>
+</html>
