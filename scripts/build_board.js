@@ -56,28 +56,48 @@ async function yahooRows(symbol) {
 }
 
 // --- 변환 --------------------------------------------------------------------
-// rows: [{day, v}] 오름차순. 반환도 같은 모양.
+// rows: [{day, v}] 오름차순(빈 값은 이미 빠져 있다). 반환: [{day, v, src}] — src 는 그 값을 만든 원자료(검증·화면 표시용).
+// 날짜로 짝을 맞춘다. 행 개수로 세지 않는다: FRED 에는 빠진 달이 있다(예: 2025년 10월 CPI·실업률은 발표되지 않았다).
+// 짝이 없는 시점은 값을 만들지 않고 건너뛴다(13개월 변화를 '전년 대비'라고 부르는 사고 방지).
+const monthKey = (day) => day.slice(0, 7);
+function shiftMonth(day, n) {
+  const y = Number(day.slice(0, 4)), m = Number(day.slice(5, 7)) - 1 + n;
+  const yy = y + Math.floor(m / 12), mm = ((m % 12) + 12) % 12;
+  return `${yy}-${String(mm + 1).padStart(2, '0')}`;
+}
 function transform(rows, kind, scale = 1) {
-  const s = rows.map((r) => ({ day: r.day, v: r.v * scale }));
-  if (kind === 'level') return s;
-  if (kind === 'yoy') { // 월간 자료: 12행 전 대비 %
+  const s = rows.map((r) => ({ day: r.day, v: r.v * scale, raw: r.v }));
+  if (kind === 'level') return s.map((r) => ({ day: r.day, v: r.v, src: { kind, raw: [r.day, r.raw] } }));
+  if (kind === 'yoy' || kind === 'diff') { // 월간 자료
+    const byMonth = new Map(s.map((r) => [monthKey(r.day), r]));
+    const back = kind === 'yoy' ? -12 : -1;
     const out = [];
-    for (let i = 12; i < s.length; i++) if (s[i - 12].v !== 0) out.push({ day: s[i].day, v: (s[i].v / s[i - 12].v - 1) * 100 });
+    for (const r of s) {
+      const b = byMonth.get(shiftMonth(r.day, back));
+      if (!b || (kind === 'yoy' && b.v === 0)) continue;
+      out.push({ day: r.day, v: kind === 'yoy' ? (r.v / b.v - 1) * 100 : r.v - b.v, src: { kind, cur: [r.day, r.raw], base: [b.day, b.raw] } });
+    }
     return out;
   }
-  if (kind === 'diff') return s.slice(1).map((r, i) => ({ day: r.day, v: r.v - s[i].v }));
-  if (kind === 'ma4') {
+  if (kind === 'ma4') { // 주간 자료: 연속된 4주(간격 7일)일 때만
     const out = [];
-    for (let i = 3; i < s.length; i++) out.push({ day: s[i].day, v: (s[i].v + s[i - 1].v + s[i - 2].v + s[i - 3].v) / 4 });
+    for (let i = 3; i < s.length; i++) {
+      const w = s.slice(i - 3, i + 1);
+      const gap = (new Date(w[3].day) - new Date(w[0].day)) / 864e5;
+      if (gap !== 21) continue;
+      out.push({ day: s[i].day, v: w.reduce((a, r) => a + r.v, 0) / 4, src: { kind, vals: w.map((r) => [r.day, r.raw]) } });
+    }
     return out;
   }
   if (kind === 'dd252' || kind === 'vs200') {
     const n = kind === 'dd252' ? 252 : 200;
     const out = [];
     for (let i = n - 1; i < s.length; i++) {
-      const win = s.slice(i - n + 1, i + 1).map((r) => r.v);
-      const ref = kind === 'dd252' ? Math.max(...win) : win.reduce((a, b) => a + b, 0) / n;
-      out.push({ day: s[i].day, v: (s[i].v / ref - 1) * 100 });
+      const win = s.slice(i - n + 1, i + 1);
+      let ref, src;
+      if (kind === 'dd252') { const hi = win.reduce((a, r) => (r.v > a.v ? r : a)); ref = hi.v; src = { kind, close: [s[i].day, s[i].raw], high: [hi.day, hi.raw], days: n }; }
+      else { ref = win.reduce((a, r) => a + r.v, 0) / n; src = { kind, close: [s[i].day, s[i].raw], avg: round(ref, 4), from: win[0].day, days: n }; }
+      out.push({ day: s[i].day, v: (s[i].v / ref - 1) * 100, src });
     }
     return out;
   }
@@ -144,7 +164,11 @@ function buildIndicator(ind, rows, sr) {
   const v3m = valueAt(s, addDays(last.day, -91));
   const p3 = percentile(s, v3m, last.day, years);
   const j = judge(ind, last.v, p.pct, sr);
+  // 원자료의 가장 최근 시점이 계산에서 빠졌으면(짝이 되는 과거 값이 없음) 그 사실을 남긴다
+  const rawLast = rows[rows.length - 1];
+  const skipped = rawLast.day > last.day ? { day: rawLast.day, raw: rawLast.v } : null;
   return {
+    calc: last.src, skipped_latest: skipped,
     value: round(last.v), asof: last.day,
     v1m: round(valueAt(s, addDays(last.day, -30))), v3m: round(v3m), v1y: round(valueAt(s, addDays(last.day, -365))),
     pct: round(p.pct, 1), pct3m: round(p3.pct, 1), pct_n: p.n, pct_from: p.from,
@@ -221,14 +245,14 @@ function demo(outPath) {
   for (const ind of cfg.indicators) {
     if (!cache[ind.fred]) {
       const stepDays = monthly.has(ind.fred) ? 30 : weekly.has(ind.fred) ? 7 : 1;
-      const n = Math.floor((365.25 * 8) / stepDays);
+      const n = stepDays === 30 ? 96 : Math.floor((365.25 * 8) / stepDays);
       const trendy = ['CPIAUCNS', 'PCEPILFE', 'PAYEMS', 'RSAFS', 'M2SL', 'SP500'].includes(ind.fred);
       let v = base[ind.fred] * (trendy ? 0.75 : 1);
       const rows = [];
       for (let i = n; i >= 0; i--) {
         const vol = Math.abs(base[ind.fred]) * (trendy ? 0.004 : 0.02) + 0.01;
         v += (rnd() - 0.5) * vol * (stepDays === 1 ? 0.6 : 1.4) + (trendy ? base[ind.fred] * 0.25 / n : (base[ind.fred] - v) * 0.02);
-        const day = addDays(today, -i * stepDays);
+        const day = stepDays === 30 ? `${shiftMonth(today, -i)}-01` : addDays(today, -i * stepDays);
         if (stepDays === 1 && [0, 6].includes(new Date(day + 'T00:00:00Z').getUTCDay())) continue;
         rows.push({ day, v });
       }
@@ -244,18 +268,35 @@ function demo(outPath) {
 function selftest() {
   const assert = (c, m) => { if (!c) { console.error('FAIL', m); process.exit(1); } };
   const near = (a, b, e = 1e-9) => Math.abs(a - b) < e;
-  const mk = (vals, stepDays = 30, start = '2020-01-01') => vals.map((v, i) => ({ day: addDays(start, i * stepDays), v }));
-  // yoy: 13번째 값이 첫 값의 1.1배 → 10%
-  const y = transform(mk([100, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 110]), 'yoy');
-  assert(y.length === 1 && near(y[0].v, 10, 1e-6), 'yoy');
-  assert(near(transform(mk([5, 8, 6]), 'diff')[1].v, -2), 'diff');
-  assert(near(transform(mk([1, 2, 3, 4, 5]), 'ma4')[1].v, 3.5), 'ma4');
+  const mk = (vals, stepDays = 1, start = '2020-01-01') => vals.map((v, i) => ({ day: addDays(start, i * stepDays), v }));
+  const mkM = (vals, start = '2024-01') => vals.map((v, i) => (v == null ? null : { day: `${shiftMonth(start + '-01', i)}-01`, v })).filter(Boolean);
+  assert(shiftMonth('2026-01-01', -1) === '2025-12' && shiftMonth('2026-10-01', -12) === '2025-10' && shiftMonth('2025-12-01', 1) === '2026-01', 'shiftMonth');
+  // yoy: 같은 달끼리
+  const y = transform(mkM([100, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 110]), 'yoy');
+  assert(y.length === 1 && near(y[0].v, 10, 1e-6) && y[0].src.base[0] === '2024-01-01', 'yoy');
+  // 빠진 달: 2024-10 이 없으면 2025-10 은 값을 만들지 않고, 2025-11 은 2024-11 과 짝을 맞춘다(행 개수로 세면 13개월 변화가 된다)
+  const gapVals = Array.from({ length: 24 }, (_, i) => 100 + i); gapVals[9] = null;
+  const yg = transform(mkM(gapVals), 'yoy');
+  assert(!yg.some((r) => r.day === '2025-10-01'), 'yoy: 1년 전 달이 없으면 건너뜀');
+  const nov = yg.find((r) => r.day === '2025-11-01');
+  assert(nov && nov.src.base[0] === '2024-11-01' && near(nov.v, (122 / 110 - 1) * 100, 1e-9), 'yoy: 빠진 달 뒤에도 같은 달끼리');
+  const dg = transform(mkM([5, 8, null, 6, 9]), 'diff');
+  assert(dg.length === 2 && near(dg[0].v, 3) && near(dg[1].v, 3) && dg[1].day === '2024-05-01', 'diff: 전달이 없으면 건너뜀');
+  assert(near(transform(mk([1, 2, 3, 4, 5], 7), 'ma4')[1].v, 3.5), 'ma4');
+  const wk = mk([1, 2, 3, 4, 5, 6], 7); wk.splice(2, 1);
+  assert(transform(wk, 'ma4').length === 0, 'ma4: 주가 빠지면 그 구간은 건너뜀');
   assert(near(transform(mk([2000000]), 'level', 0.000001)[0].v, 2), 'scale');
   const up = mk(Array.from({ length: 260 }, (_, i) => 100 + i), 1);
   assert(near(transform(up, 'dd252').pop().v, 0), 'dd252 고점이면 0');
   const drop = up.concat([{ day: addDays(up[up.length - 1].day, 1), v: 359 * 0.9 }]);
-  assert(near(transform(drop, 'dd252').pop().v, -10, 1e-6), 'dd252 -10%');
+  const dd = transform(drop, 'dd252').pop();
+  assert(near(dd.v, -10, 1e-6) && dd.src.high[1] === 359, 'dd252 -10%');
   assert(transform(up, 'vs200').pop().v > 0, 'vs200 오름세면 양수');
+  // 최근 달이 계산에서 빠지면 skipped_latest 로 남는다
+  const cpiLike = mkM(gapVals.concat([130, 131]).map((v, i) => (i === 9 ? null : v))); // 2024-10 없음, 마지막 달 = 2026-02
+  const bi = buildIndicator({ transform: 'yoy' }, mkM(Array.from({ length: 22 }, (_, i) => (i === 9 ? null : 100 + i))), { warn_at_badness: 80, mid_at_badness: 50, window_years: 5 });
+  assert(bi.asof === '2025-09-01' && bi.skipped_latest && bi.skipped_latest.day === '2025-10-01', '마지막 달의 1년 전이 없으면 직전 달 값을 쓰고 표시를 남김');
+  void cpiLike;
   // 판정
   const sr = { warn_at_badness: 80, mid_at_badness: 50, window_years: 5 };
   assert(judge({ bad: 'high' }, 1, 90, sr).status === 'warn', '높을수록 나쁨: 상위 10% → 주의');

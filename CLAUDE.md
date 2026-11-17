@@ -57,6 +57,8 @@ GitHub Pages 홈페이지에 게시 + 이메일로 발송하는 프로젝트.
 - **LLM 을 쓰지 않는다.** `scripts/build_board.js`(코드)가 FRED 키 없는 CSV(S&P 500 은 Yahoo 일별 종가 — FRED 는 최근 1년치만 준다)를 받아 `docs/data/board.json` 을 만든다. 워크플로는 `.github/workflows/board.yml`(하루 2회 + 수동 실행). 일일 리포트(`daily.yml`)와 완전히 따로 돈다.
 - 지표 목록·설명 문구·색 기준은 `config/board.json` 한 곳에서 관리한다. 화면은 `docs/board/index.html`(손으로 관리하는 정적 파일. `build_site.js` 가 만들지 않는다).
 - 색(양호·보통·주의)과 날씨는 **읽기 쉽게 하려는 표시이며 매매 신호가 아니다.** 기준선이 있는 지표는 그 선(`rule`), 없는 지표는 최근 5년 중 위치로 정한다. 좋고 나쁨을 한쪽으로 말하기 어려운 지표(`bad: none`)는 색을 주지 않는다.
+- **전년 대비·전월 대비는 날짜로 짝을 맞춘다(행 개수로 세지 않는다).** FRED 에는 빠진 달이 있다(2025년 10월 CPI·실업률은 발표되지 않았다). 짝이 없는 달은 값을 만들지 않고 `skipped_latest` 로 남겨 화면에 알린다. 처음 버전은 12행 전과 비교해 13개월 변화를 '전년 대비'로 내보냈다(2026-11-17 검수에서 발견·수정, 회귀 테스트는 `--selftest`).
+- 지표마다 `calc`(그 값을 만든 원자료)를 `board.json` 에 남기고 화면 '배우기'에 계산식을 보여준다.
 - 못 받은 지표는 `value: null` + `error` 로 남기고 화면에 '자료를 가져오지 못했습니다'로 나온다. 추정치로 메우지 않는다.
 - ISM 지수·콘퍼런스보드 선행지수는 무료 공개 자료가 아니라 넣지 않았다. 하이일드 스프레드는 FRED 가 최근 3년치만 준다.
 - 명령: `npm run board`(실제 수집) · `node scripts/build_board.js --demo <파일>`(네트워크 없이 예시 자료) · `node scripts/build_board.js --selftest`.

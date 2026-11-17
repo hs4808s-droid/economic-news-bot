@@ -123,6 +123,7 @@ details.learn dl{margin:4px 0 6px; font-size:14px}
 details.learn dt{font-weight:700; margin-top:8px; font-size:12.5px; color:var(--muted); letter-spacing:.02em}
 details.learn dd{margin:1px 0 0}
 .src{font-size:12px; color:var(--faint); margin-top:8px}
+.skip{font-size:12.5px; color:var(--muted); background:var(--mid-soft); border-radius:8px; padding:5px 8px; margin-top:6px}
 .tile.na .val{font-size:18px; color:var(--muted); font-weight:600}
 
 /* 표 */
@@ -249,6 +250,23 @@ function ruleText(ind){
   if(ind.rule_note)return ind.rule_note;
   return (ind.bad==='high'?'높을수록 나쁜 지표입니다. ':'낮을수록 나쁜 지표입니다. ')+windowText(ind)+'과 견줘 나쁜 쪽 상위 20% 안이면 주의, 절반보다 나쁜 쪽이면 보통으로 표시합니다.'+(ind.window_note?' '+ind.window_note:'');
 }
+function n0(v){return v==null?'–':Number(v).toLocaleString('en-US',{maximumFractionDigits:4});}
+function mon(day){return day.slice(0,4)+'년 '+Number(day.slice(5,7))+'월';}
+function calcText(ind){
+  var c=ind.calc; if(!c)return '';
+  if(c.kind==='yoy')return mon(c.cur[0])+' 값 '+n0(c.cur[1])+' ÷ '+mon(c.base[0])+' 값 '+n0(c.base[1])+' − 1 = '+fmt(ind.value,ind)+'%';
+  if(c.kind==='diff')return mon(c.cur[0])+' 값 '+n0(c.cur[1])+' − '+mon(c.base[0])+' 값 '+n0(c.base[1])+' = '+fmt(ind.value,ind);
+  if(c.kind==='ma4')return '최근 4주 값('+c.vals.map(function(v){return n0(v[1]);}).join(', ')+')의 평균입니다.';
+  if(c.kind==='dd252')return c.close[0]+' 종가 '+n0(c.close[1])+' ÷ 최근 1년 최고 종가 '+n0(c.high[1])+'('+c.high[0]+') − 1 = '+fmt(ind.value,ind)+'%';
+  if(c.kind==='vs200')return c.close[0]+' 종가 '+n0(c.close[1])+' ÷ 200거래일 평균 '+n0(c.avg)+' − 1 = '+fmt(ind.value,ind)+'%';
+  return '원자료 값 '+n0(c.raw[1])+' ('+c.raw[0]+')을 그대로 씁니다.';
+}
+function skipText(ind){
+  var k=ind.skipped_latest; if(!k)return '';
+  var c=ind.calc||{};
+  if(c.kind==='yoy')return '가장 최근 발표인 '+mon(k.day)+'분은 1년 전 같은 달 자료가 없어 전년 대비를 계산하지 못했습니다. 그래서 '+mon(ind.asof)+'분을 보여 드립니다.';
+  return '가장 최근 발표('+k.day+')는 짝이 되는 앞선 자료가 없어 계산하지 못했습니다. 그 앞 시점을 보여 드립니다.';
+}
 function chip(st){var s=ST[st]||ST.na;return '<span class="chip '+st+'"><span class="dot '+st+'" aria-hidden="true">'+s[0]+'</span>'+s[1]+'</span>';}
 
 function sparkSvg(ind){
@@ -285,14 +303,15 @@ function tile(ind){
       '<div class="poscap"><span>낮음</span><span>'+windowText(ind)+' 중 <b>'+esc(posText(ind))+'</b></span><span>높음</span></div></div>';
   }
   return '<article class="tile '+ind.status+'" id="t-'+esc(ind.id)+'"><div class="thead"><h3>'+esc(ind.label)+'</h3>'+chip(ind.status)+'</div>'+
-    '<div class="val num">'+fmt(ind.value,ind)+unit(ind)+'</div>'+delta+sparkSvg(ind)+pos+learn(ind)+'</article>';
+    '<div class="val num">'+fmt(ind.value,ind)+unit(ind)+'</div>'+delta+(ind.skipped_latest?'<div class="skip">※ '+esc(skipText(ind))+'</div>':'')+sparkSvg(ind)+pos+learn(ind)+'</article>';
 }
 function learn(ind){
   return '<details class="learn"><summary>배우기</summary><dl>'+
     '<dt>이게 뭐예요?</dt><dd>'+esc(ind.what)+'</dd>'+
     '<dt>어떻게 읽어요?</dt><dd>'+esc(ind.read)+'</dd>'+
     '<dt>지금은?</dt><dd>'+esc(nowText(ind))+'</dd>'+
-    '<dt>색은 어떻게 정했나요?</dt><dd>'+esc(ruleText(ind))+'</dd></dl>'+
+    '<dt>색은 어떻게 정했나요?</dt><dd>'+esc(ruleText(ind))+'</dd>'+
+    (ind.calc?'<dt>숫자는 어떻게 나왔나요?</dt><dd class="num">'+esc(calcText(ind))+'</dd>':'')+'</dl>'+
     '<div class="src">'+esc(ind.freq||'')+' 발표 · 기준 '+esc(asofText(ind))+' · 출처 '+esc(ind.source)+(ind.error?' · 오류: '+esc(ind.error):'')+'</div></details>';
 }
 function groupRead(g,list){
