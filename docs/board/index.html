@@ -61,8 +61,8 @@ header.top p{margin:.25em 0 0; color:var(--muted); font-size:13.5px}
 .story .qdesc{font-size:15.5px; margin:0 0 6px}
 .story .move{font-size:14px; color:var(--muted); margin:0 0 12px}
 .story ol{margin:0; padding:0; list-style:none; display:grid; gap:9px}
-.story li{font-size:15px; line-height:1.55; padding-left:62px; position:relative}
-.story li .k{position:absolute; left:0; top:1px; font-size:12.5px; font-weight:700; border-radius:6px; padding:1px 7px; background:var(--surface-2); color:var(--muted)}
+.story ol li{font-size:15px; line-height:1.55; padding-left:62px; position:relative}
+.story ol li .k{position:absolute; left:0; top:1px; font-size:12.5px; font-weight:700; border-radius:6px; padding:1px 7px; background:var(--surface-2); color:var(--muted)}
 .story h3{font-size:13px; color:var(--muted); margin:16px 0 6px; letter-spacing:.04em}
 .story ul.watch{margin:0; padding-left:1.1em; font-size:14.5px; line-height:1.6}
 .qmap{width:100%; height:auto; display:block}
@@ -396,9 +396,9 @@ function learn(ind){
 function infoExtreme(list){
   var out=[];
   list.filter(function(x){return x.status==='info'&&x.value!=null;}).forEach(function(x){
-    if(x.pct!=null&&x.pct>=95)out.push(x.label+'은(는) '+windowText(x)+' 중 가장 높은 축입니다');
-    else if(x.pct!=null&&x.pct<=5)out.push(x.label+'은(는) '+windowText(x)+' 중 가장 낮은 축입니다');
-    else if(x.unit!=='%'&&x.unit!=='%p'&&x.v1y>0){var ch=(x.value/x.v1y-1)*100;if(Math.abs(ch)>=30)out.push(x.label+'은(는) 1년 전보다 '+Math.round(Math.abs(ch))+'% '+(ch>0?'올랐습니다':'내렸습니다'));}
+    if(x.pct!=null&&x.pct>=95)out.push(josa(x.label,'은','는')+' '+windowText(x)+' 중 가장 높은 축입니다');
+    else if(x.pct!=null&&x.pct<=5)out.push(josa(x.label,'은','는')+' '+windowText(x)+' 중 가장 낮은 축입니다');
+    else if(x.unit!=='%'&&x.unit!=='%p'&&x.v1y>0){var ch=(x.value/x.v1y-1)*100;if(Math.abs(ch)>=30)out.push(josa(x.label,'은','는')+' 1년 전보다 '+Math.round(Math.abs(ch))+'% '+(ch>0?'올랐습니다':'내렸습니다'));}
   });
   return out.length?' 참고(색 없음): '+out.join('. ')+'.':'';
 }
@@ -425,9 +425,11 @@ var Q={balance:['좋은 균형','경기는 괜찮고 물가는 안정된 상태�
   hot:['뜨거움','경기는 버티지만 물가가 높습니다. 연준이 금리를 내리기 어려운 환경입니다.','q-hot'],
   stag:['둔화 + 물가 부담','경기는 식는데 물가는 높습니다. 연준이 돕기 어려워 가장 불편한 환경입니다.','q-stag'],
   cooling:['식어감','경기와 물가가 함께 식고 있습니다. 연준이 금리를 내릴 여지가 생깁니다.','q-cooling']};
+function josa(w,a,b){var t=String(w).replace(/[^가-힣A-Za-z0-9]+$/,''),c=t.charCodeAt(t.length-1);if(c>=0xAC00&&c<=0xD7A3)return w+((c-0xAC00)%28?a:b);return w+(/[0-9LMNRlmnr]$/.test(t)?a:b);}
+function num(v,x){return String(Number(v))+(x.unit==='%'||x.unit==='%p'?x.unit:'');}
 function byId(D,id){for(var i=0;i<D.indicators.length;i++)if(D.indicators[i].id===id)return D.indicators[i];return null;}
 function qmap(r){
-  var W0=360,H0=250,L=34,Rr=346,T=14,B=214, fmax=Math.max(6,Math.ceil(Math.max(r.infl,r.infl3m||0)+0.5)), fmin=Math.min(0,Math.floor(Math.min(r.infl,r.infl3m==null?r.infl:r.infl3m)));
+  var W0=360,H0=258,L=40,Rr=350,T=26,B=222, fmax=Math.max(6,Math.ceil(Math.max(r.infl,r.infl3m||0)+0.5)), fmin=Math.min(0,Math.floor(Math.min(r.infl,r.infl3m==null?r.infl:r.infl3m)));
   var X=function(g){return L+(Math.max(-1,Math.min(1,g))+1)/2*(Rr-L);}, Y=function(f){return B-(Math.max(fmin,Math.min(fmax,f))-fmin)/(fmax-fmin)*(B-T);};
   var cx=X(0), cy=Y(r.infl_line);
   var box=function(x,y,w,hh,cls,lab,tx,ty,anc){return '<rect x="'+x+'" y="'+y+'" width="'+w+'" height="'+hh+'" fill="var(--'+cls+'-soft)"/><text x="'+tx+'" y="'+ty+'" text-anchor="'+anc+'" font-size="12.5" font-weight="700" fill="var(--muted)">'+lab+'</text>';};
@@ -437,15 +439,18 @@ function qmap(r){
   s+='<text x="'+(L-4)+'" y="'+(cy+4)+'" text-anchor="end" font-size="10.5" fill="var(--muted)">'+r.infl_line+'%</text>';
   var y2=Y(2); if(Math.abs(y2-cy)>10)s+='<line x1="'+L+'" x2="'+(L+8)+'" y1="'+y2+'" y2="'+y2+'" stroke="var(--muted)"/><text x="'+(L-4)+'" y="'+(y2+4)+'" text-anchor="end" font-size="10.5" fill="var(--muted)">2%</text>';
   s+='<text x="'+((L+Rr)/2)+'" y="'+(B+18)+'" text-anchor="middle" font-size="11.5" fill="var(--muted)">← 경기 약함 · 경기 강함 →</text>';
-  s+='<text x="12" y="'+((T+B)/2)+'" text-anchor="middle" font-size="11.5" fill="var(--muted)" transform="rotate(-90 12 '+((T+B)/2)+')">물가 낮음 · 높음 →</text>';
+  s+='<text x="'+L+'" y="'+(T-9)+'" text-anchor="start" font-size="11.5" fill="var(--muted)">↑ 물가 높음</text>';
   var px=X(r.growth), py=Y(r.infl);
   if(r.growth3m!=null){
     var ox=X(r.growth3m), oy=Y(r.infl3m);
     s+='<defs><marker id="ah" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill="var(--muted)"/></marker></defs>';
-    if(Math.hypot(px-ox,py-oy)>14)s+='<line x1="'+ox+'" y1="'+oy+'" x2="'+(px-(px-ox)*9/Math.hypot(px-ox,py-oy))+'" y2="'+(py-(py-oy)*9/Math.hypot(px-ox,py-oy))+'" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#ah)"/>';
-    s+='<circle cx="'+ox+'" cy="'+oy+'" r="5.5" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.6"/><text x="'+ox+'" y="'+(oy+(oy>py?18:-10))+'" text-anchor="middle" font-size="11" fill="var(--muted)">석 달 전</text>';
+    var same=Math.hypot(px-ox,py-oy)<12;
+    if(!same&&Math.hypot(px-ox,py-oy)>14)s+='<line x1="'+ox+'" y1="'+oy+'" x2="'+(px-(px-ox)*9/Math.hypot(px-ox,py-oy))+'" y2="'+(py-(py-oy)*9/Math.hypot(px-ox,py-oy))+'" stroke="var(--muted)" stroke-width="1.6" marker-end="url(#ah)"/>';
+    if(!same)s+='<circle cx="'+ox+'" cy="'+oy+'" r="5.5" fill="var(--surface)" stroke="var(--muted)" stroke-width="1.6"/><text x="'+ox+'" y="'+(oy+(oy>py?18:-10))+'" text-anchor="middle" font-size="11" fill="var(--muted)">석 달 전</text>';
+    else s+='<text x="'+px+'" y="'+(py+24)+'" text-anchor="middle" font-size="11" fill="var(--muted)">석 달 전과 같은 자리</text>';
   }
   s+='<circle cx="'+px+'" cy="'+py+'" r="8" fill="var(--text)" stroke="var(--surface)" stroke-width="2.5"/><text x="'+px+'" y="'+(py+(r.growth3m!=null&&Y(r.infl3m)<py?24:-13))+'" text-anchor="middle" font-size="12.5" font-weight="800" fill="var(--text)">지금</text>';
+  if(false)0;
   return s+'</svg>';
 }
 function moveText(r){
@@ -484,10 +489,10 @@ function watchList(D){
   var seen={}, out=[];
   c.forEach(function(o){
     if(out.length>=3||seen[o.x.id])return; seen[o.x.id]=1;
-    var x=o.x, r=x.rule, v=x.value, t=fmt(o.t,x)+(x.unit==='%'||x.unit==='%p'?x.unit:'');
+    var x=o.x, r=x.rule, v=x.value, t=num(o.t,x);
     var worse=r.dir==='high'?v>=o.t:v<o.t;
     var verb=r.dir==='high'?(worse?t+' 아래로 내려오는지':t+'를 넘지 않는지'):(worse?t+' 위로 올라오는지':t+' 아래로 내려가지 않는지');
-    out.push('<a href="#t-'+esc(x.id)+'">'+esc(x.label)+'</a>가 '+esc(verb)+' <span class="num">(지금 '+fmt(v,x)+(x.unit==='%'||x.unit==='%p'?x.unit:'')+')</span>');
+    out.push('<a href="#t-'+esc(x.id)+'">'+esc(x.label)+'</a>'+josa(x.label,'이','가').slice(x.label.length)+' '+esc(verb)+' <span class="num">(지금 '+fmt(v,x)+(x.unit==='%'||x.unit==='%p'?x.unit:'')+')</span>');
   });
   return out;
 }
