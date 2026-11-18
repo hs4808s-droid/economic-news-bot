@@ -1,7 +1,7 @@
 {
   "schema": 1,
-  "generated_at": "2026-11-18T05:01:47.522Z",
-  "generated_kst": "2026-11-18 14:01",
+  "generated_at": "2026-11-18T06:58:05.097Z",
+  "generated_kst": "2026-11-18 15:58",
   "latest_data_day": "2026-11-17",
   "status_rule": {
     "warn_at_badness": 80,
@@ -17,6 +17,17 @@
   },
   "weather": "cloudy",
   "weather_short": false,
+  "regime": {
+    "growth": 0.333,
+    "growth_n": 12,
+    "infl": 3.429,
+    "infl_line": 2.5,
+    "quad": "hot",
+    "growth3m": 0.333,
+    "infl3m": 3.286,
+    "quad3m": "hot",
+    "near_edge": false
+  },
   "groups": [
     {
       "id": "rates",
@@ -143,6 +154,8 @@
         "flat": "석 달 전과 비슷합니다. 연준이 지켜보는 중입니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -165,6 +178,18 @@
       "pct_from": "2021-11-16",
       "status": "info",
       "basis": "none",
+      "status3m": "info",
+      "hist": {
+        "from": "2018-11-18",
+        "max": [
+          "2023-07-27",
+          5.33
+        ],
+        "min": [
+          "2020-04-23",
+          0.04
+        ]
+      },
       "spark": [
         [
           "2024-11-15",
@@ -546,6 +571,8 @@
         "flat": "석 달 전과 비슷합니다. 금리 전망이 크게 바뀌지 않았습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -568,6 +595,18 @@
       "pct_from": "2021-11-16",
       "status": "info",
       "basis": "none",
+      "status3m": "info",
+      "hist": {
+        "from": "2018-11-19",
+        "max": [
+          "2023-10-17",
+          5.19
+        ],
+        "min": [
+          "2021-02-05",
+          0.09
+        ]
+      },
       "spark": [
         [
           "2024-11-15",
@@ -949,6 +988,8 @@
         "flat": "석 달 전과 비슷합니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -971,6 +1012,18 @@
       "pct_from": "2021-11-16",
       "status": "info",
       "basis": "none",
+      "status3m": "info",
+      "hist": {
+        "from": "2018-11-19",
+        "max": [
+          "2026-10-05",
+          5.31
+        ],
+        "min": [
+          "2020-08-04",
+          0.52
+        ]
+      },
       "spark": [
         [
           "2024-11-15",
@@ -1352,6 +1405,18 @@
         "warn": "연준 목표(2%)보다 많이 높습니다. 금리를 내리기 어려운 상태입니다."
       },
       "rule_note": "연준 목표 2%와의 거리로 색을 정합니다 (2.5% 넘으면 보통, 3.5% 넘으면 주의).",
+      "rule": {
+        "dir": "high",
+        "mid": 2.5,
+        "warn": 3.5,
+        "note": "연준 목표 2%와의 거리로 색을 정합니다 (2.5% 넘으면 보통, 3.5% 넘으면 주의)."
+      },
+      "marks": [
+        {
+          "v": 2,
+          "label": "연준 목표 2%"
+        }
+      ],
       "rule_line": 3.5,
       "window_note": null,
       "calc": {
@@ -1381,6 +1446,18 @@
       "pct_from": "2021-09-01",
       "status": "warn",
       "basis": "rule",
+      "status3m": "warn",
+      "hist": {
+        "from": "2019-11-01",
+        "max": [
+          "2022-06-01",
+          9.0598
+        ],
+        "min": [
+          "2020-05-01",
+          0.1179
+        ]
+      },
       "spark": [
         [
           "2024-09-01",
@@ -1498,6 +1575,18 @@
         "warn": "연준 목표(2%)보다 많이 높습니다. 금리를 내리기 어려운 상태입니다."
       },
       "rule_note": "연준 목표 2%와의 거리로 색을 정합니다 (2.3% 넘으면 보통, 3.0% 넘으면 주의).",
+      "rule": {
+        "dir": "high",
+        "mid": 2.3,
+        "warn": 3,
+        "note": "연준 목표 2%와의 거리로 색을 정합니다 (2.3% 넘으면 보통, 3.0% 넘으면 주의)."
+      },
+      "marks": [
+        {
+          "v": 2,
+          "label": "연준 목표 2%"
+        }
+      ],
       "rule_line": 3,
       "window_note": null,
       "calc": {
@@ -1524,6 +1613,18 @@
       "pct_from": "2021-09-01",
       "status": "warn",
       "basis": "rule",
+      "status3m": "warn",
+      "hist": {
+        "from": "2019-11-01",
+        "max": [
+          "2022-09-01",
+          5.6404
+        ],
+        "min": [
+          "2020-06-01",
+          0.9705
+        ]
+      },
       "spark": [
         [
           "2024-09-01",
@@ -1645,6 +1746,13 @@
         "warn": "역전됐습니다. 과거 침체 전에 자주 나타난 모습입니다. 언제인지는 알려주지 않습니다."
       },
       "rule_note": "0 아래(역전)면 주의, 0.5 아래면 보통으로 표시합니다.",
+      "rule": {
+        "dir": "low",
+        "mid": 0.5,
+        "warn": 0,
+        "note": "0 아래(역전)면 주의, 0.5 아래면 보통으로 표시합니다."
+      },
+      "marks": null,
       "rule_line": 0,
       "window_note": null,
       "calc": {
@@ -1670,6 +1778,18 @@
       "pct_from": "2021-11-17",
       "status": "good",
       "basis": "rule",
+      "status3m": "good",
+      "hist": {
+        "from": "2018-11-19",
+        "max": [
+          "2022-05-06",
+          2.27
+        ],
+        "min": [
+          "2023-05-04",
+          -1.89
+        ]
+      },
       "spark": [
         [
           "2024-11-18",
@@ -2051,6 +2171,13 @@
         "warn": "역전됐습니다. 과거 침체 전에 자주 나타난 모습입니다. 언제인지는 알려주지 않습니다."
       },
       "rule_note": "0 아래(역전)면 주의, 0.25 아래면 보통으로 표시합니다.",
+      "rule": {
+        "dir": "low",
+        "mid": 0.25,
+        "warn": 0,
+        "note": "0 아래(역전)면 주의, 0.25 아래면 보통으로 표시합니다."
+      },
+      "marks": null,
       "rule_line": 0,
       "window_note": null,
       "calc": {
@@ -2073,6 +2200,18 @@
       "pct_from": "2021-11-17",
       "status": "good",
       "basis": "rule",
+      "status3m": "good",
+      "hist": {
+        "from": "2018-11-19",
+        "max": [
+          "2021-03-29",
+          1.59
+        ],
+        "min": [
+          "2023-07-03",
+          -1.08
+        ]
+      },
       "spark": [
         [
           "2024-11-18",
@@ -2454,6 +2593,8 @@
         "warn": "최근 5년 가운데 가장 적은 축입니다. 집 짓기가 뚜렷이 식었습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -2476,6 +2617,18 @@
       "pct_from": "2021-09-01",
       "status": "warn",
       "basis": "position",
+      "status3m": "good",
+      "hist": {
+        "from": "2018-11-01",
+        "max": [
+          "2022-04-01",
+          1807
+        ],
+        "min": [
+          "2020-04-01",
+          936
+        ]
+      },
       "spark": [
         [
           "2024-09-01",
@@ -2597,6 +2750,8 @@
         "warn": "최근 5년 가운데 가장 적은 축입니다. 몇 달 뒤 착공도 줄 수 있습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -2619,6 +2774,18 @@
       "pct_from": "2021-09-01",
       "status": "warn",
       "basis": "position",
+      "status3m": "warn",
+      "hist": {
+        "from": "2018-11-01",
+        "max": [
+          "2022-01-01",
+          1923
+        ],
+        "min": [
+          "2020-04-01",
+          1079
+        ]
+      },
       "spark": [
         [
           "2024-09-01",
@@ -2740,6 +2907,13 @@
         "warn": "일자리가 줄었습니다. 이어지면 침체를 걱정할 모습입니다."
       },
       "rule_note": "한 달 일자리가 줄면(0 아래) 주의, 10만 명 아래면 보통으로 표시합니다.",
+      "rule": {
+        "dir": "low",
+        "mid": 100,
+        "warn": 0,
+        "note": "한 달 일자리가 줄면(0 아래) 주의, 10만 명 아래면 보통으로 표시합니다."
+      },
+      "marks": null,
       "rule_line": 0,
       "window_note": null,
       "calc": {
@@ -2766,6 +2940,18 @@
       "pct_from": "2021-10-01",
       "status": "good",
       "basis": "rule",
+      "status3m": "warn",
+      "hist": {
+        "from": "2018-12-01",
+        "max": [
+          "2020-06-01",
+          4631
+        ],
+        "min": [
+          "2020-04-01",
+          -20469
+        ]
+      },
       "spark": [
         [
           "2024-10-01",
@@ -2887,6 +3073,8 @@
         "warn": "최근 5년 가운데 가장 높은 축입니다. 고용이 약해졌습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -2909,6 +3097,18 @@
       "pct_from": "2021-10-01",
       "status": "mid",
       "basis": "position",
+      "status3m": "mid",
+      "hist": {
+        "from": "2018-11-01",
+        "max": [
+          "2020-04-01",
+          14.8
+        ],
+        "min": [
+          "2023-04-01",
+          3.4
+        ]
+      },
       "spark": [
         [
           "2024-10-01",
@@ -3026,6 +3226,8 @@
         "warn": "최근 5년 가운데 가장 많은 축입니다. 해고가 뚜렷이 늘었습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -3062,6 +3264,18 @@
       "pct_from": "2021-11-13",
       "status": "good",
       "basis": "position",
+      "status3m": "good",
+      "hist": {
+        "from": "2018-12-15",
+        "max": [
+          "2020-04-18",
+          5288.25
+        ],
+        "min": [
+          "2026-10-31",
+          195.25
+        ]
+      },
       "spark": [
         [
           "2024-11-09",
@@ -3443,6 +3657,13 @@
         "warn": "0.50 이상입니다. 과거에는 침체가 시작된 때 나타난 수준입니다."
       },
       "rule_note": "0.50 이상이면 주의(지표를 만든 사람의 기준), 0.30 이상이면 보통으로 표시합니다.",
+      "rule": {
+        "dir": "high",
+        "mid": 0.3,
+        "warn": 0.5,
+        "note": "0.50 이상이면 주의(지표를 만든 사람의 기준), 0.30 이상이면 보통으로 표시합니다."
+      },
+      "marks": null,
       "rule_line": 0.5,
       "window_note": null,
       "calc": {
@@ -3465,6 +3686,18 @@
       "pct_from": "2021-10-01",
       "status": "good",
       "basis": "rule",
+      "status3m": "good",
+      "hist": {
+        "from": "2018-11-01",
+        "max": [
+          "2020-06-01",
+          9.5
+        ],
+        "min": [
+          "2021-09-01",
+          -0.37
+        ]
+      },
       "spark": [
         [
           "2024-10-01",
@@ -3582,6 +3815,8 @@
         "warn": "최근 5년 가운데 가장 낮은 축입니다. 소비가 뚜렷이 약해졌습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -3608,6 +3843,18 @@
       "pct_from": "2021-10-01",
       "status": "good",
       "basis": "position",
+      "status3m": "good",
+      "hist": {
+        "from": "2019-11-01",
+        "max": [
+          "2021-04-01",
+          51.4948
+        ],
+        "min": [
+          "2020-04-01",
+          -19.5057
+        ]
+      },
       "spark": [
         [
           "2024-10-01",
@@ -3729,6 +3976,13 @@
         "warn": "1년 전보다 2% 넘게 줄었습니다. 제조업이 움츠러들었습니다."
       },
       "rule_note": "1년 전보다 줄면(0 아래) 보통, 2% 넘게 줄면 주의로 표시합니다.",
+      "rule": {
+        "dir": "low",
+        "mid": 0,
+        "warn": -2,
+        "note": "1년 전보다 줄면(0 아래) 보통, 2% 넘게 줄면 주의로 표시합니다."
+      },
+      "marks": null,
       "rule_line": -2,
       "window_note": null,
       "calc": {
@@ -3755,6 +4009,18 @@
       "pct_from": "2021-10-01",
       "status": "good",
       "basis": "rule",
+      "status3m": "good",
+      "hist": {
+        "from": "2019-11-01",
+        "max": [
+          "2021-04-01",
+          16.5521
+        ],
+        "min": [
+          "2020-04-01",
+          -17.3183
+        ]
+      },
       "spark": [
         [
           "2024-10-01",
@@ -3876,6 +4142,8 @@
         "warn": "최근 5년 가운데 가장 낮은 축입니다. 공장 일감이 뚜렷이 줄었습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -3898,6 +4166,18 @@
       "pct_from": "2021-10-01",
       "status": "mid",
       "basis": "position",
+      "status3m": "mid",
+      "hist": {
+        "from": "2018-11-01",
+        "max": [
+          "2018-11-01",
+          79.7722
+        ],
+        "min": [
+          "2020-04-01",
+          64.0847
+        ]
+      },
       "spark": [
         [
           "2024-10-01",
@@ -4019,6 +4299,8 @@
         "warn": "최근 5년 가운데 가장 낮은 축입니다. 사람들이 살림과 경기를 많이 걱정합니다. 실제로 덜 쓰는지는 소매판매로 확인합니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -4041,6 +4323,18 @@
       "pct_from": "2021-09-01",
       "status": "warn",
       "basis": "position",
+      "status3m": "warn",
+      "hist": {
+        "from": "2018-11-01",
+        "max": [
+          "2020-02-01",
+          101
+        ],
+        "min": [
+          "2026-05-01",
+          44.8
+        ]
+      },
       "spark": [
         [
           "2024-09-01",
@@ -4162,6 +4456,8 @@
         "warn": "최근 3년 가운데 가장 벌어진 축입니다. 시장이 빌려주기를 꺼리기 시작했습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": "이 자료는 최근 3년치만 공개됩니다. 그래서 3년 안에서의 위치입니다.",
       "calc": {
@@ -4184,6 +4480,18 @@
       "pct_from": "2023-11-20",
       "status": "warn",
       "basis": "position",
+      "status3m": "good",
+      "hist": {
+        "from": "2023-11-20",
+        "max": [
+          "2025-04-07",
+          4.61
+        ],
+        "min": [
+          "2025-01-22",
+          2.59
+        ]
+      },
       "spark": [
         [
           "2024-11-15",
@@ -4565,6 +4873,13 @@
         "warn": "평소보다 빡빡합니다. 돈 구하기가 어려워졌습니다."
       },
       "rule_note": "0 위(평소보다 빡빡함)면 주의, −0.25 위면 보통으로 표시합니다.",
+      "rule": {
+        "dir": "high",
+        "mid": -0.25,
+        "warn": 0,
+        "note": "0 위(평소보다 빡빡함)면 주의, −0.25 위면 보통으로 표시합니다."
+      },
+      "marks": null,
       "rule_line": 0,
       "window_note": null,
       "calc": {
@@ -4587,6 +4902,18 @@
       "pct_from": "2021-11-12",
       "status": "good",
       "basis": "rule",
+      "status3m": "good",
+      "hist": {
+        "from": "2018-11-23",
+        "max": [
+          "2020-04-03",
+          0.312
+        ],
+        "min": [
+          "2021-06-04",
+          -0.699
+        ]
+      },
       "spark": [
         [
           "2024-11-08",
@@ -4968,6 +5295,8 @@
         "flat": "석 달 전과 비슷한 속도로 늘고 있습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -4994,6 +5323,18 @@
       "pct_from": "2021-09-01",
       "status": "info",
       "basis": "none",
+      "status3m": "info",
+      "hist": {
+        "from": "2019-11-01",
+        "max": [
+          "2021-02-01",
+          26.7776
+        ],
+        "min": [
+          "2023-04-01",
+          -4.6573
+        ]
+      },
       "spark": [
         [
           "2024-09-01",
@@ -5115,6 +5456,8 @@
         "flat": "석 달 전과 비슷합니다. 연준이 자산을 늘리지도 줄이지도 않고 있습니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -5137,6 +5480,18 @@
       "pct_from": "2021-11-17",
       "status": "info",
       "basis": "none",
+      "status3m": "info",
+      "hist": {
+        "from": "2018-11-21",
+        "max": [
+          "2022-04-13",
+          8.9655
+        ],
+        "min": [
+          "2019-08-28",
+          3.7599
+        ]
+      },
       "spark": [
         [
           "2024-11-13",
@@ -5518,6 +5873,13 @@
         "warn": "30 이상입니다. 시장이 크게 겁먹은 상태입니다."
       },
       "rule_note": "흔히 쓰는 기준입니다. 20 이상이면 보통, 30 이상이면 주의로 표시합니다.",
+      "rule": {
+        "dir": "high",
+        "mid": 20,
+        "warn": 30,
+        "note": "흔히 쓰는 기준입니다. 20 이상이면 보통, 30 이상이면 주의로 표시합니다."
+      },
+      "marks": null,
       "rule_line": 30,
       "window_note": null,
       "calc": {
@@ -5540,6 +5902,18 @@
       "pct_from": "2021-11-16",
       "status": "mid",
       "basis": "rule",
+      "status3m": "good",
+      "hist": {
+        "from": "2018-11-19",
+        "max": [
+          "2020-03-16",
+          82.69
+        ],
+        "min": [
+          "2019-11-26",
+          11.54
+        ]
+      },
       "spark": [
         [
           "2024-11-15",
@@ -5921,6 +6295,13 @@
         "warn": "고점에서 10% 넘게 내렸습니다. 흔히 조정이라 부르는 구간입니다."
       },
       "rule_note": "고점에서 5% 넘게 내리면 보통, 10% 넘게 내리면 주의(흔히 '조정'이라 부르는 선)로 표시합니다.",
+      "rule": {
+        "dir": "low",
+        "mid": -5,
+        "warn": -10,
+        "note": "고점에서 5% 넘게 내리면 보통, 10% 넘게 내리면 주의(흔히 '조정'이라 부르는 선)로 표시합니다."
+      },
+      "marks": null,
       "rule_line": -10,
       "window_note": null,
       "calc": {
@@ -5948,6 +6329,18 @@
       "pct_from": "2021-11-17",
       "status": "mid",
       "basis": "rule",
+      "status3m": "good",
+      "hist": {
+        "from": "2017-11-17",
+        "max": [
+          "2017-11-21",
+          0
+        ],
+        "min": [
+          "2020-03-23",
+          -33.925
+        ]
+      },
       "spark": [
         [
           "2024-11-18",
@@ -6329,6 +6722,13 @@
         "warn": "평균선 아래입니다. 내리는 흐름으로 봅니다."
       },
       "rule_note": "평균선 아래(0 아래)면 주의, 2% 안쪽으로 가까우면 보통으로 표시합니다.",
+      "rule": {
+        "dir": "low",
+        "mid": 2,
+        "warn": 0,
+        "note": "평균선 아래(0 아래)면 주의, 2% 안쪽으로 가까우면 보통으로 표시합니다."
+      },
+      "marks": null,
       "rule_line": 0,
       "window_note": null,
       "calc": {
@@ -6354,6 +6754,18 @@
       "pct_from": "2021-11-17",
       "status": "warn",
       "basis": "rule",
+      "status3m": "good",
+      "hist": {
+        "from": "2017-09-06",
+        "max": [
+          "2020-12-04",
+          17.0959
+        ],
+        "min": [
+          "2020-03-23",
+          -26.3216
+        ]
+      },
       "spark": [
         [
           "2024-11-18",
@@ -6735,6 +7147,8 @@
         "flat": "석 달 전과 비슷합니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -6757,6 +7171,18 @@
       "pct_from": "2021-11-15",
       "status": "info",
       "basis": "none",
+      "status3m": "info",
+      "hist": {
+        "from": "2018-11-19",
+        "max": [
+          "2025-01-13",
+          130.0413
+        ],
+        "min": [
+          "2021-06-01",
+          110.5046
+        ]
+      },
       "spark": [
         [
           "2024-11-12",
@@ -7138,6 +7564,8 @@
         "flat": "석 달 전과 비슷합니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -7160,6 +7588,18 @@
       "pct_from": "2021-11-11",
       "status": "info",
       "basis": "none",
+      "status3m": "info",
+      "hist": {
+        "from": "2018-11-19",
+        "max": [
+          "2022-03-08",
+          123.64
+        ],
+        "min": [
+          "2020-04-20",
+          -36.98
+        ]
+      },
       "spark": [
         [
           "2024-11-12",
@@ -7541,6 +7981,8 @@
         "flat": "석 달 전과 비슷합니다."
       },
       "rule_note": null,
+      "rule": null,
+      "marks": null,
       "rule_line": null,
       "window_note": null,
       "calc": {
@@ -7563,6 +8005,18 @@
       "pct_from": "2021-09-01",
       "status": "info",
       "basis": "none",
+      "status3m": "info",
+      "hist": {
+        "from": "2018-11-01",
+        "max": [
+          "2026-09-01",
+          14473.0559
+        ],
+        "min": [
+          "2020-04-01",
+          5057.972
+        ]
+      },
       "spark": [
         [
           "2024-09-01",
