@@ -123,6 +123,8 @@ details.learn dl{margin:4px 0 6px; font-size:14px}
 details.learn dt{font-weight:700; margin-top:8px; font-size:12.5px; color:var(--muted); letter-spacing:.02em}
 details.learn dd{margin:1px 0 0}
 .src{font-size:12px; color:var(--faint); margin-top:8px}
+.agenote{font-size:13.5px; color:var(--muted); margin:8px 0 0; line-height:1.5}
+.tnote{display:block; font-size:12px; color:var(--muted); margin-top:3px; line-height:1.4}
 .nowline{font-size:14px; line-height:1.5; margin:6px 0 2px; color:var(--ink,inherit)}
 .skip{font-size:12.5px; color:var(--muted); background:var(--mid-soft); border-radius:8px; padding:5px 8px; margin-top:6px}
 .tile.na .val{font-size:18px; color:var(--muted); font-weight:600}
@@ -184,11 +186,11 @@ footer{margin-top:28px; color:var(--faint); font-size:12.5px}
     <h3>색과 날씨는 이렇게 정합니다</h3>
     <ul>
       <li><b>기준선이 있는 지표</b>는 그 선으로 정합니다. 예: 장단기 금리차는 0 아래면 주의, 삼의 법칙은 0.50 이상이면 주의. 기준은 각 카드의 ‘배우기’에 적혀 있습니다.</li>
-      <li><b>기준선이 없는 지표</b>는 최근 5년과 견줍니다. 나쁜 쪽으로 상위 20% 안이면 주의, 절반보다 나쁜 쪽이면 보통, 그 밖은 양호입니다.</li>
+      <li><b>기준선이 없는 지표</b>는 최근 5년과 견줍니다. 나쁜 쪽으로 상위 20% 안이면 주의, 절반보다 나쁜 쪽이면 보통, 그 밖은 양호입니다. 그래서 이 방식은 평소에도 다섯 중 하나쯤은 주의로 나옵니다. 주의가 하나 있다고 놀랄 일은 아닙니다.</li>
       <li><b>참고 지표</b>(정책금리, 달러, 유가 등)는 오르는 것이 좋은지 나쁜지 한쪽으로 말하기 어려워 색을 주지 않았습니다.</li>
       <li><b>날씨</b>는 색이 있는 지표만 셉니다. 주의가 다섯 중 둘 이상이면 비, 다섯 중 하나 이상이면 흐림, 양호가 열 중 여섯 이상이면 맑음, 그 밖은 구름 조금입니다.</li>
       <li><b>묶음 날씨</b>는 지표가 몇 개뿐이라 따로 정합니다. 주의가 절반을 넘으면 비, 주의가 하나라도 있으면 흐림, 전부 양호면 맑음, 그 밖은 구름 조금입니다.</li>
-      <li><b>겹치는 지표가 있습니다.</b> 금리차 둘, 주택 둘, S&P 500 둘은 비슷하게 움직입니다. 날씨에는 따로따로 세므로 한쪽이 조금 크게 반영됩니다.</li>
+      <li><b>겹치는 지표가 있습니다.</b> 물가 둘(소비자물가·근원 PCE), 금리차 둘, 주택 둘, S&P 500 둘은 비슷하게 움직입니다. 날씨에는 따로따로 세므로 한쪽이 조금 크게 반영됩니다.</li>
       <li><b>자료를 못 받은 날</b>은 지난번에 받은 값을 그대로 두고 카드에 알립니다. 색이 있는 지표의 절반도 못 받으면 전체 날씨를 정하지 않습니다.</li>
       <li>이 색과 날씨는 <b>읽기 쉽게 하려는 표시</b>입니다. 사고팔 때를 알려주는 신호가 아닙니다. 거시 지표는 ‘언제’를 잘 맞히지 못합니다.</li>
     </ul>
@@ -204,7 +206,7 @@ footer{margin-top:28px; color:var(--faint); font-size:12.5px}
 (function(){
 'use strict';
 var DATA_URL='../data/board.json';
-var W={sunny:['☀️','맑음','주의로 표시된 지표가 거의 없습니다.'],partly:['🌤️','구름 조금','대체로 괜찮지만 보통 수준인 지표가 섞여 있습니다.'],cloudy:['☁️','흐림','주의 지표가 다섯 중 하나꼴을 넘습니다.'],rain:['🌧️','비','주의 지표가 다섯 중 둘꼴을 넘습니다.'],none:['▫️','참고','좋고 나쁨을 정하지 않는 지표들입니다.']};
+var W={sunny:['☀️','맑음','주의로 표시된 지표가 거의 없습니다.'],partly:['🌤️','구름 조금','대체로 괜찮지만 보통 수준인 지표가 섞여 있습니다.'],cloudy:['☁️','흐림','주의 지표가 다섯 중 하나 이상입니다.'],rain:['🌧️','비','주의 지표가 다섯 중 둘 이상입니다.'],none:['▫️','참고','좋고 나쁨을 정하지 않는 지표들입니다.']};
 var ST={good:['✓','양호'],mid:['–','보통'],warn:['!','주의'],info:['i','참고'],na:['?','자료 없음']};
 var esc=function(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});};
 var view='cards', DATA=null;
@@ -248,12 +250,17 @@ function oldDays(ind){
   var age=Math.floor((Date.now()-new Date(ind.asof+'T00:00:00Z').getTime())/864e5), lim=DAYLIMIT[ind.freq]||125;
   return age>lim?age:0;
 }
+function recentText(ind){
+  var r=ind.recent_warn;
+  return '다만 '+mon(r.day)+'까지는 역전('+fmt(r.v,ind)+')이었습니다. 과거에는 역전이 풀린 뒤 6개월~2년 사이에 침체가 온 적이 많아, 아직 지켜볼 기간입니다.';
+}
 function noteText(ind){
   var a=[];
   if(ind.carried)a.push('이번에는 새 자료를 받지 못했습니다. 지난번에 받은 값입니다.');
   var od=oldDays(ind);
   if(od)a.push('가장 최근 자료가 '+od+'일 전 것입니다. 발표가 늦어지거나 멈췄을 수 있습니다.');
   if(ind.skipped_latest)a.push(skipText(ind));
+  if(ind.recent_warn)a.push(recentText(ind));
   return a;
 }
 function nowText(ind){
@@ -339,21 +346,40 @@ function learn(ind){
     (ind.calc?'<dt>숫자는 어떻게 나왔나요?</dt><dd class="num">'+esc(calcText(ind))+'</dd>':'')+'</dl>'+
     '<div class="src">'+esc(ind.freq||'')+' 발표 · 기준 '+esc(asofText(ind))+' · 출처 '+esc(ind.source)+(ind.error?' · 오류: '+esc(ind.error):'')+'</div></details>';
 }
+function infoExtreme(list){
+  var out=[];
+  list.filter(function(x){return x.status==='info'&&x.value!=null;}).forEach(function(x){
+    if(x.pct!=null&&x.pct>=95)out.push(x.label+'은(는) '+windowText(x)+' 중 가장 높은 축입니다');
+    else if(x.pct!=null&&x.pct<=5)out.push(x.label+'은(는) '+windowText(x)+' 중 가장 낮은 축입니다');
+    else if(x.unit!=='%'&&x.unit!=='%p'&&x.v1y>0){var ch=(x.value/x.v1y-1)*100;if(Math.abs(ch)>=30)out.push(x.label+'은(는) 1년 전보다 '+Math.round(Math.abs(ch))+'% '+(ch>0?'올랐습니다':'내렸습니다'));}
+  });
+  return out.length?' 참고(색 없음): '+out.join('. ')+'.':'';
+}
 function groupRead(g,list){
   var c=g.counts, n=c.good+c.mid+c.warn;
-  if(!n)return '이 묶음은 참고 지표입니다. 숫자의 방향만 봅니다.';
+  if(!n)return '이 묶음은 참고 지표입니다. 숫자의 방향만 봅니다.'+infoExtreme(list);
   var s='색이 있는 지표 '+n+'개 중 양호 '+c.good+', 보통 '+c.mid+', 주의 '+c.warn+'.';
   var w=list.filter(function(x){return x.status==='warn';}).map(function(x){return x.label;});
   if(w.length)s+=' 눈여겨볼 것: '+w.slice(0,2).join(', ')+(w.length>2?' 외 '+(w.length-2)+'개':'')+'.';
-  return s;
+  return s+infoExtreme(list);
+}
+function warnAge(D){
+  var w=D.indicators.filter(function(x){return x.status==='warn'&&x.asof;});
+  if(!w.length)return '';
+  var by={};w.forEach(function(x){var k=asofText(x);by[k]=(by[k]||0)+1;});
+  var keys=Object.keys(by), latest=D.latest_data_day||'';
+  var old=w.filter(function(x){return latest&&x.asof<latest.slice(0,7)+'-01'&&x.freq==='매월';}).length;
+  if(!old)return '';
+  var s=keys.length===1?'주의 '+w.length+'개는 모두 '+keys[0]+' 자료입니다.':'주의 지표의 기준: '+keys.map(function(k){return k+' '+by[k]+'개';}).join(', ')+'.';
+  return '<p class="agenote">📅 '+esc(s)+' 월간 지표는 한두 달 늦게 나옵니다. 매일 나오는 지표(금리, VIX, 주가)는 '+esc(latest)+' 기준입니다.</p>';
 }
 function hero(D){
   var w=W[D.weather]||W.none, c=D.counts, n=c.good+c.mid+c.warn;
   if(D.weather_short)w=['▫️','날씨를 정하지 않았습니다','자료를 절반 넘게 받지 못했습니다. 다음 갱신 때 다시 시도합니다.'];
   var seg=function(k,cls){return c[k]?'<i class="'+cls+'" style="flex:'+c[k]+'" title="'+ST[k][1]+' '+c[k]+'개"></i>':'';};
   return '<section class="hero" aria-label="전체 요약"><div class="sky" aria-hidden="true">'+w[0]+'</div><div>'+
-    '<p class="eyebrow">오늘의 경기 날씨</p><h2>'+w[1]+'</h2>'+
-    '<p class="lead">'+w[2]+' 색이 있는 지표 <b class="num">'+n+'</b>개 가운데 양호 <b class="num">'+c.good+'</b>, 보통 <b class="num">'+c.mid+'</b>, 주의 <b class="num">'+c.warn+'</b>개입니다.</p></div>'+
+    '<p class="eyebrow">최근 발표 자료로 본 경기 날씨</p><h2>'+w[1]+'</h2>'+
+    '<p class="lead">'+w[2]+' 색이 있는 지표 <b class="num">'+n+'</b>개 가운데 양호 <b class="num">'+c.good+'</b>, 보통 <b class="num">'+c.mid+'</b>, 주의 <b class="num">'+c.warn+'</b>개입니다.</p>'+warnAge(D)+'</div>'+
     '<div class="mix"><div class="mixbar" role="img" aria-label="양호 '+c.good+', 보통 '+c.mid+', 주의 '+c.warn+'">'+seg('good','g')+seg('mid','m')+seg('warn','w')+'</div>'+
     '<div class="legend"><span><span class="dot good" aria-hidden="true">✓</span>양호 <b>'+c.good+'</b></span><span><span class="dot mid" aria-hidden="true">–</span>보통 <b>'+c.mid+'</b></span><span><span class="dot warn" aria-hidden="true">!</span>주의 <b>'+c.warn+'</b></span><span><span class="dot info" aria-hidden="true">i</span>참고 <b>'+c.info+'</b></span>'+(c.na?'<span><span class="dot na" aria-hidden="true">?</span>자료 없음 <b>'+c.na+'</b></span>':'')+
     '<span><a href="#method">어떻게 정했나요?</a></span></div></div></section>';
@@ -381,12 +407,13 @@ function cards(D){
 function table(D){
   var rows=D.groups.map(function(g){
     var list=D.indicators.filter(function(x){return x.group===g.id;});
-    return '<tr class="gh"><td colspan="7">'+esc(g.icon+' '+g.title)+'</td></tr>'+list.map(function(x){
+    return '<tr class="gh"><td colspan="7">'+esc(g.icon+' '+g.title)+'<span class="tnote">'+esc(groupRead(g,list))+'</span></td></tr>'+list.map(function(x){
       var u=x.unit?' '+esc(x.unit):'';
-      return '<tr><td>'+esc(x.label)+'</td><td class="num">'+fmt(x.value,x)+u+'</td><td class="num">'+fmt(x.v3m,x)+'</td><td class="num">'+fmt(x.v1y,x)+'</td><td class="num">'+(x.pct==null?'–':Math.round(x.pct)+'%')+'</td><td>'+chip(x.status)+'</td><td class="num">'+esc(asofText(x))+'</td></tr>';
+      var tn=(nowLine(x)?[nowLine(x)]:[]).concat(noteText(x).map(function(t){return '※ '+t;}));
+      return '<tr><td>'+esc(x.label)+(tn.length?'<span class="tnote">'+tn.map(esc).join('<br>')+'</span>':'')+'</td><td class="num">'+fmt(x.value,x)+u+'</td><td class="num">'+fmt(x.v3m,x)+'</td><td class="num">'+fmt(x.v1y,x)+'</td><td class="num">'+(x.pct==null?'–':Math.round(x.pct)+'%'+(x.window_note?' (3년)':''))+'</td><td>'+chip(x.status)+'</td><td class="num">'+esc(asofText(x))+'</td></tr>';
     }).join('');
   }).join('');
-  return '<div class="tablewrap"><table><thead><tr><th>지표</th><th>지금</th><th>석 달 전</th><th>1년 전</th><th>5년 중 위치</th><th>상태</th><th>기준</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
+  return '<div class="tablewrap"><table><thead><tr><th>지표</th><th>지금</th><th>석 달 전</th><th>1년 전</th><th>최근 위치<br><small>(낮을수록 0%)</small></th><th>상태</th><th>기준</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
 }
 function render(){
   var D=DATA; if(!D)return;

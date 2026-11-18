@@ -167,8 +167,14 @@ function buildIndicator(ind, rows, sr) {
   // 원자료의 가장 최근 시점이 계산에서 빠졌으면(짝이 되는 과거 값이 없음) 그 사실을 남긴다
   const rawLast = rows[rows.length - 1];
   const skipped = rawLast.day > last.day ? { day: rawLast.day, raw: rawLast.v } : null;
+  // 지금은 주의가 아니어도, 최근 N일 안에 주의였던 마지막 날을 남긴다(금리차 역전처럼 풀린 뒤에도 의미가 남는 지표)
+  let recentWarn = null;
+  if (ind.recent_warn_days && ind.rule && j.status !== 'warn') {
+    const from = addDays(last.day, -ind.recent_warn_days);
+    for (const r of s) if (r.day >= from && r.day < last.day && judge(ind, r.v, null, sr).status === 'warn') recentWarn = { day: r.day, v: round(r.v) };
+  }
   return {
-    calc: last.src, skipped_latest: skipped,
+    calc: last.src, skipped_latest: skipped, recent_warn: recentWarn,
     value: round(last.v), asof: last.day,
     v1m: round(valueAt(s, addDays(last.day, -30))), v3m: round(v3m), v1y: round(valueAt(s, addDays(last.day, -365))),
     pct: round(p.pct, 1), pct3m: round(p3.pct, 1), pct_n: p.n, pct_from: p.from,
@@ -206,7 +212,7 @@ function assemble(cfg, results, extra = {}) {
 
 // 이번에 못 받은 지표는 지난번에 받은 실제 값을 그대로 둔다(추정이 아니다). 화면은 '새 자료를 받지 못했다'고 알린다.
 // 지난 값도 없으면 value:null + error.
-const KEEP = ['calc', 'skipped_latest', 'value', 'asof', 'v1m', 'v3m', 'v1y', 'pct', 'pct3m', 'pct_n', 'pct_from', 'spark', 'source'];
+const KEEP = ['calc', 'skipped_latest', 'recent_warn', 'value', 'asof', 'v1m', 'v3m', 'v1y', 'pct', 'pct3m', 'pct_n', 'pct_from', 'spark', 'source'];
 function carryOver(ind, prev, error, sr) {
   const old = prev && !prev.demo && Array.isArray(prev.indicators) ? prev.indicators.find((x) => x.id === ind.id) : null;
   if (!old || old.value == null) return { error };
@@ -283,6 +289,18 @@ function demo(outPath) {
 
 function selftest() {
   const assert = (c, m) => { if (!c) { console.error('FAIL', m); process.exit(1); } };
+  // 최근 2년 안의 역전: 풀린 뒤에도 마지막 역전일을 남긴다
+  {
+    const sr1 = { warn_at_badness: 80, mid_at_badness: 50, window_years: 5 };
+    const indT = { id: 'T', transform: 'level', bad: 'low', rule: { dir: 'low', mid: 0.5, warn: 0 }, recent_warn_days: 730 };
+    const rowsT = [{ day: '2025-01-01', v: -0.3 }, { day: '2025-06-01', v: -0.1 }, { day: '2026-01-01', v: 0.4 }, { day: '2026-06-01', v: 0.8 }, { day: '2026-11-01', v: 0.9 }];
+    const bt = buildIndicator(indT, rowsT, sr1);
+    assert(bt.status === 'good' && bt.recent_warn && bt.recent_warn.day === '2025-06-01', 'recent_warn: 마지막 역전일');
+    const bt2 = buildIndicator({ ...indT, recent_warn_days: 100 }, rowsT, sr1);
+    assert(bt2.recent_warn === null, 'recent_warn: 기간 밖이면 없음');
+    const bt3 = buildIndicator({ ...indT, recent_warn_days: undefined }, rowsT, sr1);
+    assert(bt3.recent_warn === null, 'recent_warn: 설정 없으면 없음');
+  }
   // 못 받은 지표: 지난 값이 있으면 유지(색은 지금 규칙으로 다시 판정), 없으면 null
   {
     const sr0 = { warn_at_badness: 80, mid_at_badness: 50, window_years: 5 };
