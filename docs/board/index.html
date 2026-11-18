@@ -327,8 +327,9 @@ function shortAsof(ind){
   if(!ind.asof)return '';
   var y=Number(ind.asof.slice(0,4)), m=Number(ind.asof.slice(5,7)), d=Number(ind.asof.slice(8,10));
   var yy=y!==new Date().getFullYear()?(y%100)+'년 ':'';
-  if(ind.freq==='매월')return yy+m+'월분';
-  return yy+m+'월 '+d+'일'+(ind.freq==='매주'?' 주':'');
+  var f=ind.freq?' ('+ind.freq+')':'';
+  if(ind.freq==='매월')return yy+m+'월분'+f;
+  return yy+m+'월 '+d+'일'+(ind.freq==='매주'?' 주':'')+f;
 }
 function tile(ind){
   if(ind.value==null){
