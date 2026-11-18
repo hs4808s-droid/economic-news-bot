@@ -132,6 +132,28 @@ function judge(ind, v, pct, sr) {
   return { status: badness >= sr.warn_at_badness ? 'warn' : badness >= sr.mid_at_badness ? 'mid' : 'good', basis: 'position', badness: round(badness, 1) };
 }
 
+// 경기 국면 지도: 가로=경기 점수(-1~1), 세로=물가(%). 지금과 석 달 전.
+function regime(cfg, indicators) {
+  const rc = cfg.regime;
+  if (!rc) return null;
+  const sc = { good: 1, mid: 0, warn: -1 };
+  const grow = (key) => {
+    const v = indicators.filter((x) => rc.growth_groups.includes(x.group) && x.value != null && sc[x[key]] != null).map((x) => sc[x[key]]);
+    return v.length ? { v: v.reduce((a, b) => a + b, 0) / v.length, n: v.length } : null;
+  };
+  const infl = (key) => {
+    const v = rc.inflation.map((id) => indicators.find((x) => x.id === id)).filter((x) => x && x[key] != null).map((x) => x[key]);
+    return v.length === rc.inflation.length ? v.reduce((a, b) => a + b, 0) / v.length : null;
+  };
+  const quad = (g, f) => (g >= 0 ? (f >= rc.infl_line ? 'hot' : 'balance') : (f >= rc.infl_line ? 'stag' : 'cooling'));
+  const g0 = grow('status'), f0 = infl('value'), g3 = grow('status3m'), f3 = infl('v3m');
+  if (!g0 || g0.n < 6 || f0 == null) return null;
+  const out = { growth: round(g0.v, 3), growth_n: g0.n, infl: round(f0, 3), infl_line: rc.infl_line, quad: quad(g0.v, f0) };
+  if (g3 && f3 != null) Object.assign(out, { growth3m: round(g3.v, 3), infl3m: round(f3, 3), quad3m: quad(g3.v, f3) });
+  out.near_edge = Math.abs(g0.v) < 0.15 || Math.abs(f0 - rc.infl_line) < 0.3;
+  return out;
+}
+
 function weather(counts, small) {
   const n = counts.good + counts.mid + counts.warn;
   if (!n) return 'none';
@@ -164,6 +186,8 @@ function buildIndicator(ind, rows, sr) {
   const v3m = valueAt(s, addDays(last.day, -91));
   const p3 = percentile(s, v3m, last.day, years);
   const j = judge(ind, last.v, p.pct, sr);
+  const j3 = judge(ind, v3m, p3.pct, sr);
+  const hi = s.reduce((a, r) => (r.v > a.v ? r : a)), lo = s.reduce((a, r) => (r.v < a.v ? r : a));
   // 원자료의 가장 최근 시점이 계산에서 빠졌으면(짝이 되는 과거 값이 없음) 그 사실을 남긴다
   const rawLast = rows[rows.length - 1];
   const skipped = rawLast.day > last.day ? { day: rawLast.day, raw: rawLast.v } : null;
@@ -178,7 +202,8 @@ function buildIndicator(ind, rows, sr) {
     value: round(last.v), asof: last.day,
     v1m: round(valueAt(s, addDays(last.day, -30))), v3m: round(v3m), v1y: round(valueAt(s, addDays(last.day, -365))),
     pct: round(p.pct, 1), pct3m: round(p3.pct, 1), pct_n: p.n, pct_from: p.from,
-    status: j.status, basis: j.basis,
+    status: j.status, basis: j.basis, status3m: j3.status,
+    hist: { from: s[0].day, max: [hi.day, round(hi.v)], min: [lo.day, round(lo.v)] },
     spark: sparkline(s, last.day),
   };
 }
@@ -187,7 +212,7 @@ function assemble(cfg, results, extra = {}) {
   const sr = cfg.status_rule;
   const indicators = cfg.indicators.map((ind) => {
     const r = results[ind.id];
-    const base = { id: ind.id, group: ind.group, label: ind.label, unit: ind.unit, decimals: ind.decimals, signed: !!ind.signed, bad: ind.bad, freq: ind.freq, source: `FRED:${ind.fred}`, what: ind.what, read: ind.read, now: ind.now || null, rule_note: ind.rule ? ind.rule.note : null, rule_line: ind.rule ? ind.rule.warn : null, window_note: ind.window_note || null };
+    const base = { id: ind.id, group: ind.group, label: ind.label, unit: ind.unit, decimals: ind.decimals, signed: !!ind.signed, bad: ind.bad, freq: ind.freq, source: `FRED:${ind.fred}`, what: ind.what, read: ind.read, now: ind.now || null, rule_note: ind.rule ? ind.rule.note : null, rule: ind.rule || null, marks: ind.marks || null, rule_line: ind.rule ? ind.rule.warn : null, window_note: ind.window_note || null };
     if (!r || (r.error && r.value == null)) return { ...base, value: null, status: 'na', error: (r && r.error) || '수집 안 됨' };
     return { ...base, ...r };
   });
@@ -206,13 +231,14 @@ function assemble(cfg, results, extra = {}) {
     generated_at: new Date().toISOString(), generated_kst: C.kstTime(),
     latest_data_day: days.length ? days[days.length - 1] : null,
     status_rule: sr, counts, weather: enough ? weather(counts, false) : 'none', weather_short: !enough,
+    regime: regime(cfg, indicators),
     groups, indicators, ...extra,
   };
 }
 
 // 이번에 못 받은 지표는 지난번에 받은 실제 값을 그대로 둔다(추정이 아니다). 화면은 '새 자료를 받지 못했다'고 알린다.
 // 지난 값도 없으면 value:null + error.
-const KEEP = ['calc', 'skipped_latest', 'recent_warn', 'value', 'asof', 'v1m', 'v3m', 'v1y', 'pct', 'pct3m', 'pct_n', 'pct_from', 'spark', 'source'];
+const KEEP = ['calc', 'skipped_latest', 'recent_warn', 'status3m', 'hist', 'value', 'asof', 'v1m', 'v3m', 'v1y', 'pct', 'pct3m', 'pct_n', 'pct_from', 'spark', 'source'];
 function carryOver(ind, prev, error, sr) {
   const old = prev && !prev.demo && Array.isArray(prev.indicators) ? prev.indicators.find((x) => x.id === ind.id) : null;
   if (!old || old.value == null) return { error };
@@ -289,6 +315,19 @@ function demo(outPath) {
 
 function selftest() {
   const assert = (c, m) => { if (!c) { console.error('FAIL', m); process.exit(1); } };
+  // 경기 국면 지도
+  {
+    const near = (a, b, e = 1e-9) => Math.abs(a - b) < e;
+    const cfgR = { regime: { growth_groups: ['g'], inflation: ['P1', 'P2'], infl_line: 2.5 } };
+    const mkI = (id, group, st, st3, value, v3m) => ({ id, group, status: st, status3m: st3, value, v3m });
+    const base = ['good', 'good', 'good', 'warn', 'mid', 'good'].map((st, i) => mkI('G' + i, 'g', st, 'warn', 1, 1));
+    const r = regime(cfgR, [...base, mkI('P1', 'x', 'warn', 'mid', 3.7, 3.0), mkI('P2', 'x', 'warn', 'mid', 3.1, 2.8)]);
+    assert(r && near(r.growth, 0.5, 1e-3) && near(r.infl, 3.4, 1e-3) && r.quad === 'hot' && r.quad3m === 'stag' && near(r.growth3m, -1, 1e-3), 'regime: 사분면·석 달 전');
+    assert(regime(cfgR, base.slice(0, 5).concat([mkI('P1', 'x', 'warn', 'mid', 3.7, 3), mkI('P2', 'x', 'warn', 'mid', 3.1, 2.8)])) === null, 'regime: 경기 지표 6개 미만이면 없음');
+    assert(regime(cfgR, [...base, mkI('P1', 'x', 'warn', 'mid', 3.7, 3)]) === null, 'regime: 물가 지표가 빠지면 없음');
+    const bi = buildIndicator({ id: 'H', transform: 'level', bad: 'high' }, [{ day: '2020-01-01', v: 5 }, { day: '2021-01-01', v: 9 }, { day: '2022-01-01', v: 1 }, { day: '2026-01-01', v: 3 }], { warn_at_badness: 80, mid_at_badness: 50, window_years: 5 });
+    assert(bi.hist.max[0] === '2021-01-01' && bi.hist.max[1] === 9 && bi.hist.min[1] === 1 && bi.hist.from === '2020-01-01', 'hist: 최고·최저');
+  }
   // 최근 2년 안의 역전: 풀린 뒤에도 마지막 역전일을 남긴다
   {
     const sr1 = { warn_at_badness: 80, mid_at_badness: 50, window_years: 5 };

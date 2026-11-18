@@ -1,5 +1,11 @@
 {
   "_doc": "경기 상황판(docs/board/) 설정. yahoo 가 있으면 Yahoo Finance 일별 종가를 먼저 쓰고(FRED 는 S&P 500 을 최근 1년치만 준다), 실패하면 fred 로 받는다. scripts/build_board.js 가 읽어 docs/data/board.json 을 만든다. transform: level|yoy(전년 같은 달 대비 %)|diff(전월 대비 차이)|ma4(4주 평균)|dd252(1년 고점 대비 %)|vs200(200일 평균선 대비 %). bad: high(높을수록 나쁨)|low(낮을수록 나쁨)|none(좋고 나쁨 없음, 참고용). rule 이 있으면 5년 위치 대신 그 기준으로 색을 정한다(warn·mid 는 경계값, dir 는 어느 쪽이 나쁜지). 색은 '읽기 쉽게 하려는 표시'이며 매매 신호가 아니다.",
+  "regime": {
+    "_doc": "맨 위 '경기 국면 지도'. 가로=경기(아래 묶음 지표 색의 평균: 양호 +1, 보통 0, 주의 -1), 세로=물가(아래 지표 값의 평균). 경계는 경기 0, 물가 infl_line. 매매 신호가 아니다.",
+    "growth_groups": ["leading", "jobs", "real"],
+    "inflation": ["CPI_YOY", "PCE_CORE_YOY"],
+    "infl_line": 2.5
+  },
   "status_rule": { "warn_at_badness": 80, "mid_at_badness": 50, "window_years": 5 },
   "groups": [
     {
@@ -44,12 +50,12 @@
       "what": "미국 정부가 10년 동안 돈을 빌릴 때 주는 이자입니다. 세계 금리의 기준입니다.",
       "now": {"up": "석 달 전보다 올랐습니다. 대출 이자와 주식에 부담이 커지는 쪽입니다.", "down": "석 달 전보다 내렸습니다. 대출 이자와 주식에 부담이 줄어드는 쪽입니다.", "flat": "석 달 전과 비슷합니다."},
       "read": "빠르게 오르면 주식, 특히 성장주에 부담입니다. 주택담보대출 금리도 이걸 따라갑니다." },
-    { "id": "CPI_YOY", "fred": "CPIAUCNS", "group": "rates", "label": "소비자물가 상승률", "unit": "%", "decimals": 1, "transform": "yoy", "bad": "high", "freq": "매월",
+    { "id": "CPI_YOY", "fred": "CPIAUCNS", "marks": [{ "v": 2, "label": "연준 목표 2%" }], "group": "rates", "label": "소비자물가 상승률", "unit": "%", "decimals": 1, "transform": "yoy", "bad": "high", "freq": "매월",
       "rule": { "dir": "high", "mid": 2.5, "warn": 3.5, "note": "연준 목표 2%와의 거리로 색을 정합니다 (2.5% 넘으면 보통, 3.5% 넘으면 주의)." },
       "what": "장바구니 물가가 1년 전보다 얼마나 올랐는지입니다.",
       "now": {"good": "연준 목표(2%) 근처입니다. 물가 걱정이 작은 상태입니다.", "mid": "연준 목표(2%)보다 조금 높습니다. 금리를 빨리 내리기는 어려운 상태입니다.", "warn": "연준 목표(2%)보다 많이 높습니다. 금리를 내리기 어려운 상태입니다."},
       "read": "연준의 목표는 2% 안팎입니다. 높을수록 금리를 내리기 어려워집니다." },
-    { "id": "PCE_CORE_YOY", "fred": "PCEPILFE", "group": "rates", "label": "근원 PCE 물가 상승률", "unit": "%", "decimals": 1, "transform": "yoy", "bad": "high", "freq": "매월",
+    { "id": "PCE_CORE_YOY", "fred": "PCEPILFE", "marks": [{ "v": 2, "label": "연준 목표 2%" }], "group": "rates", "label": "근원 PCE 물가 상승률", "unit": "%", "decimals": 1, "transform": "yoy", "bad": "high", "freq": "매월",
       "rule": { "dir": "high", "mid": 2.3, "warn": 3.0, "note": "연준 목표 2%와의 거리로 색을 정합니다 (2.3% 넘으면 보통, 3.0% 넘으면 주의)." },
       "what": "식품과 에너지를 뺀 물가입니다. 연준이 금리를 정할 때 가장 중요하게 보는 물가입니다.",
       "now": {"good": "연준 목표(2%) 근처입니다. 금리를 내릴 여유가 있는 상태입니다.", "mid": "연준 목표(2%)보다 조금 높습니다. 금리를 빨리 내리기는 어려운 상태입니다.", "warn": "연준 목표(2%)보다 많이 높습니다. 금리를 내리기 어려운 상태입니다."},
