@@ -125,6 +125,7 @@ details.learn dd{margin:1px 0 0}
 .src{font-size:12px; color:var(--faint); margin-top:8px}
 .agenote{font-size:13.5px; color:var(--muted); margin:8px 0 0; line-height:1.5}
 .tnote{display:block; font-size:12px; color:var(--muted); margin-top:3px; line-height:1.4}
+.vdate{font-size:12px; font-weight:500; color:var(--muted); margin-left:8px; letter-spacing:0; white-space:nowrap}
 .nowline{font-size:14px; line-height:1.5; margin:6px 0 2px; color:var(--ink,inherit)}
 .skip{font-size:12.5px; color:var(--muted); background:var(--mid-soft); border-radius:8px; padding:5px 8px; margin-top:6px}
 .tile.na .val{font-size:18px; color:var(--muted); font-weight:600}
@@ -322,6 +323,13 @@ function sparkSvg(ind){
     '<div class="axis"><span>'+ym(pts[0][0])+'</span><span>'+ym(pts[pts.length-1][0])+'</span></div></div>';
 }
 
+function shortAsof(ind){
+  if(!ind.asof)return '';
+  var y=Number(ind.asof.slice(0,4)), m=Number(ind.asof.slice(5,7)), d=Number(ind.asof.slice(8,10));
+  var yy=y!==new Date().getFullYear()?(y%100)+'년 ':'';
+  if(ind.freq==='매월')return yy+m+'월분';
+  return yy+m+'월 '+d+'일'+(ind.freq==='매주'?' 주':'');
+}
 function tile(ind){
   if(ind.value==null){
     return '<article class="tile na"><div class="thead"><h3>'+esc(ind.label)+'</h3>'+chip('na')+'</div><div class="val">자료를 가져오지 못했습니다</div><div class="delta">다음 갱신 때 다시 시도합니다.</div>'+learn(ind)+'</article>';
@@ -335,7 +343,7 @@ function tile(ind){
       '<div class="poscap"><span>낮음</span><span>'+windowText(ind)+' 중 <b>'+esc(posText(ind))+'</b></span><span>높음</span></div></div>';
   }
   return '<article class="tile '+ind.status+'" id="t-'+esc(ind.id)+'"><div class="thead"><h3>'+esc(ind.label)+'</h3>'+chip(ind.status)+'</div>'+
-    '<div class="val num">'+fmt(ind.value,ind)+unit(ind)+'</div>'+delta+(nowLine(ind)?'<p class="nowline">'+esc(nowLine(ind))+'</p>':'')+noteText(ind).map(function(t){return '<div class="skip">※ '+esc(t)+'</div>';}).join('')+sparkSvg(ind)+pos+learn(ind)+'</article>';
+    '<div class="val num">'+fmt(ind.value,ind)+unit(ind)+'<span class="vdate">'+esc(shortAsof(ind))+'</span></div>'+delta+(nowLine(ind)?'<p class="nowline">'+esc(nowLine(ind))+'</p>':'')+noteText(ind).map(function(t){return '<div class="skip">※ '+esc(t)+'</div>';}).join('')+sparkSvg(ind)+pos+learn(ind)+'</article>';
 }
 function learn(ind){
   return '<details class="learn"><summary>배우기</summary><dl>'+
